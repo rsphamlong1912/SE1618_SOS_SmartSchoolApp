@@ -15,7 +15,7 @@ import java.util.logging.Logger;
  * @author SE150925 Nguyen Van Hai Nam
  */
 public class DBUtils {
-    public static final String URL = "jdbc:sqlserver://localhost;databaseName=SmartSchool_SWP391;user=sa;password=1";
+    public static final String URL = "jdbc:sqlserver://localhost;databaseName=SmartSchool_SWP391;user=sa;password=123456";
     
     public static void loadDriver() {
         try {
@@ -25,5 +25,6 @@ public class DBUtils {
             Logger.getLogger(DBUtils.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
 }
 
