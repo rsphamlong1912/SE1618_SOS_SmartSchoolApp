@@ -29,7 +29,7 @@ public class tblUser {
     public tblUser() {
     }
 
-    public tblUser(String userId, String roleId, String password, String fullname, byte[] avatar, String phone, String email, String facebook, String compName, String compDesc, String compPhone, String compEmail, String compAddress, boolean statusBaned, boolean haveJob) {
+    public tblUser(String userId, String roleId, String password, String fullname, byte[] avatar, String phone, String email, String facebook, String compName, String compDesc, String compPhone, String compEmail, String compAddress, boolean userStatus, boolean haveJob) {
         this.userId = userId;
         this.roleId = roleId;
         this.password = password;
@@ -43,7 +43,7 @@ public class tblUser {
         this.compPhone = compPhone;
         this.compEmail = compEmail;
         this.compAddress = compAddress;
-        this.userStatus = statusBaned;
+        this.userStatus = userStatus;
         this.haveJob = haveJob;
     }
 

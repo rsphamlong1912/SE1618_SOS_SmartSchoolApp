@@ -15,16 +15,23 @@ import java.util.logging.Logger;
  * @author SE150925 Nguyen Van Hai Nam
  */
 public class DBUtils {
-    public static final String URL = "jdbc:sqlserver://localhost;databaseName=SmartSchool_SWP391;user=sa;password=123456";
-    
-    public static void loadDriver() {
-        try {
-            //Loading a driver
-            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(DBUtils.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    public Connection getConnection() throws Exception {
+        String url = "jdbc:sqlserver://localhost:1433;databaseName=SmartSchool";
+        Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+        return DriverManager.getConnection(url, "sa", "123456");
     }
+//        public static void main(String[] args) {
+//        try {
+//            DBUtils dbc = new DBUtils();
+//            if(dbc.getConnection() != null) {
+//                System.out.println("thanh cong");
+//            }else{
+//                System.out.println("that bai");
+//            }
+//        } catch (Exception ex) {
+//            Logger.getLogger(DBUtils.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//    }
     
 }
 
