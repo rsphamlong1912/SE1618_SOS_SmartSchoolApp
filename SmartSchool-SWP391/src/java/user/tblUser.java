@@ -23,7 +23,7 @@ public class tblUser {
     private String compPhone;
     private String compEmail;
     private String compAddress;
-    private boolean statusBaned;
+    private boolean userStatus;
     private boolean haveJob;
 
     public tblUser() {
@@ -43,7 +43,7 @@ public class tblUser {
         this.compPhone = compPhone;
         this.compEmail = compEmail;
         this.compAddress = compAddress;
-        this.statusBaned = statusBaned;
+        this.userStatus = statusBaned;
         this.haveJob = haveJob;
     }
 
@@ -151,12 +151,12 @@ public class tblUser {
         this.compAddress = compAddress;
     }
 
-    public boolean isStatusBaned() {
-        return statusBaned;
+    public boolean isUserStatus() {
+        return userStatus;
     }
 
-    public void setStatusBaned(boolean statusBaned) {
-        this.statusBaned = statusBaned;
+    public void setUserStatus(boolean userStatus) {
+        this.userStatus = userStatus;
     }
 
     public boolean isHaveJob() {
