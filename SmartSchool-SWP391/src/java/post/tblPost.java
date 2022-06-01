@@ -15,7 +15,7 @@ public class tblPost {
     private int postId;
     private String userId;
     private int categoryId;
-    private String picture;
+    private byte[] picture;
     private String description;
     private Date date;
     private String type;
@@ -25,7 +25,7 @@ public class tblPost {
     public tblPost() {
     }
 
-    public tblPost(int postId, String userId, int categoryId, String picture, String description, Date date, String type, String title, String statusPost) {
+    public tblPost(int postId, String userId, int categoryId, byte[] picture, String description, Date date, String type, String title, String statusPost) {
         this.postId = postId;
         this.userId = userId;
         this.categoryId = categoryId;
@@ -61,11 +61,11 @@ public class tblPost {
         this.categoryId = categoryId;
     }
 
-    public String getPicture() {
+    public byte[] getPicture() {
         return picture;
     }
 
-    public void setPicture(String picture) {
+    public void setPicture(byte[] picture) {
         this.picture = picture;
     }
 
@@ -108,5 +108,9 @@ public class tblPost {
     public void setStatusPost(String statusPost) {
         this.statusPost = statusPost;
     }
+
+    
+
+
     
 }

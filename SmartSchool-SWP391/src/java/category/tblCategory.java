@@ -5,6 +5,7 @@
  */
 package category;
 
+
 /**
  *
  * @author SE150925 Nguyen Van Hai Nam
@@ -13,14 +14,16 @@ public class tblCategory {
     private int categoryId;
     private String categoryName;
     private boolean categoryStatus;
+    private byte[] categoryImg;
 
     public tblCategory() {
     }
 
-    public tblCategory(int categoryId, String categoryName, boolean categoryStatus) {
+    public tblCategory(int categoryId, String categoryName, boolean categoryStatus, byte[] categoryImg) {
         this.categoryId = categoryId;
         this.categoryName = categoryName;
         this.categoryStatus = categoryStatus;
+        this.categoryImg = categoryImg;
     }
 
     public int getCategoryId() {
@@ -46,6 +49,15 @@ public class tblCategory {
     public void setCategoryStatus(boolean categoryStatus) {
         this.categoryStatus = categoryStatus;
     }
+
+    public byte[] getCategoryImg() {
+        return categoryImg;
+    }
+
+    public void setCategoryImg(byte[] categoryImg) {
+        this.categoryImg = categoryImg;
+    }
+
 
     
 }

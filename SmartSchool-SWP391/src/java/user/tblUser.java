@@ -14,6 +14,7 @@ public class tblUser {
     private String roleId;
     private String password;
     private String fullname;
+    private byte[] avatar;
     private String phone;
     private String email;
     private String facebook;
@@ -28,11 +29,12 @@ public class tblUser {
     public tblUser() {
     }
 
-    public tblUser(String userId, String roleId, String password, String fullname, String phone, String email, String facebook, String compName, String compDesc, String compPhone, String compEmail, String compAddress, boolean statusBaned, boolean haveJob) {
+    public tblUser(String userId, String roleId, String password, String fullname, byte[] avatar, String phone, String email, String facebook, String compName, String compDesc, String compPhone, String compEmail, String compAddress, boolean statusBaned, boolean haveJob) {
         this.userId = userId;
         this.roleId = roleId;
         this.password = password;
         this.fullname = fullname;
+        this.avatar = avatar;
         this.phone = phone;
         this.email = email;
         this.facebook = facebook;
@@ -75,6 +77,14 @@ public class tblUser {
 
     public void setFullname(String fullname) {
         this.fullname = fullname;
+    }
+
+    public byte[] getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(byte[] avatar) {
+        this.avatar = avatar;
     }
 
     public String getPhone() {
@@ -156,6 +166,8 @@ public class tblUser {
     public void setHaveJob(boolean haveJob) {
         this.haveJob = haveJob;
     }
+
+    
     
     
 }
