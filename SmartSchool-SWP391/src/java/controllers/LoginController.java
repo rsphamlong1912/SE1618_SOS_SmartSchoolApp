@@ -6,15 +6,14 @@
 package controllers;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import user.userDTO;
-import user.userDAO;
+import user.UserDTO;
+import user.UserDAO;
 
 /**
  *
@@ -47,8 +46,8 @@ public class LoginController extends HttpServlet {
         try {
             String userID = request.getParameter("userID");
             String password = request.getParameter("password");
-            userDAO dao = new userDAO();
-            userDTO user = dao.login(userID, password);
+            UserDAO dao = new UserDAO();
+            UserDTO user = dao.login(userID, password);
             //xac thuc
             if (user != null) {
                 String roleID = user.getRoleId();

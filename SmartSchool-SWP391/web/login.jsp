@@ -51,8 +51,8 @@
                 <div class="form-group">
                     <input type="password" name="password" class="form-control" placeholder="Password" required="required">
                 </div>
-<!--                <div class="g-recaptcha mb-3" data-sitekey="6Le3ANQeAAAAALLLnR9NGshK6drwtkWAMSa3C32L">                   
-                </div>-->
+                <!--                <div class="g-recaptcha mb-3" data-sitekey="6Le3ANQeAAAAALLLnR9NGshK6drwtkWAMSa3C32L">                   
+                                </div>-->
                 <div id="error" class="" style="font-weight: bold;"></div>
                 <div class="form-group">
                     <button type="submit" name="action" value="Login" class="btn btn-block btn-dark ">Log in</button>
@@ -68,12 +68,12 @@
                 } else {
             %>
             <div class="alert alert-danger text-center" style="font-weight: bold;" role = "alert">
-                 <%= error%>
+                <%= error%>
+            </div>
+            <%
+                }
+            %>            
         </div>
-        <%
-            }
-        %>            
-    </div>
-    
-</body>
+
+    </body>
 </html>

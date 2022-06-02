@@ -11,17 +11,17 @@ import java.sql.Date;
  *
  * @author SE150925 Nguyen Van Hai Nam
  */
-public class feedbackSystemDTO {
+public class FeedbackSystemDTO {
     private int feedbackId;
     private String userId;
     private String feedbackDesc;
     private byte[] feedbackImg;
     private Date dateFeedback;
 
-    public feedbackSystemDTO() {
+    public FeedbackSystemDTO() {
     }
 
-    public feedbackSystemDTO(int feedbackId, String userId, String feedbackDesc, byte[] feedbackImg, Date dateFeedback) {
+    public FeedbackSystemDTO(int feedbackId, String userId, String feedbackDesc, byte[] feedbackImg, Date dateFeedback) {
         this.feedbackId = feedbackId;
         this.userId = userId;
         this.feedbackDesc = feedbackDesc;

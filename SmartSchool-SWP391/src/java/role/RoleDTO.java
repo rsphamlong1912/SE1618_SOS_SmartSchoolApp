@@ -9,14 +9,14 @@ package role;
  *
  * @author SE150925 Nguyen Van Hai Nam
  */
-public class roleDTO {
+public class RoleDTO {
     private String roleId;
     private String roleName;
 
-    public roleDTO() {
+    public RoleDTO() {
     }
 
-    public roleDTO(String roleId, String roleName) {
+    public RoleDTO(String roleId, String roleName) {
         this.roleId = roleId;
         this.roleName = roleName;
     }

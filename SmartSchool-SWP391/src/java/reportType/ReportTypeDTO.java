@@ -9,14 +9,14 @@ package reportType;
  *
  * @author SE150925 Nguyen Van Hai Nam
  */
-public class reportTypeDTO {
+public class ReportTypeDTO {
     private int reportTypeId;
     private String reportType;
 
-    public reportTypeDTO() {
+    public ReportTypeDTO() {
     }
 
-    public reportTypeDTO(int reportTypeId, String reportType) {
+    public ReportTypeDTO(int reportTypeId, String reportType) {
         this.reportTypeId = reportTypeId;
         this.reportType = reportType;
     }

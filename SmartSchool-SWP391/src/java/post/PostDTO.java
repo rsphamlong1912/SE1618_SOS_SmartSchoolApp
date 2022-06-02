@@ -11,7 +11,7 @@ import java.sql.Date;
  *
  * @author SE150925 Nguyen Van Hai Nam
  */
-public class postDTO {
+public class PostDTO {
     private int postId;
     private String userId;
     private int categoryId;
@@ -22,10 +22,10 @@ public class postDTO {
     private String title;
     private String statusPost;
 
-    public postDTO() {
+    public PostDTO() {
     }
 
-    public postDTO(int postId, String userId, int categoryId, byte[] postImg, String description, Date date, String type, String title, String statusPost) {
+    public PostDTO(int postId, String userId, int categoryId, byte[] postImg, String description, Date date, String type, String title, String statusPost) {
         this.postId = postId;
         this.userId = userId;
         this.categoryId = categoryId;
@@ -78,7 +78,7 @@ public class postDTO {
     }
 
     public Date getDate() {
-        return date;
+        return  date;
     }
 
     public void setDate(Date date) {
