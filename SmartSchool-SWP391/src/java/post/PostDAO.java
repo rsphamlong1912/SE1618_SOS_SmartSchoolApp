@@ -20,7 +20,8 @@ import java.util.Date;
  * @author SE150925 Nguyen Van Hai Nam
  */
 public class PostDAO {
-
+    private static final String SEARCH = "SELECT * FROM tblPost WHERE type like ? AND postStatus = 'true'";
+    
     public void uploadPost(Connection con, PostDTO post) throws SQLException, Exception {
         String sql = "INSERT INTO tblPost(userId, categoryId, postImg, description, date, type, title, statusPost) VALUES(?,?,?,?,?,?,?,?)";
         PreparedStatement ptm = con.prepareStatement(sql);
@@ -59,6 +60,47 @@ public class PostDAO {
             list.add(post);
         }
         return list;
+    }
+        
+        //Search Post
+    public List<PostDTO> getListPost(String search) throws SQLException {
+        List<PostDTO> listP = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(SEARCH);
+                ptm.setString(1, "%" + search + "%");
+                rs = ptm.executeQuery();
+                while (rs.next()) {
+                    int postId = rs.getInt("postId");
+                    String userId = rs.getString("userId");
+                    int categoryId = rs.getInt("categoryId");
+                    byte[] postImg = rs.getBytes("postImg");
+                    String description = rs.getString("description");
+                    Date date = rs.getDate("date");
+                    String type = rs.getString("type");
+                    String title = rs.getString("title");
+                    String statusPost = rs.getString("postStatus");
+                    listP.add(new PostDTO(postId, userId, categoryId, postImg, description, (java.sql.Date)date, type, title, statusPost));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return listP;
     }
     
     public static void main(String[] args) {

@@ -15,7 +15,7 @@ import java.util.logging.Logger;
  * @author SE150925 Nguyen Van Hai Nam
  */
 public class DBUtils {
-    public Connection getConnection() throws Exception {
+    public static Connection getConnection() throws Exception {
         String url = "jdbc:sqlserver://localhost:1433;databaseName=SmartSchool";
         Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
         return DriverManager.getConnection(url, "sa", "123456");
