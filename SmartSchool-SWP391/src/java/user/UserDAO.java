@@ -8,6 +8,7 @@ package user;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import utills.DBUtils;
@@ -17,6 +18,8 @@ import utills.DBUtils;
  * @author SE150925 Nguyen Van Hai Nam
  */
 public class UserDAO {
+    private static final String REGISTER = "INSERT INTO tblUser(fullname, userId, password, email, phone) "
+                                            + "Values(?, ?, ?, ?, ?)";
 
     public UserDTO login(String userId, String password) {
         UserDTO user = null;
@@ -45,5 +48,42 @@ public class UserDAO {
             Logger.getLogger(UserDTO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return user;
+    }
+    
+    public boolean createNewAccount(UserDTO dto) throws SQLException {
+        if (dto == null) {
+            return false;
+        }
+
+        Connection conn = null;
+        PreparedStatement ptm = null;
+
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(REGISTER);
+                ptm.setString(1, dto.getFullname());
+                ptm.setString(2, dto.getUserId());
+                ptm.setString(3, dto.getPassword());
+                ptm.setString(4, dto.getEmail());
+                ptm.setString(5, dto.getPhone());
+                
+                int row = ptm.executeUpdate();
+                if (row > 0) {
+                    return true;
+                }
+                
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return false;
     }
 }
