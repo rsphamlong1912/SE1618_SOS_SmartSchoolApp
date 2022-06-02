@@ -9,7 +9,7 @@ package user;
  *
  * @author SE150925 Nguyen Van Hai Nam
  */
-public class tblUser {
+public class userDTO {
     private String userId;
     private String roleId;
     private String password;
@@ -26,10 +26,10 @@ public class tblUser {
     private boolean userStatus;
     private boolean haveJob;
 
-    public tblUser() {
+    public userDTO() {
     }
 
-    public tblUser(String userId, String roleId, String password, String fullname, byte[] avatar, String phone, String email, String facebook, String compName, String compDesc, String compPhone, String compEmail, String compAddress, boolean userStatus, boolean haveJob) {
+    public userDTO(String userId, String roleId, String password, String fullname, byte[] avatar, String phone, String email, String facebook, String compName, String compDesc, String compPhone, String compEmail, String compAddress, boolean userStatus, boolean haveJob) {
         this.userId = userId;
         this.roleId = roleId;
         this.password = password;

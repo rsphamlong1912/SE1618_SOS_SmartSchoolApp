@@ -11,17 +11,17 @@ import java.sql.Date;
  *
  * @author SE150925 Nguyen Van Hai Nam
  */
-public class tblFeedbackSystem {
+public class feedbackSystemDTO {
     private int feedbackId;
     private String userId;
     private String feedbackDesc;
     private byte[] feedbackImg;
     private Date dateFeedback;
 
-    public tblFeedbackSystem() {
+    public feedbackSystemDTO() {
     }
 
-    public tblFeedbackSystem(int feedbackId, String userId, String feedbackDesc, byte[] feedbackImg, Date dateFeedback) {
+    public feedbackSystemDTO(int feedbackId, String userId, String feedbackDesc, byte[] feedbackImg, Date dateFeedback) {
         this.feedbackId = feedbackId;
         this.userId = userId;
         this.feedbackDesc = feedbackDesc;

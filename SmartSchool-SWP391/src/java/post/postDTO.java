@@ -11,7 +11,7 @@ import java.sql.Date;
  *
  * @author SE150925 Nguyen Van Hai Nam
  */
-public class tblPost {
+public class postDTO {
     private int postId;
     private String userId;
     private int categoryId;
@@ -22,10 +22,10 @@ public class tblPost {
     private String title;
     private String statusPost;
 
-    public tblPost() {
+    public postDTO() {
     }
 
-    public tblPost(int postId, String userId, int categoryId, byte[] postImg, String description, Date date, String type, String title, String statusPost) {
+    public postDTO(int postId, String userId, int categoryId, byte[] postImg, String description, Date date, String type, String title, String statusPost) {
         this.postId = postId;
         this.userId = userId;
         this.categoryId = categoryId;

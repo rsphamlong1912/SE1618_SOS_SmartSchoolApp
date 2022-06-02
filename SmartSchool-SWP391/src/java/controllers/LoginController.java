@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import user.tblUser;
+import user.userDTO;
 import user.userDAO;
 
 /**
@@ -48,7 +48,7 @@ public class LoginController extends HttpServlet {
             String userID = request.getParameter("userID");
             String password = request.getParameter("password");
             userDAO dao = new userDAO();
-            tblUser user = dao.login(userID, password);
+            userDTO user = dao.login(userID, password);
             //xac thuc
             if (user != null) {
                 String roleID = user.getRoleId();

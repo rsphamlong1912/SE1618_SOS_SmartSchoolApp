@@ -9,14 +9,14 @@ package reportType;
  *
  * @author SE150925 Nguyen Van Hai Nam
  */
-public class tblReportType {
+public class reportTypeDTO {
     private int reportTypeId;
     private String reportType;
 
-    public tblReportType() {
+    public reportTypeDTO() {
     }
 
-    public tblReportType(int reportTypeId, String reportType) {
+    public reportTypeDTO(int reportTypeId, String reportType) {
         this.reportTypeId = reportTypeId;
         this.reportType = reportType;
     }

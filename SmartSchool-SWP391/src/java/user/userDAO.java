@@ -18,8 +18,8 @@ import utills.DBUtils;
  */
 public class userDAO {
 
-    public tblUser login(String userId, String password) {
-        tblUser user = null;
+    public userDTO login(String userId, String password) {
+        userDTO user = null;
         try {
             String sql = "select * from tblUser where userId = ? and password=?";
             Connection con = new DBUtils().getConnection();
@@ -28,7 +28,7 @@ public class userDAO {
             ps.setString(2, password);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                user = new tblUser();
+                user = new userDTO();
                 user.setUserId(rs.getString("userId"));
                 user.setRoleId(rs.getString("roleId"));
                 user.setPassword(rs.getString("password"));
@@ -42,7 +42,7 @@ public class userDAO {
                 user.setHaveJob(rs.getBoolean("haveJob"));
             }
         } catch (Exception ex) {
-            Logger.getLogger(tblUser.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(userDTO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return user;
     }

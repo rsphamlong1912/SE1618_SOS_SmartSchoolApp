@@ -9,17 +9,17 @@ package report;
  *
  * @author SE150925 Nguyen Van Hai Nam
  */
-public class tblReport {
+public class reportDTO {
     private int reportId;
     private String userId;
     private int postId;
     private int reportTypeId;
     private String reportDetail;
 
-    public tblReport() {
+    public reportDTO() {
     }
 
-    public tblReport(int reportId, String userId, int postId, int reportTypeId, String reportDetail) {
+    public reportDTO(int reportId, String userId, int postId, int reportTypeId, String reportDetail) {
         this.reportId = reportId;
         this.userId = userId;
         this.postId = postId;
