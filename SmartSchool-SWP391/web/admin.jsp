@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -13,5 +14,6 @@
     </head>
     <body>
         <h1>Hello Admin</h1>
+        <a href="<c:url value="/main?action=ProfileDetail" />">See profile Detail</a>
     </body>
 </html>

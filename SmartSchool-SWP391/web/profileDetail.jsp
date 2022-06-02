@@ -1,3 +1,16 @@
+<%-- 
+    Document   : profileDetail.jsp
+    Created on : Jun 3, 2022, 12:12:37 AM
+    Author     : SE150888 Pham Ngoc Long
+--%>
+
+<%-- 
+    Document   : profileDetail.jsp
+    Created on : Jun 2, 2022, 10:05:13 PM
+    Author     : SE150888 Pham Ngoc Long
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en-US" dir="ltr">
 
@@ -35,9 +48,9 @@
   <!-- ===============================================-->
   <!--Stylesheets-->
   <!-- ===============================================-->
-  <link href="./assets/css/theme.css" rel="stylesheet" />
-  <link href="./assets/css/main.css" rel="stylesheet" />
-  <link href="./assets/css/style.css" rel="stylesheet" />
+  <link href="assets/css/theme.css" rel="stylesheet" />
+  <link href="assets/css/main.css" rel="stylesheet" />
+  <link href="assets/css/style.css" rel="stylesheet" />
   <style>
     .left h5 {
       text-align: center;
@@ -133,24 +146,24 @@
             <div class="row">
               <div class="form-group col-12 col-md-6">
                 <label for="name">Họ và tên</label>
-                <input type="text" class="form-control" id="name" placeholder="" value="Phạm Ngọc Long">
+                <input type="text" class="form-control" id="name" placeholder="" value="${sessionScope.LOGIN_USER.fullname}">
               </div>
               <div class="form-group col-12 col-md-6">
                 <label for="phone">Số điện thoại</label>
-                <input type="text" class="form-control" id="phone"" placeholder="" value=" 0333198562">
+                <input type="text" class="form-control" id="phone"" placeholder="" value="${sessionScope.LOGIN_USER.phone}">
               </div>
             </div>
             <div class="row">
               <div class="form-group col-12 col-md-6">
                 <label for="email">Email liên lạc</label>
-                <input type="email" class="form-control" id="email" placeholder="" value="rsphamlong1912@gmail.com">
+                <input type="email" class="form-control" id="email" placeholder="" value="${sessionScope.LOGIN_USER.email}">
               </div>
             </div>
             <div class="row">
               <div class="form-group col-12 col-md-6">
                 <label for="facebook">Facebook</label>
                 <input type="text" class="form-control" id="facebook" placeholder=""
-                  value="https://www.facebook.com/phamlong.19/">
+                  value="${sessionScope.LOGIN_USER.facebook}">
               </div>
             </div>
             <br>
