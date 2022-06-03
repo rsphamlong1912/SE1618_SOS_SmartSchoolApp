@@ -20,18 +20,19 @@ public class DBUtils {
         Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
         return DriverManager.getConnection(url, "sa", "123456");
     }
-//        public static void main(String[] args) {
-//        try {
-//            DBUtils dbc = new DBUtils();
-//            if(dbc.getConnection() != null) {
-//                System.out.println("thanh cong");
-//            }else{
-//                System.out.println("that bai");
-//            }
-//        } catch (Exception ex) {
-//            Logger.getLogger(DBUtils.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//    }
+    
+        public static void main(String[] args) {
+        try {
+            
+            if(DBUtils.getConnection() != null) {
+                System.out.println("thanh cong");
+            }else{
+                System.out.println("that bai");
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(DBUtils.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     
 }
 

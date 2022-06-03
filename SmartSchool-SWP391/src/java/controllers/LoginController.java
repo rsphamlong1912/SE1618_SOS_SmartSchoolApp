@@ -53,13 +53,19 @@ public class LoginController extends HttpServlet {
                 String roleID = user.getRoleId();
                 HttpSession session = request.getSession();
                 session.setAttribute("LOGIN_USER", user);
-                //phan quyen
-                if (AD.equals(roleID)) {
-                    url = ADMIN_PAGE;
-                } else if (US.equals(roleID)) {
-                    url = HOME_PAGE;
-                } else {
+                if (null == roleID) {
                     request.setAttribute("ERROR", "Your role is not support!");
+                } else //phan quyen
+                switch (roleID) {
+                    case AD:
+                        url = HOME_PAGE;
+                        break;
+                    case US:
+                        url = HOME_PAGE;
+                        break;
+                    default:
+                        request.setAttribute("ERROR", "Your role is not support!");
+                        break;
                 }
             } else {
                 request.setAttribute("ERROR", "Incorrect UserID or Pasword !");

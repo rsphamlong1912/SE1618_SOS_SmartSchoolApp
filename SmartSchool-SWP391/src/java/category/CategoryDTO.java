@@ -10,16 +10,16 @@ package category;
  *
  * @author SE150925 Nguyen Van Hai Nam
  */
-public class categoryDTO {
+public class CategoryDTO {
     private int categoryId;
     private String categoryName;
     private boolean categoryStatus;
     private byte[] categoryImg;
 
-    public categoryDTO() {
+    public CategoryDTO() {
     }
 
-    public categoryDTO(int categoryId, String categoryName, boolean categoryStatus, byte[] categoryImg) {
+    public CategoryDTO(int categoryId, String categoryName, boolean categoryStatus, byte[] categoryImg) {
         this.categoryId = categoryId;
         this.categoryName = categoryName;
         this.categoryStatus = categoryStatus;
