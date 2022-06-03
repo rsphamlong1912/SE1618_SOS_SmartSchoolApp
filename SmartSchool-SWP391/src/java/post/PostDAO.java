@@ -103,11 +103,4 @@ public class PostDAO {
         return listP;
     }
     
-    public static void main(String[] args) {
-        
-        Date date = new Date();
-        SimpleDateFormat df = new SimpleDateFormat("hh:mm dd/MM/yyyy");
-        String strDate = df.format(date);
-        System.out.println("Date Format with MM/dd/yyyy: " + strDate);
-}
 }

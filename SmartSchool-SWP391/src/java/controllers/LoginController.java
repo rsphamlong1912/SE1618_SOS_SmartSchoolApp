@@ -35,7 +35,7 @@ public class LoginController extends HttpServlet {
     private static final String AD = "AD";
     private static final String ADMIN_PAGE = "admin.jsp";
     private static final String US = "US";
-    private static final String USER_PAGE = "user.jsp";
+    private static final String HOME_PAGE = "LostAndFoundHome.jsp";
     private static final String EM = "EM";
     private static final String EMPLOYER_PAGE = "employer.jsp";
 
@@ -57,7 +57,7 @@ public class LoginController extends HttpServlet {
                 if (AD.equals(roleID)) {
                     url = ADMIN_PAGE;
                 } else if (US.equals(roleID)) {
-                    url = USER_PAGE;
+                    url = HOME_PAGE;
                 } else {
                     request.setAttribute("ERROR", "Your role is not support!");
                 }
