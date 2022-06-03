@@ -123,7 +123,7 @@
                 <div class="input-field first-wrap">
                   <input id="search" type="text" placeholder="Bạn đang tìm kiếm gì?" />
                 </div>
-                <div class="input-field second-wrap" style="font-family: 'Inter', sans-serif;">
+                     <div class="input-field second-wrap" style="font-family: 'Inter', sans-serif;">
                   <div class="input-select">
                     <select data-trigger="" name="choices-single-defaul">
                       <option placeholder="">Danh sách</option>

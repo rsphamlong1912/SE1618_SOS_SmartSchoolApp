@@ -20,12 +20,12 @@ public class PostDTO {
     private Date date;
     private String type;
     private String title;
-    private String statusPost;
+    private String postStatus;
 
     public PostDTO() {
     }
 
-    public PostDTO(int postId, String userId, int categoryId, byte[] postImg, String description, Date date, String type, String title, String statusPost) {
+    public PostDTO(int postId, String userId, int categoryId, byte[] postImg, String description, Date date, String type, String title, String postStatus) {
         this.postId = postId;
         this.userId = userId;
         this.categoryId = categoryId;
@@ -34,7 +34,7 @@ public class PostDTO {
         this.date = date;
         this.type = type;
         this.title = title;
-        this.statusPost = statusPost;
+        this.postStatus = postStatus;
     }
 
     public int getPostId() {
@@ -101,12 +101,12 @@ public class PostDTO {
         this.title = title;
     }
 
-    public String getStatusPost() {
-        return statusPost;
+    public String getPostStatus() {
+        return postStatus;
     }
 
-    public void setStatusPost(String statusPost) {
-        this.statusPost = statusPost;
+    public void setPostStatus(String postStatus) {
+        this.postStatus = postStatus;
     }
 
     

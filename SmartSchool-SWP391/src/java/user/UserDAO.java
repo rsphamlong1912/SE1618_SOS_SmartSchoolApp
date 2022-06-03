@@ -20,16 +20,19 @@ import utills.DBUtils;
 public class UserDAO {
     private static final String REGISTER = "INSERT INTO tblUser(fullname, userId, password, email, phone) "
                                             + "Values(?, ?, ?, ?, ?)";
+    private static final String LOGIN = "select * from tblUser where userId = ? and password=?";
 
-    public UserDTO login(String userId, String password) {
+    public UserDTO login(String userId, String password) throws SQLException {
         UserDTO user = null;
+        Connection con=null;
+        PreparedStatement ptm=null;
+        ResultSet rs =null;
         try {
-            String sql = "select * from tblUser where userId = ? and password=?";
-            Connection con = new DBUtils().getConnection();
-            PreparedStatement ps = con.prepareStatement(sql);
-            ps.setString(1, userId);
-            ps.setString(2, password);
-            ResultSet rs = ps.executeQuery();
+            con = DBUtils.getConnection();
+            ptm = con.prepareStatement(LOGIN);
+            ptm.setString(1, userId);
+            ptm.setString(2, password);
+            rs = ptm.executeQuery();
             while (rs.next()) {
                 user = new UserDTO();
                 user.setUserId(rs.getString("userId"));
@@ -46,6 +49,16 @@ public class UserDAO {
             }
         } catch (Exception ex) {
             Logger.getLogger(UserDTO.class.getName()).log(Level.SEVERE, null, ex);
+        }finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
         }
         return user;
     }
@@ -75,7 +88,6 @@ public class UserDAO {
                 
             }
         } catch (Exception e) {
-            e.printStackTrace();
         } finally {
             if (ptm != null) {
                 ptm.close();
