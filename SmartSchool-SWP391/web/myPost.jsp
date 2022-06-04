@@ -1,12 +1,6 @@
 <%-- 
-    Document   : profileDetail.jsp
-    Created on : Jun 3, 2022, 12:12:37 AM
-    Author     : SE150888 Pham Ngoc Long
---%>
-
-<%-- 
-    Document   : profileDetail.jsp
-    Created on : Jun 2, 2022, 10:05:13 PM
+    Document   : myPost.jsp
+    Created on : Jun 4, 2022, 3:51:44 PM
     Author     : SE150888 Pham Ngoc Long
 --%>
 
@@ -83,6 +77,29 @@
     .right .btn {
       width: 150px;
     }
+
+    .myDetailPost{
+        padding: 30px 0 30px 0;
+        border-bottom: 1px solid darkcyan;
+    }
+
+    .imgPost img{
+        border-radius: 10%;
+        height: 100px;
+        width: 150px;
+    }
+
+    .info, .typePost, .detail{
+        align-self: end;
+    }
+
+    .typePost p{
+        font-size: 15px;
+    }
+
+    .detail p{
+        font-size: 13px;
+    }
   </style>
 </head>
 
@@ -121,7 +138,7 @@
       </div>
     </nav>
     <section class="container" style="padding-top: 1rem;" id="timkiem">
-      <h1 style="margin-top: 100px; text-align: center;">Thông tin chung</h1>
+      <h1 style="margin-top: 100px; text-align: center;">Bài đăng của tôi</h1>
       <div class="row justify-content-center">
         <div class="left col-12 col-md-4">
           <div class="card position-relative shadow" style="max-width: 370px;">
@@ -130,46 +147,52 @@
                 src="https://cdn2.iconfinder.com/data/icons/people-flat-design/64/Face-Profile-User-Man-Boy-Person-Avatar-512.png"
                 alt="Avatar profile" />
               <ul>
-                <li><a href="#" type="button" class="btn btn-success active"><i class="fa-solid fa-user"></i> Thông tin chung</a></li>
-                <li><a href="main?action=MyPost" type="button" class="btn btn-success"><i class="fa-solid fa-file"></i> Bài đăng của tôi</a></li>
+                <li><a href="main?action=ProfileDetail" type="button" class="btn btn-success"><i class="fa-solid fa-user"></i> Thông tin chung</a></li>
+                <li><a href="#" type="button" class="btn btn-success active"><i class="fa-solid fa-file"></i> Bài đăng của tôi</a></li>
                 <li><a href="main?action=ChangePassword" type="button" class="btn btn-success"><i class="fa-solid fa-key"></i> Thay đổi mật khẩu</a></li>
                 <li><a href="main?action=FeedbackSystem" type="button" class="btn btn-success"><i class="fa-solid fa-comment"></i> Feedback hệ thống</a></li>
-
               </ul>
             </div>
           </div>
         </div>
         <div class="right col-12 col-md-6">
-          <h5 style="margin-bottom: 30px;">Cập nhật thông tin</h5>
+          <!-- <h5 style="margin-bottom: 30px;">Cập nhật thông tin</h5> -->
           <form>
-            <div class="row">
-              <div class="form-group col-12 col-md-6">
-                <label for="name">Họ và tên</label>
-                <input type="text" class="form-control" id="name" placeholder="" value="${sessionScope.LOGIN_USER.fullname}">
-              </div>
-              <div class="form-group col-12 col-md-6">
-                <label for="phone">Số điện thoại</label>
-                <input type="text" class="form-control" id="phone"" placeholder="" value="${sessionScope.LOGIN_USER.phone}">
-              </div>
+            <div class="row myDetailPost">
+                <div class="col-1 count">
+                    <h5>1.</h5>
+                </div>
+                <div class="col-3 imgPost">
+                    <img src="https://sw25772.sfstatic.io/upload_dir/shop/exentri-mens-black-leather-wallet.jpg" class="img-fluid" alt="post image">
+                </div>
+                <div class="col-4 info">
+                    <h5>Mất ví mọi người ơi!</h5>
+                    <p>Loại: Bóp Ví</p>
+                </div>
+                <div class="col-2 typePost">
+                    <p>Đồ thất lạc</p>
+                </div>
+                <div class="col-2 detail">
+                    <p><a href="#" type="button" class="link-dark btn btn-outline-success btn-sm">Xem chi tiết</a></p>
+                </div>
             </div>
-            <div class="row">
-              <div class="form-group col-12 col-md-6">
-                <label for="email">Email liên lạc</label>
-                <input type="email" class="form-control" id="email" placeholder="" value="${sessionScope.LOGIN_USER.email}">
-              </div>
-            </div>
-            <div class="row">
-              <div class="form-group col-12 col-md-6">
-                <label for="facebook">Facebook</label>
-                <input type="text" class="form-control" id="facebook" placeholder=""
-                  value="${sessionScope.LOGIN_USER.facebook}">
-              </div>
-            </div>
-            <br>
-            <div class="row">
-              <div class="form-group col-8 col-md-6">
-                <button type="submit" class="btn btn-success"><i class="fa-solid fa-floppy-disk"></i> Lưu</button>
-              </div>
+            <div class="row myDetailPost">
+                <div class="col-1 count">
+                    <h5>2.</h5>
+                </div>
+                <div class="col-3 imgPost">
+                    <img src="https://www.neuf.tv/wp-content/uploads/2022/04/1649242986_Le-succes-modere-des-AirPods-3-suggere-quApple-pourrait-bientot..jpg" class="img-fluid" alt="post image">
+                </div>
+                <div class="col-4 info">
+                    <h5>Nhặt được airPods 3 ở thư viện</h5>
+                    <p>Loại: Khác</p>
+                </div>
+                <div class="col-2 typePost">
+                    <p>Đồ nhặt được</p>
+                </div>
+                <div class="col-2 detail">
+                    <p><a href="#" type="button" class="link-dark btn btn-outline-success btn-sm">Xem chi tiết</a></p>
+                </div>
             </div>
           </form>
         </div>
