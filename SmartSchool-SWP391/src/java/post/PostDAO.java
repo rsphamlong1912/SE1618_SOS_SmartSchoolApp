@@ -31,6 +31,7 @@ public class PostDAO {
     private static final String LIST_ALL = "SELECT * FROM tblPost";
     private static final String CREATE = "INSERT INTO tblPost(userId, categoryId, postImg, description, date, type, title, postStatus) VALUES(?,?,?,?,?,?,?,?)";
     private static final String UPDATE = "UPDATE tblPost SET postImg=?, description=?, type=?, title=?, postStatus=? WHERE postId=?";
+    private static final String DELETE = "UPDATE tblPost SET postStatus='false' WHERE postId=?";
 
     //Upload new post
     public void uploadPost(PostDTO post) throws SQLException {
@@ -304,5 +305,30 @@ public class PostDAO {
                 con.close();
             }
         }
+    }
+    
+    //Delete Post
+    public boolean deletePost(int postId) throws SQLException {
+        boolean check = false;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(DELETE);
+                ptm.setInt(1, postId);
+                ptm.executeUpdate();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return check;
     }
 }
