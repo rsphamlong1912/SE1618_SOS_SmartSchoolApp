@@ -75,15 +75,73 @@
                 lạc</a></li>
             <li class="nav-item px-3"><a class="nav-link fw-bold" aria-current="page" href="#timkiem">Tìm kiếm</a></li>
             <c:if test="${empty sessionScope.LOGIN_USER}">
-            <li class="nav-item px-3"><a class="btn btn-outline-light order-1 order-lg-0 fw-bold" href="login.html">Đăng nhập /
+            <li class="nav-item px-3"><a class="btn btn-outline-light order-1 order-lg-0 fw-bold" href="#!">Đăng nhập /
                 Đăng ký</a></li>
             </c:if>
             <c:if test="${!empty sessionScope.LOGIN_USER}">
-            <li class="nav-item px-3"><a class="btn btn-outline-light order-1 order-lg-0 fw-bold" href="main?action=ProfileDetail">Show Profile</a></li>
-            <li class="nav-item px-3"><a class="btn btn-outline-light order-1 order-lg-0 fw-bold" href="main?action=Logout">Đăng xuất</a></li>
-            </c:if>   
-            <!-- <li class="nav-item px-3 px-xl-4"><a class="btn btn-outline-dark btn-success order-1 order-lg-0 fw-bold"
-                href="#!">Đăng ký</a></li> -->
+            <!-- User -->
+            <li class="nav-item px-3 navbar-dropdown dropdown-user dropdown">
+              <a class="btn btn-outline-light order-1 order-lg-0 fw-bold nav-link hide-arrow" id="nameLogin" href="" data-bs-toggle="dropdown">
+                <div class="avatar avatar-online">
+                  <img src="https://scontent.fsgn15-1.fna.fbcdn.net/v/t1.6435-9/116445398_1234730980214996_1849654018096645042_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=174925&_nc_ohc=pgUyDSduxzAAX9ad7EY&_nc_ht=scontent.fsgn15-1.fna&oh=00_AT8jjgfBa1sqlbffbkZhJK-oJXPcJ_f5kOI2qv86fltoSg&oe=62C0A48B" alt class="w-px-40 h-auto rounded-circle" style="width: 2rem;"/> ${sessionScope.LOGIN_USER.fullname}
+                </div>
+              </a>          
+              <ul class="dropdown-menu dropdown-menu-end">
+                <li>
+                  <a class="dropdown-item" href="#">
+                    <div class="d-flex">
+                  
+                      <div class="flex-grow-1">
+                        <span class="fw-semibold d-block">${sessionScope.LOGIN_USER.fullname}</span>
+                        <small class="text-muted">Admin</small>
+                      </div>
+                    </div>
+                  </a>
+                </li>
+                <li>
+                  <div class="dropdown-divider"></div>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="main?action=ProfileDetail">
+                    <i class="bx bx-user me-2"></i>
+                    <span class="align-middle"><i class="fa fa-user" aria-hidden="true"></i> Thông tin cá nhân</span>
+                  </a>
+                </li>
+
+                <li>
+                  <a class="dropdown-item" href="main?action=MyPost">
+                    <span class="d-flex align-items-center align-middle">
+                      <i class="bx bx-user me-2"></i>
+                      <span class="flex-grow-1 align-middle"><i class="fa fa-list-alt" aria-hidden="true"></i> Bài viết của tôi</span>
+                      <span class="flex-shrink-0 badge badge-center rounded-pill bg-danger w-px-20 h-px-20">4</span>
+                    </span>
+                  </a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="main?action=ChangePassword">
+                    <i class="bx bx-user me-2"></i>
+                    <span class="align-middle"><i class="fa fa-key" aria-hidden="true"></i> Đổi mật khẩu</span>
+                  </a>
+                </li>
+                <li>
+                    <a class="dropdown-item" href="main?action=FeedbackSystem">
+                    <i class="bx bx-user me-2"></i>
+                    <span class="align-middle"><i class="fa fa-bug" aria-hidden="true"></i> Phản hồi hệ thống</span>
+                  </a>
+                </li>
+                <li>
+                  <div class="dropdown-divider"></div>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="main?action=Logout">
+                    <i class="bx bx-user me-2"></i>
+                    <span class="align-middle"><i class="fa fa-sign-out-alt" aria-hidden="true"></i> Đăng xuất</span>
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <!--/ User -->    
+            </c:if>    
           </ul>
         </div>
       </div>
