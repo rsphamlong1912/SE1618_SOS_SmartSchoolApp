@@ -1,12 +1,6 @@
 <%-- 
-    Document   : profileDetail.jsp
-    Created on : Jun 3, 2022, 12:12:37 AM
-    Author     : SE150888 Pham Ngoc Long
---%>
-
-<%-- 
-    Document   : profileDetail.jsp
-    Created on : Jun 2, 2022, 10:05:13 PM
+    Document   : changePassword.jsp
+    Created on : Jun 4, 2022, 2:59:45 PM
     Author     : SE150888 Pham Ngoc Long
 --%>
 
@@ -121,7 +115,7 @@
       </div>
     </nav>
     <section class="container" style="padding-top: 1rem;" id="timkiem">
-      <h1 style="margin-top: 100px; text-align: center;">Thông tin chung</h1>
+      <h1 style="margin-top: 100px; text-align: center;">Đổi mật khẩu</h1>
       <div class="row justify-content-center">
         <div class="left col-12 col-md-4">
           <div class="card position-relative shadow" style="max-width: 370px;">
@@ -130,9 +124,9 @@
                 src="https://cdn2.iconfinder.com/data/icons/people-flat-design/64/Face-Profile-User-Man-Boy-Person-Avatar-512.png"
                 alt="Avatar profile" />
               <ul>
-                <li><a href="#" type="button" class="btn btn-success active"><i class="fa-solid fa-user"></i> Thông tin chung</a></li>
+                <li><a href="main?action=ProfileDeatil" type="button" class="btn btn-success"><i class="fa-solid fa-user"></i> Thông tin chung</a></li>
                 <li><a href="main?action=MyPost" type="button" class="btn btn-success"><i class="fa-solid fa-file"></i> Bài đăng của tôi</a></li>
-                <li><a href="main?action=ChangePassword" type="button" class="btn btn-success"><i class="fa-solid fa-key"></i> Thay đổi mật khẩu</a></li>
+                <li><a href="#" type="button" class="btn btn-success active"><i class="fa-solid fa-key"></i> Thay đổi mật khẩu</a></li>
                 <li><a href="main?action=FeedbackSystem" type="button" class="btn btn-success"><i class="fa-solid fa-comment"></i> Feedback hệ thống</a></li>
 
               </ul>
@@ -140,29 +134,24 @@
           </div>
         </div>
         <div class="right col-12 col-md-6">
-          <h5 style="margin-bottom: 30px;">Cập nhật thông tin</h5>
+          <!-- <h5 style="margin-bottom: 30px;">Cập nhật thông tin</h5> -->
           <form>
             <div class="row">
-              <div class="form-group col-12 col-md-6">
-                <label for="name">Họ và tên</label>
-                <input type="text" class="form-control" id="name" placeholder="" value="${sessionScope.LOGIN_USER.fullname}">
-              </div>
-              <div class="form-group col-12 col-md-6">
-                <label for="phone">Số điện thoại</label>
-                <input type="text" class="form-control" id="phone"" placeholder="" value="${sessionScope.LOGIN_USER.phone}">
+              <div class="form-group col-12 col-md-8">
+                <label for="oldPassword">Mật khẩu cũ</label>
+                <input type="text" class="form-control" id="oldPassword" placeholder="">
               </div>
             </div>
             <div class="row">
-              <div class="form-group col-12 col-md-6">
-                <label for="email">Email liên lạc</label>
-                <input type="email" class="form-control" id="email" placeholder="" value="${sessionScope.LOGIN_USER.email}">
+              <div class="form-group col-12 col-md-8">
+                <label for="newPassword">Mật khẩu mới</label>
+                <input type="email" class="form-control" id="newPassword" placeholder="">
               </div>
             </div>
             <div class="row">
-              <div class="form-group col-12 col-md-6">
-                <label for="facebook">Facebook</label>
-                <input type="text" class="form-control" id="facebook" placeholder=""
-                  value="${sessionScope.LOGIN_USER.facebook}">
+              <div class="form-group col-12 col-md-8">
+                <label for="confirmNewPassword">Xác nhận mật khẩu mới</label>
+                <input type="text" class="form-control" id="confirmNewPassword" placeholder="">
               </div>
             </div>
             <br>
