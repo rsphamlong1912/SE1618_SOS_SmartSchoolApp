@@ -1,9 +1,9 @@
 <%-- 
-    Document   : login1
-    Created on : Mar 3, 2022, 8:48:02 PM
+    Document   : register.jsp
+    Created on : Jun 5, 2022, 1:01:08 AM
     Author     : TrinhNgocBao
 --%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en-US" dir="ltr">
@@ -64,7 +64,7 @@
             class="navbar-toggler-icon"> </span></button>
         <div class="collapse navbar-collapse border-top border-lg-0 mt-4 mt-lg-0" id="navbarSupportedContent">
           <ul class="navbar-nav ms-auto pt-2 pt-lg-0 font-base align-items-lg-center align-items-start">
-            <li class="nav-item px-3"><a class="nav-link fw-bold" aria-current="page" href="index.jsp">Trang chủ</a>
+            <li class="nav-item px-3"><a class="nav-link fw-bold" aria-current="page" href="index.html">Trang chủ</a>
             </li>
             <li class="nav-item px-3"><a class="nav-link fw-bold" aria-current="page" href="#phanloai">Phân loại</a>
             </li>
@@ -90,7 +90,7 @@
       <div class="container pt-10 h-100">
         <div class="row d-flex justify-content-center align-items-center h-100">
           <div class="col-xl-10">
-            <div class="card rounded text-secondary">
+            <div class="card rounded-1 text-secondary">
               <div class="row g-0">
                 <div class="col-lg-6">
                   <div class="card-body p-md-5 mx-md-4">
@@ -101,36 +101,58 @@
                       <h4 class="mt-1 mb-5 pb-1">Lost And Found</h4>
                     </div>
     
-                      <form action="main" method="POST">
-                      <p class="text-center">Vui lòng đăng nhập tài khoản của bạn</p>
+                    <form onsubmit="return validate()" action="main" method="POST">
+                      <p class="text-center">Đăng ký tài khoản của bạn</p>
     
-                      <div class="form-outline mb-4">
-                        <label class="form-label" for="form2Example11">Tên đăng nhập</label>
-                        <input type="text" name="userID" id="form2Example11" class="form-control"
+                      <div class="form-outline mb-2 ">
+                        <label class="form-label" for="form2Example11">Họ tên</label>
+                        <input type="text" id="fullName" class="form-control"
                           placeholder="" />
-                        
+                          <small></small>                      
+                      </div>
+                      <div class="form-outline mb-2">
+                        <label class="form-label" for="form2Example11">Tên đăng nhập</label>
+                        <input type="text" id="userName" class="form-control"
+                          placeholder="" />
+                          <small></small>                       
                       </div>
     
-                      <div class="form-outline mb-4">
+                      <div class="form-outline mb-3">
                         <label class="form-label" for="form2Example22">Mật khẩu</label>
-                        <input type="password" name="password" id="form2Example22" class="form-control" />
-                        
+                        <input type="password" id="password" class="form-control" />
+                        <small></small>
                       </div>
-    
+                      <div class="form-outline mb-3">
+                        <label class="form-label" for="form2Example22">Nhập lại mật khẩu</label>
+                        <input type="password" id="re-password" class="form-control" />
+                        <small></small>
+                      </div>
+                      <div class="form-outline mb-2">
+                        <label class="form-label" for="form2Example11">Email</label>
+                        <input type="email" id="email" class="form-control"
+                          placeholder="" />
+                          <small></small>                      
+                      </div>
+                      <div class="form-outline mb-2">
+                        <label class="form-label" for="form2Example11">Số điện thoại</label>
+                        <input type="tel" id="phone" class="form-control"
+                          placeholder="" />
+                          <small></small>                      
+                      </div>
                       <div class="text-center pt-1 mb-5 pb-1">
-                        <button class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="submit" name="action" value="Login">Đăng nhập</button>
+                        <button class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="submit" name="action" value="CreateAccount">Đăng ký</button>
                       </div>
     
                       <div class="d-flex align-items-center justify-content-center pb-4">
-                        <p class="mb-0 me-2">Chưa có tài khoản ?</p>
-                        <a class="btn btn-outline-danger" href="register.jsp">Đăng ký</a>
+                        <p class="mb-0 me-2">Đã có tài khoản ?</p>
+                        <a class="btn btn-outline-danger" href="login.jsp">Đăng nhập</a>
                       </div>
     
                     </form>
     
                   </div>
                 </div>
-                <div class="col-lg-6 d-flex align-items-center rounded-end gradient-custom-2">
+                <div class="col-lg-6 d-flex align-items-center gradient-custom-2">
                   <div class="text-white px-3 py-4 p-md-5 mx-md-4">
                     <h4 class="mb-4">FPT Smart School</h4>
                     <p class="mb-0">Smart School, Smart System, Better Life !</p>
@@ -219,6 +241,7 @@
   <script src="vendors/fontawesome/all.min.js"></script>
   <script src="assets/js/theme.js"></script>
   <script src="assets/js/extention/choices.js"></script>
+  <script src="assets/js/extention/validation.js"></script>
   <script>
     const choices = new Choices('[data-trigger]',
       {
