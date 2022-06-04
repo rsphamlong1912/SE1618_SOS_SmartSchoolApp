@@ -8,57 +8,53 @@ package controllers;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import user.UserDAO;
+import user.UserDTO;
 
 /**
  *
- * @author SE150925 Nguyen Van Hai Nam
+ * @author TQK
  */
-public class MainController extends HttpServlet {
-
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    private static final String ERROR = "error.jsp";
-    private static final String LOGIN = "Login";
-    private static final String LOGIN_CONTROLLER = "login";
-    private static final String LOGOUT = "Logout";
-    private static final String LOGOUT_CONTROLLER = "logout";
-    private static final String PROFILE_DETAIL = "ProfileDetail";
-    private static final String PROFILE_DETAIL_CONTROLLER = "profileDetail";
-    private static final String SIGNUP = "Sigup";
-    private static final String SIGNUP_CONTROLLER = "sigup";
-
+@WebServlet(name = "SignUpController", urlPatterns = {"/signup"})
+public class SignUpController extends HttpServlet {
+    private static final String SUCCESS = "login.jsp";
+    private static final String SIGNUP = "register.html";
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = ERROR;
+        String fullname = request.getParameter("fullName");
+        String userId = request.getParameter("userName");
+        String password = request.getParameter("password");
+        String re_password = request.getParameter("re_password");
+        String email = request.getParameter("email");
+        String phone = request.getParameter("phone");
+        String url = SIGNUP;
         try {
-            String action = request.getParameter("action");
-            if (LOGIN.equals(action)) {
-                url = LOGIN_CONTROLLER;
-            }
-            if (PROFILE_DETAIL.equals(action)) {
-                url = PROFILE_DETAIL_CONTROLLER;
-            }
-            if (LOGOUT.equals(action)) {
-                url = LOGOUT_CONTROLLER;
-            }
-            if (SIGNUP.equals(action)) {
-                url = SIGNUP_CONTROLLER;
+            if(!re_password.equals(password)){
+                request.setAttribute("ERROR", "Confirm must match Password");
+            } else {
+                UserDAO dao = new UserDAO();
+                UserDTO dto = dao.checkAccountExist(userId);
+                if(dto == null) {
+                    dao.signup(fullname, userId, password, email, phone);
+                    response.sendRedirect(SUCCESS);
+                }else {
+                    response.sendRedirect(SIGNUP);
+                }
+//                boolean result = dao.createNewAccount(dto);
+//                if(result) {
+//                    url = SUCCESS;
+//                }
             }
         } catch (Exception e) {
-            log("Error at MainController: " + e.toString());
+            log("Error at SignUpController: " + e.toString());
         } finally {
-            request.getRequestDispatcher(url).forward(request, response);
+            request.getRequestDispatcher(SUCCESS).forward(request, response);
         }
     }
 
