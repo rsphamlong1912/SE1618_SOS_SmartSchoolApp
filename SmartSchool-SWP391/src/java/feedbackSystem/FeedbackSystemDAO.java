@@ -3,9 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package report;
+package feedbackSystem;
 
-import feedbackSystem.FeedbackSystemDTO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -18,28 +17,30 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import post.PostDAO;
-import post.PostDTO;
 import utills.DBUtils;
 
 /**
  *
  * @author SE150925 Nguyen Van Hai Nam
  */
-public class ReportDAO {
+public class FeedbackSystemDAO {
 
-    private static final String CREATE = "INSERT INTO tblReport(userId,postId,reportTypeId,reportDetail) VALUES(?,?,?,?)";
-    private static final String LIST_ALL = "SELECT * FROM tblReport";
+    private static final String CREATE = "INSERT INTO tblFeedbackSystem(userId,feedbackDesc,feedbackImg,dateFeedback) VALUES(?,?,?,?)";
+    private static final String LIST_ALL = "SELECT * FROM tblFeedbackSystem";
 
-    public void sendReport(ReportDTO report) throws SQLException {
+    public void sendFeedbackSystem(FeedbackSystemDTO feedback) throws SQLException {
         Connection con = null;
         PreparedStatement ptm = null;
         try {
             con = DBUtils.getConnection();
             ptm = con.prepareStatement(CREATE);
-            ptm.setString(1, report.getUserId());
-            ptm.setInt(2, report.getPostId());
-            ptm.setInt(3, report.getReportTypeId());
-            ptm.setString(4, report.getReportDetail());
+            ptm.setString(1, feedback.getUserId());
+            ptm.setString(2, feedback.getFeedbackDesc());
+            ptm.setBytes(3, feedback.getFeedbackImg());
+            Date date = new Date();
+            SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy hh:mm");
+            String newDate = df.format(date);
+            ptm.setString(4, newDate);
             ptm.executeUpdate();
         } catch (Exception ex) {
             Logger.getLogger(PostDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -54,8 +55,8 @@ public class ReportDAO {
         }
     }
 
-    public List<ReportDTO> getAll() throws SQLException {
-        List<ReportDTO> list = new ArrayList<>();
+    public List<FeedbackSystemDTO> getAll() throws SQLException {
+        List<FeedbackSystemDTO> list = new ArrayList<>();
         Connection con = null;
         Statement stm = null;
         ResultSet rs = null;
@@ -67,13 +68,13 @@ public class ReportDAO {
             rs = stm.executeQuery(LIST_ALL);
             //Loading data into the list
             while (rs.next()) {
-                ReportDTO report = new ReportDTO();
-                report.setReportId(rs.getInt("reportId"));
-                report.setUserId(rs.getString("userId"));
-                report.setPostId(rs.getInt("postId"));
-                report.setReportId(rs.getInt("reportId"));
-                report.setReportDetail(rs.getString("reportDetail"));
-                list.add(report);
+                FeedbackSystemDTO feedbackSystem = new FeedbackSystemDTO();
+                feedbackSystem.setFeedbackId(rs.getInt("feedbackId"));
+                feedbackSystem.setUserId(rs.getString("userId"));
+                feedbackSystem.setFeedbackDesc(rs.getString("feedbackDesc"));
+                feedbackSystem.setFeedbackImg(rs.getBytes("feedbackImg"));
+                feedbackSystem.setDateFeedback(rs.getDate("dateFeedback"));
+                list.add(feedbackSystem);
             }
 
         } catch (Exception ex) {
