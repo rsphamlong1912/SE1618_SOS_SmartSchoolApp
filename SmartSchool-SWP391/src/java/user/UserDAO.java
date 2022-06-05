@@ -19,8 +19,7 @@ import utills.DBUtils;
  */
 public class UserDAO {
 
-    private static final String REGISTER = "INSERT INTO tblUser(fullname, userId, password, email, phone) "
-            + "Values(?, ?, ?, ?, ?)";
+    private static final String REGISTER = "INSERT INTO tblUser(fullname, userId, password, email, phone, roleId) VALUES(?, ?, ?, ?, ?, 'US')";
     private static final String LOGIN = "select * from tblUser where userId = ? and password=?";
     private static final String CHECK_ACCOUNT = "SELECT * FROM tblUser WHERE userId = ?";
     private static final String CHANGE_PASSWORD = "UPDATE tblUser SET password = ? WHERE userId= ?";
@@ -119,9 +118,9 @@ public class UserDAO {
                 ptm = conn.prepareStatement(REGISTER);
                 ptm.setString(1, fullname);
                 ptm.setString(2, userId);
-                ptm.setString(2, password);
-                ptm.setString(2, email);
-                ptm.setString(2, phone);
+                ptm.setString(3, password);
+                ptm.setString(4, email);
+                ptm.setString(5, phone);
                 ptm.executeUpdate();
             }
         } catch (Exception e) {
