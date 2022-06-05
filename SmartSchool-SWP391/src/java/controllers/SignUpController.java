@@ -22,7 +22,7 @@ import user.UserDTO;
 @WebServlet(name = "SignUpController", urlPatterns = {"/signup"})
 public class SignUpController extends HttpServlet {
     private static final String SUCCESS = "login.jsp";
-    private static final String SIGNUP = "register.html";
+    private static final String SIGNUP = "register.jsp";
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
