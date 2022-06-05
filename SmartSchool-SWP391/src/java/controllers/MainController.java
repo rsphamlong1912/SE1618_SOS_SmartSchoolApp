@@ -40,10 +40,8 @@ public class MainController extends HttpServlet {
     private static final String CHANGE_PASSWORD_CONTROLLER = "changePassword";
     private static final String FEEDBACK_SYSTEM = "FeedbackSystem";
     private static final String FEEDBACK_SYSTEM_CONTROLLER = "feedbackSystem";
-    private static final String SIGNUP = "Sigup";
-    private static final String SIGNUP_CONTROLLER = "sigup";
-    private static final String CREATE_ACCOUNT = "CreateAccount";
-    private static final String CREATE_ACCOUNT_CONTROLLER = "createaccount";
+    private static final String SIGNUP = "SignUp";
+    private static final String SIGNUP_CONTROLLER = "signup";
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -70,9 +68,6 @@ public class MainController extends HttpServlet {
             }
             if (SIGNUP.equals(action)) {
                 url = SIGNUP_CONTROLLER;
-            }
-            if (CREATE_ACCOUNT.equals(action)) {
-                url = CREATE_ACCOUNT_CONTROLLER;
             }
         } catch (Exception e) {
             log("Error at MainController: " + e.toString());

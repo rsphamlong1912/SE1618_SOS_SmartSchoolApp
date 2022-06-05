@@ -68,7 +68,7 @@ public class LoginController extends HttpServlet {
                         break;
                 }
             } else {
-                request.setAttribute("ERROR", "Incorrect UserID or Pasword !");
+                request.setAttribute("ERROR", "Tên đăng nhập hoặc mật khẩu không đúng!");
             }
         } catch (Exception e) {
             log("Error at LoginController:" + e.toString());
