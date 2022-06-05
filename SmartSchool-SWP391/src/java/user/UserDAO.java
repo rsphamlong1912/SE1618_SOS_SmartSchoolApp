@@ -91,6 +91,7 @@ public class UserDAO {
                     user.setUserStatus(rs.getBoolean("userStatus"));
                     user.setHaveJob(rs.getBoolean("haveJob"));
                 }
+                return user;
             }
         } catch (Exception e) {
             e.printStackTrace();
