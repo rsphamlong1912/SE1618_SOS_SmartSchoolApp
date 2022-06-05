@@ -22,8 +22,8 @@ public class UserDAO {
     private static final String REGISTER = "INSERT INTO tblUser(fullname, userId, password, email, phone) "
             + "Values(?, ?, ?, ?, ?)";
     private static final String LOGIN = "select * from tblUser where userId = ? and password=?";
-    private static final String UPDATE_PASSWORD = "UPDATE tblUser SET password=? WHERE userId=?";
     private static final String CHECK_ACCOUNT = "SELECT * FROM tblUser WHERE userId = ?";
+    private static final String CHANGE_PASSWORD = "UPDATE tblUser SET password = ? WHERE userId= ?";
 
     public UserDTO login(String userId, String password) throws SQLException {
         UserDTO user = null;
@@ -108,8 +108,8 @@ public class UserDAO {
         return null;
     }
 
-    public void signup(String fullname, String userId, String password, String email, String phone) 
-                        throws SQLException {
+    public void signup(String fullname, String userId, String password, String email, String phone)
+            throws SQLException {
         Connection conn = null;
         PreparedStatement ptm = null;
         try {
@@ -169,7 +169,28 @@ public class UserDAO {
 //        }
 //        return false;
 //    }
-    
-    
     //Change Password
+    public void changePassword(String userId, String newPassword)
+            throws SQLException {
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(CHANGE_PASSWORD);
+                ptm.setString(1, newPassword);
+                ptm.setString(2, userId);
+                ptm.executeUpdate();
+            }
+        } catch (Exception e) {
+            
+        } finally {
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+    }
 }
