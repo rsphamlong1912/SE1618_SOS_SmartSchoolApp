@@ -4,6 +4,7 @@
     Author     : TrinhNgocBao
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en-US" dir="ltr">
@@ -106,43 +107,45 @@
     
                       <div class="form-outline mb-2 ">
                         <label class="form-label" for="form2Example11">Họ tên</label>
-                        <input type="text" id="fullName" class="form-control"
-                          placeholder="" />
+                        <input type="text" id="fullName" class="form-control" name="fullName"
+                               value="${requestScope.FULLNAME}" placeholder="" />
                           <small></small>                      
                       </div>
                       <div class="form-outline mb-2">
                         <label class="form-label" for="form2Example11">Tên đăng nhập</label>
-                        <input type="text" id="userName" class="form-control"
-                          placeholder="" />
-                          <small></small>                       
+                        <input type="text" id="userName" class="form-control" name="userName"
+                          value="${requestScope.USERNAME}" placeholder="" />
+                          <small>${requestScope.ERROR}</small>                       
                       </div>
     
                       <div class="form-outline mb-3">
                         <label class="form-label" for="form2Example22">Mật khẩu</label>
-                        <input type="password" id="password" class="form-control" />
+                        <input type="password" id="password" class="form-control" name="password" />
                         <small></small>
                       </div>
                       <div class="form-outline mb-3">
                         <label class="form-label" for="form2Example22">Nhập lại mật khẩu</label>
-                        <input type="password" id="re-password" class="form-control" />
+                        <input type="password" id="re-password" class="form-control" name="repassword"/>
                         <small></small>
                       </div>
                       <div class="form-outline mb-2">
                         <label class="form-label" for="form2Example11">Email</label>
-                        <input type="email" id="email" class="form-control"
-                          placeholder="" />
+                        <input type="email" id="email" class="form-control" name="email"
+                          value="${requestScope.EMAIL}" placeholder="" />
                           <small></small>                      
                       </div>
                       <div class="form-outline mb-2">
                         <label class="form-label" for="form2Example11">Số điện thoại</label>
-                        <input type="tel" id="phone" class="form-control"
-                          placeholder="" />
+                        <input type="tel" id="phone" class="form-control" name="phone"
+                          value="${requestScope.PHONE}" placeholder="" />
                           <small></small>                      
                       </div>
                       <div class="text-center pt-1 mb-5 pb-1">
-                        <button class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="submit" name="action" value="SignUp">Đăng ký</button>
-                      </div>
-    
+                          <c:if test="${empty requestScope.ERROR}">
+                              <h6 style="color: green; display: inline-block; padding: 5px 0">${requestScope.SUCCESS}</h6></br>
+                          </c:if>
+                          <button class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="submit" name="action" value="SignUp">Đăng ký</button>                       
+                      </div>                     
                       <div class="d-flex align-items-center justify-content-center pb-4">
                         <p class="mb-0 me-2">Đã có tài khoản ?</p>
                         <a class="btn btn-outline-danger" href="login.jsp">Đăng nhập</a>
