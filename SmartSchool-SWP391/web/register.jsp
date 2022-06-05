@@ -140,7 +140,7 @@
                           <small></small>                      
                       </div>
                       <div class="text-center pt-1 mb-5 pb-1">
-                        <button class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="submit" name="action" value="CreateAccount">Đăng ký</button>
+                        <button class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="submit" name="action" value="SignUp">Đăng ký</button>
                       </div>
     
                       <div class="d-flex align-items-center justify-content-center pb-4">

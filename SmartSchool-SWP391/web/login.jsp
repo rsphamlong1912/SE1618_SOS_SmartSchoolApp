@@ -104,15 +104,14 @@
     
                       <div class="form-outline mb-4">
                         <label class="form-label" for="form2Example11">Tên đăng nhập</label>
-                        <input type="text" name="userID" id="form2Example11" class="form-control"
-                          placeholder="" />
+                        <input type="text" name="userID" id="form2Example11" class="form-control" placeholder="" />
                         
                       </div>
     
                       <div class="form-outline mb-4">
                         <label class="form-label" for="form2Example22">Mật khẩu</label>
                         <input type="password" name="password" id="form2Example22" class="form-control" />
-                        
+                        <h6 style="font-style: italic;color: red; display: inline-block; padding: 5px 0">${requestScope.ERROR}</h6>
                       </div>
     
                       <div class="text-center pt-1 mb-5 pb-1">
@@ -122,6 +121,7 @@
                       <div class="d-flex align-items-center justify-content-center pb-4">
                         <p class="mb-0 me-2">Chưa có tài khoản ?</p>
                         <a class="btn btn-outline-danger" href="register.jsp">Đăng ký</a>
+                        
                       </div>
     
                     </form>
