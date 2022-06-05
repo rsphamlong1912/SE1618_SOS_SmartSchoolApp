@@ -147,9 +147,7 @@
                         <p class="mb-0 me-2">Đã có tài khoản ?</p>
                         <a class="btn btn-outline-danger" href="login.jsp">Đăng nhập</a>
                       </div>
-    
-                    </form>
-    
+                    </form>  
                   </div>
                 </div>
                 <div class="col-lg-6 d-flex align-items-center gradient-custom-2">

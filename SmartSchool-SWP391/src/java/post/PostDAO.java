@@ -32,7 +32,7 @@ public class PostDAO {
     private static final String CREATE = "INSERT INTO tblPost(userId, categoryId, postImg, description, date, type, title, postStatus) VALUES(?,?,?,?,?,?,?,?)";
     private static final String UPDATE = "UPDATE tblPost SET postImg=?, description=?, type=?, title=?, postStatus=? WHERE postId=?";
     private static final String DELETE = "UPDATE tblPost SET postStatus='false' WHERE postId=?";
-
+    private static final String LIST_MYPOST = "SELECT * FROM tblPost WHERE userId=? AND postStatus = 'true'";
     //Upload new post
     public void uploadPost(PostDTO post) throws SQLException {
         Connection con = null;
@@ -330,5 +330,46 @@ public class PostDAO {
             }
         }
         return check;
+    }
+    
+    public List<PostDTO> getMyPost(String userId) throws SQLException {
+        List<PostDTO> list = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(LIST_MYPOST);
+                ptm.setString(1, userId);
+                rs = ptm.executeQuery();
+                while (rs.next()) {
+                    PostDTO post = new PostDTO();
+                    post.setPostId(rs.getInt("postId"));
+                    post.setUserId(rs.getString("userId"));
+                    post.setCategoryId(rs.getInt("categoryId"));
+                    post.setPostImg(rs.getBytes("postImg"));
+                    post.setDescription(rs.getString("description"));
+                    post.setDate(rs.getDate("date"));
+                    post.setType(rs.getBoolean("type"));
+                    post.setTitle(rs.getString("title"));
+                    post.setPostStatus(rs.getString("postStatus"));
+                    list.add(post);
+                }
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(PostDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return list;
     }
 }
