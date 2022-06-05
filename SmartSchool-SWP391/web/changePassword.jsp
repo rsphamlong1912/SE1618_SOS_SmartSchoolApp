@@ -139,19 +139,19 @@
             <div class="row">
               <div class="form-group col-12 col-md-8">
                 <label for="oldPassword">Mật khẩu cũ</label>
-                <input type="password" class="form-control" id="oldPassword" placeholder="" name="oldPassword">
+                <input type="password" class="form-control" id="oldPassword" placeholder="" name="oldPassword" required="">
               </div>
             </div>
             <div class="row">
               <div class="form-group col-12 col-md-8">
                 <label for="newPassword">Mật khẩu mới</label>
-                <input type="password" class="form-control" id="newPassword" placeholder="" name="newPassword">
+                <input type="password" class="form-control" id="newPassword" placeholder="" name="newPassword" required="">
               </div>
             </div>
             <div class="row">
               <div class="form-group col-12 col-md-8">
                 <label for="confirmNewPassword">Xác nhận mật khẩu mới</label>
-                <input type="password" class="form-control" id="confirmNewPassword" placeholder="" name="confirmNewPassword">
+                <input type="password" class="form-control" id="confirmNewPassword" placeholder="" name="confirmNewPassword" required="">
               </div>
             </div>
               <h6 style="font-style: italic;color: red; display: inline-block; padding: 5px 0">${requestScope.errMessage}</h6>
