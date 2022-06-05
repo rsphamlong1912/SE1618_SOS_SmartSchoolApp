@@ -46,26 +46,30 @@ public class LoginController extends HttpServlet {
         try {
             String userID = request.getParameter("userID");
             String password = request.getParameter("password");
+            HttpSession session = request.getSession();
+            request.setAttribute("USERID", userID);
+            request.setAttribute("PASSWORD", password);
             UserDAO dao = new UserDAO();
             UserDTO user = dao.login(userID, password);
             //xac thuc
             if (user != null) {
                 String roleID = user.getRoleId();
-                HttpSession session = request.getSession();
                 session.setAttribute("LOGIN_USER", user);
                 if (null == roleID) {
                     request.setAttribute("ERROR", "Your role is not support!");
                 } else //phan quyen
-                switch (roleID) {
-                    case AD:
-                        url = HOME_PAGE;
-                        break;
-                    case US:
-                        url = HOME_PAGE;
-                        break;
-                    default:
-                        request.setAttribute("ERROR", "Your role is not support!");
-                        break;
+                {
+                    switch (roleID) {
+                        case AD:
+                            url = HOME_PAGE;
+                            break;
+                        case US:
+                            url = HOME_PAGE;
+                            break;
+                        default:
+                            request.setAttribute("ERROR", "Your role is not support!");
+                            break;
+                    }
                 }
             } else {
                 request.setAttribute("ERROR", "Tên đăng nhập hoặc mật khẩu không đúng!");
