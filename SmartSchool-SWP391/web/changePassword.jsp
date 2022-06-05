@@ -159,6 +159,7 @@
             <br>
             <div class="row">
               <div class="form-group col-8 col-md-6">
+                  <input type="hidden" name="userId" value="${sessionScope.LOGIN_USER.userId}">
                 <input type="hidden" name="action" value="ChangePassword">
                 <button type="submit" class="btn btn-success"><i class="fa-solid fa-floppy-disk"></i> Lưu</button>
               </div>

@@ -76,20 +76,18 @@ public class ChangePasswordController extends HttpServlet {
             throws ServletException, IOException {
         String url = CHANGE_PASSWORD_PAGE;
         try {
+            String userId = request.getParameter("userId");
             String oldPassword = request.getParameter("oldPassword");
             String newPassword = request.getParameter("newPassword");
             String confirmNewPassword = request.getParameter("confirmNewPassword");
-
-            HttpSession session = request.getSession();
-            UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
-
+            UserDAO dao = new UserDAO(); 
+            UserDTO loginUser = dao.checkAccountExist(userId);
             if (loginUser == null) {
                 url = ERROR;
             } else {
                 if (loginUser.getPassword().equals(oldPassword)) {
                     if (newPassword.equals(confirmNewPassword)) {
                         url = CHANGE_PASSWORD_PAGE;
-                        UserDAO dao = new UserDAO();
                         dao.changePassword(loginUser.getUserId(), newPassword);
                         request.setAttribute("message", "Đổi mật khẩu thành công!");
                     } else {
