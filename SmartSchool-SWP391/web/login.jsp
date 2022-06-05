@@ -104,13 +104,13 @@
     
                       <div class="form-outline mb-4">
                         <label class="form-label" for="form2Example11">Tên đăng nhập</label>
-                        <input type="text" name="userID" id="form2Example11" class="form-control" placeholder="" />
+                        <input type="text" name="userID" id="form2Example11" class="form-control" placeholder="" value="${requestScope.USERID}"/>
                         
                       </div>
     
                       <div class="form-outline mb-4">
                         <label class="form-label" for="form2Example22">Mật khẩu</label>
-                        <input type="password" name="password" id="form2Example22" class="form-control" />
+                        <input type="password" name="password" id="form2Example22" class="form-control" value="${requestScope.PASSWORD}"/>
                         <h6 style="font-style: italic;color: red; display: inline-block; padding: 5px 0">${requestScope.ERROR}</h6>
                       </div>
     
