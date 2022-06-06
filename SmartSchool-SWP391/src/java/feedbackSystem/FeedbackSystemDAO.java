@@ -25,7 +25,7 @@ import utills.DBUtils;
  */
 public class FeedbackSystemDAO {
 
-    private static final String CREATE = "INSERT INTO tblFeedbackSystem(userId,feedbackDesc,feedbackImg,dateFeedback) VALUES(?,?,?,?)";
+    private static final String SEND_FEEDBACK = "INSERT INTO tblFeedbackSystem(userId,feedbackDesc,dateFeedback) VALUES(?,?,?)";
     private static final String LIST_ALL = "SELECT * FROM tblFeedbackSystem";
 
     public void sendFeedbackSystem(FeedbackSystemDTO feedback) throws SQLException {
@@ -33,14 +33,13 @@ public class FeedbackSystemDAO {
         PreparedStatement ptm = null;
         try {
             con = DBUtils.getConnection();
-            ptm = con.prepareStatement(CREATE);
+            ptm = con.prepareStatement(SEND_FEEDBACK);
             ptm.setString(1, feedback.getUserId());
             ptm.setString(2, feedback.getFeedbackDesc());
-            ptm.setBytes(3, feedback.getFeedbackImg());
             Date date = new Date();
             SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy hh:mm");
             String newDate = df.format(date);
-            ptm.setString(4, newDate);
+            ptm.setString(3, newDate);
             ptm.executeUpdate();
         } catch (Exception ex) {
             Logger.getLogger(PostDAO.class.getName()).log(Level.SEVERE, null, ex);
