@@ -159,27 +159,38 @@
                     <div class="right col-12 col-md-6">
                         <form>
                             <c:if test="${!empty requestScope.MY_POST}">
-                            <c:forEach items="${requestScope.MY_POST}" var="myPost" varStatus="count">
-                            <div class="row myDetailPost">
-                                <div class="col-1 count">
-                                    <h5>${count.index + 1}.</h5>
-                                </div>
-                                <div class="col-3 imgPost">
-                                    <img src="https://sw25772.sfstatic.io/upload_dir/shop/exentri-mens-black-leather-wallet.jpg" class="img-fluid" alt="post image">
-                                </div>
-                                <div class="col-4 info">
-                                    <h5>${myPost.title}</h5>
-                                    <p>Loại: Điện thoại</p>
-                                    <!--$myPost.categoryId = CATE.categoryId CATE.categoryName-->
-                                </div>
-                                <div class="col-2 typePost">
-                                    <p>Đồ thất lạc</p>
-                                </div>
-                                <div class="col-2 detail">
-                                    <p><a href="#" type="button" class="link-dark btn btn-outline-success btn-sm">Xem chi tiết</a></p>
-                                </div>
-                            </div>
-                            </c:forEach>
+                                <c:forEach items="${requestScope.MY_POST}" var="myPost" varStatus="count">
+                                    <div class="row myDetailPost">
+                                        <div class="col-1 count">
+                                            <h5>${count.index + 1}.</h5>
+                                        </div>
+                                        <div class="col-3 imgPost">
+                                            <img src="https://sw25772.sfstatic.io/upload_dir/shop/exentri-mens-black-leather-wallet.jpg" class="img-fluid" alt="post image">
+                                        </div>
+                                        <div class="col-4 info">
+                                            <h5>${myPost.title}</h5>
+                                            <p>
+                                                Loại: ${myPost.categoryName}
+                                            </p>
+                                            <!--$myPost.categoryId = CATE.categoryId CATE.categoryName-->
+                                        </div>
+                                        <div class="col-2 typePost">
+                                            <p>
+                                                <c:choose>
+                                                    <c:when test="${myPost.type=='0'}">
+                                                        Đồ thất lạc
+                                                    </c:when>    
+                                                    <c:otherwise>
+                                                        Đồ nhặt được
+                                                    </c:otherwise>
+                                                </c:choose>
+                                            </p>
+                                        </div>
+                                        <div class="col-2 detail">
+                                            <p><a href="#" type="button" class="link-dark btn btn-outline-success btn-sm">Xem chi tiết</a></p>
+                                        </div>
+                                    </div>
+                                </c:forEach>
                             </c:if>
                             <c:if test="${empty requestScope.MY_POST}">
                                 <h3>${requestScope.ERROR}</h3>
