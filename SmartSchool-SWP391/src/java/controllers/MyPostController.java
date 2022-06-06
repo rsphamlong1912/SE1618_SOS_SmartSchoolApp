@@ -33,7 +33,7 @@ public class MyPostController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    private static final String ERROR = "login.jsp";
+    private static final String ERROR = "myPost.jsp";
     private static final String MY_POST_PAGE = "myPost.jsp";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -49,6 +49,9 @@ public class MyPostController extends HttpServlet {
             if (!list.isEmpty()) {
                 request.setAttribute("MY_POST", list);
                 url = MY_POST_PAGE;
+            }else {
+                request.setAttribute("ERROR", "Bạn chưa có bài đăng nào");
+                url = ERROR;
             }
         } catch (Exception e) {
             log("Error at MyPostController:" + e.toString());
