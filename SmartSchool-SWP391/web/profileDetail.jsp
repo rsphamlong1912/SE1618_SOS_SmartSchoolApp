@@ -9,7 +9,7 @@
     Created on : Jun 2, 2022, 10:05:13 PM
     Author     : SE150888 Pham Ngoc Long
 --%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en-US" dir="ltr">
@@ -184,7 +184,7 @@
           </ul>
         </div>
       </div>
-    </nav>
+    </nav>  
     <section class="container" style="padding-top: 1rem;" id="timkiem">
       <h1 style="margin-top: 100px; text-align: center;">Thông tin chung</h1>
       <div class="row justify-content-center">
