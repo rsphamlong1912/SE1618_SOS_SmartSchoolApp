@@ -122,7 +122,7 @@
             <li class="nav-item px-3 navbar-dropdown dropdown-user dropdown">
               <a class="btn btn-outline-light order-1 order-lg-0 fw-bold nav-link hide-arrow" id="nameLogin" href="" data-bs-toggle="dropdown">
                 <div class="avatar avatar-online">
-                  <img src="https://scontent.fsgn15-1.fna.fbcdn.net/v/t1.6435-9/116445398_1234730980214996_1849654018096645042_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=174925&_nc_ohc=pgUyDSduxzAAX9ad7EY&_nc_ht=scontent.fsgn15-1.fna&oh=00_AT8jjgfBa1sqlbffbkZhJK-oJXPcJ_f5kOI2qv86fltoSg&oe=62C0A48B" alt class="w-px-40 h-auto rounded-circle" style="width: 2rem;"/> ${sessionScope.LOGIN_USER.fullname}
+                  <img src="https://cdn2.iconfinder.com/data/icons/people-flat-design/64/Face-Profile-User-Man-Boy-Person-Avatar-512.png" alt class="w-px-40 h-auto rounded-circle" style="width: 2rem;"/> ${sessionScope.LOGIN_USER.fullname}
                 </div>
               </a>          
               <ul class="dropdown-menu dropdown-menu-end">
@@ -180,7 +180,7 @@
               </ul>
             </li>
             <!--/ User -->    
-            </c:if> 
+            </c:if>    
           </ul>
         </div>
       </div>
@@ -206,7 +206,7 @@
         </div>
         <div class="right col-12 col-md-6">
           <h5 style="margin-bottom: 30px;">Cập nhật thông tin</h5>
-          <form>
+          <form action="main" method="GET">
             <div class="row">
               <div class="form-group col-12 col-md-6">
                 <label for="name">Họ và tên</label>
