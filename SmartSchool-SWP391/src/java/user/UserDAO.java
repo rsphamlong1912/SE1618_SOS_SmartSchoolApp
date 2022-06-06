@@ -23,7 +23,7 @@ public class UserDAO {
     private static final String LOGIN = "select * from tblUser where userId = ? and password=?";
     private static final String CHECK_ACCOUNT = "SELECT * FROM tblUser WHERE userId = ?";
     private static final String CHANGE_PASSWORD = "UPDATE tblUser SET password = ? WHERE userId= ?";
-    private static final String UPDATE_ACCOUNT = "UPDATE tblUser SET fulname=?, email=?, facebook=?, phone=? WHERE userId= ?";
+    private static final String UPDATE_ACCOUNT = "UPDATE tblUser SET fullname = ?, email = ?, facebook = ?, phone = ? WHERE userId= ?";
 
     public UserDTO login(String userId, String password) throws SQLException {
         UserDTO user = null;
@@ -184,7 +184,7 @@ public class UserDAO {
                 ptm.executeUpdate();
             }
         } catch (Exception e) {
-            
+
         } finally {
             if (ptm != null) {
                 ptm.close();
@@ -194,9 +194,9 @@ public class UserDAO {
             }
         }
     }
-    
+
     //Edit Profile
-    public boolean updateAccount(String fullname, String email, String facebook, String phone) throws Exception {
+    public void updateAccount(String userId, String fullname, String email, String facebook, String phone) throws Exception {
         Connection conn = null;
         PreparedStatement ptm = null;
         try {
@@ -208,15 +208,13 @@ public class UserDAO {
                 ptm.setString(2, email);
                 ptm.setString(3, facebook);
                 ptm.setString(4, phone);
-                //4. Execute Query
-                int effectRows = ptm.executeUpdate();
-                //5. Process Result
-                if (effectRows > 0) {
-                    return true;
-                }
+                ptm.setString(5, userId);
+                ptm.executeUpdate();
             } //process when connection is existed
-            
-        } finally {
+
+        } catch (Exception e) {
+
+        }finally {
 
             if (ptm != null) {
                 ptm.close();
@@ -225,6 +223,5 @@ public class UserDAO {
                 conn.close();
             }
         }
-        return false;
     }
 }

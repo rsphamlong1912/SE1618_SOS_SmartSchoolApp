@@ -210,7 +210,7 @@
             <div class="row">
               <div class="form-group col-12 col-md-6">
                 <label for="name">Họ và tên</label>
-                <input type="text" name="name" class="form-control" id="name" placeholder="" value="${sessionScope.LOGIN_USER.fullname}">
+                <input type="text" name="fullname" class="form-control" id="name" placeholder="" value="${sessionScope.LOGIN_USER.fullname}">
               </div>
               <div class="form-group col-12 col-md-6">
                 <label for="phone">Số điện thoại</label>
@@ -233,6 +233,11 @@
             <br>
             <div class="row">
               <div class="form-group col-8 col-md-6">
+              <h6 style="color: green; display: inline-block; padding: 5px 0">${requestScope.SUCCESS}</h6>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-8 col-md-8">
                 <button type="submit" name="action" value="UpdateProfile" class="btn btn-success"><i class="fa-solid fa-floppy-disk"></i> Lưu</button>
               </div>
             </div>

@@ -12,7 +12,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import user.UserDAO;
+import user.UserDTO;
 
 /**
  *
@@ -29,22 +31,23 @@ public class UpdateAccountController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
-            String fullname = request.getParameter("name");
+            HttpSession session = request.getSession();
+            UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
+            String fullname = request.getParameter("fullname");
             String email = request.getParameter("email");
             String facebook = request.getParameter("facebook");
             String phone = request.getParameter("phone");
             UserDAO dao = new UserDAO();
-            dao.updateAccount(fullname, email, facebook, phone);
+            System.out.println("userID là: " + loginUser.getUserId());
+            dao.updateAccount(loginUser.getUserId(),fullname, email, facebook, phone);
             url = SUCCESS;
-            request.setAttribute("SUCCESS", "Cập nhật thông tin thành công!!!");
-
+            request.setAttribute("SUCCESS", "Cập nhật thông tin thành công!");
         } catch (Exception e) {
             log("Error at UpdateAccountController: " + e.toString());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }
     }
-
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
