@@ -210,30 +210,30 @@
             <div class="row">
               <div class="form-group col-12 col-md-6">
                 <label for="name">Họ và tên</label>
-                <input type="text" class="form-control" id="name" placeholder="" value="${sessionScope.LOGIN_USER.fullname}">
+                <input type="text" name="name" class="form-control" id="name" placeholder="" value="${sessionScope.LOGIN_USER.fullname}">
               </div>
               <div class="form-group col-12 col-md-6">
                 <label for="phone">Số điện thoại</label>
-                <input type="text" class="form-control" id="phone"" placeholder="" value="${sessionScope.LOGIN_USER.phone}">
+                <input type="text" name="phone" class="form-control" id="phone"" placeholder="" value="${sessionScope.LOGIN_USER.phone}">
               </div>
             </div>
             <div class="row">
               <div class="form-group col-12 col-md-6">
                 <label for="email">Email liên lạc</label>
-                <input type="email" class="form-control" id="email" placeholder="" value="${sessionScope.LOGIN_USER.email}">
+                <input type="email" name="email" class="form-control" id="email" placeholder="" value="${sessionScope.LOGIN_USER.email}">
               </div>
             </div>
             <div class="row">
               <div class="form-group col-12 col-md-6">
                 <label for="facebook">Facebook</label>
-                <input type="text" class="form-control" id="facebook" placeholder=""
+                <input type="text" name="facebook" class="form-control" id="facebook" placeholder=""
                   value="${sessionScope.LOGIN_USER.facebook}">
               </div>
             </div>
             <br>
             <div class="row">
               <div class="form-group col-8 col-md-6">
-                <button type="submit" class="btn btn-success"><i class="fa-solid fa-floppy-disk"></i> Lưu</button>
+                <button type="submit" name="action" value="UpdateProfile" class="btn btn-success"><i class="fa-solid fa-floppy-disk"></i> Lưu</button>
               </div>
             </div>
           </form>

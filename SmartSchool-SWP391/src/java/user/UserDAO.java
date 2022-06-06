@@ -23,6 +23,7 @@ public class UserDAO {
     private static final String LOGIN = "select * from tblUser where userId = ? and password=?";
     private static final String CHECK_ACCOUNT = "SELECT * FROM tblUser WHERE userId = ?";
     private static final String CHANGE_PASSWORD = "UPDATE tblUser SET password = ? WHERE userId= ?";
+    private static final String UPDATE_ACCOUNT = "UPDATE tblUser SET fulname=?, email=?, facebook=?, phone=? WHERE userId= ?";
 
     public UserDTO login(String userId, String password) throws SQLException {
         UserDTO user = null;
@@ -192,5 +193,38 @@ public class UserDAO {
                 conn.close();
             }
         }
+    }
+    
+    //Edit Profile
+    public boolean updateAccount(String fullname, String email, String facebook, String phone) throws Exception {
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        try {
+            //1. connect DB
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(UPDATE_ACCOUNT);
+                ptm.setString(1, fullname);
+                ptm.setString(2, email);
+                ptm.setString(3, facebook);
+                ptm.setString(4, phone);
+                //4. Execute Query
+                int effectRows = ptm.executeUpdate();
+                //5. Process Result
+                if (effectRows > 0) {
+                    return true;
+                }
+            } //process when connection is existed
+            
+        } finally {
+
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return false;
     }
 }

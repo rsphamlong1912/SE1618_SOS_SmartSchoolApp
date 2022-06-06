@@ -5,6 +5,8 @@
  */
 package controllers;
 
+import category.CategoryDAO;
+import category.CategoryDTO;
 import java.io.IOException;
 import java.util.List;
 import javax.servlet.ServletException;
@@ -33,7 +35,7 @@ public class MyPostController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    private static final String ERROR = "login.jsp";
+    private static final String ERROR = "myPost.jsp";
     private static final String MY_POST_PAGE = "myPost.jsp";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -44,11 +46,15 @@ public class MyPostController extends HttpServlet {
             HttpSession session = request.getSession();
             UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
             PostDAO dao = new PostDAO();
+//            CategoryDAO dao1 = new CategoryDAO();
             List<PostDTO> list = dao.getMyPost(loginUser.getUserId());
-            
+
             if (!list.isEmpty()) {
                 request.setAttribute("MY_POST", list);
                 url = MY_POST_PAGE;
+            } else {
+                request.setAttribute("ERROR", "Bạn chưa có bài đăng nào");
+                url = ERROR;
             }
         } catch (Exception e) {
             log("Error at MyPostController:" + e.toString());

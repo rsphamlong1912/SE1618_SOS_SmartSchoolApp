@@ -28,11 +28,14 @@ public class PostDAO {
     private static final String SEARCH_BY_TITLE = "SELECT * FROM tblPost WHERE title like ? AND postStatus = 'true'";
     private static final String SEARCH_3NEWLOST = "SELECT TOP(3) postId FROM tblPost WHERE type=1 AND postStatus = 'true' ORDER BY postId DESC";
     private static final String SEARCH_3NEWFOUND = "SELECT TOP(3) postId FROM tblPost WHERE type=2 AND postStatus = 'true' ORDER BY postId DESC";
-    private static final String LIST_ALL = "SELECT * FROM tblPost";
+    private static final String LIST_ALL = "SELECT * FROM tblPost WHERE postStatus='true'";
     private static final String CREATE = "INSERT INTO tblPost(userId, categoryId, postImg, description, date, type, title, postStatus) VALUES(?,?,?,?,?,?,?,?)";
     private static final String UPDATE = "UPDATE tblPost SET postImg=?, description=?, type=?, title=?, postStatus=? WHERE postId=?";
     private static final String DELETE = "UPDATE tblPost SET postStatus='false' WHERE postId=?";
-    private static final String LIST_MYPOST = "SELECT * FROM tblPost WHERE userId=? AND postStatus = 'true'";
+    private static final String LIST_MYPOST = "SELECT p.postId, p.userId,p.categoryId, p.postImg, p.description,p.date,p.type,p.title,p.postStatus,c.categoryName\n"
+            + "FROM tblPost as p, tblCategory as c\n"
+            + "WHERE p.categoryId=c.categoryId AND postStatus='true' AND userId=?";
+
     //Upload new post
     public void uploadPost(PostDTO post) throws SQLException {
         Connection con = null;
@@ -306,7 +309,7 @@ public class PostDAO {
             }
         }
     }
-    
+
     //Delete Post
     public boolean deletePost(int postId) throws SQLException {
         boolean check = false;
@@ -331,7 +334,7 @@ public class PostDAO {
         }
         return check;
     }
-    
+
     public List<PostDTO> getMyPost(String userId) throws SQLException {
         List<PostDTO> list = new ArrayList<>();
         Connection conn = null;
@@ -354,7 +357,21 @@ public class PostDAO {
                     post.setType(rs.getBoolean("type"));
                     post.setTitle(rs.getString("title"));
                     post.setPostStatus(rs.getString("postStatus"));
+                    post.setCategoryName(rs.getString("categoryName"));
                     list.add(post);
+//                    int postId = rs.getInt("postId");
+//                    String newUserId=rs.getString("userId");
+//                    int categoryId=rs.getInt("categoryId");
+//                    byte[] postImg=rs.getBytes("postImg");
+//                    String description=rs.getString("description");
+//                    Date date=rs.getDate("date");
+//                    boolean type=rs.getBoolean("type");
+//                    String title=rs.getString("title");
+//                    String postStatus=rs.getString("postStatus");
+//                    String categoryName=rs.getString("categoryName");
+//                    
+//                    
+//                    list.add(new PostDTO(postId, newUserId, categoryId, postImg, description, (java.sql.Date) date, type, title, postStatus, categoryName));
                 }
             }
         } catch (Exception ex) {
@@ -372,4 +389,5 @@ public class PostDAO {
         }
         return list;
     }
+
 }

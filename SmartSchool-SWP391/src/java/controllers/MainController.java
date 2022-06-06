@@ -42,6 +42,8 @@ public class MainController extends HttpServlet {
     private static final String FEEDBACK_SYSTEM_CONTROLLER = "feedbackSystem";
     private static final String SIGNUP = "SignUp";
     private static final String SIGNUP_CONTROLLER = "signup";
+    private static final String UPDATE_PROFILE = "UpdateProfile";
+    private static final String UPDATE_PROFILE_CONTROLLER = "updateProfile";
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -68,6 +70,9 @@ public class MainController extends HttpServlet {
             }
             if (SIGNUP.equals(action)) {
                 url = SIGNUP_CONTROLLER;
+            }
+            if (UPDATE_PROFILE.equals(action)) {
+                url = UPDATE_PROFILE_CONTROLLER;
             }
         } catch (Exception e) {
             log("Error at MainController: " + e.toString());
