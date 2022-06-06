@@ -158,6 +158,7 @@
                     </div>
                     <div class="right col-12 col-md-6">
                         <form>
+                            <c:if test="${!empty requestScope.MY_POST}">
                             <c:forEach items="${requestScope.MY_POST}" var="myPost" varStatus="count">
                             <div class="row myDetailPost">
                                 <div class="col-1 count">
@@ -179,6 +180,10 @@
                                 </div>
                             </div>
                             </c:forEach>
+                            </c:if>
+                            <c:if test="${empty requestScope.MY_POST}">
+                                <h3>${requestScope.ERROR}</h3>
+                            </c:if>
                         </form>
                     </div>
 
