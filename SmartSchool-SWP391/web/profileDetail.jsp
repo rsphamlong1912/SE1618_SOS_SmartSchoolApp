@@ -210,17 +210,17 @@
             <div class="row">
               <div class="form-group col-12 col-md-6">
                 <label for="name">Họ và tên</label>
-                <input type="text" name="fullname" class="form-control" id="name" placeholder="" value="${sessionScope.LOGIN_USER.fullname}">
+                <input type="text" name="fullname" class="form-control" id="name" placeholder="" value="${sessionScope.LOGIN_USER.fullname}" required="">
               </div>
               <div class="form-group col-12 col-md-6">
                 <label for="phone">Số điện thoại</label>
-                <input type="text" name="phone" class="form-control" id="phone"" placeholder="" value="${sessionScope.LOGIN_USER.phone}">
+                <input type="text" name="phone" class="form-control" id="phone"" placeholder="" value="${sessionScope.LOGIN_USER.phone}" required="">
               </div>
             </div>
             <div class="row">
               <div class="form-group col-12 col-md-6">
                 <label for="email">Email liên lạc</label>
-                <input type="email" name="email" class="form-control" id="email" placeholder="" value="${sessionScope.LOGIN_USER.email}">
+                <input type="email" name="email" class="form-control" id="email" placeholder="" value="${sessionScope.LOGIN_USER.email}" required="">
               </div>
             </div>
             <div class="row">
