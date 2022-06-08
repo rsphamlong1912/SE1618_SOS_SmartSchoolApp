@@ -24,7 +24,7 @@ import user.UserDTO;
 public class UpdateAccountController extends HttpServlet {
 
     private static final String ERROR = "profileDetail.jsp";
-    private static final String SUCCESS = "profileDetail.jsp";
+    private static final String SUCCESS = "profileDetail";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -42,6 +42,7 @@ public class UpdateAccountController extends HttpServlet {
             dao.updateAccount(loginUser.getUserId(),fullname, email, facebook, phone);
             url = SUCCESS;
             request.setAttribute("SUCCESS", "Cập nhật thông tin thành công!");
+            
         } catch (Exception e) {
             log("Error at UpdateAccountController: " + e.toString());
         } finally {
