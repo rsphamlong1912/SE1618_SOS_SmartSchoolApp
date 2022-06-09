@@ -206,7 +206,7 @@
                 <label for="titleFeedback">Tiêu đề</label>
                 <input type="text" class="form-control" id="titleFeedback" placeholder="" required="" name="title">
               </div>
-            </div>-->
+                </div>-->
             <div class="form-group col-12 col-md-8">
                 <label for="feedback">Nội dung</label>
                 <textarea class="form-control" id="feedback" rows="5" required="" name="feedback"></textarea>
