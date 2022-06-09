@@ -6,49 +6,56 @@
 package controllers;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 import user.UserDAO;
 import user.UserDTO;
 
 /**
  *
- * @author TQK
+ * @author TrinhNgocBao
  */
-@WebServlet(name = "UpdateAccountController", urlPatterns = {"/updateProfile"})
-public class UpdateAccountController extends HttpServlet {
-
-    private static final String ERROR = "profileDetail.jsp";
-    private static final String SUCCESS = "profileDetail";
+@WebServlet(name = "UpdateAvatarController", urlPatterns = {"/updateAvatar"})
+@MultipartConfig(maxFileSize = 16177215)
+public class UpdateAvatarController extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = ERROR;
         try {
+            InputStream inputStream = null;
+            Part filePart = request.getPart("userAvatar");
+            if (filePart != null) {
+                inputStream = filePart.getInputStream();
+            }
             HttpSession session = request.getSession();
             UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
-            String fullname = request.getParameter("fullname");
-            String email = request.getParameter("email");
-            String facebook = request.getParameter("facebook");
-            String phone = request.getParameter("phone");
             UserDAO dao = new UserDAO();
-            System.out.println("userID là: " + loginUser.getUserId());
-            dao.updateAccount(loginUser.getUserId(),fullname, email, facebook, phone);
-            url = SUCCESS;
-            request.setAttribute("SUCCESS", "Cập nhật thông tin thành công!");
-            
+            boolean result = dao.updateUserAvatar(inputStream, loginUser.getUserId());
+            if (result == true) {
+                request.setAttribute("SUCCESS", "Cập nhật Avatar thành công!");
+            }else {
+                request.setAttribute("SUCCESS", "Cập nhật Avatar thất bại!");
+            }
         } catch (Exception e) {
-            log("Error at UpdateAccountController: " + e.toString());
         } finally {
-            request.getRequestDispatcher(url).forward(request, response);
+//            response.sendRedirect("profileDetail.jsp");
+            request.getRequestDispatcher("profileDetail").forward(request, response);
         }
+
     }
+
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -61,7 +68,11 @@ public class UpdateAccountController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(UpdateAvatarController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -75,7 +86,11 @@ public class UpdateAccountController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(UpdateAvatarController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

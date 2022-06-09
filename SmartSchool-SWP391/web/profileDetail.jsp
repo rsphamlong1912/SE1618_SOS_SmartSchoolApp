@@ -122,7 +122,7 @@
             <li class="nav-item px-3 navbar-dropdown dropdown-user dropdown">
               <a class="btn btn-outline-light order-1 order-lg-0 fw-bold nav-link hide-arrow" id="nameLogin" href="" data-bs-toggle="dropdown">
                 <div class="avatar avatar-online">
-                  <img src="https://cdn2.iconfinder.com/data/icons/people-flat-design/64/Face-Profile-User-Man-Boy-Person-Avatar-512.png" alt class="w-px-40 h-auto rounded-circle" style="width: 2rem;"/> ${sessionScope.LOGIN_USER.fullname}
+                    <img src="${pageContext.servletContext.contextPath}/avatar?userId=${sessionScope.LOGIN_USER.userId}" alt class="w-px-40 rounded-circle" style="width: 2rem; height: 2rem"/> ${sessionScope.LOGIN_USER.fullname}
                 </div>
               </a>          
               <ul class="dropdown-menu dropdown-menu-end">
@@ -191,16 +191,27 @@
         <div class="left col-12 col-md-4">
           <div class="card position-relative shadow" style="max-width: 370px;">
             <div class="card-body p-3">
-              <img class="mb-4 mt-2 rounded-2 w-100"
-                src="https://cdn2.iconfinder.com/data/icons/people-flat-design/64/Face-Profile-User-Man-Boy-Person-Avatar-512.png"
-                alt="Avatar profile" />
-              <ul>
+            <div class="row justify-content-center mt-4">              
+                <div class="avatar-upload">
+                    <form action="updateAvatar" id="frmUploadAvatar" enctype="multipart/form-data" method="POST">
+                    <div class="avatar-edit">                       
+                        <input type="file" id="imageUpload" onchange="submitForm()" name="userAvatar" accept=".png, .jpg, .jpeg"/>
+                        <label for="imageUpload"></label>                         
+                   </div>
+                    </form>
+                <div class="text-center avatar-preview">                 
+                        <img src="${pageContext.servletContext.contextPath}/avatar?userId=${sessionScope.LOGIN_USER.userId}" width="216" height="216">                  
+                </div>                 
+                </div>              
+            </div>
+              <div class="row text-center mt-4">              
+                <ul>
                 <li><a href="#" type="button" class="btn btn-success active"><i class="fa-solid fa-user"></i> Thông tin chung</a></li>
                 <li><a href="main?action=MyPost" type="button" class="btn btn-success"><i class="fa-solid fa-file"></i> Bài đăng của tôi</a></li>
                 <li><a href="main?action=ChangePassword" type="button" class="btn btn-success"><i class="fa-solid fa-key"></i> Thay đổi mật khẩu</a></li>
                 <li><a href="main?action=FeedbackSystem" type="button" class="btn btn-success"><i class="fa-solid fa-comment"></i> Feedback hệ thống</a></li>
-
-              </ul>
+                </ul>
+              </div>
             </div>
           </div>
         </div>
@@ -214,7 +225,7 @@
               </div>
               <div class="form-group col-12 col-md-6">
                 <label for="phone">Số điện thoại</label>
-                <input type="text" name="phone" class="form-control" id="phone"" placeholder="" value="${sessionScope.LOGIN_USER.phone}">
+                <input type="text" name="phone" class="form-control" id="phone" placeholder="" value="${sessionScope.LOGIN_USER.phone}">
               </div>
             </div>
             <div class="row">
@@ -327,7 +338,11 @@
       {
         searchEnabled: false
       });
+        
 
+    function submitForm() {
+        document.getElementById("frmUploadAvatar").submit();
+       }
   </script>
   <link
     href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&amp;family=Volkhov:wght@700&amp;display=swap"

@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import user.UserDAO;
 import user.UserDTO;
 
 /**
@@ -42,6 +43,11 @@ public class ProfileDetailController extends HttpServlet {
         try {
             HttpSession session = request.getSession();
             UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
+            
+            UserDAO dao = new UserDAO(); 
+            UserDTO userDetail = dao.checkAccountExist(loginUser.getUserId());
+            
+            session.setAttribute("LOGIN_USER", userDetail);
         } catch (Exception e) {
             log("Error at LoginController:" + e.toString());
         } finally {

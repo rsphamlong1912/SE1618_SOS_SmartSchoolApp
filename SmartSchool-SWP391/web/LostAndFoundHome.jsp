@@ -83,7 +83,7 @@
             <li class="nav-item px-3 navbar-dropdown dropdown-user dropdown">
               <a class="btn btn-outline-light order-1 order-lg-0 fw-bold nav-link hide-arrow" id="nameLogin" href="" data-bs-toggle="dropdown">
                 <div class="avatar avatar-online">
-                  <img src="https://cdn2.iconfinder.com/data/icons/people-flat-design/64/Face-Profile-User-Man-Boy-Person-Avatar-512.png" alt class="w-px-40 h-auto rounded-circle" style="width: 2rem;"/> ${sessionScope.LOGIN_USER.fullname}
+                    <img src="${pageContext.servletContext.contextPath}/avatar?userId=${sessionScope.LOGIN_USER.userId}" alt class="w-px-40 rounded-circle" style="width: 2rem; height: 2rem"/> ${sessionScope.LOGIN_USER.fullname}
                 </div>
               </a>          
               <ul class="dropdown-menu dropdown-menu-end">
