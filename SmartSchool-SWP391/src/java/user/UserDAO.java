@@ -5,6 +5,7 @@
  */
 package user;
 
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -45,6 +46,7 @@ public class UserDAO {
                 user.setAvatar(rs.getBytes("avatar"));
                 user.setPhone(rs.getString("phone"));
                 user.setEmail(rs.getString("email"));
+                user.setFacebook(rs.getString("facebook"));
                 user.setCompAddress(rs.getString("compAddress"));
                 user.setUserId(rs.getString("userId"));
                 user.setUserStatus(rs.getBoolean("userStatus"));
@@ -86,6 +88,7 @@ public class UserDAO {
                     user.setAvatar(rs.getBytes("avatar"));
                     user.setPhone(rs.getString("phone"));
                     user.setEmail(rs.getString("email"));
+                    user.setFacebook(rs.getString("facebook"));
                     user.setCompAddress(rs.getString("compAddress"));
                     user.setUserId(rs.getString("userId"));
                     user.setUserStatus(rs.getBoolean("userStatus"));
@@ -223,5 +226,62 @@ public class UserDAO {
                 conn.close();
             }
         }
+    }
+    public boolean updateUserAvatar(InputStream inputStream, String userId) throws SQLException{
+        String update = "UPDATE tblUser SET avatar = ? WHERE userId = ?";
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        try {
+            //1. connect DB
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(update);
+                ptm.setBlob(1, inputStream);
+                ptm.setString(2, userId);
+                ptm.executeUpdate();
+                return true;
+            } //process when connection is existed
+        }catch (Exception e){
+            
+        }finally {           
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return false;
+    }
+    
+    public byte[] getAvatarData(String userId) throws SQLException{
+        String getAvatar = "SELECT avatar FROM tblUser WHERE userId = ?";
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(getAvatar);
+                ptm.setString(1, userId);
+                rs = ptm.executeQuery();
+                if (rs.next()) {
+                   return rs.getBytes("avatar");
+                }    
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return null;
     }
 }
