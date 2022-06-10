@@ -26,8 +26,8 @@ public class PostDAO {
 
     private static final String SEARCH_BY_TYPE = "SELECT * FROM tblPost WHERE type like ? AND postStatus = 'true'";
     private static final String SEARCH_BY_TITLE = "SELECT * FROM tblPost WHERE title like ? AND postStatus = 'true'";
-    private static final String SEARCH_3NEWLOST = "SELECT TOP(3) postId FROM tblPost WHERE type=1 AND postStatus = 'true' ORDER BY postId DESC";
-    private static final String SEARCH_3NEWFOUND = "SELECT TOP(3) postId FROM tblPost WHERE type=2 AND postStatus = 'true' ORDER BY postId DESC";
+    private static final String SEARCH_3NEWLOST = "SELECT TOP(3) * FROM tblPost WHERE type=0 AND postStatus = 'true' ORDER BY postId DESC";
+    private static final String SEARCH_3NEWFOUND = "SELECT TOP(3) * FROM tblPost WHERE type=1 AND postStatus = 'true' ORDER BY postId DESC";
     private static final String LIST_ALL = "SELECT * FROM tblPost WHERE postStatus='true'";
     private static final String CREATE = "INSERT INTO tblPost(userId, categoryId, postImg, description, date, type, title, postStatus) VALUES(?,?,?,?,?,?,?,?)";
     private static final String UPDATE = "UPDATE tblPost SET postImg=?, description=?, type=?, title=?, postStatus=? WHERE postId=?";
@@ -204,7 +204,7 @@ public class PostDAO {
         return list;
     }
 
-    public List<PostDTO> search3NewLost(String search) throws SQLException {
+    public List<PostDTO> get3NewLost() throws SQLException {
         List<PostDTO> list = new ArrayList<>();
         Connection conn = null;
         PreparedStatement ptm = null;
@@ -243,8 +243,39 @@ public class PostDAO {
         }
         return list;
     }
+    
+    public byte[] getItemData(String postId) throws SQLException{
+        String getAvatar = "SELECT postImg FROM tblPost WHERE postId = ? and postStatus = 'true'";
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(getAvatar);
+                ptm.setString(1, postId);
+                rs = ptm.executeQuery();
+                if (rs.next()) {
+                   return rs.getBytes("postImg");
+                }    
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return null;
+    }
 
-    public List<PostDTO> search3NewFound(String search) throws SQLException {
+    public List<PostDTO> get3NewFound() throws SQLException {
         List<PostDTO> list = new ArrayList<>();
         Connection conn = null;
         PreparedStatement ptm = null;
