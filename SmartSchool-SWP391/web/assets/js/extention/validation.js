@@ -4,6 +4,15 @@ var password = document.querySelector('#password')
 var repassword = document.querySelector('#re-password')
 var email = document.querySelector('#email')
 var phone = document.querySelector('#phone')
+
+//Feedback
+var feedback = document.querySelector('#feedback');
+
+//Change Password
+var oldPassword = document.querySelector('#oldPassword');
+var newPassword = document.querySelector('#newPassword');
+var confirmNewPassword = document.querySelector('#confirmNewPassword');
+
 var form = document.querySelector('form')
 
 
@@ -19,6 +28,17 @@ function showSuccess(input) {
     small.innerText = ''
 }
 
+function checkEmptyErrorOneParam(input) {
+    let isEmptyError = false;
+    input.value = input.value.trim()
+    if (!input.value) {
+        isEmptyError = true
+        showError(input, 'Không được để trống !')
+    } else {
+        showSuccess(input)
+    }
+    return isEmptyError
+}
 
 function checkEmptyError(listInput) {
     let isEmptyError = false;
@@ -37,7 +57,7 @@ function checkEmptyError(listInput) {
 
 function checkEmailError(input) {
     const regexEmail =
-        /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+            /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
     input.value = input.value.trim()
     let isEmailError = !regexEmail.test(input.value)
     if (regexEmail.test(input.value)) {
@@ -82,7 +102,7 @@ function checkMatchPasswordError(passwordInput, repasswordInput) {
 //     if(isEmptyError || isEmailError || isUserNameLengthError || isPasswordLengthError || isMatchError){
 
 //     }else {
-      
+
 //     }
 // })
 
@@ -93,7 +113,24 @@ function validate() {
     let isPasswordLengthError = checkLengthError(password, 4, 30)
     let isMatchError = checkMatchPasswordError(password, repassword)
 
-    if(isEmptyError || isEmailError || isUserNameLengthError || isPasswordLengthError || isMatchError){
+    if (isEmptyError || isEmailError || isUserNameLengthError || isPasswordLengthError || isMatchError) {
+        return false
+    }
+    return true
+}
+
+function validateFeedback() {
+    let isFeedbackEmpty = checkEmptyErrorOneParam(feedback)
+    if (isFeedbackEmpty) {
+        return false
+    }
+    return true
+}
+
+function validateChangePassword() {
+    let isPasswordEmpty = checkEmptyError([oldPassword, newPassword, confirmNewPassword])
+    let isPasswordMatchError = checkMatchPasswordError(newPassword, confirmNewPassword)
+    if (isPasswordEmpty || isPasswordMatchError) {
         return false
     }
     return true

@@ -219,25 +219,17 @@
                     </div>
                     <div class="right col-12 col-md-6">
                         <h5 style="margin-bottom: 30px;">Phản hồi/ Báo lỗi</h5>
-                        <form action="main?action=FeedbackSystem" method="POST">
-                            <!--            <div class="row">
-                                          <div class="form-group col-12 col-md-8">
-                                            <label for="titleFeedback">Tiêu đề</label>
-                                            <input type="text" class="form-control" id="titleFeedback" placeholder="" required="" name="title">
-                                          </div>
-                                            </div>-->
-                            <div class="form-group col-12 col-md-8">
+                        <form onsubmit="return validateFeedback()" action="main" method="POST">
+                            <div class="form-outline mb-3">
                                 <label for="feedback">Nội dung</label>
-                                <textarea class="form-control" id="feedback" rows="5" required="" name="feedback"></textarea>
+                                <textarea class="form-control" id="feedback" rows="5" name="feedback"></textarea>
+                                <small></small>  
                             </div>
-                            <br>
-                            <h6 style="color: green; display: inline-block; padding: 5px 0">${requestScope.MESSAGE}</h6>
-                            <div class="row">
+                            <h6 style="color: green; display: inline-block">${requestScope.MESSAGE}</h6>
+                            <div class="form-group col-8 col-md-6">
                                 <input type="hidden" name="userId" value="${sessionScope.LOGIN_USER.userId}">
-                                <div class="form-group col-8 col-md-6">
-                                    <button type="submit" class="btn btn-success"><i class="fa-solid fa-floppy-disk"></i> Gửi</button>
-                                </div>
-                            </div>
+                                <button type="submit" class="btn btn-success" name="action" value="FeedbackSystem"><i class="fa-solid fa-floppy-disk"></i> Gửi</button>
+                            </div>  
                         </form>
                     </div>
 
@@ -319,13 +311,15 @@
         <script src="vendors/fontawesome/all.min.js"></script>
         <script src="assets/js/theme.js"></script>
         <script src="assets/js/extention/choices.js"></script>
+        <script src="assets/js/extention/validation.js"></script>
         <script>
-            const choices = new Choices('[data-trigger]',
-                    {
-                        searchEnabled: false
-                    });
+                            const choices = new Choices('[data-trigger]',
+                                    {
+                                        searchEnabled: false
+                                    });
 
         </script>
+
         <link
             href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&amp;family=Volkhov:wght@700&amp;display=swap"
             rel="stylesheet">

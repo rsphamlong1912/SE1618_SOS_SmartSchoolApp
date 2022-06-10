@@ -80,21 +80,15 @@ public class ChangePasswordController extends HttpServlet {
             String oldPassword = request.getParameter("oldPassword");
             String newPassword = request.getParameter("newPassword");
             String confirmNewPassword = request.getParameter("confirmNewPassword");
-            UserDAO dao = new UserDAO(); 
+            UserDAO dao = new UserDAO();
             UserDTO loginUser = dao.checkAccountExist(userId);
             if (loginUser == null) {
                 url = ERROR;
             } else {
                 if (loginUser.getPassword().equals(oldPassword)) {
-                    if (newPassword.equals(confirmNewPassword)) {
-                        url = CHANGE_PASSWORD_PAGE;
-                        dao.changePassword(loginUser.getUserId(), newPassword);
-                        request.setAttribute("message", "Đổi mật khẩu thành công!");
-                    } else {
-                        url = CHANGE_PASSWORD_PAGE;
-                        request.setAttribute("errMessage", "Mật khẩu mới không khớp!");
-                    }
-
+                    url = CHANGE_PASSWORD_PAGE;
+                    dao.changePassword(loginUser.getUserId(), newPassword);
+                    request.setAttribute("message", "Đổi mật khẩu thành công!");
                 } else {
                     url = CHANGE_PASSWORD_PAGE;
                     request.setAttribute("errMessage", "Nhập sai mật khẩu, xin mời nhập lại!");

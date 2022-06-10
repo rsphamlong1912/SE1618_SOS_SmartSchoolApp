@@ -220,24 +220,27 @@
                         </div>
                     </div>
                     <div class="right col-12 col-md-6">
-                        <!-- <h5 style="margin-bottom: 30px;">Cập nhật thông tin</h5> -->
-                        <form action="main?action=ChangePassword" method="POST">
+                        <h5 style="margin-bottom: 30px;">Cập nhật thông tin</h5> 
+                        <form onsubmit="return validateChangePassword()" action="main" method="POST">
                             <div class="row">
                                 <div class="form-group col-12 col-md-8">
                                     <label for="oldPassword">Mật khẩu cũ</label>
-                                    <input type="password" class="form-control" id="oldPassword" placeholder="" name="oldPassword" required="">
+                                    <input type="password" class="form-control" id="oldPassword" placeholder="" name="oldPassword">
+                                    <small></small>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="form-group col-12 col-md-8">
                                     <label for="newPassword">Mật khẩu mới</label>
-                                    <input type="password" class="form-control" id="newPassword" placeholder="" name="newPassword" required="">
+                                    <input type="password" class="form-control" id="newPassword" placeholder="" name="newPassword">
+                                    <small></small>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="form-group col-12 col-md-8">
                                     <label for="confirmNewPassword">Xác nhận mật khẩu mới</label>
-                                    <input type="password" class="form-control" id="confirmNewPassword" placeholder="" name="confirmNewPassword" required="">
+                                    <input type="password" class="form-control" id="confirmNewPassword" placeholder="" name="confirmNewPassword">
+                                    <small></small>
                                 </div>
                             </div>
                             <h6 style="font-style: italic;color: red; display: inline-block; padding: 5px 0">${requestScope.errMessage}</h6>
@@ -246,8 +249,7 @@
                             <div class="row">
                                 <div class="form-group col-8 col-md-6">
                                     <input type="hidden" name="userId" value="${sessionScope.LOGIN_USER.userId}">
-                                    <input type="hidden" name="action" value="ChangePassword">
-                                    <button type="submit" class="btn btn-success"><i class="fa-solid fa-floppy-disk"></i> Lưu</button>
+                                    <button type="submit" class="btn btn-success" name="action" value="ChangePassword"><i class="fa-solid fa-floppy-disk"></i> Lưu</button>
                                 </div>
                             </div>
                         </form>
@@ -331,11 +333,12 @@
         <script src="vendors/fontawesome/all.min.js"></script>
         <script src="assets/js/theme.js"></script>
         <script src="assets/js/extention/choices.js"></script>
+        <script src="assets/js/extention/validation.js"></script>
         <script>
-            const choices = new Choices('[data-trigger]',
-                    {
-                        searchEnabled: false
-                    });
+                            const choices = new Choices('[data-trigger]',
+                                    {
+                                        searchEnabled: false
+                                    });
 
         </script>
         <link
