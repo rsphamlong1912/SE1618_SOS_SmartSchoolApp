@@ -58,14 +58,14 @@
         <main class="main" id="top">
             <!-- here  data-navbar-on-scroll="data-navbar-on-scroll"-->
             <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3 d-block gradient-custom-2">
-                <div class="container"><a class="navbar-brand" href="index.html"><img
+                <div class="container"><a class="navbar-brand" href="lostAndfoundhome"><img
                             src="https://hcmuni.fpt.edu.vn/landing-page/images/logo-top.png" height="46" alt="logo" /></a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
                             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span
                             class="navbar-toggler-icon"> </span></button>
                     <div class="collapse navbar-collapse border-top border-lg-0 mt-4 mt-lg-0" id="navbarSupportedContent">
                         <ul class="navbar-nav ms-auto pt-2 pt-lg-0 font-base align-items-lg-center align-items-start">
-                            <li class="nav-item px-3"><a class="nav-link fw-bold" aria-current="page" href="index.html">Trang chủ</a>
+                            <li class="nav-item px-3"><a class="nav-link fw-bold" aria-current="page" href="lostAndfoundhome">Trang chủ</a>
                             </li>
                             <li class="nav-item px-3"><a class="nav-link fw-bold" aria-current="page" href="#phanloai">Phân loại</a>
                             </li>
@@ -85,7 +85,7 @@
                                         <div class="avatar avatar-online">
                                             <c:choose>
                                                 <c:when test="${sessionScope.LOGIN_USER.avatar==null}">
-                                                    <img src="https://unloc.online/wp-content/uploads/2020/04/283-2833820_user-icon-orange-png.png?fbclid=IwAR133UMM9dPj2fhzsRFAVrcTvgHaJBLsIbkkwQbqx1dv_3FTf8OQfqcIRcM" alt class="w-px-40 rounded-circle" style="width: 2rem; height: 2rem"/>
+                                                    <img src="https://unloc.online/wp-content/uploads/2020/04/283-2833820_user-icon-orange-png.png?fbclid=IwAR133UMM9dPj2fhzsRFAVrcTvgHaJBLsIbkkwQbqx1dv_3FTf8OQfqcIRcM" alt class="w-px-40 rounded-circle" style="width: 2rem; height: 2rem"/> ${sessionScope.LOGIN_USER.fullname}
                                                 </c:when>    
                                                 <c:otherwise>
                                                     <img src="${pageContext.servletContext.contextPath}/avatar?userId=${sessionScope.LOGIN_USER.userId}" alt class="w-px-40 rounded-circle" style="width: 2rem; height: 2rem"/> ${sessionScope.LOGIN_USER.fullname}
@@ -301,54 +301,27 @@
 
                 <div class="container">
                     <div class="position-absolute start-100 bottom-0 translate-middle-x d-none d-xl-block ms-xl-n4"><img
-                            src="assets/img/dest/shape.svg" alt="destination" /></div>
+                            src="assets/img/dest/shape.svg" alt="destination" /></div> 
                     <div class="mb-7 text-center">
                         <h5 class="text-secondary">TIN MỚI NHẤT </h5>
-                        <h3 class="fs-xl-10 fs-lg-8 fs-7 fw-bold text-capitalize"><a href="list.html">Mới nhặt được</a> </h3>
+                        <h3 class="fs-xl-10 fs-lg-8 fs-7 fw-bold text-capitalize"><a href="list.html">Mới thất lạc</a> </h3>
                     </div>
                     <div class="row">
+                        <c:forEach items="${requestScope.LIST3LOST}" var="itemLost">
                         <div class="col-md-4 mb-4">
-                            <div class="card overflow-hidden shadow shadow-hover" id="hoverCard"> <img class="card-img-top" src="assets/img/dest/dest1.jpg"
-                                                                                                       alt="Rome, Italty" style="height: 18rem;" />
+                            <div class="card overflow-hidden shadow shadow-hover" id="hoverCard"> <img class="card-img-top" src="${pageContext.servletContext.contextPath}/item?postId=${itemLost.postId}"
+                                                                                                       alt="Lost Item" style="height: 18rem;" />
                                 <div class="card-body py-4 px-3">
                                     <div class="d-flex flex-column flex-lg-row justify-content-between mb-3">
                                         <h4 class="text-secondary fw-medium"><a class="link-901 text-decoration-none stretched-link"
-                                                                                href="#!">Title</a></h4><span class="fs-1 fw-medium">$5,42k</span>
+                                                                                href="#!">${itemLost.title}</a></h4><span class="fs-1 fw-medium">${itemLost.postId}</span>
                                     </div>
-                                    <div class="d-flex align-items-center"> <img src="assets/img/dest/navigation.svg"
-                                                                                 style="margin-right: 14px" width="20" alt="navigation" /><span class="fs-0 fw-medium">10 Days
-                                            Trip</span></div>
+                                    <div class="d-flex align-items-center"> <img src="assets/img/dest/clock.svg"
+                                                                                 style="margin-right: 14px" width="20" alt="navigation" /><span class="fs-0 fw-medium">${itemLost.date}</span></div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-4 mb-4">
-                            <div class="card overflow-hidden shadow"> <img class="card-img-top" src="assets/img/dest/dest2.jpg"
-                                                                           alt="London, UK" style="height: 18rem;" />
-                                <div class="card-body py-4 px-3">
-                                    <div class="d-flex flex-column flex-lg-row justify-content-between mb-3">
-                                        <h4 class="text-secondary fw-medium"><a class="link-900 text-decoration-none stretched-link"
-                                                                                href="#!">Title</a></h4><span class="fs-1 fw-medium">$4.2k</span>
-                                    </div>
-                                    <div class="d-flex align-items-center"> <img src="assets/img/dest/navigation.svg"
-                                                                                 style="margin-right: 14px" width="20" alt="navigation" /><span class="fs-0 fw-medium">12 Days
-                                            Trip</span></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4 mb-4">
-                            <div class="card overflow-hidden shadow"> <img class="card-img-top" src="assets/img/dest/dest3.jpg"
-                                                                           alt="Full Europe" style="height: 18rem;" />
-                                <div class="card-body py-4 px-3">
-                                    <div class="d-flex flex-column flex-lg-row justify-content-between mb-3">
-                                        <h4 class="text-secondary fw-medium"><a class="link-900 text-decoration-none stretched-link"
-                                                                                href="#!">Title</a></h4><span class="fs-1 fw-medium">$15k</span>
-                                    </div>
-                                    <div class="d-flex align-items-center"> <img src="assets/img/dest/navigation.svg"
-                                                                                 style="margin-right: 14px" width="20" alt="navigation" /><span class="fs-0 fw-medium">28 Days
-                                            Trip</span></div>
-                                </div>
-                            </div>
-                        </div>
+                        </c:forEach>
                     </div>
                 </div><!-- end of .container-->
 
@@ -362,52 +335,24 @@
                             src="assets/img/dest/shape.svg" alt="destination" /></div>
                     <div class="mb-7 text-center">
                         <h5 class="text-secondary">TIN MỚI NHẤT </h5>
-                        <h3 class="fs-xl-10 fs-lg-8 fs-7 fw-bold text-capitalize"><a href="list.html">Mới thất lạc</a></h3>
+                        <h3 class="fs-xl-10 fs-lg-8 fs-7 fw-bold text-capitalize"><a href="list.html">Mới nhặt được</a></h3>
                     </div>
                     <div class="row">
+                        <c:forEach items="${requestScope.LIST3FOUND}" var="itemFound">
                         <div class="col-md-4 mb-4">
-                            <div class="card overflow-hidden shadow shadow-hover" id="hoverCard"> <img class="card-img-top"
-                                                                                                       src="https://media5.sgp1.digitaloceanspaces.com/wp-content/uploads/2021/10/13143842/1920X1080-Wallpapers.jpg"
-                                                                                                       alt="Rome, Italty" style="height: 18rem;" />
+                            <div class="card overflow-hidden shadow shadow-hover" id="hoverCard"> <img class="card-img-top" src="${pageContext.servletContext.contextPath}/item?postId=${itemFound.postId}"
+                                                                                                       alt="Found Item" style="height: 18rem;" />
                                 <div class="card-body py-4 px-3">
                                     <div class="d-flex flex-column flex-lg-row justify-content-between mb-3">
-                                        <h4 class="text-secondary fw-medium"><a class="link-900 text-decoration-none stretched-link"
-                                                                                href="#!">Title</a></h4><span class="fs-1 fw-medium">$5,42k</span>
+                                        <h4 class="text-secondary fw-medium"><a class="link-901 text-decoration-none stretched-link"
+                                                                                href="#!">${itemFound.title}</a></h4><span class="fs-1 fw-medium">${itemFound.postId}</span>
                                     </div>
-                                    <div class="d-flex align-items-center"> <img src="assets/img/dest/navigation.svg"
-                                                                                 style="margin-right: 14px" width="20" alt="navigation" /><span class="fs-0 fw-medium">10 Days
-                                            Trip</span></div>
+                                    <div class="d-flex align-items-center"> <img src="assets/img/dest/clock.svg"
+                                                                                 style="margin-right: 14px" width="20" alt="navigation" /><span class="fs-0 fw-medium">${itemFound.date}</span></div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-4 mb-4">
-                            <div class="card overflow-hidden shadow"> <img class="card-img-top" src="assets/img/dest/dest2.jpg"
-                                                                           alt="London, UK" style="height: 18rem;" />
-                                <div class="card-body py-4 px-3">
-                                    <div class="d-flex flex-column flex-lg-row justify-content-between mb-3">
-                                        <h4 class="text-secondary fw-medium"><a class="link-900 text-decoration-none stretched-link"
-                                                                                href="#!">Title</a></h4><span class="fs-1 fw-medium">$4.2k</span>
-                                    </div>
-                                    <div class="d-flex align-items-center"> <img src="assets/img/dest/navigation.svg"
-                                                                                 style="margin-right: 14px" width="20" alt="navigation" /><span class="fs-0 fw-medium">12 Days
-                                            Trip</span></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4 mb-4">
-                            <div class="card overflow-hidden shadow"> <img class="card-img-top" src="assets/img/dest/dest3.jpg"
-                                                                           alt="Full Europe" style="height: 18rem;" />
-                                <div class="card-body py-4 px-3">
-                                    <div class="d-flex flex-column flex-lg-row justify-content-between mb-3">
-                                        <h4 class="text-secondary fw-medium"><a class="link-900 text-decoration-none stretched-link"
-                                                                                href="#!">Title</a></h4><span class="fs-1 fw-medium">$15k</span>
-                                    </div>
-                                    <div class="d-flex align-items-center"> <img src="assets/img/dest/navigation.svg"
-                                                                                 style="margin-right: 14px" width="20" alt="navigation" /><span class="fs-0 fw-medium">28 Days
-                                            Trip</span></div>
-                                </div>
-                            </div>
-                        </div>
+                        </c:forEach>
                     </div>
                 </div><!-- end of .container-->
 
