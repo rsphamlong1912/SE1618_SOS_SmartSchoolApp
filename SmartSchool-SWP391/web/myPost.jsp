@@ -140,7 +140,14 @@
                                 <li class="nav-item px-3 navbar-dropdown dropdown-user dropdown">
                                     <a class="btn btn-outline-light order-1 order-lg-0 fw-bold nav-link hide-arrow" id="nameLogin" href="" data-bs-toggle="dropdown">
                                         <div class="avatar avatar-online">
-                                            <img src="${pageContext.servletContext.contextPath}/avatar?userId=${sessionScope.LOGIN_USER.userId}" alt class="w-px-40 rounded-circle" style="width: 2rem; height: 2rem"/> ${sessionScope.LOGIN_USER.fullname}
+                                            <c:choose>
+                                                <c:when test="${sessionScope.LOGIN_USER.avatar==null}">
+                                                    <img src="https://unloc.online/wp-content/uploads/2020/04/283-2833820_user-icon-orange-png.png?fbclid=IwAR133UMM9dPj2fhzsRFAVrcTvgHaJBLsIbkkwQbqx1dv_3FTf8OQfqcIRcM" alt class="w-px-40 rounded-circle" style="width: 2rem; height: 2rem"/>
+                                                </c:when>    
+                                                <c:otherwise>
+                                                    <img src="${pageContext.servletContext.contextPath}/avatar?userId=${sessionScope.LOGIN_USER.userId}" alt class="w-px-40 rounded-circle" style="width: 2rem; height: 2rem"/> ${sessionScope.LOGIN_USER.fullname}
+                                                </c:otherwise>
+                                            </c:choose>     
                                         </div>
                                     </a>          
                                     <ul class="dropdown-menu dropdown-menu-end">
@@ -212,7 +219,16 @@
                                 <div class="row justify-content-center mt-4">              
                                     <div class="avatar-upload">
                                         <div class="text-center avatar-preview">                 
-                                            <img src="${pageContext.servletContext.contextPath}/avatar?userId=${sessionScope.LOGIN_USER.userId}" width="216" height="216">                  
+                                            <c:choose>
+                                                <c:when test="${sessionScope.LOGIN_USER.avatar==null}">
+                                                    <img src="https://unloc.online/wp-content/uploads/2020/04/283-2833820_user-icon-orange-png.png?fbclid=IwAR133UMM9dPj2fhzsRFAVrcTvgHaJBLsIbkkwQbqx1dv_3FTf8OQfqcIRcM" width="216" height="216"/>
+                                                </c:when>    
+                                                <c:otherwise>
+                                                    <img src="${pageContext.servletContext.contextPath}/avatar?userId=${sessionScope.LOGIN_USER.userId}" width="216" height="216"/> 
+                                                </c:otherwise>
+                                            </c:choose>
+                                            </br>
+                                            </br>${sessionScope.LOGIN_USER.fullname}                             
                                         </div>                 
                                     </div>              
                                 </div>
