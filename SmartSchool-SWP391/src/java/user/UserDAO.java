@@ -20,7 +20,7 @@ import utills.DBUtils;
  */
 public class UserDAO {
 
-    private static final String REGISTER = "INSERT INTO tblUser(fullname, userId, password, email, phone, roleId) VALUES(?, ?, ?, ?, ?, 'US')";
+    private static final String REGISTER = "INSERT INTO tblUser(fullname, userId, password, email, phone, roleId) VALUES (?, ?, ?, ?, ?, 'US')";
     private static final String LOGIN = "select * from tblUser where userId = ? and password=?";
     private static final String CHECK_ACCOUNT = "SELECT * FROM tblUser WHERE userId = ?";
     private static final String CHANGE_PASSWORD = "UPDATE tblUser SET password = ? WHERE userId= ?";
