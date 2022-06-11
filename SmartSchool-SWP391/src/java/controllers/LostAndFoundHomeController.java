@@ -33,9 +33,22 @@ public class LostAndFoundHomeController extends HttpServlet {
             CategoryDAO cdao = new CategoryDAO();
             List<PostDTO> list3Lost = pdao.get3NewLost();
             List<PostDTO> list3Found = pdao.get3NewFound();
-            
+            for (PostDTO postDTO : list3Found) {
+                if (postDTO.getTitle().length() > 25) {
+                    String title = postDTO.getTitle().substring(0, 25);
+                    postDTO.setTitle(title + "...");
+                    System.out.println(postDTO.getTitle());
+                }
+            }
+            for (PostDTO postDTO : list3Lost) {
+                if (postDTO.getTitle().length() > 25) {
+                    String title = postDTO.getTitle().substring(0, 25);
+                    postDTO.setTitle(title + "...");
+                    System.out.println(postDTO.getTitle());
+                }
+            }
             List<CategoryDTO> listAllCategory = cdao.getAllCategory();
-            
+
             request.setAttribute("LIST3LOST", list3Lost);
             request.setAttribute("LIST3FOUND", list3Found);
             request.setAttribute("LISTALLCATEGORY", listAllCategory);
