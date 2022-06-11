@@ -14,12 +14,12 @@ public class CategoryDTO {
     private int categoryId;
     private String categoryName;
     private boolean categoryStatus;
-    private byte[] categoryImg;
+    private String categoryImg;
 
     public CategoryDTO() {
     }
 
-    public CategoryDTO(int categoryId, String categoryName, boolean categoryStatus, byte[] categoryImg) {
+    public CategoryDTO(int categoryId, String categoryName, boolean categoryStatus, String categoryImg) {
         this.categoryId = categoryId;
         this.categoryName = categoryName;
         this.categoryStatus = categoryStatus;
@@ -50,11 +50,11 @@ public class CategoryDTO {
         this.categoryStatus = categoryStatus;
     }
 
-    public byte[] getCategoryImg() {
+    public String getCategoryImg() {
         return categoryImg;
     }
 
-    public void setCategoryImg(byte[] categoryImg) {
+    public void setCategoryImg(String categoryImg) {
         this.categoryImg = categoryImg;
     }
 

@@ -5,6 +5,7 @@
  */
 package controllers;
 
+import category.CategoryDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -14,6 +15,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import post.PostDAO;
+import category.CategoryDAO;
 import post.PostDTO;
 
 /**
@@ -27,12 +29,16 @@ public class LostAndFoundHomeController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try {
-            PostDAO dao = new PostDAO();
-            List<PostDTO> list3Lost = dao.get3NewLost();
-            List<PostDTO> list3Found = dao.get3NewFound();
+            PostDAO pdao = new PostDAO();
+            CategoryDAO cdao = new CategoryDAO();
+            List<PostDTO> list3Lost = pdao.get3NewLost();
+            List<PostDTO> list3Found = pdao.get3NewFound();
+            
+            List<CategoryDTO> listAllCategory = cdao.getAllCategory();
             
             request.setAttribute("LIST3LOST", list3Lost);
             request.setAttribute("LIST3FOUND", list3Found);
+            request.setAttribute("LISTALLCATEGORY", listAllCategory);
         } catch (Exception e) {
         } finally {
             request.getRequestDispatcher("LostAndFoundHome.jsp").forward(request, response);
