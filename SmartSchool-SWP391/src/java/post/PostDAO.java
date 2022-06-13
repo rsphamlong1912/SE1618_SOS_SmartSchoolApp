@@ -35,6 +35,8 @@ public class PostDAO {
     private static final String LIST_MYPOST = "SELECT p.postId, p.userId,p.categoryId, p.postImg, p.description,p.date,p.type,p.title,p.postStatus,c.categoryName\n"
             + "FROM tblPost as p, tblCategory as c\n"
             + "WHERE p.categoryId=c.categoryId AND postStatus='true' AND userId=?";
+    private static final String READ = "SELECT p.postId,p.userId,p.categoryId,p.postImg,p.description,p.date,p.type,p.title,p.postStatus, c.categoryName FROM tblPost as p inner join tblCategory as c \n"
+            + "ON p.categoryId = c.categoryId WHERE p.postId  = ?";
 
     //Upload new post
     public void uploadPost(PostDTO post) throws SQLException {
@@ -66,6 +68,47 @@ public class PostDAO {
                 con.close();
             }
         }
+    }
+
+    public PostDTO readPost(String userId) throws SQLException {
+        PostDTO post = new PostDTO();
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(READ);
+                ptm.setString(1, userId);
+                rs = ptm.executeQuery();
+                while (rs.next()) {
+                    post.setPostId(rs.getInt("postId"));
+                    post.setUserId(rs.getString("userId"));
+                    post.setCategoryId(rs.getInt("categoryId"));
+                    post.setPostImg(rs.getBytes("postImg"));
+                    post.setDescription(rs.getString("description"));
+                    post.setDate(rs.getDate("date"));
+                    post.setType(rs.getBoolean("type"));
+                    post.setTitle(rs.getString("title"));
+                    post.setPostStatus(rs.getString("postStatus"));
+                    post.setCategoryName(rs.getString("categoryName"));
+                }
+                return post;
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(PostDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return null;
     }
 
     //List all post
@@ -243,8 +286,8 @@ public class PostDAO {
         }
         return list;
     }
-    
-    public byte[] getItemData(String postId) throws SQLException{
+
+    public byte[] getItemData(String postId) throws SQLException {
         String getAvatar = "SELECT postImg FROM tblPost WHERE postId = ? and postStatus = 'true'";
         Connection conn = null;
         PreparedStatement ptm = null;
@@ -256,8 +299,8 @@ public class PostDAO {
                 ptm.setString(1, postId);
                 rs = ptm.executeQuery();
                 if (rs.next()) {
-                   return rs.getBytes("postImg");
-                }    
+                    return rs.getBytes("postImg");
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();
