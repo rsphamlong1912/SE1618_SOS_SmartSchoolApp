@@ -101,7 +101,7 @@
             <!-- here  data-navbar-on-scroll="data-navbar-on-scroll"-->
             <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3 d-block gradient-custom-2"
                  style="background-color: #F26F21 ;">
-                <div class="container"><a class="navbar-brand" href="index.html"><img
+                <div class="container"><a class="navbar-brand" href="lostAndfoundhome"><img
                             src="https://hcmuni.fpt.edu.vn/landing-page/images/logo-top.png" height="46" alt="logo" /></a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                             data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -110,7 +110,7 @@
                     <div class="collapse navbar-collapse border-top border-lg-0 mt-4 mt-lg-0" id="navbarSupportedContent">
                         <ul class="navbar-nav ms-auto pt-2 pt-lg-0 font-base align-items-lg-center align-items-start">
                             <li class="nav-item px-3"><a class="nav-link fw-bold" aria-current="page"
-                                                         href="index.html">Trang chủ</a>
+                                                         href="lostAndfoundhome">Trang chủ</a>
                             </li>
                             <li class="nav-item px-3"><a class="nav-link fw-bold" aria-current="page" href="#phanloai">Phân
                                     loại</a>
