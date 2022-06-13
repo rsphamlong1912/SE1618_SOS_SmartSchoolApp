@@ -6,8 +6,8 @@
 package controllers;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,6 +16,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author SE150925 Nguyen Van Hai Nam
  */
+
+@MultipartConfig(maxFileSize = 16177215)
 public class MainController extends HttpServlet {
 
     /**
@@ -79,6 +81,9 @@ public class MainController extends HttpServlet {
             }
             if (POST_DETAIL.equals(action)) {
                 url = POST_DETAIL_CONTROLLER;
+            }
+            if("uploadImg".equals(action)){
+                url="updateAvatar";
             }
         } catch (Exception e) {
             log("Error at MainController: " + e.toString());
