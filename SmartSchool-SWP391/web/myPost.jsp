@@ -157,7 +157,7 @@
 
                                                     <div class="flex-grow-1">
                                                         <span class="fw-semibold d-block">${sessionScope.LOGIN_USER.fullname}</span>
-                                                        <small class="text-muted">Admin</small>
+                                                        <small class="text-muted">${sessionScope.LOGIN_USER.roleName}</small>
                                                     </div>
                                                 </div>
                                             </a>
@@ -252,7 +252,7 @@
                                             <h5>${count.index + 1}.</h5>
                                         </div>
                                         <div class="col-3 imgPost">
-                                            <img src="https://sw25772.sfstatic.io/upload_dir/shop/exentri-mens-black-leather-wallet.jpg" class="img-fluid" alt="post image">
+                                            <img src="${pageContext.servletContext.contextPath}/item?postId=${myPost.postId}" class="img-fluid" alt="post image">
                                         </div>
                                         <div class="col-4 info">
                                             <h5>${myPost.title}</h5>
@@ -263,7 +263,7 @@
                                         </div>
                                         <div class="col-2 typePost">
                                             <p>
-                                                <c:choose>
+                                                <c:choose> 
                                                     <c:when test="${myPost.type=='0'}">
                                                         Đồ thất lạc
                                                     </c:when>    
@@ -274,7 +274,7 @@
                                             </p>
                                         </div>
                                         <div class="col-2 detail">
-                                            <p><a href="#" type="button" class="link-dark btn btn-outline-success btn-sm">Xem chi tiết</a></p>
+                                            <p><a href="main?action=PostDetail&postId=${myPost.postId}" type="button" class="link-dark btn btn-outline-success btn-sm">Xem chi tiết</a></p>
                                         </div>
                                     </div>
                                 </c:forEach>

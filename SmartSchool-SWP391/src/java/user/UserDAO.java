@@ -21,8 +21,12 @@ import utills.DBUtils;
 public class UserDAO {
 
     private static final String REGISTER = "INSERT INTO tblUser(fullname, userId, password, email, phone, roleId) VALUES (?, ?, ?, ?, ?, 'US')";
-    private static final String LOGIN = "select * from tblUser where userId = ? and password=?";
-    private static final String CHECK_ACCOUNT = "SELECT * FROM tblUser WHERE userId = ?";
+    private static final String LOGIN = "SELECT u.userId, u.roleId, u.password, u.fullname, u.avatar, u.phone, u.email, u.facebook, u.userStatus, u.haveJob, r.roleName\n"
+            + "FROM tblUser as u, tblRole as r\n"
+            + "WHERE u.roleId = r.roleId AND userId = ? AND password = ?";    
+    private static final String CHECK_ACCOUNT =  "SELECT u.userId, u.roleId, u.password, u.fullname, u.avatar, u.phone, u.email, u.facebook, u.userStatus, u.haveJob, r.roleName\n"
+            + "FROM tblUser as u, tblRole as r\n"
+            + "WHERE u.roleId = r.roleId AND userId = ?";
     private static final String CHANGE_PASSWORD = "UPDATE tblUser SET password = ? WHERE userId= ?";
     private static final String UPDATE_ACCOUNT = "UPDATE tblUser SET fullname = ?, email = ?, facebook = ?, phone = ? WHERE userId= ?";
 
@@ -47,10 +51,11 @@ public class UserDAO {
                 user.setPhone(rs.getString("phone"));
                 user.setEmail(rs.getString("email"));
                 user.setFacebook(rs.getString("facebook"));
-                user.setCompAddress(rs.getString("compAddress"));
-                user.setUserId(rs.getString("userId"));
+//                user.setCompAddress(rs.getString("compAddress"));
+//                user.setUserId(rs.getString("userId"));
                 user.setUserStatus(rs.getBoolean("userStatus"));
                 user.setHaveJob(rs.getBoolean("haveJob"));
+                user.setRoleName(rs.getString("roleName"));
             }
         } catch (Exception ex) {
             Logger.getLogger(UserDTO.class.getName()).log(Level.SEVERE, null, ex);
@@ -89,10 +94,11 @@ public class UserDAO {
                     user.setPhone(rs.getString("phone"));
                     user.setEmail(rs.getString("email"));
                     user.setFacebook(rs.getString("facebook"));
-                    user.setCompAddress(rs.getString("compAddress"));
-                    user.setUserId(rs.getString("userId"));
+//                    user.setCompAddress(rs.getString("compAddress"));
+//                    user.setUserId(rs.getString("userId"));
                     user.setUserStatus(rs.getBoolean("userStatus"));
                     user.setHaveJob(rs.getBoolean("haveJob"));
+                    user.setRoleName(rs.getString("roleName"));
                 }
                 return user;
             }
