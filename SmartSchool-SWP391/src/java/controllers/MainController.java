@@ -16,7 +16,6 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author SE150925 Nguyen Van Hai Nam
  */
-
 @MultipartConfig(maxFileSize = 16177215)
 public class MainController extends HttpServlet {
 
@@ -48,7 +47,9 @@ public class MainController extends HttpServlet {
     private static final String UPDATE_PROFILE_CONTROLLER = "updateProfile";
     private static final String POST_DETAIL = "PostDetail";
     private static final String POST_DETAIL_CONTROLLER = "postDetail";
-    
+    private static final String UPLOAD_JOBPOST = "UploadJobPost";
+    private static final String UPLOAD_JOBPOST_CONTROLLER = "uploadJobPost";
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -82,8 +83,11 @@ public class MainController extends HttpServlet {
             if (POST_DETAIL.equals(action)) {
                 url = POST_DETAIL_CONTROLLER;
             }
-            if("uploadImg".equals(action)){
-                url="updateAvatar";
+            if ("uploadImg".equals(action)) {
+                url = "updateAvatar";
+            }
+            if (UPLOAD_JOBPOST.equals(action)) {
+                url = UPLOAD_JOBPOST_CONTROLLER;
             }
         } catch (Exception e) {
             log("Error at MainController: " + e.toString());
