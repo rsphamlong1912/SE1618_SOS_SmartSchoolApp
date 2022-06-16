@@ -64,8 +64,8 @@
             }
 
             .profileUserPost img {
-                width: 300px;
-                height: 300px;
+                width: 234px;
+                height: 234px;
                 border-radius: 50%;
             }
 
@@ -123,15 +123,87 @@
                                     lạc</a></li>
                             <li class="nav-item px-3"><a class="nav-link fw-bold" aria-current="page" href="#timkiem">Tìm
                                     kiếm</a></li>
-                            <li class="nav-item px-3"><a class="btn btn-outline-light order-1 order-lg-0 fw-bold"
-                                                         href="main?action=Logout">Đăng xuất</a></li>
-                            <!-- <li class="nav-item px-3 px-xl-4"><a class="btn btn-outline-dark btn-success order-1 order-lg-0 fw-bold"
-                    href="#!">Đăng ký</a></li> -->
+                            <c:if test="${empty sessionScope.LOGIN_USER}">
+                                <li class="nav-item px-3"><a class="btn btn-outline-light order-1 order-lg-0 fw-bold" href="#!">Đăng nhập /
+                                        Đăng ký</a></li>
+                                    </c:if>
+                                    <c:if test="${!empty sessionScope.LOGIN_USER}">
+                                <!-- User -->
+                                <li class="nav-item px-3 navbar-dropdown dropdown-user dropdown">
+                                    <a class="btn btn-outline-light order-1 order-lg-0 fw-bold nav-link hide-arrow" id="nameLogin" href="" data-bs-toggle="dropdown">
+                                        <div class="avatar avatar-online">
+                                            <c:choose>
+                                                <c:when test="${sessionScope.LOGIN_USER.avatar==null}">
+                                                    <img src="https://unloc.online/wp-content/uploads/2020/04/283-2833820_user-icon-orange-png.png?fbclid=IwAR133UMM9dPj2fhzsRFAVrcTvgHaJBLsIbkkwQbqx1dv_3FTf8OQfqcIRcM" alt class="w-px-40 rounded-circle" style="width: 2rem; height: 2rem"/> ${sessionScope.LOGIN_USER.fullname}
+                                                </c:when>    
+                                                <c:otherwise>
+                                                    <img src="${pageContext.servletContext.contextPath}/avatar?userId=${sessionScope.LOGIN_USER.userId}" alt class="w-px-40 rounded-circle" style="width: 2rem; height: 2rem"/> ${sessionScope.LOGIN_USER.fullname}
+                                                </c:otherwise>
+                                            </c:choose>
+                                        </div>
+                                    </a>          
+                                    <ul class="dropdown-menu dropdown-menu-end">
+                                        <li>
+                                            <a class="dropdown-item" href="#">
+                                                <div class="d-flex">
+
+                                                    <div class="flex-grow-1">
+                                                        <span class="fw-semibold d-block">${sessionScope.LOGIN_USER.fullname}</span>
+                                                        <small class="text-muted">${sessionScope.LOGIN_USER.roleName}</small>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <div class="dropdown-divider"></div>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" href="main?action=ProfileDetail">
+                                                <i class="bx bx-user me-2"></i>
+                                                <span class="align-middle"><i class="fa fa-user" aria-hidden="true"></i> Thông tin cá nhân</span>
+                                            </a>
+                                        </li>
+
+                                        <li>
+                                            <a class="dropdown-item" href="main?action=MyPost">
+                                                <span class="d-flex align-items-center align-middle">
+                                                    <i class="bx bx-user me-2"></i>
+                                                    <span class="flex-grow-1 align-middle"><i class="fa fa-list-alt" aria-hidden="true"></i> Bài viết của tôi</span>
+                                                    <span class="flex-shrink-0 badge badge-center rounded-pill bg-danger w-px-20 h-px-20">4</span>
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" href="main?action=ChangePassword">
+                                                <i class="bx bx-user me-2"></i>
+                                                <span class="align-middle"><i class="fa fa-key" aria-hidden="true"></i> Đổi mật khẩu</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" href="main?action=FeedbackSystem">
+                                                <i class="bx bx-user me-2"></i>
+                                                <span class="align-middle"><i class="fa fa-bug" aria-hidden="true"></i> Phản hồi hệ thống</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <div class="dropdown-divider"></div>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" href="main?action=Logout">
+                                                <i class="bx bx-user me-2"></i>
+                                                <span class="align-middle"><i class="fa fa-sign-out-alt" aria-hidden="true"></i> Đăng xuất</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <!--/ User -->    
+                            </c:if>    
                         </ul>
                     </div>
                 </div>
             </nav>
-            <section class="container" style="padding-top: 120px;" id="timkiem">
+            <section class="container" style="padding-top: 3rem;" id="timkiem">
+                <h1 class="mb-8" style="margin-top: 50px; text-align: center;">Chỉnh sửa bài đăng</h1>
                 <div class="row">
                     <div class="col-12 col-md-4">
                         <div class="imgPost">
@@ -162,13 +234,15 @@
                         <div class="info-desc"><span class="title-desc">Ngày đăng: </span>
                             <p class="content-desc">${requestScope.POST.date}</p>
                         </div>
-                        <a href="#" class="btn btn-danger btn-sm"><i class="fa-solid fa-flag"></i> Báo cáo vi phạm</a>
+                        <a href="#" class="btn btn-danger btn-sm"><i class="fa-solid fa-trash"></i> Xóa</a>
+                        <a href="#" class="btn btn-success btn-sm"><i class="fa-solid fa-pencil"></i> Sửa</a>
 
 
                     </div>
                     <div class="col-12 col-md-3 profileUserPost">
-                        <h3>Người đăng</h3>
-                        <div class="card" style="width: 18rem;">
+                        
+                        <div class="card align-items-center" style="width: 18rem;">
+                            <h3>Người đăng</h3>
                             <c:choose>
                                 <c:when test="${sessionScope.LOGIN_USER.avatar==null}">
                                     <img src="https://unloc.online/wp-content/uploads/2020/04/283-2833820_user-icon-orange-png.png?fbclid=IwAR133UMM9dPj2fhzsRFAVrcTvgHaJBLsIbkkwQbqx1dv_3FTf8OQfqcIRcM" alt >
@@ -185,11 +259,11 @@
                                 <li class="list-group-item"><i class="fa-solid fa-envelope"></i> ${requestScope.USER_POST.email} </li>
                                 <li class="list-group-item"><i class="fa-brands fa-facebook"></i> ${requestScope.USER_POST.facebook} </li>
                             </ul>
-                            <div class="card-body text-center">
+<!--                            <div class="card-body text-center">
                                 <a href="#" class="btn btn-success btn-sm"><i class="fa-solid fa-phone-volume"></i> Gọi</a>
                                 <a href="#" class="btn btn-success btn-sm"><i class="fa-brands fa-facebook-messenger"></i> Messenger</a>
                                 <a href="#" class="btn btn-success btn-sm"><i class="fa-solid fa-envelope"></i> Mail</a>
-                            </div>
+                            </div>-->
                         </div>
 
                     </div>
