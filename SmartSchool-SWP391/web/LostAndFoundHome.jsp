@@ -179,7 +179,17 @@
                             </div>
                           </div> -->
                         <h1 class="fw-bold text-light mb-3 text-center hero-title"
-                            style="font-family: 'Inter', sans-serif; text-shadow: 6px 6px 0px rgba(0,0,0,0.2); top: 7.5rem;">FPT
+                            style="font-family: 'Inter', sans-serif; text-shadow: 1px 1px 1px #ffffff, 
+                                                                    1px 2px 1px #919191, 
+                                                                    1px 3px 1px #919191, 
+                                                                    1px 4px 1px #919191, 
+                                                                    1px 5px 1px #919191, 
+                                                                    1px 6px 1px #919191, 
+                                                                    1px 7px 1px #919191, 
+                                                                    1px 10px 6px rgb(16 16 16 / 40%), 
+                                                                    1px 2px 10px rgb(16 16 16 / 20%), 
+                                                                    1px 25px 35px rgb(16 16 16 / 20%), 
+                                                                    1px 30px 60px rgb(16 16 16 / 40%); top: 7.5rem;">FPT
                             University </br>Tìm kiếm đồ thất lạc</h1>
                         <div class="s131">
 
