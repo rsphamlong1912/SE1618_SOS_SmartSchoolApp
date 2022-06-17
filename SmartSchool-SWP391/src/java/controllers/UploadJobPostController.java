@@ -6,53 +6,48 @@
 package controllers;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.servlet.http.Part;
-import user.UserDAO;
+import jobPost.JobPostDAO;
 import user.UserDTO;
 
 /**
  *
  * @author TrinhNgocBao
  */
-@WebServlet(name = "UpdateAvatarController", urlPatterns = {"/updateAvatar"})
-@MultipartConfig(maxFileSize = 16177215)
-public class UpdateAvatarController extends HttpServlet {
+@WebServlet(name = "UploadJobPostController", urlPatterns = {"/uploadJobPost"})
+public class UploadJobPostController extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, SQLException {
+            throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try {
-            InputStream inputStream = null;
-            Part filePart = request.getPart("userAvatar");
-            if (filePart != null) {
-                inputStream = filePart.getInputStream();
-            }
             HttpSession session = request.getSession();
             UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
-            UserDAO dao = new UserDAO();
-            boolean result = dao.updateUserAvatar(inputStream, loginUser.getUserId());
-            if (result == true) {
-                request.setAttribute("SUCCESS", "Cập nhật Avatar thành công!");
-            }else {
-                request.setAttribute("SUCCESS", "Cập nhật Avatar thất bại!");
-            }
-        } catch (Exception e) {
+            String userId = loginUser.getUserId();
+            int jobCategoryId = Integer.parseInt(request.getParameter("jobCategoryId"));
+            String title = request.getParameter("title");
+            String description = request.getParameter("description");
+            float salary = Float.parseFloat(request.getParameter("salary"));
+            int amount = Integer.parseInt(request.getParameter("amount"));
+            int timeJob = Integer.parseInt(request.getParameter("timeJob"));
+            String[] question = request.getParameterValues("question");
+            JobPostDAO dao = new JobPostDAO();
+            int jobId = dao.uploadJobPost(userId, jobCategoryId, title, description, salary, amount, timeJob);
+            for (String q : question) {
+                dao.uploadQuestion(jobId,q);
+            }           
+            request.setAttribute("SUCCESS", "Đăng ký tài khoản thành công!");
+        }catch (Exception e) {
+            log("Error at UploadJobPostController: " + e.toString());
         } finally {
-//            response.sendRedirect("profileDetail.jsp");
-            request.getRequestDispatcher("profileDetail").forward(request, response);
+            request.getRequestDispatcher("EmployerUpload.jsp").forward(request, response);
         }
-
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -67,11 +62,7 @@ public class UpdateAvatarController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (SQLException ex) {
-            Logger.getLogger(UpdateAvatarController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
     }
 
     /**
@@ -85,11 +76,7 @@ public class UpdateAvatarController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (SQLException ex) {
-            Logger.getLogger(UpdateAvatarController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
     }
 
     /**

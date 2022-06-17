@@ -3,7 +3,6 @@
     Created on : Mar 3, 2022, 8:48:02 PM
     Author     : TrinhNgocBao
 --%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en-US" dir="ltr">
@@ -79,7 +78,7 @@
         </div>
       </div>
     </nav>
-    <section class="" style="padding-top: 1rem;" id="timkiem">
+    <section class="" style="padding-top: 2rem; min-height: 61rem;">
       <div class="bg-holder"
         style="background-image:url(https://hcmuni.fpt.edu.vn/Data/Sites/1/media/hinh-gioi-thieu-dai-hoc-fpt/hcm.png);">
       </div>
@@ -88,7 +87,7 @@
       <div class="container pt-10 h-100">
         <div class="row d-flex justify-content-center align-items-center h-100">
           <div class="col-xl-10">
-            <div class="card rounded text-secondary">
+            <div class="card rounded-1 text-secondary">
               <div class="row g-0">
                 <div class="col-lg-6">
                   <div class="card-body p-md-5 mx-md-4">

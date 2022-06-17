@@ -108,7 +108,7 @@
                             </li>
                             <li class="nav-item px-3"><a class="nav-link fw-bold" aria-current="page" href="#phanloai">Phân loại</a>
                             </li>
-                            <li class="nav-item px-3"><a class="nav-link fw-bold" aria-current="page" href="#moinhatduoc">Mới nhặt
+                            <li class="nav-item px-3"><a class="nav-link fw-bold" aria-current="page" href="lostAndfoundhome#moinhatduoc">Mới nhặt
                                     được</a></li>
                             <li class="nav-item px-3"><a class="nav-link fw-bold" aria-current="page" href="#moithatlac">Mới thất
                                     lạc</a></li>
@@ -139,7 +139,7 @@
 
                                                     <div class="flex-grow-1">
                                                         <span class="fw-semibold d-block">${sessionScope.LOGIN_USER.fullname}</span>
-                                                        <small class="text-muted">Admin</small>
+                                                        <small class="text-muted">${sessionScope.LOGIN_USER.roleName}</small>
                                                     </div>
                                                 </div>
                                             </a>
@@ -200,10 +200,14 @@
                             <div class="card-body p-3">
                                 <div class="row justify-content-center mt-4">              
                                     <div class="avatar-upload">
-                                        <form action="updateAvatar" id="frmUploadAvatar" enctype="multipart/form-data" method="POST">
+                                        <form action="main?action=uploadImg" id="frmUploadAvatar" enctype="multipart/form-data" method="POST">
                                             <div class="avatar-edit">                       
-                                                <input type="file" id="imageUpload" onchange="submitForm()" name="userAvatar" accept=".png, .jpg, .jpeg"/>
-                                                <label for="imageUpload"></label>                         
+                                                <!--<input type="file" id="imageUpload" onchange="submitForm()" name="userAvatar" accept=".png, .jpg, .jpeg"/>-->
+                                                <!--<label for="imageUpload"></label>--> 
+                                                
+                                                <input type="file" id="imageUpload" name="userAvatar" onchange="submitForm()" accept=".png, .jpg, .jpeg">
+                                                <label for="imageUpload"></label>
+                                                <!--</br><button type="submit" name="action" value="uploadImg">upload ảnh</button>-->
                                             </div>
                                         </form>
                                         <div class="text-center avatar-preview">                 
@@ -217,7 +221,7 @@
                                                 </c:otherwise>
                                             </c:choose>
                                             </br>
-                                            </br>${sessionScope.LOGIN_USER.fullname}
+                                            </br><h4>${sessionScope.LOGIN_USER.fullname}</h4>
                                         </div>                 
                                     </div>              
                                 </div>

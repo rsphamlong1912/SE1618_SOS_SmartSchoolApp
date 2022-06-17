@@ -37,8 +37,8 @@
 
 @media (min-width: 769px) {
     .gradient-custom-2 {
-        border-top-right-radius: .3rem;
-        border-bottom-right-radius: .3rem;
+/*        border-top-right-radius: .3rem;
+        border-bottom-right-radius: .3rem;*/
     }
 }
 

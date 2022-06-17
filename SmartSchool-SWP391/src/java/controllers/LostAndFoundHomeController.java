@@ -47,6 +47,7 @@ public class LostAndFoundHomeController extends HttpServlet {
                     System.out.println(postDTO.getTitle());
                 }
             }
+
             List<CategoryDTO> listAllCategory = cdao.getAllCategory();
 
             request.setAttribute("LIST3LOST", list3Lost);

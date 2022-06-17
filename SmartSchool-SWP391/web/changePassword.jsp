@@ -133,7 +133,7 @@
 
                                                     <div class="flex-grow-1">
                                                         <span class="fw-semibold d-block">${sessionScope.LOGIN_USER.fullname}</span>
-                                                        <small class="text-muted">Admin</small>
+                                                        <small class="text-muted">${sessionScope.LOGIN_USER.roleName}</small>
                                                     </div>
                                                 </div>
                                             </a>
@@ -204,7 +204,7 @@
                                                 </c:otherwise>
                                             </c:choose>
                                             </br>
-                                            </br>${sessionScope.LOGIN_USER.fullname}                             
+                                            </br><h4>${sessionScope.LOGIN_USER.fullname}</h4>                             
                                         </div>                 
                                     </div>              
                                 </div>
