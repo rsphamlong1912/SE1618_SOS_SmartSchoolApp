@@ -10,10 +10,11 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Welcome Page</title>
     </head>
     <body>
-        <h1>Hello Admin</h1>
-        <a href="<c:url value="/main?action=ProfileDetail" />">See profile Detail</a>
+        <h1>Hello !</h1>
+        <button><a href="lostAndfoundhome">Lost And Found</a></button>
+        <button><a href="EmployerHome.jsp">Freelance Job</a></button>
     </body>
 </html>
