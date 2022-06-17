@@ -104,7 +104,7 @@
                                 </ul>
                             </li>
                             <c:if test="${empty sessionScope.LOGIN_USER}">
-                                <li class="nav-item px-3"><a class="btn btn-outline-light order-1 order-lg-0 fw-bold" href="#!">Đăng nhập /
+                                <li class="nav-item px-3"><a class="btn btn-outline-light order-1 order-lg-0 fw-bold" href="login.jsp">Đăng nhập /
                                         Đăng ký</a></li>
                                     </c:if>
                                     <c:if test="${!empty sessionScope.LOGIN_USER}">
@@ -222,7 +222,7 @@
                             1px 30px 60px rgba(16,16,16,0.4); top: 7.5rem;">FPT
                             University </br>Tuyển dụng Freelancer</h1>
                         <div class="row text-center">
-                            <div class="text-center"> <a class="btn btn-primary btn-lg primary-btn-shadow gradient-custom-2" style="box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;" href="EmployerUpload.html" role="button">Đăng tuyển nhân sự</a></div>
+                            <div class="text-center"> <a class="btn btn-primary btn-lg primary-btn-shadow gradient-custom-2" style="box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;" href="EmployerUpload.jsp" role="button">Đăng tuyển nhân sự</a></div>
                         </div>
                     </div>
                 </div>

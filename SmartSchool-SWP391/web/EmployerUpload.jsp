@@ -220,8 +220,9 @@
                     <div class="card card-shadow">
                         <form action="main" class="needs-validation" novalidate>
                             <div class="card-header bg-white pt-4 pb-4 pl-10 pr-10 border-bottom d-md-flex">
-                                <h3 class="">ĐĂNG VIỆC FREELANCE ${requestScope.SUCCESS}</h3>
+                                <h3 class="">ĐĂNG VIỆC FREELANCE</h3>                               
                             </div>
+                            <div class="pl-10 pr-10 pt-3"><h4 class="text-success">${requestScope.SUCCESS}</h4></div>
                             <div class="card-body pl-10 pr-10">
                                 <div class="form-group mb-4">
                                     <label for="title" class="form-control-label fw-bold mb-2">Nhập tên công việc</label>

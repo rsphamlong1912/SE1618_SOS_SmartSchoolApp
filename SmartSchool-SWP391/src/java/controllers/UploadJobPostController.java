@@ -42,7 +42,7 @@ public class UploadJobPostController extends HttpServlet {
             for (String q : question) {
                 dao.uploadQuestion(jobId,q);
             }           
-            request.setAttribute("SUCCESS", "Đăng ký tài khoản thành công!");
+            request.setAttribute("SUCCESS", "Đăng bài thành công !");
         }catch (Exception e) {
             log("Error at UploadJobPostController: " + e.toString());
         } finally {
