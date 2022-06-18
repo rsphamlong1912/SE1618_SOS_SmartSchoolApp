@@ -3,16 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/ROG%20STRIX/SE1618_SOS_SmartSchoolApp/SmartSchool-SWP391/src/java/jobCategory/JobCategoryDTO.java</file>
-            <file>file:/C:/Users/ROG%20STRIX/SE1618_SOS_SmartSchoolApp/SmartSchool-SWP391/src/java/feedbackSystem/FeedbackSystemDAO.java</file>
-            <file>file:/C:/Users/ROG%20STRIX/SE1618_SOS_SmartSchoolApp/SmartSchool-SWP391/src/java/post/PostDAO.java</file>
-            <file>file:/C:/Users/ROG%20STRIX/SE1618_SOS_SmartSchoolApp/SmartSchool-SWP391/src/java/jobPost/JobPostDAO.java</file>
-            <file>file:/C:/Users/ROG%20STRIX/SE1618_SOS_SmartSchoolApp/SmartSchool-SWP391/src/java/controllers/MainController.java</file>
-            <file>file:/C:/Users/ROG%20STRIX/SE1618_SOS_SmartSchoolApp/SmartSchool-SWP391/src/java/post/PostDTO.java</file>
-            <file>file:/C:/Users/ROG%20STRIX/SE1618_SOS_SmartSchoolApp/SmartSchool-SWP391/src/java/jobCategory/JobCategoryDAO.java</file>
-            <file>file:/C:/Users/ROG%20STRIX/SE1618_SOS_SmartSchoolApp/SmartSchool-SWP391/src/java/controllers/FeedbackSystemController.java</file>
-            <file>file:/C:/Users/ROG%20STRIX/SE1618_SOS_SmartSchoolApp/SmartSchool-SWP391/src/java/jobPost/JobPostDTO.java</file>
-            <file>file:/C:/Users/ROG%20STRIX/SE1618_SOS_SmartSchoolApp/SmartSchool-SWP391/src/java/controllers/UploadJobPostController.java</file>
+            <file>file:/C:/Users/nguye/OneDrive/Documents/NetBeansProjects/SE1618_SOS_SmartSchoolApp/SmartSchool-SWP391/src/java/controllers/ChangePasswordController.java</file>
         </group>
     </open-files>
 </project-private>

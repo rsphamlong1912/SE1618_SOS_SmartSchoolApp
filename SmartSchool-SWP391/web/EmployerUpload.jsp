@@ -114,13 +114,13 @@
                                 <ul class="dropdown-menu dropdown-menu-end">
 
                                     <li>
-                                        <a class="dropdown-item" href="">
+                                        <a class="dropdown-item" href="EmployerJobProcess.jsp">
                                             <i class="bx bx-user me-2"></i>
                                             <span class="align-middle"> VIỆC ĐANG TUYỂN</span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="">
+                                        <a class="dropdown-item" href="EmployerJobDone.jsp">
                                             <i class="bx bx-user me-2"></i>
                                             <span class="align-middle"> VIỆC ĐÃ TUYỂN</span>
                                         </a>
@@ -129,7 +129,7 @@
                                         <div class="dropdown-divider"></div>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="">
+                                        <a class="dropdown-item" href="EmployerUpload.jsp">
                                             <i class="bx bx-user me-2"></i>
                                             <span class="align-middle"> ĐĂNG TUYỂN</span>
                                         </a>
