@@ -49,7 +49,8 @@ public class MainController extends HttpServlet {
     private static final String POST_DETAIL_CONTROLLER = "postDetail";
     private static final String UPLOAD_JOBPOST = "UploadJobPost";
     private static final String UPLOAD_JOBPOST_CONTROLLER = "uploadJobPost";
-
+    private static final String MY_JOB_POST = "MyJobPost";
+    private static final String MY_JOB_POST_CONTROLLER = "myJobPost";
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -65,6 +66,9 @@ public class MainController extends HttpServlet {
             if (MY_POST.equals(action)) {
                 url = MY_POST_CONTROLLER;
             }
+            if (MY_JOB_POST.equals(action)) {
+                url = MY_JOB_POST_CONTROLLER;
+            }            
             if (CHANGE_PASSWORD.equals(action)) {
                 url = CHANGE_PASSWORD_CONTROLLER;
             }

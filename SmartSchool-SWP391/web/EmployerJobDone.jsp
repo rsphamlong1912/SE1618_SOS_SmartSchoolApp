@@ -105,13 +105,13 @@
               <ul class="dropdown-menu dropdown-menu-end">
 
                 <li>
-                  <a class="dropdown-item" href="">
+                  <a class="dropdown-item" href="main?action=MyJobPost">
                     <i class="bx bx-user me-2"></i>
                     <span class="align-middle"> VIỆC ĐANG TUYỂN</span>
                   </a>
                 </li>
                 <li>
-                  <a class="dropdown-item" href="">
+                  <a class="dropdown-item" href="EmployerJobDone.jsp">
                     <i class="bx bx-user me-2"></i>
                     <span class="align-middle"> VIỆC ĐÃ TUYỂN XONG</span>
                   </a>
@@ -120,7 +120,7 @@
                   <div class="dropdown-divider"></div>
                 </li>
                 <li>
-                  <a class="dropdown-item" href="">
+                  <a class="dropdown-item" href="EmployerUpload.jsp">
                     <i class="bx bx-user me-2"></i>
                     <span class="align-middle"> ĐĂNG TUYỂN</span>
                   </a>
@@ -208,14 +208,15 @@
     </nav>
     <div class="container">
       <div class="row row-cols-2 row-content text-center ">
-        <a class="text-decoration-none fw-bold choosen" href="#">
-          <div class="col">
-            VIỆC ĐÃ TUYỂN XONG
-          </div>
-        </a>
-        <a class="text-decoration-none fw-bold" href="EmployerJobProcess.html">
+        <a class="text-decoration-none fw-bold " href="main?action=MyJobPost">
           <div class="col">
             VIỆC ĐANG TUYỂN
+          </div>
+        </a>
+        <a class="text-decoration-none fw-bold choosen" href="#">
+
+          <div class="col">
+            VIỆC ĐÃ TUYỂN XONG
           </div>
         </a>
       </div>
