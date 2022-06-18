@@ -17,12 +17,11 @@ public class JobPostDTO {
     private String process;
     private String date;
     private boolean status;
-    private String jobCategoryName;
 
     public JobPostDTO() {
     }
 
-    public JobPostDTO(int jobId, String userId, int jobCategoryId, String title, String description, float salary, int amount, int timeJob, String process, String date, boolean status, String jobCategoryName) {
+    public JobPostDTO(int jobId, String userId, int jobCategoryId, String title, String description, float salary, int amount, int timeJob, String process, String date, boolean status) {
         this.jobId = jobId;
         this.userId = userId;
         this.jobCategoryId = jobCategoryId;
@@ -34,10 +33,7 @@ public class JobPostDTO {
         this.process = process;
         this.date = date;
         this.status = status;
-        this.jobCategoryName = jobCategoryName;
     }
-
-
 
     public int getJobId() {
         return jobId;
@@ -125,14 +121,6 @@ public class JobPostDTO {
 
     public void setStatus(boolean status) {
         this.status = status;
-    }
-
-    public String getJobCategoryName() {
-        return jobCategoryName;
-    }
-
-    public void setJobCategoryName(String jobCategoryName) {
-        this.jobCategoryName = jobCategoryName;
     }
     
     
