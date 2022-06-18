@@ -81,13 +81,13 @@
                                 <ul class="dropdown-menu dropdown-menu-end">              
 
                                     <li>
-                                        <a class="dropdown-item" href="main?action=MyJobPost">
+                                        <a class="dropdown-item" href="main?action=MyJobPostProcess">
                                             <i class="bx bx-user me-2"></i>
                                             <span class="align-middle"> VIỆC ĐANG TUYỂN</span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="EmployerJobDone.jsp">
+                                        <a class="dropdown-item" href="main?action=MyJobPostDone">
                                             <i class="bx bx-user me-2"></i>
                                             <span class="align-middle"> VIỆC ĐÃ TUYỂN XONG</span>
                                         </a>
@@ -96,7 +96,7 @@
                                         <div class="dropdown-divider"></div>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="EmployerUpload.jsp">
+                                        <a class="dropdown-item" href="main?action=UploadJobPost">
                                             <i class="bx bx-user me-2"></i>
                                             <span class="align-middle"> ĐĂNG TUYỂN</span>
                                         </a>
