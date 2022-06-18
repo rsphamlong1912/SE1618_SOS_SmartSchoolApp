@@ -105,13 +105,13 @@
                                 <ul class="dropdown-menu dropdown-menu-end">
 
                                     <li>
-                                        <a class="dropdown-item" href="main?action=MyJobPost">
+                                        <a class="dropdown-item" href="#">
                                             <i class="bx bx-user me-2"></i>
                                             <span class="align-middle"> VIỆC ĐANG TUYỂN</span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="main?action=MyJobPost">
+                                        <a class="dropdown-item" href="main?action=MyJobPostDone">
                                             <i class="bx bx-user me-2"></i>
                                             <span class="align-middle"> VIỆC ĐÃ TUYỂN XONG</span>
                                         </a>
@@ -120,7 +120,7 @@
                                         <div class="dropdown-divider"></div>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="EmployerUpload.jsp">
+                                        <a class="dropdown-item" href="main?action=UploadJobPost">
                                             <i class="bx bx-user me-2"></i>
                                             <span class="align-middle"> ĐĂNG TUYỂN</span>
                                         </a>
@@ -214,7 +214,7 @@
                         </div>       
                     </a>
 
-                    <a class="text-decoration-none fw-bold " href="EmployerJobDone.jsp">
+                    <a class="text-decoration-none fw-bold " href="main?action=MyJobPostDone">
                         <div class="col">
                             VIỆC ĐÃ TUYỂN XONG
                         </div>
@@ -225,26 +225,26 @@
             <section style="padding: 50px 0;">
 
                 <div class="container">
-                    <c:if test="${!empty requestScope.MY_JOB_POST}">
-                        <c:forEach items="${requestScope.MY_JOB_POST}" var="myJobPost">
+                    <c:if test="${!empty requestScope.MY_JOB_POST_PROCESS}">
+                        <c:forEach items="${requestScope.MY_JOB_POST_PROCESS}" var="myJobPostProcess">
                             <div class="card w-100">
                                 <div class="card-body">
-                                    <h5 class="card-title mb-3">${myJobPost.title}</h5>
-                                    <p class="card-text"><i class="fa fa-clock" aria-hidden="true"></i> ${myJobPost.date}</p>
+                                    <h5 class="card-title mb-3">${myJobPostProcess.title}</h5>
+                                    <p class="card-text"><i class="fa fa-clock" aria-hidden="true"></i> ${myJobPostProcess.date}</p>
                                     <div class="row mb-3">
-                                        <p class="col-md-4 card-text">Lĩnh vực: ${myJobPost.jobCategoryName} </p>
-                                        <p class="col-md-4 card-text">Yêu cầu số người:  ${myJobPost.amount} </p>
+                                        <p class="col-md-4 card-text">Lĩnh vực: ${myJobPostProcess.jobCategoryName} </p>
+                                        <p class="col-md-4 card-text">Yêu cầu số người:  ${myJobPostProcess.amount} </p>
                                         <!--<p class="col-md-4 card-text">Thời gian: 1-3 tháng </p>-->
                                         <p class="col-md-4 card-text">
                                             Thời gian: 
                                             <c:choose> 
-                                                <c:when test="${myJobPost.timeJob==1}">
+                                                <c:when test="${myJobPostProcess.timeJob==1}">
                                                     Ít hơn 1 tháng
                                                 </c:when> 
-                                                <c:when test="${myJobPost.timeJob==2}">
+                                                <c:when test="${myJobPostProcess.timeJob==2}">
                                                     1 - 3 tháng
                                                 </c:when>
-                                                <c:when test="${myJobPost.timeJob==3}">
+                                                <c:when test="${myJobPostProcess.timeJob==3}">
                                                     Hơn 3 tháng
                                                 </c:when> 
                                             </c:choose>

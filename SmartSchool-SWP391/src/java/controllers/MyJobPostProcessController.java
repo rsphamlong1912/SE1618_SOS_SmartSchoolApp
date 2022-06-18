@@ -21,8 +21,8 @@ import user.UserDTO;
  *
  * @author SE150925 Nguyen Van Hai Nam
  */
-@WebServlet(name = "MyJobPostController", urlPatterns = {"/myJobPost"})
-public class MyJobPostController extends HttpServlet {
+@WebServlet(name = "MyJobPostProcessController", urlPatterns = {"/myJobPostProcess"})
+public class MyJobPostProcessController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,7 +34,7 @@ public class MyJobPostController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     private static final String ERROR = "EmployerJobProcess.jsp";
-    private static final String MY_JOB_POST_PAGE = "EmployerJobProcess.jsp";
+    private static final String MY_JOB_POST_PROCESS_PAGE = "EmployerJobProcess.jsp";
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -47,8 +47,8 @@ public class MyJobPostController extends HttpServlet {
             List<JobPostDTO> list = dao.getMyJobPost(userId);
 
             if (!list.isEmpty()) {
-                request.setAttribute("MY_JOB_POST", list);
-                url = MY_JOB_POST_PAGE;
+                request.setAttribute("MY_JOB_POST_PROCESS", list);
+                url = MY_JOB_POST_PROCESS_PAGE;
             } else {
                 request.setAttribute("ERROR", "Bạn chưa có bài đăng nào");
                 url = ERROR;

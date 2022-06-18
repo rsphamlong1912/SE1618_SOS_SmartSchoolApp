@@ -114,13 +114,13 @@
                                 <ul class="dropdown-menu dropdown-menu-end">
 
                                     <li>
-                                        <a class="dropdown-item" href="EmployerJobProcess.jsp">
+                                        <a class="dropdown-item" href="main?action=MyJobPostProcess">
                                             <i class="bx bx-user me-2"></i>
                                             <span class="align-middle"> VIỆC ĐANG TUYỂN</span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="EmployerJobDone.jsp">
+                                        <a class="dropdown-item" href="main?action=MyJobPostDone">
                                             <i class="bx bx-user me-2"></i>
                                             <span class="align-middle"> VIỆC ĐÃ TUYỂN</span>
                                         </a>
@@ -129,7 +129,7 @@
                                         <div class="dropdown-divider"></div>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="EmployerUpload.jsp">
+                                        <a class="dropdown-item" href="#">
                                             <i class="bx bx-user me-2"></i>
                                             <span class="align-middle"> ĐĂNG TUYỂN</span>
                                         </a>
@@ -236,9 +236,9 @@
                                     <label for="category" class="form-control-label fw-bold mb-2">Chọn lĩnh vực</label>
                                     <select name="jobCategoryId" class="form-select form-select-lg mb-3 required" required="true" data-rule-required="true" aria-label=".form-select-lg example">
                                         <option selected disabled value="">Chọn...</option>
-                                        <option value="1">Công nghệ</option>
-                                        <option value="2">Kinh Doanh</option>
-                                        <option value="3">Gì đó</option>
+                                        <option value="1">Lập trình</option>
+                                        <option value="2">Thiết Kế - Mỹ Thuật</option>
+                                        <option value="3">Giáo dục - Đào Tạo</option>
                                     </select>
                                     <div class="invalid-feedback fw-bold">
                                         Vui lòng chọn!
