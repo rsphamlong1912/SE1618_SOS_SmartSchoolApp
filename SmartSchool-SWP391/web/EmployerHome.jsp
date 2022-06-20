@@ -317,7 +317,7 @@
 
             <!-- ============================================-->
             <!-- <section> begin ============================-->
-            <section class="pt-5" id="moinhatduoc">
+<!--            <section class="pt-5" id="moinhatduoc">
 
                 <div class="container">
                     <div class="position-absolute start-100 bottom-0 translate-middle-x d-none d-xl-block ms-xl-n4"><img
@@ -370,11 +370,11 @@
                             </div>
                         </div>
                     </div>
-                </div><!-- end of .container-->
+                </div> end of .container
 
             </section>
-            <!-- <section> close ============================-->
-            <!-- ============================================-->
+             <section> close ============================
+             ============================================
             <section class="pt-5" id="moithatlac">
 
                 <div class="container">
@@ -429,9 +429,9 @@
                             </div>
                         </div>
                     </div>
-                </div><!-- end of .container-->
-
-            </section>
+                </div> end of .container-->
+<!--
+            </section>-->
             <!-- <section> close ============================-->
             <!-- ============================================-->
 
