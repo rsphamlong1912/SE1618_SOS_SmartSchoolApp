@@ -44,7 +44,7 @@ public class MyJobPostDoneController extends HttpServlet {
             UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
             String userId = loginUser.getUserId();
             JobPostDAO dao = new JobPostDAO();
-            List<JobPostDTO> list = dao.getMyJobPost(userId);
+            List<JobPostDTO> list = dao.getMyJobPostDone(userId);
 
             if (!list.isEmpty()) {
                 request.setAttribute("MY_JOB_POST_DONE", list);
