@@ -58,14 +58,14 @@
 
             .imgPost img {
                 width: 400px;
-                height: 400px;
+                height: 290px;
                 border: 1px solid #433535;
                 border-radius: 10px;
             }
 
             .profileUserPost img {
-                width: 234px;
-                height: 234px;
+                width: 216px;
+                height: 216px;
                 border-radius: 50%;
             }
 
@@ -233,10 +233,9 @@
                         </div>
                         <div class="info-desc"><span class="title-desc">Ngày đăng: </span>
                             <p class="content-desc">${requestScope.POST.date}</p>
-                        </div>
-                        <a href="#" class="btn btn-danger btn-sm"><i class="fa-solid fa-trash"></i> Xóa</a>
+                        </div>                      
                         <a href="#" class="btn btn-success btn-sm"><i class="fa-solid fa-pencil"></i> Sửa</a>
-
+                        <a href="#" class="btn btn-danger btn-sm"><i class="fa-solid fa-trash"></i> Xóa</a>
 
                     </div>
                     <div class="col-12 col-md-3 profileUserPost">

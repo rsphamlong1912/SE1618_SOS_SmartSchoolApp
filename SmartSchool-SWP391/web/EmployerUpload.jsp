@@ -89,7 +89,7 @@
         <main class="main" id="top">
             <!-- here  data-navbar-on-scroll="data-navbar-on-scroll"-->
             <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3 d-block gradient-custom-2">
-                <div class="container"><a class="navbar-brand" href="EmployerHome.html"><img
+                <div class="container"><a class="navbar-brand" href="EmployerHome.jsp"><img
                             src="https://hcmuni.fpt.edu.vn/landing-page/images/logo-top.png" height="46" alt="logo" /></a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
                             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span
@@ -313,7 +313,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group mb-4">
-                                    <label for="formQuestion" class="form-control-label fw-bold mb-3">Câu hỏi biểu mẫu đăng ký công
+                                    <label for="formQuestion" class="form-control-label fw-bold mb-3">Câu hỏi Form đăng ký công
                                         việc (ít nhất 1 câu hỏi)</label>
                                     <div class="row mb-3">
                                         <div class="input-group">
