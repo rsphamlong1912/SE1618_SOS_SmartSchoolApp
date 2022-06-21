@@ -123,7 +123,7 @@
                 role="button">Tìm kiếm đồ thất lạc</a>
             </div>
             <div class="col-6 text-center"> <a class="btn btn-primary btn-lg primary-btn-shadow gradient-custom-2"
-              style="box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;" href="EmployerHome.jsp"
+              style="box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;" href="FreelancerHome.jsp"
               role="button">Tìm kiếm việc Freelance</a>
           </div>
             

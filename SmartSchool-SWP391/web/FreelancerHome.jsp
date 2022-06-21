@@ -1,6 +1,6 @@
 <%-- 
-    Document   : EmployerHome
-    Created on : Jun 16, 2022, 3:14:46 PM
+    Document   : FreelancerHome
+    Created on : Jun 20, 2022, 10:32:16 PM
     Author     : TrinhNgocBao
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -45,6 +45,9 @@
         <link href="./assets/css/theme.css" rel="stylesheet" />
         <link href="./assets/css/main.css" rel="stylesheet" />
         <link href="./assets/css/style.css" rel="stylesheet" />
+        <style>
+            .row
+        </style>
     </head>
 
 
@@ -64,9 +67,9 @@
                             class="navbar-toggler-icon"> </span></button>
                     <div class="collapse navbar-collapse border-top border-lg-0 mt-4 mt-lg-0" id="navbarSupportedContent">
                         <ul class="navbar-nav ms-auto pt-2 pt-lg-0 font-base align-items-lg-center align-items-start">
-                            <li class="nav-item px-3"><a class="nav-link fw-bold" aria-current="page" href="EmployerHome.jsp">TRANG CHỦ</a>
+                            <li class="nav-item px-3"><a class="nav-link fw-bold" aria-current="page" href="">TRANG CHỦ</a>
                             </li>
-                            <li class="nav-item px-3"><a class="nav-link fw-bold" aria-current="page" href="#phanloai">DASHBOARD</a>
+                            <li class="nav-item px-3"><a class="nav-link fw-bold" aria-current="page" href="">TÌM VIỆC</a>
                             </li>
                             <li class="nav-item px-3 navbar-dropdown dropdown-user dropdown">
                                 <a class="btn btn-outline-light order-1 order-lg-0 fw-bold nav-link hide-arrow" id="nameLogin" href="" data-bs-toggle="dropdown">
@@ -83,13 +86,13 @@
                                     <li>
                                         <a class="dropdown-item" href="main?action=MyJobPostProcess">
                                             <i class="bx bx-user me-2"></i>
-                                            <span class="align-middle"> VIỆC ĐANG TUYỂN</span>
+                                            <span class="align-middle"> VIỆC ĐANG CHỜ ỨNG TUYỂN</span>
                                         </a>
                                     </li>
                                     <li>
                                         <a class="dropdown-item" href="main?action=MyJobPostDone">
                                             <i class="bx bx-user me-2"></i>
-                                            <span class="align-middle"> VIỆC ĐÃ TUYỂN XONG</span>
+                                            <span class="align-middle"> VIỆC ĐANG THỰC HIỆN</span>
                                         </a>
                                     </li>
                                     <li>
@@ -169,7 +172,7 @@
                                             <div class="dropdown-divider"></div>
                                         </li>
                                         <li>
-                                            <a class="dropdown-item" href="main?action=Logout">
+                                            <a class="dropdown-item" href="main?action=Logout&isFreelance=isFreelance">
                                                 <i class="bx bx-user me-2"></i>
                                                 <span class="align-middle"><i class="fa fa-sign-out-alt" aria-hidden="true"></i> Đăng xuất</span>
                                             </a>
@@ -187,10 +190,9 @@
                      style="background-image:url(https://daihoc.fpt.edu.vn/wp-content/uploads/2022/02/HCM-scaled.jpeg);">
                 </div>
                 <!--/.bg-holder-->
-
                 <div class="container">
 
-                    <div class="row align-items-center" style="min-height: 90vh;">
+                    <div class="row align-items-center" style="min-height: 90vh;" >
                         <h1 class="fw-bold text-light text-center hero-title"
                             style="font-family: 'Inter', sans-serif; ; color: #ffffff;
                             text-shadow: 1px 1px 1px #ffffff,
@@ -204,9 +206,16 @@
                             1px 22px 10px rgba(16,16,16,0.2),
                             1px 25px 35px rgba(16,16,16,0.2),
                             1px 30px 60px rgba(16,16,16,0.4); top: 7.5rem;">FPT
-                            SmartSchool </br>Tuyển dụng Freelancer</h1>
-                        <div class="row text-center">
-                            <div class="text-center"> <a class="btn btn-primary btn-lg primary-btn-shadow gradient-custom-2" style="box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;" href="EmployerUpload.jsp" role="button">Đăng tuyển nhân sự</a></div>
+                            SmartSchool </br>Tìm kiếm việc Freelance</h1>
+                        <div class="row text-center justify-content-center" style="--bs-gutter-x: 0rem;">
+                            <div class="col-lg-6">
+                                <div class="input-group">
+                                    <input type="text" name="" class="form-control"  placeholder="Bạn đang tìm kiếm công việc gì..." style="line-height:2.5; text-indent: 1rem; border-radius: 0.2rem 0 0 0.2rem; ">
+                                    <button type="button" class="btn btn-primary gradient-custom-2" style="width:8rem;">
+                                       Tìm kiếm
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -218,8 +227,7 @@
             <section class="pt-5 pt-md-9" id="phanloai">
 
                 <div class="container">
-                    <div class="position-absolute z-index--1 end-0 d-none d-lg-block"><img src="assets/img/category/shape.svg"
-                                                                                           style="max-width: 200px" alt="service" /></div>
+                    <div class="position-absolute z-index--1 end-0 d-none d-lg-block"><img src="assets/img/category/shape.svg" style="max-width: 200px" alt="service" /></div>
                     <div class="mb-7 text-center">
                         <h5 class="text-secondary">CATEGORY </h5>
                         <h3 class="fs-xl-10 fs-lg-8 fs-7 fw-bold text-capitalize">Các Lĩnh Vực</h3>
@@ -301,121 +309,121 @@
 
             <!-- ============================================-->
             <!-- <section> begin ============================-->
-<!--            <section class="pt-5" id="moinhatduoc">
-
-                <div class="container">
-                    <div class="position-absolute start-100 bottom-0 translate-middle-x d-none d-xl-block ms-xl-n4"><img
-                            src="assets/img/dest/shape.svg" alt="destination" /></div>
-                    <div class="mb-7 text-center">
-                        <h5 class="text-secondary">TIN MỚI NHẤT </h5>
-                        <h3 class="fs-xl-10 fs-lg-8 fs-7 fw-bold text-capitalize"><a href="list.html">Mới nhặt được</a> </h3>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-4 mb-4">
-                            <div class="card overflow-hidden shadow shadow-hover" id="hoverCard"> <img class="card-img-top" src="assets/img/dest/dest1.jpg"
-                                                                                                       alt="Rome, Italty" style="height: 18rem;" />
-                                <div class="card-body py-4 px-3">
-                                    <div class="d-flex flex-column flex-lg-row justify-content-between mb-3">
-                                        <h4 class="text-secondary fw-medium"><a class="link-901 text-decoration-none stretched-link"
-                                                                                href="#!">Title</a></h4><span class="fs-1 fw-medium">$5,42k</span>
-                                    </div>
-                                    <div class="d-flex align-items-center"> <img src="assets/img/dest/navigation.svg"
-                                                                                 style="margin-right: 14px" width="20" alt="navigation" /><span class="fs-0 fw-medium">10 Days
-                                            Trip</span></div>
+            <!--            <section class="pt-5" id="moinhatduoc">
+            
+                            <div class="container">
+                                <div class="position-absolute start-100 bottom-0 translate-middle-x d-none d-xl-block ms-xl-n4"><img
+                                        src="assets/img/dest/shape.svg" alt="destination" /></div>
+                                <div class="mb-7 text-center">
+                                    <h5 class="text-secondary">TIN MỚI NHẤT </h5>
+                                    <h3 class="fs-xl-10 fs-lg-8 fs-7 fw-bold text-capitalize"><a href="list.html">Mới nhặt được</a> </h3>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4 mb-4">
-                            <div class="card overflow-hidden shadow"> <img class="card-img-top" src="assets/img/dest/dest2.jpg"
-                                                                           alt="London, UK" style="height: 18rem;" />
-                                <div class="card-body py-4 px-3">
-                                    <div class="d-flex flex-column flex-lg-row justify-content-between mb-3">
-                                        <h4 class="text-secondary fw-medium"><a class="link-900 text-decoration-none stretched-link"
-                                                                                href="#!">Title</a></h4><span class="fs-1 fw-medium">$4.2k</span>
+                                <div class="row">
+                                    <div class="col-md-4 mb-4">
+                                        <div class="card overflow-hidden shadow shadow-hover" id="hoverCard"> <img class="card-img-top" src="assets/img/dest/dest1.jpg"
+                                                                                                                   alt="Rome, Italty" style="height: 18rem;" />
+                                            <div class="card-body py-4 px-3">
+                                                <div class="d-flex flex-column flex-lg-row justify-content-between mb-3">
+                                                    <h4 class="text-secondary fw-medium"><a class="link-901 text-decoration-none stretched-link"
+                                                                                            href="#!">Title</a></h4><span class="fs-1 fw-medium">$5,42k</span>
+                                                </div>
+                                                <div class="d-flex align-items-center"> <img src="assets/img/dest/navigation.svg"
+                                                                                             style="margin-right: 14px" width="20" alt="navigation" /><span class="fs-0 fw-medium">10 Days
+                                                        Trip</span></div>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="d-flex align-items-center"> <img src="assets/img/dest/navigation.svg"
-                                                                                 style="margin-right: 14px" width="20" alt="navigation" /><span class="fs-0 fw-medium">12 Days
-                                            Trip</span></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4 mb-4">
-                            <div class="card overflow-hidden shadow"> <img class="card-img-top" src="assets/img/dest/dest3.jpg"
-                                                                           alt="Full Europe" style="height: 18rem;" />
-                                <div class="card-body py-4 px-3">
-                                    <div class="d-flex flex-column flex-lg-row justify-content-between mb-3">
-                                        <h4 class="text-secondary fw-medium"><a class="link-900 text-decoration-none stretched-link"
-                                                                                href="#!">Title</a></h4><span class="fs-1 fw-medium">$15k</span>
+                                    <div class="col-md-4 mb-4">
+                                        <div class="card overflow-hidden shadow"> <img class="card-img-top" src="assets/img/dest/dest2.jpg"
+                                                                                       alt="London, UK" style="height: 18rem;" />
+                                            <div class="card-body py-4 px-3">
+                                                <div class="d-flex flex-column flex-lg-row justify-content-between mb-3">
+                                                    <h4 class="text-secondary fw-medium"><a class="link-900 text-decoration-none stretched-link"
+                                                                                            href="#!">Title</a></h4><span class="fs-1 fw-medium">$4.2k</span>
+                                                </div>
+                                                <div class="d-flex align-items-center"> <img src="assets/img/dest/navigation.svg"
+                                                                                             style="margin-right: 14px" width="20" alt="navigation" /><span class="fs-0 fw-medium">12 Days
+                                                        Trip</span></div>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="d-flex align-items-center"> <img src="assets/img/dest/navigation.svg"
-                                                                                 style="margin-right: 14px" width="20" alt="navigation" /><span class="fs-0 fw-medium">28 Days
-                                            Trip</span></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div> end of .container
-
-            </section>
-             <section> close ============================
-             ============================================
-            <section class="pt-5" id="moithatlac">
-
-                <div class="container">
-                    <div class="position-absolute start-100 bottom-0 translate-middle-x d-none d-xl-block ms-xl-n4"><img
-                            src="assets/img/dest/shape.svg" alt="destination" /></div>
-                    <div class="mb-7 text-center">
-                        <h5 class="text-secondary">TIN MỚI NHẤT </h5>
-                        <h3 class="fs-xl-10 fs-lg-8 fs-7 fw-bold text-capitalize"><a href="list.html">Mới thất lạc</a></h3>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-4 mb-4">
-                            <div class="card overflow-hidden shadow shadow-hover" id="hoverCard"> <img class="card-img-top"
-                                                                                                       src="https://media5.sgp1.digitaloceanspaces.com/wp-content/uploads/2021/10/13143842/1920X1080-Wallpapers.jpg"
-                                                                                                       alt="Rome, Italty" style="height: 18rem;" />
-                                <div class="card-body py-4 px-3">
-                                    <div class="d-flex flex-column flex-lg-row justify-content-between mb-3">
-                                        <h4 class="text-secondary fw-medium"><a class="link-900 text-decoration-none stretched-link"
-                                                                                href="#!">Title</a></h4><span class="fs-1 fw-medium">$5,42k</span>
+                                    <div class="col-md-4 mb-4">
+                                        <div class="card overflow-hidden shadow"> <img class="card-img-top" src="assets/img/dest/dest3.jpg"
+                                                                                       alt="Full Europe" style="height: 18rem;" />
+                                            <div class="card-body py-4 px-3">
+                                                <div class="d-flex flex-column flex-lg-row justify-content-between mb-3">
+                                                    <h4 class="text-secondary fw-medium"><a class="link-900 text-decoration-none stretched-link"
+                                                                                            href="#!">Title</a></h4><span class="fs-1 fw-medium">$15k</span>
+                                                </div>
+                                                <div class="d-flex align-items-center"> <img src="assets/img/dest/navigation.svg"
+                                                                                             style="margin-right: 14px" width="20" alt="navigation" /><span class="fs-0 fw-medium">28 Days
+                                                        Trip</span></div>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="d-flex align-items-center"> <img src="assets/img/dest/navigation.svg"
-                                                                                 style="margin-right: 14px" width="20" alt="navigation" /><span class="fs-0 fw-medium">10 Days
-                                            Trip</span></div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4 mb-4">
-                            <div class="card overflow-hidden shadow"> <img class="card-img-top" src="assets/img/dest/dest2.jpg"
-                                                                           alt="London, UK" style="height: 18rem;" />
-                                <div class="card-body py-4 px-3">
-                                    <div class="d-flex flex-column flex-lg-row justify-content-between mb-3">
-                                        <h4 class="text-secondary fw-medium"><a class="link-900 text-decoration-none stretched-link"
-                                                                                href="#!">Title</a></h4><span class="fs-1 fw-medium">$4.2k</span>
+                            </div> end of .container
+            
+                        </section>
+                         <section> close ============================
+                         ============================================
+                        <section class="pt-5" id="moithatlac">
+            
+                            <div class="container">
+                                <div class="position-absolute start-100 bottom-0 translate-middle-x d-none d-xl-block ms-xl-n4"><img
+                                        src="assets/img/dest/shape.svg" alt="destination" /></div>
+                                <div class="mb-7 text-center">
+                                    <h5 class="text-secondary">TIN MỚI NHẤT </h5>
+                                    <h3 class="fs-xl-10 fs-lg-8 fs-7 fw-bold text-capitalize"><a href="list.html">Mới thất lạc</a></h3>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4 mb-4">
+                                        <div class="card overflow-hidden shadow shadow-hover" id="hoverCard"> <img class="card-img-top"
+                                                                                                                   src="https://media5.sgp1.digitaloceanspaces.com/wp-content/uploads/2021/10/13143842/1920X1080-Wallpapers.jpg"
+                                                                                                                   alt="Rome, Italty" style="height: 18rem;" />
+                                            <div class="card-body py-4 px-3">
+                                                <div class="d-flex flex-column flex-lg-row justify-content-between mb-3">
+                                                    <h4 class="text-secondary fw-medium"><a class="link-900 text-decoration-none stretched-link"
+                                                                                            href="#!">Title</a></h4><span class="fs-1 fw-medium">$5,42k</span>
+                                                </div>
+                                                <div class="d-flex align-items-center"> <img src="assets/img/dest/navigation.svg"
+                                                                                             style="margin-right: 14px" width="20" alt="navigation" /><span class="fs-0 fw-medium">10 Days
+                                                        Trip</span></div>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="d-flex align-items-center"> <img src="assets/img/dest/navigation.svg"
-                                                                                 style="margin-right: 14px" width="20" alt="navigation" /><span class="fs-0 fw-medium">12 Days
-                                            Trip</span></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4 mb-4">
-                            <div class="card overflow-hidden shadow"> <img class="card-img-top" src="assets/img/dest/dest3.jpg"
-                                                                           alt="Full Europe" style="height: 18rem;" />
-                                <div class="card-body py-4 px-3">
-                                    <div class="d-flex flex-column flex-lg-row justify-content-between mb-3">
-                                        <h4 class="text-secondary fw-medium"><a class="link-900 text-decoration-none stretched-link"
-                                                                                href="#!">Title</a></h4><span class="fs-1 fw-medium">$15k</span>
+                                    <div class="col-md-4 mb-4">
+                                        <div class="card overflow-hidden shadow"> <img class="card-img-top" src="assets/img/dest/dest2.jpg"
+                                                                                       alt="London, UK" style="height: 18rem;" />
+                                            <div class="card-body py-4 px-3">
+                                                <div class="d-flex flex-column flex-lg-row justify-content-between mb-3">
+                                                    <h4 class="text-secondary fw-medium"><a class="link-900 text-decoration-none stretched-link"
+                                                                                            href="#!">Title</a></h4><span class="fs-1 fw-medium">$4.2k</span>
+                                                </div>
+                                                <div class="d-flex align-items-center"> <img src="assets/img/dest/navigation.svg"
+                                                                                             style="margin-right: 14px" width="20" alt="navigation" /><span class="fs-0 fw-medium">12 Days
+                                                        Trip</span></div>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="d-flex align-items-center"> <img src="assets/img/dest/navigation.svg"
-                                                                                 style="margin-right: 14px" width="20" alt="navigation" /><span class="fs-0 fw-medium">28 Days
-                                            Trip</span></div>
+                                    <div class="col-md-4 mb-4">
+                                        <div class="card overflow-hidden shadow"> <img class="card-img-top" src="assets/img/dest/dest3.jpg"
+                                                                                       alt="Full Europe" style="height: 18rem;" />
+                                            <div class="card-body py-4 px-3">
+                                                <div class="d-flex flex-column flex-lg-row justify-content-between mb-3">
+                                                    <h4 class="text-secondary fw-medium"><a class="link-900 text-decoration-none stretched-link"
+                                                                                            href="#!">Title</a></h4><span class="fs-1 fw-medium">$15k</span>
+                                                </div>
+                                                <div class="d-flex align-items-center"> <img src="assets/img/dest/navigation.svg"
+                                                                                             style="margin-right: 14px" width="20" alt="navigation" /><span class="fs-0 fw-medium">28 Days
+                                                        Trip</span></div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                </div> end of .container-->
-<!--
-            </section>-->
+                            </div> end of .container-->
+            <!--
+                        </section>-->
             <!-- <section> close ============================-->
             <!-- ============================================-->
 

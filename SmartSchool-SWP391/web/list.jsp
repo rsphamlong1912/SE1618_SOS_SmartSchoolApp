@@ -1,3 +1,10 @@
+<%-- 
+    Document   : list
+    Created on : Jun 20, 2022, 5:20:03 PM
+    Author     : TrinhNgocBao
+--%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en-US" dir="ltr">
 
@@ -163,6 +170,7 @@
           </div>
           <div class="col-lg-9 col-md-9">
             <div class="row">
+                <c:forEach begin="0" end="6">
               <div class="col-lg-4 col-md-6 mb-5">
                 <div class="card overflow-hidden shadow shadow-hover" id="hoverCard"> <img class="card-img-top"
                     src="assets/img/dest/dest1.jpg" alt="Rome, Italty" style="height: 15rem;" />
@@ -177,90 +185,7 @@
                   </div>
                 </div>
               </div>
-              <div class="col-lg-4 col-md-6 mb-5">
-                <div class="card overflow-hidden shadow"> <img class="card-img-top" src="assets/img/dest/dest2.jpg"
-                    alt="London, UK" style="height: 18rem;" />
-                  <div class="card-body py-4 px-3">
-                    <div class="d-flex flex-column flex-lg-row justify-content-between mb-3">
-                      <h4 class="text-secondary fw-medium"><a class="link-900 text-decoration-none stretched-link"
-                          href="#!">Title</a></h4><span class="fs-1 fw-medium">$4.2k</span>
-                    </div>
-                    <div class="d-flex align-items-center"> <img src="assets/img/dest/navigation.svg"
-                        style="margin-right: 14px" width="20" alt="navigation" /><span class="fs-0 fw-medium">12 Days
-                        Trip</span></div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-4 col-md-6 mb-5">
-                <div class="card overflow-hidden shadow"> <img class="card-img-top" src="assets/img/dest/dest2.jpg"
-                    alt="London, UK" style="height: 18rem;" />
-                  <div class="card-body py-4 px-3">
-                    <div class="d-flex flex-column flex-lg-row justify-content-between mb-3">
-                      <h4 class="text-secondary fw-medium"><a class="link-900 text-decoration-none stretched-link"
-                          href="#!">Title</a></h4><span class="fs-1 fw-medium">$4.2k</span>
-                    </div>
-                    <div class="d-flex align-items-center"> <img src="assets/img/dest/navigation.svg"
-                        style="margin-right: 14px" width="20" alt="navigation" /><span class="fs-0 fw-medium">12 Days
-                        Trip</span></div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-4 col-md-6 mb-5">
-                <div class="card overflow-hidden shadow"> <img class="card-img-top" src="assets/img/dest/dest2.jpg"
-                    alt="London, UK" style="height: 18rem;" />
-                  <div class="card-body py-4 px-3">
-                    <div class="d-flex flex-column flex-lg-row justify-content-between mb-3">
-                      <h4 class="text-secondary fw-medium"><a class="link-900 text-decoration-none stretched-link"
-                          href="#!">Title</a></h4><span class="fs-1 fw-medium">$4.2k</span>
-                    </div>
-                    <div class="d-flex align-items-center"> <img src="assets/img/dest/navigation.svg"
-                        style="margin-right: 14px" width="20" alt="navigation" /><span class="fs-0 fw-medium">12 Days
-                        Trip</span></div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-4 col-md-6 mb-5">
-                <div class="card overflow-hidden shadow"> <img class="card-img-top" src="assets/img/dest/dest2.jpg"
-                    alt="London, UK" style="height: 18rem;" />
-                  <div class="card-body py-4 px-3">
-                    <div class="d-flex flex-column flex-lg-row justify-content-between mb-3">
-                      <h4 class="text-secondary fw-medium"><a class="link-900 text-decoration-none stretched-link"
-                          href="#!">Title</a></h4><span class="fs-1 fw-medium">$4.2k</span>
-                    </div>
-                    <div class="d-flex align-items-center"> <img src="assets/img/dest/navigation.svg"
-                        style="margin-right: 14px" width="20" alt="navigation" /><span class="fs-0 fw-medium">12 Days
-                        Trip</span></div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-4 col-md-6 mb-5">
-                <div class="card overflow-hidden shadow"> <img class="card-img-top" src="assets/img/dest/dest2.jpg"
-                    alt="London, UK" style="height: 18rem;" />
-                  <div class="card-body py-4 px-3">
-                    <div class="d-flex flex-column flex-lg-row justify-content-between mb-3">
-                      <h4 class="text-secondary fw-medium"><a class="link-900 text-decoration-none stretched-link"
-                          href="#!">Title</a></h4><span class="fs-1 fw-medium">$4.2k</span>
-                    </div>
-                    <div class="d-flex align-items-center"> <img src="assets/img/dest/navigation.svg"
-                        style="margin-right: 14px" width="20" alt="navigation" /><span class="fs-0 fw-medium">12 Days
-                        Trip</span></div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-4 col-md-6 mb-5">
-                <div class="card overflow-hidden shadow"> <img class="card-img-top" src="assets/img/dest/dest2.jpg"
-                    alt="London, UK" style="height: 18rem;" />
-                  <div class="card-body py-4 px-3">
-                    <div class="d-flex flex-column flex-lg-row justify-content-between mb-3">
-                      <h4 class="text-secondary fw-medium"><a class="link-900 text-decoration-none stretched-link"
-                          href="#!">Title</a></h4><span class="fs-1 fw-medium">$4.2k</span>
-                    </div>
-                    <div class="d-flex align-items-center"> <img src="assets/img/dest/navigation.svg"
-                        style="margin-right: 14px" width="20" alt="navigation" /><span class="fs-0 fw-medium">12 Days
-                        Trip</span></div>
-                  </div>
-                </div>
-              </div>
+                </c:forEach>
             </div>
           </div>
     </section>
