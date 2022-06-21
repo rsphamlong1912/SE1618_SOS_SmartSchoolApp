@@ -233,7 +233,7 @@
                     <div class="row">
                         <c:forEach items="${requestScope.LISTALLCATEGORY}" var="listAllCategory">
                         <div class="col-lg-3 col-sm-6 mb-6">
-                            <div class="card service-card shadow-hover rounded-3 text-center align-items-center">
+                            <div class="card service-card shadow-hover rounded-2 text-center align-items-center">
                                 <div class="card-body p-xxl-5 p-4"> <img src="${listAllCategory.categoryImg}" width="75" alt="Service" />
                                     <h4 class="mb-3">${listAllCategory.categoryName}</h4>
 
@@ -260,7 +260,7 @@
                             src="assets/img/dest/shape.svg" alt="destination" /></div> 
                     <div class="mb-7 text-center">
                         <h5 class="text-secondary">TIN MỚI NHẤT </h5>
-                        <h3 class="fs-xl-10 fs-lg-8 fs-7 fw-bold text-capitalize"><a href="list.html">Mới thất lạc</a> </h3>
+                        <h3 class="fs-xl-10 fs-lg-8 fs-7 fw-bold text-capitalize"><a href="list.jsp">Mới thất lạc</a> </h3>
                     </div>
                     <div class="row">
                         <c:forEach items="${requestScope.LIST3LOST}" var="itemLost">
@@ -291,7 +291,7 @@
                             src="assets/img/dest/shape.svg" alt="destination" /></div>
                     <div class="mb-7 text-center">
                         <h5 class="text-secondary">TIN MỚI NHẤT </h5>
-                        <h3 class="fs-xl-10 fs-lg-8 fs-7 fw-bold text-capitalize"><a href="list.html">Mới nhặt được</a></h3>
+                        <h3 class="fs-xl-10 fs-lg-8 fs-7 fw-bold text-capitalize"><a href="list.jsp">Mới nhặt được</a></h3>
                     </div>
                     <div class="row">
                         <c:forEach items="${requestScope.LIST3FOUND}" var="itemFound">

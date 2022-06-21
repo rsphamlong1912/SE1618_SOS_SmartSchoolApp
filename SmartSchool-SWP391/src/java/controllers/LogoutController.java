@@ -22,16 +22,23 @@ public class LogoutController extends HttpServlet {
 
     private static final String ERROR = "login.jsp";
     private static final String SUCCESS = "login.jsp";
+    private static final String FREELANCE_SUCCESS = "FreelancerLogin.jsp";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
+            String isFreelance = request.getParameter("isFreelance");
             HttpSession session = request.getSession(false);
             if (session != null) {
-                session.invalidate();
-                url = SUCCESS;
+                if ("isFreelance".equals(isFreelance)) {
+                    session.invalidate();
+                    url = FREELANCE_SUCCESS;
+                } else {
+                    session.invalidate();
+                    url = SUCCESS;
+                }
             }
         } catch (Exception e) {
             log("Error at LogoutController:" + e.toString());
