@@ -77,6 +77,11 @@
             .right .btn {
                 width: 150px;
             }
+            .form-group small {
+                color: #F21F26;
+                padding-left: 10px;
+                font-weight: 700 !important;
+            }
         </style>
     </head>
 

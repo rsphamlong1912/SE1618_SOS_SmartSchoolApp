@@ -223,7 +223,7 @@
                             <div class="form-outline mb-3">
                                 <label for="feedback">Nội dung</label>
                                 <textarea class="form-control" id="feedback" rows="5" name="feedback"></textarea>
-                                <small></small>  
+                                <small class="fw-bold"></small>  
                             </div>
                             <h6 style="color: green; display: inline-block">${requestScope.MESSAGE}</h6>
                             <div class="form-group col-8 col-md-6">

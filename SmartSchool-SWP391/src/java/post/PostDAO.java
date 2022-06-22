@@ -24,11 +24,11 @@ import java.util.logging.Logger;
  */
 public class PostDAO {
 
-    private static final String SEARCH_BY_TYPE = "SELECT * FROM tblPost WHERE type like ? AND postStatus = 'true'";
-    private static final String SEARCH_BY_TITLE = "SELECT * FROM tblPost WHERE title like ? AND postStatus = 'true'";
+    private static final String SEARCH_BY_TYPE = "SELECT * FROM tblPost WHERE type like ? AND postStatus = 'true' ORDER BY postId DESC";
+    private static final String SEARCH_BY_TITLE = "SELECT * FROM tblPost WHERE title like ? AND postStatus = 'true' ORDER BY postId DESC";
     private static final String SEARCH_3NEWLOST = "SELECT TOP(3) * FROM tblPost WHERE type=0 AND postStatus = 'true' ORDER BY postId DESC";
     private static final String SEARCH_3NEWFOUND = "SELECT TOP(3) * FROM tblPost WHERE type=1 AND postStatus = 'true' ORDER BY postId DESC";
-    private static final String LIST_ALL = "SELECT * FROM tblPost WHERE postStatus='true'";
+    private static final String LIST_ALL = "SELECT * FROM tblPost WHERE postStatus='true' ORDER BY postId DESC";
     private static final String CREATE = "INSERT INTO tblPost(userId, categoryId, postImg, description, date, type, title, postStatus) VALUES(?,?,?,?,?,?,?,?)";
     private static final String UPDATE = "UPDATE tblPost SET postImg=?, description=?, type=?, title=?, postStatus=? WHERE postId=?";
     private static final String DELETE = "UPDATE tblPost SET postStatus='false' WHERE postId=?";
@@ -119,7 +119,6 @@ public class PostDAO {
         ResultSet rs = null;
         try {
             //Creating and executing JDBC statements
-
             con = DBUtils.getConnection();
             stm = con.createStatement();
             rs = stm.executeQuery(LIST_ALL);
