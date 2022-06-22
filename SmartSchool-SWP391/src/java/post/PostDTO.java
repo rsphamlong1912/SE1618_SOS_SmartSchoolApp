@@ -17,7 +17,7 @@ public class PostDTO {
     private int categoryId;
     private byte[] postImg;
     private String description;
-    private Date date;
+    private String date;
     private boolean type;
     private String title;
     private String postStatus;
@@ -28,7 +28,7 @@ public class PostDTO {
     public PostDTO() {
     }
 
-    public PostDTO(int postId, String userId, int categoryId, byte[] postImg, String description, Date date, boolean type, String title, String postStatus, String categoryName) {
+    public PostDTO(int postId, String userId, int categoryId, byte[] postImg, String description, String date, boolean type, String title, String postStatus, String categoryName) {
         this.postId = postId;
         this.userId = userId;
         this.categoryId = categoryId;
@@ -95,11 +95,11 @@ public class PostDTO {
         this.description = description;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 

@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 import utills.DBUtils;
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -38,6 +39,30 @@ public class PostDAO {
     private static final String READ = "SELECT p.postId,p.userId,p.categoryId,p.postImg,p.description,p.date,p.type,p.title,p.postStatus, c.categoryName FROM tblPost as p inner join tblCategory as c \n"
             + "ON p.categoryId = c.categoryId WHERE p.postId  = ?";
 
+    public static int takeMinutes() {
+        long millis = System.currentTimeMillis();
+        long minutes = TimeUnit.MILLISECONDS.toMinutes(millis);
+        int minutesInt = (int) minutes;
+        return minutesInt;
+    }
+
+    public static String checkTime(int minutes) {
+        String time = null;
+        long millis = System.currentTimeMillis();
+        int minutesNow = (int) TimeUnit.MILLISECONDS.toMinutes(millis);
+        int minutesDistance = minutesNow - minutes;
+        if (minutesDistance < 60) {
+            return time = Integer.toString(minutesDistance) + " phút trước";
+        } else if (minutesDistance < 1440 && minutesDistance >= 60) {
+            return time = Integer.toString(minutesDistance / 60) + " giờ trước";
+        } else if (minutesDistance < 43200 && minutesDistance >= 1440) {
+            return time = Integer.toString(minutesDistance / 1440) + " ngày trước";
+        } else if (minutesDistance >= 43200) {
+            return time = Integer.toString(minutesDistance / 43200) + " tháng trước";
+        }
+        return null;
+    }
+
     //Upload new post
     public void uploadPost(PostDTO post) throws SQLException {
         Connection con = null;
@@ -49,10 +74,8 @@ public class PostDAO {
             ptm.setInt(2, post.getCategoryId());
             ptm.setBytes(3, post.getPostImg());
             ptm.setString(4, post.getDescription());
-            Date date = new Date();
-            SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy hh:mm");
-            String newDate = df.format(date);
-            ptm.setString(5, newDate);
+            int date = takeMinutes();
+            ptm.setInt(5, date);
             ptm.setBoolean(6, post.getType());
             ptm.setString(7, post.getTitle());
             ptm.setString(8, post.getPostStatus());
@@ -87,7 +110,9 @@ public class PostDAO {
                     post.setCategoryId(rs.getInt("categoryId"));
                     post.setPostImg(rs.getBytes("postImg"));
                     post.setDescription(rs.getString("description"));
-                    post.setDate(rs.getDate("date"));
+                    int date = rs.getInt("date");
+                    String newDate = checkTime(date);
+                    post.setDate(newDate);
                     post.setType(rs.getBoolean("type"));
                     post.setTitle(rs.getString("title"));
                     post.setPostStatus(rs.getString("postStatus"));
@@ -130,7 +155,9 @@ public class PostDAO {
                 post.setCategoryId(rs.getInt("categoryId"));
                 post.setPostImg(rs.getBytes("postImg"));
                 post.setDescription(rs.getString("description"));
-                post.setDate(rs.getDate("date"));
+                int date = rs.getInt("date");
+                String newDate = checkTime(date);
+                post.setDate(newDate);
                 post.setType(rs.getBoolean("type"));
                 post.setTitle(rs.getString("title"));
                 post.setPostStatus(rs.getString("postStatus"));
@@ -182,7 +209,9 @@ public class PostDAO {
                     post.setCategoryId(rs.getInt("categoryId"));
                     post.setPostImg(rs.getBytes("postImg"));
                     post.setDescription(rs.getString("description"));
-                    post.setDate(rs.getDate("date"));
+                    int date = rs.getInt("date");
+                    String newDate = checkTime(date);
+                    post.setDate(newDate);
                     post.setType(rs.getBoolean("type"));
                     post.setTitle(rs.getString("title"));
                     post.setPostStatus(rs.getString("postStatus"));
@@ -223,7 +252,9 @@ public class PostDAO {
                     post.setCategoryId(rs.getInt("categoryId"));
                     post.setPostImg(rs.getBytes("postImg"));
                     post.setDescription(rs.getString("description"));
-                    post.setDate(rs.getDate("date"));
+                    int date = rs.getInt("date");
+                    String newDate = checkTime(date);
+                    post.setDate(newDate);
                     post.setType(rs.getBoolean("type"));
                     post.setTitle(rs.getString("title"));
                     post.setPostStatus(rs.getString("postStatus"));
@@ -263,7 +294,9 @@ public class PostDAO {
                     post.setCategoryId(rs.getInt("categoryId"));
                     post.setPostImg(rs.getBytes("postImg"));
                     post.setDescription(rs.getString("description"));
-                    post.setDate(rs.getDate("date"));
+                    int date = rs.getInt("date");
+                    String newDate = checkTime(date);
+                    post.setDate(newDate);
                     post.setType(rs.getBoolean("type"));
                     post.setTitle(rs.getString("title"));
                     post.setPostStatus(rs.getString("postStatus"));
@@ -334,7 +367,9 @@ public class PostDAO {
                     post.setCategoryId(rs.getInt("categoryId"));
                     post.setPostImg(rs.getBytes("postImg"));
                     post.setDescription(rs.getString("description"));
-                    post.setDate(rs.getDate("date"));
+                    int date = rs.getInt("date");
+                    String newDate = checkTime(date);
+                    post.setDate(newDate);
                     post.setType(rs.getBoolean("type"));
                     post.setTitle(rs.getString("title"));
                     post.setPostStatus(rs.getString("postStatus"));
@@ -426,7 +461,9 @@ public class PostDAO {
                     post.setCategoryId(rs.getInt("categoryId"));
                     post.setPostImg(rs.getBytes("postImg"));
                     post.setDescription(rs.getString("description"));
-                    post.setDate(rs.getDate("date"));
+                    int date = rs.getInt("date");
+                    String newDate = checkTime(date);
+                    post.setDate(newDate);
                     post.setType(rs.getBoolean("type"));
                     post.setTitle(rs.getString("title"));
                     post.setPostStatus(rs.getString("postStatus"));
