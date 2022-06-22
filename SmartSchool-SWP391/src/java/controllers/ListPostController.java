@@ -5,45 +5,40 @@
  */
 package controllers;
 
+import category.CategoryDAO;
+import category.CategoryDTO;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import post.PostDAO;
+import post.PostDTO;
 
 /**
  *
  * @author TrinhNgocBao
  */
-@WebServlet(name = "LogoutController", urlPatterns = {"/logout"})
-public class LogoutController extends HttpServlet {
-
-    private static final String ERROR = "login.jsp";
-    private static final String SUCCESS = "login.jsp";
-    private static final String FREELANCE_SUCCESS = "FreelancerLogin.jsp";
+@WebServlet(name = "ListPostController", urlPatterns = {"/listAll"})
+public class ListPostController extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = ERROR;
-        try {
-            String isFreelance = request.getParameter("isFreelance");
-            HttpSession session = request.getSession(false);
-            if (session != null) {
-                if ("isFreelance".equals(isFreelance)) {
-                    session.invalidate();
-                    url = FREELANCE_SUCCESS;
-                } else {
-                    session.invalidate();
-                    url = SUCCESS;
-                }
-            }
+         try {
+            PostDAO pdao = new PostDAO();
+            CategoryDAO cdao = new CategoryDAO();
+            List<PostDTO> listAll = pdao.getAll();
+            List<CategoryDTO> listAllCategory = cdao.getAllCategory();
+
+            request.setAttribute("LISTPOST", listAll);
+            request.setAttribute("LISTALLCATEGORY", listAllCategory);
         } catch (Exception e) {
-            log("Error at LogoutController:" + e.toString());
         } finally {
-            response.sendRedirect(url);
+            request.getRequestDispatcher("list.jsp").forward(request, response);
         }
     }
 

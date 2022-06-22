@@ -65,18 +65,16 @@
                             class="navbar-toggler-icon"> </span></button>
                     <div class="collapse navbar-collapse border-top border-lg-0 mt-4 mt-lg-0" id="navbarSupportedContent">
                         <ul class="navbar-nav ms-auto pt-2 pt-lg-0 font-base align-items-lg-center align-items-start">
-                            <li class="nav-item px-3"><a class="nav-link fw-bold" aria-current="page" href="lostAndfoundhome">Trang chủ</a>
+                            <li class="nav-item px-3"><a class="nav-link fw-bold" aria-current="page" href="lostAndfoundhome">TRANG CHỦ</a>
                             </li>
-                            <li class="nav-item px-3"><a class="nav-link fw-bold" aria-current="page" href="#phanloai">Phân loại</a>
+                            <li class="nav-item px-3"><a class="nav-link fw-bold" aria-current="page" href="#phanloai">PHÂN LOẠI</a>
                             </li>
-                            <li class="nav-item px-3"><a class="nav-link fw-bold" aria-current="page" href="#moinhatduoc">Mới nhặt
-                                    được</a></li>
-                            <li class="nav-item px-3"><a class="nav-link fw-bold" aria-current="page" href="#moithatlac">Mới thất
-                                    lạc</a></li>
-                            <li class="nav-item px-3"><a class="nav-link fw-bold" aria-current="page" href="#timkiem">Tìm kiếm</a></li>
+                            <li class="nav-item px-3"><a class="nav-link fw-bold" aria-current="page" href="#moinhatduoc">MỚI NHẶT ĐƯỢC</a></li>
+                            <li class="nav-item px-3"><a class="nav-link fw-bold" aria-current="page" href="#moithatlac">MỚI THẤT LẠC</a></li>
+                            <li class="nav-item px-3"><a class="nav-link fw-bold" aria-current="page" href="/listAll">TÌM KIẾM</a></li>
                                 <c:if test="${empty sessionScope.LOGIN_USER}">
-                                <li class="nav-item px-3"><a class="btn btn-outline-light order-1 order-lg-0 fw-bold" href="login.jsp">Đăng nhập /
-                                        Đăng ký</a></li>
+                                <li class="nav-item px-3"><a class="btn btn-outline-light order-1 order-lg-0 fw-bold" href="login.jsp">ĐĂNG NHẬP /
+                                        ĐĂNG KÝ</a></li>
                                     </c:if>
                                     <c:if test="${!empty sessionScope.LOGIN_USER}">
                                 <!-- User -->
@@ -162,34 +160,18 @@
                 <div class="container">
 
                     <div class="row align-items-center">
-                        <!-- <div class="col-md-5 col-lg-6 order-0 order-md-1 text-end"><img class="pt-7 pt-md-0 hero-img" src="assets/img/hero/hero-img.png" alt="hero-header" /></div>
-                          <div class="col-md-7 col-lg-6 text-md-start text-center py-6">
-                            <h4 class="fw-bold text-danger mb-3">Best Destinations around the world</h4>
-                            <h1 class="hero-title">Travel, enjoy and live a new and full life</h1>
-                            <p class="mb-4 fw-medium">Built Wicket longer admire do barton vanity itself do in it.<br class="d-none d-xl-block" />Preferred to sportsmen it engrossed listening. Park gate<br class="d-none d-xl-block" />sell they west hard for the.</p>
-                            <div class="text-center text-md-start"> <a class="btn btn-primary btn-lg me-md-4 mb-3 mb-md-0 border-0 primary-btn-shadow" href="#!" role="button">Find out more</a>
-                              <div class="w-100 d-block d-md-none"></div><a href="#!" role="button" data-bs-toggle="modal" data-bs-target="#popupVideo"><span class="btn btn-danger round-btn-lg rounded-circle me-3 danger-btn-shadow"> <img src="assets/img/hero/play.svg" width="15" alt="paly"/></span></a><span class="fw-medium">Play Demo</span>
-                              <div class="modal fade" id="popupVideo" tabindex="-1" aria-labelledby="popupVideo" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered modal-lg">
-                                  <div class="modal-content">
-                                    <iframe class="rounded" style="width:100%;max-height:500px;" height="500px" src="https://www.youtube.com/embed/_lhdhL4UDIo" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen"></iframe>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div> -->
                         <h1 class="fw-bold text-light mb-3 text-center hero-title"
                             style="font-family: 'Inter', sans-serif; text-shadow: 1px 1px 1px #ffffff, 
-                                                                    1px 2px 1px #919191, 
-                                                                    1px 3px 1px #919191, 
-                                                                    1px 4px 1px #919191, 
-                                                                    1px 5px 1px #919191, 
-                                                                    1px 6px 1px #919191, 
-                                                                    1px 7px 1px #919191, 
-                                                                    1px 10px 6px rgb(16 16 16 / 40%), 
-                                                                    1px 2px 10px rgb(16 16 16 / 20%), 
-                                                                    1px 25px 35px rgb(16 16 16 / 20%), 
-                                                                    1px 30px 60px rgb(16 16 16 / 40%); top: 7.5rem;">FPT
+                            1px 2px 1px #919191, 
+                            1px 3px 1px #919191, 
+                            1px 4px 1px #919191, 
+                            1px 5px 1px #919191, 
+                            1px 6px 1px #919191, 
+                            1px 7px 1px #919191, 
+                            1px 10px 6px rgb(16 16 16 / 40%), 
+                            1px 2px 10px rgb(16 16 16 / 20%), 
+                            1px 25px 35px rgb(16 16 16 / 20%), 
+                            1px 30px 60px rgb(16 16 16 / 40%); top: 7.5rem;">FPT
                             University </br>Tìm kiếm đồ thất lạc</h1>
                         <div class="s131">
 
@@ -232,14 +214,14 @@
                     </div>
                     <div class="row">
                         <c:forEach items="${requestScope.LISTALLCATEGORY}" var="listAllCategory">
-                        <div class="col-lg-3 col-sm-6 mb-6">
-                            <div class="card service-card shadow-hover rounded-3 text-center align-items-center">
-                                <div class="card-body p-xxl-5 p-4"> <img src="${listAllCategory.categoryImg}" width="75" alt="Service" />
-                                    <h4 class="mb-3">${listAllCategory.categoryName}</h4>
+                            <div class="col-lg-3 col-sm-6 mb-6">
+                                <div class="card service-card shadow-hover rounded-2 text-center align-items-center">
+                                    <div class="card-body p-xxl-5 p-4"> <img src="${listAllCategory.categoryImg}" width="75" alt="Service" />
+                                        <h4 class="mb-3">${listAllCategory.categoryName}</h4>
 
+                                    </div>
                                 </div>
                             </div>
-                        </div>
                         </c:forEach>                       
                     </div>
                 </div><!-- end of .container-->
@@ -260,23 +242,23 @@
                             src="assets/img/dest/shape.svg" alt="destination" /></div> 
                     <div class="mb-7 text-center">
                         <h5 class="text-secondary">TIN MỚI NHẤT </h5>
-                        <h3 class="fs-xl-10 fs-lg-8 fs-7 fw-bold text-capitalize"><a href="list.html">Mới thất lạc</a> </h3>
+                        <h3 class="fs-xl-10 fs-lg-8 fs-7 fw-bold text-capitalize"><a href="list.jsp">Mới thất lạc</a> </h3>
                     </div>
                     <div class="row">
                         <c:forEach items="${requestScope.LIST3LOST}" var="itemLost">
-                        <div class="col-md-4 mb-4">
-                            <div class="card overflow-hidden shadow shadow-hover" id="hoverCard"> <img class="card-img-top" src="${pageContext.servletContext.contextPath}/item?postId=${itemLost.postId}"
-                                                                                                       alt="Lost Item" style="height: 18rem;" />
-                                <div class="card-body py-4 px-3">
-                                    <div class="d-flex flex-column flex-lg-row justify-content-between mb-3">
-                                        <h4 class="text-secondary fw-medium"><a class="link-901 text-decoration-none stretched-link"
-                                                                                href="#!">${itemLost.title}</a></h4><span class="fs-1 fw-medium">${itemLost.postId}</span>
+                            <div class="col-md-4 mb-4">
+                                <div class="card overflow-hidden shadow shadow-hover" id="hoverCard"> <img class="card-img-top" src="${pageContext.servletContext.contextPath}/item?postId=${itemLost.postId}"
+                                                                                                           alt="Lost Item" style="height: 18rem;" />
+                                    <div class="card-body py-4 px-3">
+                                        <div class="d-flex flex-column flex-lg-row justify-content-between mb-3">
+                                            <h4 class="text-secondary fw-medium"><a class="link-901 text-decoration-none stretched-link"
+                                                                                    href="#!">${itemLost.title}</a></h4><span class="fs-1 fw-medium">${itemLost.postId}</span>
+                                        </div>
+                                        <div class="d-flex align-items-center"> <img src="assets/img/dest/clock.svg"
+                                                                                     style="margin-right: 14px" width="20" alt="navigation" /><span class="fs-0 fw-medium">${itemLost.date}</span></div>
                                     </div>
-                                    <div class="d-flex align-items-center"> <img src="assets/img/dest/clock.svg"
-                                                                                 style="margin-right: 14px" width="20" alt="navigation" /><span class="fs-0 fw-medium">${itemLost.date}</span></div>
                                 </div>
                             </div>
-                        </div>
                         </c:forEach>
                     </div>
                 </div><!-- end of .container-->
@@ -291,23 +273,23 @@
                             src="assets/img/dest/shape.svg" alt="destination" /></div>
                     <div class="mb-7 text-center">
                         <h5 class="text-secondary">TIN MỚI NHẤT </h5>
-                        <h3 class="fs-xl-10 fs-lg-8 fs-7 fw-bold text-capitalize"><a href="list.html">Mới nhặt được</a></h3>
+                        <h3 class="fs-xl-10 fs-lg-8 fs-7 fw-bold text-capitalize"><a href="list.jsp">Mới nhặt được</a></h3>
                     </div>
                     <div class="row">
                         <c:forEach items="${requestScope.LIST3FOUND}" var="itemFound">
-                        <div class="col-md-4 mb-4">
-                            <div class="card overflow-hidden shadow shadow-hover" id="hoverCard"> <img class="card-img-top" src="${pageContext.servletContext.contextPath}/item?postId=${itemFound.postId}"
-                                                                                                       alt="Found Item" style="height: 18rem;" />
-                                <div class="card-body py-4 px-3">
-                                    <div class="d-flex flex-column flex-lg-row justify-content-between mb-3">
-                                        <h4 class="text-secondary fw-medium"><a class="link-901 text-decoration-none stretched-link"
-                                                                                href="#!">${itemFound.title}</a></h4><span class="fs-1 fw-medium">${itemFound.postId}</span>
+                            <div class="col-md-4 mb-4">
+                                <div class="card overflow-hidden shadow shadow-hover" id="hoverCard"> <img class="card-img-top" src="${pageContext.servletContext.contextPath}/item?postId=${itemFound.postId}"
+                                                                                                           alt="Found Item" style="height: 18rem;" />
+                                    <div class="card-body py-4 px-3">
+                                        <div class="d-flex flex-column flex-lg-row justify-content-between mb-3">
+                                            <h4 class="text-secondary fw-medium"><a class="link-901 text-decoration-none stretched-link"
+                                                                                    href="#!">${itemFound.title}</a></h4><span class="fs-1 fw-medium">${itemFound.postId}</span>
+                                        </div>
+                                        <div class="d-flex align-items-center"> <img src="assets/img/dest/clock.svg"
+                                                                                     style="margin-right: 14px" width="20" alt="navigation" /><span class="fs-0 fw-medium">${itemFound.date}</span></div>
                                     </div>
-                                    <div class="d-flex align-items-center"> <img src="assets/img/dest/clock.svg"
-                                                                                 style="margin-right: 14px" width="20" alt="navigation" /><span class="fs-0 fw-medium">${itemFound.date}</span></div>
                                 </div>
                             </div>
-                        </div>
                         </c:forEach>
                     </div>
                 </div><!-- end of .container-->

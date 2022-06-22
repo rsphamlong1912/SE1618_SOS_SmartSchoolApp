@@ -35,7 +35,9 @@ public class LoginController extends HttpServlet {
     private static final String AD = "AD";
     private static final String ADMIN_PAGE = "admin.jsp";
     private static final String US = "US";
-    private static final String HOME_PAGE = "lostAndfoundhome";
+    private static final String LOSTANDFOUNDHOME_PAGE = "lostAndfoundhome";
+    private static final String EMPLOYERHOME_PAGE = "EmployerHome.jsp";
+    private static final String FREELANCERHOME_PAGE = "FreelancerHome.jsp";
     private static final String EM = "EM";
     private static final String EMPLOYER_PAGE = "employer.jsp";
 
@@ -44,6 +46,7 @@ public class LoginController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
+            String isFreelance = request.getParameter("isFreelance");
             String userID = request.getParameter("userID");
             String password = request.getParameter("password");
             HttpSession session = request.getSession();
@@ -57,14 +60,28 @@ public class LoginController extends HttpServlet {
                 session.setAttribute("LOGIN_USER", user);
                 if (null == roleID) {
                     request.setAttribute("ERROR", "Your role is not support!");
-                } else //phan quyen
-                {
+                } else if ("isFreelance".equals(isFreelance)) {
                     switch (roleID) {
                         case AD:
-                            url = HOME_PAGE;
+                            url = FREELANCERHOME_PAGE;
+                            break;
+                        case EM:
+                            url = EMPLOYERHOME_PAGE;
                             break;
                         case US:
-                            url = HOME_PAGE;
+                            url = FREELANCERHOME_PAGE;
+                            break;
+                        default:
+                            request.setAttribute("ERROR", "Your role is not support!");
+                            break;
+                    }
+                } else {
+                    switch (roleID) {
+                        case AD:
+                            url = LOSTANDFOUNDHOME_PAGE;
+                            break;
+                        case US:
+                            url = LOSTANDFOUNDHOME_PAGE;
                             break;
                         default:
                             request.setAttribute("ERROR", "Your role is not support!");
