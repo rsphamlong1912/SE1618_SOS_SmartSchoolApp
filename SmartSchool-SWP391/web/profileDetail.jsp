@@ -83,6 +83,11 @@
             .right .btn {
                 width: 150px;
             }
+            .form-group small {
+                color: #F21F26;
+                padding-left: 10px;
+                font-weight: 700 !important;
+            }
         </style>
     </head>
 
@@ -243,16 +248,19 @@
                                 <div class="form-group col-12 col-md-6">
                                     <label for="name">Họ và tên</label>
                                     <input type="text" name="fullname" class="form-control" id="name" placeholder="" value="${sessionScope.LOGIN_USER.fullname}">
+                                    <small></small>
                                 </div>
                                 <div class="form-group col-12 col-md-6">
                                     <label for="phone">Số điện thoại</label>
                                     <input type="text" name="phone" class="form-control" id="phone" placeholder="" value="${sessionScope.LOGIN_USER.phone}">
+                                    <small></small>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="form-group col-12 col-md-6">
                                     <label for="email">Email liên lạc</label>
                                     <input type="email" name="email" class="form-control" id="email" placeholder="" value="${sessionScope.LOGIN_USER.email}">
+                                    <small></small>
                                 </div>
                             </div>
                             <div class="row">
