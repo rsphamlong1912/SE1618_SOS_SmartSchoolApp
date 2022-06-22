@@ -26,7 +26,7 @@ import java.util.logging.Logger;
 public class PostDAO {
 
     private static final String SEARCH_BY_TYPE = "SELECT * FROM tblPost WHERE type like ? AND postStatus = 'true' ORDER BY postId DESC";
-    private static final String SEARCH_BY_TITLE = "SELECT * FROM tblPost WHERE title like ? AND postStatus = 'true' ORDER BY postId DESC";
+    private static final String SEARCH_BY_TITLE = "SELECT * FROM tblPost WHERE  (dbo.removeMark(title) LIKE ? OR title LIKE ?)  AND postStatus = 'true' ORDER BY postId DESC";
     private static final String SEARCH_3NEWLOST = "SELECT TOP(3) * FROM tblPost WHERE type=0 AND postStatus = 'true' ORDER BY postId DESC";
     private static final String SEARCH_3NEWFOUND = "SELECT TOP(3) * FROM tblPost WHERE type=1 AND postStatus = 'true' ORDER BY postId DESC";
     private static final String LIST_ALL = "SELECT * FROM tblPost WHERE postStatus='true' ORDER BY postId DESC";
@@ -244,6 +244,7 @@ public class PostDAO {
             if (conn != null) {
                 ptm = conn.prepareStatement(SEARCH_BY_TITLE);
                 ptm.setString(1, "%" + search + "%");
+                ptm.setString(2, "%" + search + "%");
                 rs = ptm.executeQuery();
                 while (rs.next()) {
                     PostDTO post = new PostDTO();
