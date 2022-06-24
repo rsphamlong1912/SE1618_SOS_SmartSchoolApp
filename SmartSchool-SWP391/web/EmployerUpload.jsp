@@ -75,6 +75,11 @@
             .pr-10 {
                 padding-right: 1.875rem!important;
             }
+            .form-group small {
+                color: #F21F26;
+                padding-left: 10px;
+                font-weight: 700 !important;
+            }
         </style>
     </head>
 
@@ -218,7 +223,8 @@
             <section class="bg-gray-75 pt-10 pb-8">
                 <div class="container" style="max-width: 771px;">
                     <div class="card card-shadow">
-                        <form action="main" class="needs-validation" novalidate>
+<!--                        <form action="main" class="needs-validation" novalidate>-->
+                            <form onsubmit="return validateEmployerUpload()" action="main" method="POST" class="needs-validation" novalidate>
                             <div class="card-header bg-white pt-4 pb-4 pl-10 pr-10 border-bottom d-md-flex">
                                 <h3 class="">ĐĂNG VIỆC FREELANCE</h3>                               
                             </div>
@@ -226,15 +232,16 @@
                             <div class="card-body pl-10 pr-10">
                                 <div class="form-group mb-4">
                                     <label for="title" class="form-control-label fw-bold mb-2">Nhập tên công việc</label>
-                                    <input type="text" name="title" value="" id="title" data-validate-hide-message="1"
+                                    <input type="text" name="title" value="" id="titleJob" data-validate-hide-message="1"
                                            class="form-control required" required="true" data-rule-required="true" data-rule-maxlength="255">
-                                    <div class="invalid-feedback fw-bold">
+<!--                                    <div class="invalid-feedback fw-bold">
                                         Vui lòng nhập!
-                                    </div>
+                                    </div>-->
+                                    <small></small>
                                 </div>
                                 <div class="form-group mb-4">
                                     <label for="category" class="form-control-label fw-bold mb-2">Chọn lĩnh vực</label>
-                                    <select name="jobCategoryId" class="form-select form-select-lg mb-3 required" required="true" data-rule-required="true" aria-label=".form-select-lg example">
+                                    <select name="jobCategoryId" id="categoryJob" class="form-select form-select-lg mb-3 required" required="true" data-rule-required="true" aria-label=".form-select-lg example">
                                         <option selected disabled value="">Chọn...</option>
                                         <option value="1">Lập trình</option>
                                         <option value="2">Thiết Kế - Mỹ Thuật</option>
@@ -252,37 +259,42 @@
                                             • Mô tả cụ thể yêu cầu cho công việc mà bạn cần làm<br>
                                             • Các thông tin khác liên quan</span>
                                     </p>
+                                    
                                     <div class="form-floating">
                                         <textarea class="form-control required" required="true" data-rule-required="true" name="description" placeholder=" " id="floatingTextarea2"
                                                   style="height: 150px"></textarea>
+                                                  <small></small>
                                         <label for="floatingTextarea2">Nhập mô tả</label>
                                     </div>
-                                    <div class="invalid-feedback fw-bold">
+<!--                                    <div class="invalid-feedback fw-bold">
                                         Vui lòng nhập!
-                                    </div>
+                                    </div>-->
+                                    
                                 </div>
                                 <div class="form-group mb-4 w-50">
                                     <label for="salary" class="form-control-label fw-bold mb-2">Mức lương theo giờ (VNĐ/giờ)</label>
-                                    <input type="number" name="salary" value="" id="salary" data-validate-hide-message="1"
+                                    <input type="number" name="salary" value="100000" id="salary" data-validate-hide-message="1"
                                            class="form-control required" required="true" data-rule-required="true" data-rule-maxlength="255">
                                     <div class="invalid-feedback fw-bold">
                                         Vui lòng nhập!
                                     </div>
+                                    <small></small>
                                 </div>
                                 <div class="form-group mb-4 w-50">
                                     <label for="amount" class="form-control-label fw-bold mb-2">Số người cần tuyển</label>
-                                    <input type="number" name="amount" value="" id="amount" data-validate-hide-message="1"
+                                    <input type="number" name="amount" value="3" id="amount" data-validate-hide-message="1"
                                            class="form-control required" required="true" data-rule-required="true" data-rule-maxlength="255">
                                     <div class="invalid-feedback fw-bold">
                                         Vui lòng nhập!
                                     </div>
+                                    <small></small>
                                 </div>
                                 <div class="form-group mb-3">
                                     <label class="form-control-label fw-bold mb-3">Công việc của bạn dự kiến kéo dài bao lâu</label>
                                     <div class="row">
                                         <div class="col-lg-4 mb-3">
                                             <span class="w-100">
-                                                <input type="radio" class="form-check-input required" required="true" data-rule-required="true" name="timeJob" value="1" id="timeJob_1" data-validate-hide-message="1">
+                                                <input type="radio" class="form-check-input required" required="true" data-rule-required="true" name="timeJob" value="1" id="timeJob_1" data-validate-hide-message="1" checked="checked">
                                                 <label for="timeJobs_1">
                                                     <span class="inside pt-2 pb-2">
                                                         <span class="d-block fw-500"> Ít hơn 1 tháng</span>
@@ -317,13 +329,17 @@
                                         việc (ít nhất 1 câu hỏi)</label>
                                     <div class="row mb-3">
                                         <div class="input-group">
-                                            <input type="text" name="question" class="form-control m-input" required>
+                                            <input type="text" name="question" class="form-control m-input question" required>
                                             <div class="input-group-prepend">
                                                 <button class="btn btn-danger" id="DeleteRowDisable" type="button">
                                                     <i class="fa fa-trash"></i>
                                                 </button>
-                                            </div>
+                                            </div> 
+                                            <br>
+                                            <small></small>
+                                            
                                         </div>
+                                        
                                     </div>
 
                                     <div id="newinput"></div>
@@ -434,6 +450,7 @@
         <script src="vendors/fontawesome/all.min.js"></script>
         <script src="assets/js/theme.js"></script>
         <script src="assets/js/extention/choices.js"></script>
+        <script src="assets/js/extention/validation.js"></script>
         <script>
             const choices = new Choices('[data-trigger]',
                     {
@@ -464,7 +481,7 @@
             $("#rowAdder").click(function () {
                 newRowAdd =
                         '<div class="row mb-3"> <div class="input-group">' +
-                        '<input type="text" name="question" class="form-control m-input" required>' +
+                        '<input type="text" name="question" class="form-control m-inputque question" required>' +
                         '<div class="input-group-prepend">' +
                         '<button class="btn btn-danger" id="DeleteRow" type="button"> <i class="fa fa-trash"></i></button> </div>' +
                         '</div> </div> </div>';
