@@ -5,13 +5,19 @@
  */
 package controllers;
 
+import category.CategoryDAO;
+import category.CategoryDTO;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import post.PostDAO;
+import post.PostDTO;
+import user.UserDTO;
 
 /**
  *
@@ -29,17 +35,29 @@ public class MyPostController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    private static final String ERROR = "login.jsp";
+    private static final String ERROR = "myPost.jsp";
     private static final String MY_POST_PAGE = "myPost.jsp";
-    
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = MY_POST_PAGE;
+        String url = ERROR;
         try {
-            
+            HttpSession session = request.getSession();
+            UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
+            PostDAO dao = new PostDAO();
+//            CategoryDAO dao1 = new CategoryDAO();
+            List<PostDTO> list = dao.getMyPost(loginUser.getUserId());
+
+            if (!list.isEmpty()) {
+                request.setAttribute("MY_POST", list);
+                url = MY_POST_PAGE;
+            } else {
+                request.setAttribute("ERROR", "Bạn chưa có bài đăng nào");
+                url = ERROR;
+            }
         } catch (Exception e) {
-            log("Error at LoginController:" + e.toString());
+            log("Error at MyPostController:" + e.toString());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }

@@ -21,18 +21,35 @@ import javax.servlet.http.HttpSession;
 public class LogoutController extends HttpServlet {
 
     private static final String ERROR = "login.jsp";
-    private static final String SUCCESS = "login.jsp";
+    private static final String LOSTFOUND_SUCCESS = "login.jsp";
+    private static final String FREELANCE_SUCCESS = "FreelancerLogin.jsp";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
-            HttpSession session = request.getSession(false);
-            if (session != null) {
-                session.invalidate();
-                url = SUCCESS;
-            }
+              HttpSession session = request.getSession();
+              String urlBranch =(String) session.getAttribute("urlBranch");
+              if ("LostFound".equals(urlBranch)) {
+                  session.invalidate();
+                  url = LOSTFOUND_SUCCESS;
+              } else {
+                  session.invalidate();
+                  url = FREELANCE_SUCCESS;
+              }
+//            String isFreelance = request.getParameter("isFreelance");
+//            HttpSession session = request.getSession(false);
+//            
+//            if (session != null) {
+//                if ("isFreelance".equals(isFreelance)) {
+//                    session.invalidate();
+//                    url = FREELANCE_SUCCESS;
+//                } else {
+//                    session.invalidate();
+//                    url = SUCCESS;
+//                }
+//            }
         } catch (Exception e) {
             log("Error at LogoutController:" + e.toString());
         } finally {

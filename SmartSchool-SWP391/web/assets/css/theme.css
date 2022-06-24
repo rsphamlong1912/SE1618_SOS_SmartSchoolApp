@@ -2601,7 +2601,7 @@ progress {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-  border-radius: 1.5rem;
+  border-radius: 0.5rem;
   -webkit-transition: border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
   transition: border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
   -o-transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
@@ -4824,7 +4824,7 @@ fieldset:disabled .btn {
   padding-right: 1rem;
   padding-bottom: 0.5rem;
   padding-left: 1rem;
-  box-shadow: rgb(0 0 0 / 16%) 0px 3px 6px, rgb(0 0 0 / 23%) 0px 3px 6px;
+  
 }
 
 .navbar > .container,
@@ -9957,8 +9957,8 @@ fieldset:disabled .btn {
 }
 
 .rounded-end {
-  border-top-right-radius: 1.5rem !important;
-  border-bottom-right-radius: 1.5rem !important;
+  border-top-right-radius: 0.625rem !important;
+  border-bottom-right-radius: 0.625rem !important;
 }
 
 .rounded-end-lg {
@@ -18626,7 +18626,7 @@ label,
 .pagination,
 .valid-feedback,
 .invalid-feedback {
-  font-family: "Poppins", "Rubik", "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-family: "Inter", "Rubik", "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 }
 
 pre {

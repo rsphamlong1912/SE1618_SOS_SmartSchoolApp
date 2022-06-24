@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 import utills.DBUtils;
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -24,14 +25,43 @@ import java.util.logging.Logger;
  */
 public class PostDAO {
 
-    private static final String SEARCH_BY_TYPE = "SELECT * FROM tblPost WHERE type like ? AND postStatus = 'true'";
-    private static final String SEARCH_BY_TITLE = "SELECT * FROM tblPost WHERE title like ? AND postStatus = 'true'";
-    private static final String SEARCH_3NEWLOST = "SELECT TOP(3) postId FROM tblPost WHERE type=1 AND postStatus = 'true' ORDER BY postId DESC";
-    private static final String SEARCH_3NEWFOUND = "SELECT TOP(3) postId FROM tblPost WHERE type=2 AND postStatus = 'true' ORDER BY postId DESC";
-    private static final String LIST_ALL = "SELECT * FROM tblPost";
+    private static final String SEARCH_BY_TYPE = "SELECT * FROM tblPost WHERE type like ? AND postStatus = 'true' ORDER BY postId DESC";
+    private static final String SEARCH_BY_TITLE = "SELECT * FROM tblPost WHERE  (dbo.removeMark(title) LIKE ? OR title LIKE ?)  AND postStatus = 'true' ORDER BY postId DESC";
+    private static final String SEARCH_3NEWLOST = "SELECT TOP(3) * FROM tblPost WHERE type=0 AND postStatus = 'true' ORDER BY postId DESC";
+    private static final String SEARCH_3NEWFOUND = "SELECT TOP(3) * FROM tblPost WHERE type=1 AND postStatus = 'true' ORDER BY postId DESC";
+    private static final String LIST_ALL = "SELECT * FROM tblPost WHERE postStatus='true' ORDER BY postId DESC";
     private static final String CREATE = "INSERT INTO tblPost(userId, categoryId, postImg, description, date, type, title, postStatus) VALUES(?,?,?,?,?,?,?,?)";
     private static final String UPDATE = "UPDATE tblPost SET postImg=?, description=?, type=?, title=?, postStatus=? WHERE postId=?";
     private static final String DELETE = "UPDATE tblPost SET postStatus='false' WHERE postId=?";
+    private static final String LIST_MYPOST = "SELECT p.postId, p.userId,p.categoryId, p.postImg, p.description,p.date,p.type,p.title,p.postStatus,c.categoryName\n"
+            + "FROM tblPost as p, tblCategory as c\n"
+            + "WHERE p.categoryId=c.categoryId AND postStatus='true' AND userId=?";
+    private static final String READ = "SELECT p.postId,p.userId,p.categoryId,p.postImg,p.description,p.date,p.type,p.title,p.postStatus, c.categoryName FROM tblPost as p inner join tblCategory as c \n"
+            + "ON p.categoryId = c.categoryId WHERE p.postId  = ?";
+
+    public static int takeMinutes() {
+        long millis = System.currentTimeMillis();
+        long minutes = TimeUnit.MILLISECONDS.toMinutes(millis);
+        int minutesInt = (int) minutes;
+        return minutesInt;
+    }
+
+    public static String checkTime(int minutes) {
+        String time = null;
+        long millis = System.currentTimeMillis();
+        int minutesNow = (int) TimeUnit.MILLISECONDS.toMinutes(millis);
+        int minutesDistance = minutesNow - minutes;
+        if (minutesDistance < 60) {
+            return time = Integer.toString(minutesDistance) + " phút trước";
+        } else if (minutesDistance < 1440 && minutesDistance >= 60) {
+            return time = Integer.toString(minutesDistance / 60) + " giờ trước";
+        } else if (minutesDistance < 43200 && minutesDistance >= 1440) {
+            return time = Integer.toString(minutesDistance / 1440) + " ngày trước";
+        } else if (minutesDistance >= 43200) {
+            return time = Integer.toString(minutesDistance / 43200) + " tháng trước";
+        }
+        return null;
+    }
 
     //Upload new post
     public void uploadPost(PostDTO post) throws SQLException {
@@ -44,10 +74,8 @@ public class PostDAO {
             ptm.setInt(2, post.getCategoryId());
             ptm.setBytes(3, post.getPostImg());
             ptm.setString(4, post.getDescription());
-            Date date = new Date();
-            SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy hh:mm");
-            String newDate = df.format(date);
-            ptm.setString(5, newDate);
+            int date = takeMinutes();
+            ptm.setInt(5, date);
             ptm.setBoolean(6, post.getType());
             ptm.setString(7, post.getTitle());
             ptm.setString(8, post.getPostStatus());
@@ -65,6 +93,49 @@ public class PostDAO {
         }
     }
 
+    public PostDTO readPost(String userId) throws SQLException {
+        PostDTO post = new PostDTO();
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(READ);
+                ptm.setString(1, userId);
+                rs = ptm.executeQuery();
+                while (rs.next()) {
+                    post.setPostId(rs.getInt("postId"));
+                    post.setUserId(rs.getString("userId"));
+                    post.setCategoryId(rs.getInt("categoryId"));
+                    post.setPostImg(rs.getBytes("postImg"));
+                    post.setDescription(rs.getString("description"));
+                    int date = rs.getInt("date");
+                    String newDate = checkTime(date);
+                    post.setDate(newDate);
+                    post.setType(rs.getBoolean("type"));
+                    post.setTitle(rs.getString("title"));
+                    post.setPostStatus(rs.getString("postStatus"));
+                    post.setCategoryName(rs.getString("categoryName"));
+                }
+                return post;
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(PostDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return null;
+    }
+
     //List all post
     public List<PostDTO> getAll() throws SQLException {
         List<PostDTO> list = new ArrayList<>();
@@ -73,7 +144,6 @@ public class PostDAO {
         ResultSet rs = null;
         try {
             //Creating and executing JDBC statements
-
             con = DBUtils.getConnection();
             stm = con.createStatement();
             rs = stm.executeQuery(LIST_ALL);
@@ -85,7 +155,9 @@ public class PostDAO {
                 post.setCategoryId(rs.getInt("categoryId"));
                 post.setPostImg(rs.getBytes("postImg"));
                 post.setDescription(rs.getString("description"));
-                post.setDate(rs.getDate("date"));
+                int date = rs.getInt("date");
+                String newDate = checkTime(date);
+                post.setDate(newDate);
                 post.setType(rs.getBoolean("type"));
                 post.setTitle(rs.getString("title"));
                 post.setPostStatus(rs.getString("postStatus"));
@@ -137,7 +209,9 @@ public class PostDAO {
                     post.setCategoryId(rs.getInt("categoryId"));
                     post.setPostImg(rs.getBytes("postImg"));
                     post.setDescription(rs.getString("description"));
-                    post.setDate(rs.getDate("date"));
+                    int date = rs.getInt("date");
+                    String newDate = checkTime(date);
+                    post.setDate(newDate);
                     post.setType(rs.getBoolean("type"));
                     post.setTitle(rs.getString("title"));
                     post.setPostStatus(rs.getString("postStatus"));
@@ -170,6 +244,7 @@ public class PostDAO {
             if (conn != null) {
                 ptm = conn.prepareStatement(SEARCH_BY_TITLE);
                 ptm.setString(1, "%" + search + "%");
+                ptm.setString(2, "%" + search + "%");
                 rs = ptm.executeQuery();
                 while (rs.next()) {
                     PostDTO post = new PostDTO();
@@ -178,7 +253,9 @@ public class PostDAO {
                     post.setCategoryId(rs.getInt("categoryId"));
                     post.setPostImg(rs.getBytes("postImg"));
                     post.setDescription(rs.getString("description"));
-                    post.setDate(rs.getDate("date"));
+                    int date = rs.getInt("date");
+                    String newDate = checkTime(date);
+                    post.setDate(newDate);
                     post.setType(rs.getBoolean("type"));
                     post.setTitle(rs.getString("title"));
                     post.setPostStatus(rs.getString("postStatus"));
@@ -201,7 +278,7 @@ public class PostDAO {
         return list;
     }
 
-    public List<PostDTO> search3NewLost(String search) throws SQLException {
+    public List<PostDTO> get3NewLost() throws SQLException {
         List<PostDTO> list = new ArrayList<>();
         Connection conn = null;
         PreparedStatement ptm = null;
@@ -218,7 +295,9 @@ public class PostDAO {
                     post.setCategoryId(rs.getInt("categoryId"));
                     post.setPostImg(rs.getBytes("postImg"));
                     post.setDescription(rs.getString("description"));
-                    post.setDate(rs.getDate("date"));
+                    int date = rs.getInt("date");
+                    String newDate = checkTime(date);
+                    post.setDate(newDate);
                     post.setType(rs.getBoolean("type"));
                     post.setTitle(rs.getString("title"));
                     post.setPostStatus(rs.getString("postStatus"));
@@ -241,7 +320,38 @@ public class PostDAO {
         return list;
     }
 
-    public List<PostDTO> search3NewFound(String search) throws SQLException {
+    public byte[] getItemData(String postId) throws SQLException {
+        String getAvatar = "SELECT postImg FROM tblPost WHERE postId = ? and postStatus = 'true'";
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(getAvatar);
+                ptm.setString(1, postId);
+                rs = ptm.executeQuery();
+                if (rs.next()) {
+                    return rs.getBytes("postImg");
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return null;
+    }
+
+    public List<PostDTO> get3NewFound() throws SQLException {
         List<PostDTO> list = new ArrayList<>();
         Connection conn = null;
         PreparedStatement ptm = null;
@@ -258,7 +368,9 @@ public class PostDAO {
                     post.setCategoryId(rs.getInt("categoryId"));
                     post.setPostImg(rs.getBytes("postImg"));
                     post.setDescription(rs.getString("description"));
-                    post.setDate(rs.getDate("date"));
+                    int date = rs.getInt("date");
+                    String newDate = checkTime(date);
+                    post.setDate(newDate);
                     post.setType(rs.getBoolean("type"));
                     post.setTitle(rs.getString("title"));
                     post.setPostStatus(rs.getString("postStatus"));
@@ -306,7 +418,7 @@ public class PostDAO {
             }
         }
     }
-    
+
     //Delete Post
     public boolean deletePost(int postId) throws SQLException {
         boolean check = false;
@@ -331,4 +443,62 @@ public class PostDAO {
         }
         return check;
     }
+
+    public List<PostDTO> getMyPost(String userId) throws SQLException {
+        List<PostDTO> list = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(LIST_MYPOST);
+                ptm.setString(1, userId);
+                rs = ptm.executeQuery();
+                while (rs.next()) {
+                    PostDTO post = new PostDTO();
+                    post.setPostId(rs.getInt("postId"));
+                    post.setUserId(rs.getString("userId"));
+                    post.setCategoryId(rs.getInt("categoryId"));
+                    post.setPostImg(rs.getBytes("postImg"));
+                    post.setDescription(rs.getString("description"));
+                    int date = rs.getInt("date");
+                    String newDate = checkTime(date);
+                    post.setDate(newDate);
+                    post.setType(rs.getBoolean("type"));
+                    post.setTitle(rs.getString("title"));
+                    post.setPostStatus(rs.getString("postStatus"));
+                    post.setCategoryName(rs.getString("categoryName"));
+                    list.add(post);
+//                    int postId = rs.getInt("postId");
+//                    String newUserId=rs.getString("userId");
+//                    int categoryId=rs.getInt("categoryId");
+//                    byte[] postImg=rs.getBytes("postImg");
+//                    String description=rs.getString("description");
+//                    Date date=rs.getDate("date");
+//                    boolean type=rs.getBoolean("type");
+//                    String title=rs.getString("title");
+//                    String postStatus=rs.getString("postStatus");
+//                    String categoryName=rs.getString("categoryName");
+//                    
+//                    
+//                    list.add(new PostDTO(postId, newUserId, categoryId, postImg, description, (java.sql.Date) date, type, title, postStatus, categoryName));
+                }
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(PostDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return list;
+    }
+
 }

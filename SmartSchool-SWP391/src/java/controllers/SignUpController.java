@@ -21,40 +21,38 @@ import user.UserDTO;
  */
 @WebServlet(name = "SignUpController", urlPatterns = {"/signup"})
 public class SignUpController extends HttpServlet {
-    private static final String SUCCESS = "login.jsp";
-    private static final String SIGNUP = "register.html";
-    
+
+    private static final String SUCCESS = "register.jsp";
+    private static final String ERROR = "register.jsp";
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String fullname = request.getParameter("fullName");
-        String userId = request.getParameter("userName");
-        String password = request.getParameter("password");
-        String re_password = request.getParameter("re_password");
-        String email = request.getParameter("email");
-        String phone = request.getParameter("phone");
-        String url = SIGNUP;
+        String url = ERROR;
         try {
-            if(!re_password.equals(password)){
-                request.setAttribute("ERROR", "Confirm must match Password");
+            String fullname = request.getParameter("fullName");
+            String userId = request.getParameter("userName");
+            String password = request.getParameter("password");
+            String rePassword = request.getParameter("repassword");
+            String email = request.getParameter("email");
+            String phone = request.getParameter("phone");
+            UserDAO dao = new UserDAO();
+            UserDTO user = dao.checkAccountExist(userId);
+            if (user != null) {
+                request.setAttribute("ERROR", "Tên đăng nhập đã tồn tại!");
+                request.setAttribute("FULLNAME", fullname);
+                request.setAttribute("USERNAME", userId);
+                request.setAttribute("EMAIL", email);
+                request.setAttribute("PHONE", phone);
             } else {
-                UserDAO dao = new UserDAO();
-                UserDTO dto = dao.checkAccountExist(userId);
-                if(dto == null) {
-                    dao.signup(fullname, userId, password, email, phone);
-                    response.sendRedirect(SUCCESS);
-                }else {
-                    response.sendRedirect(SIGNUP);
-                }
-//                boolean result = dao.createNewAccount(dto);
-//                if(result) {
-//                    url = SUCCESS;
-//                }
+                dao.signup(fullname, userId, password, email, phone);
+                request.setAttribute("SUCCESS", "Đăng ký tài khoản thành công!");
+                url = SUCCESS;
             }
         } catch (Exception e) {
             log("Error at SignUpController: " + e.toString());
         } finally {
-            request.getRequestDispatcher(SUCCESS).forward(request, response);
+            request.getRequestDispatcher(url).forward(request, response);
         }
     }
 

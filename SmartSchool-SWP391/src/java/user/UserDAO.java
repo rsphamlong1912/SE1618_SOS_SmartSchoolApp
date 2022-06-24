@@ -5,6 +5,7 @@
  */
 package user;
 
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -19,11 +20,15 @@ import utills.DBUtils;
  */
 public class UserDAO {
 
-    private static final String REGISTER = "INSERT INTO tblUser(fullname, userId, password, email, phone) "
-            + "Values(?, ?, ?, ?, ?)";
-    private static final String LOGIN = "select * from tblUser where userId = ? and password=?";
-    private static final String UPDATE_PASSWORD = "UPDATE tblUser SET password=? WHERE userId=?";
-    private static final String CHECK_ACCOUNT = "SELECT * FROM tblUser WHERE userId = ?";
+    private static final String REGISTER = "INSERT INTO tblUser(fullname, userId, password, email, phone, roleId) VALUES (?, ?, ?, ?, ?, 'US')";
+    private static final String LOGIN = "SELECT u.userId, u.roleId, u.password, u.fullname, u.avatar, u.phone, u.email, u.facebook, u.userStatus, u.haveJob, r.roleName\n"
+            + "FROM tblUser as u, tblRole as r\n"
+            + "WHERE u.roleId = r.roleId AND userId = ? AND password = ?";    
+    private static final String CHECK_ACCOUNT =  "SELECT u.userId, u.roleId, u.password, u.fullname, u.avatar, u.phone, u.email, u.facebook, u.userStatus, u.haveJob, r.roleName\n"
+            + "FROM tblUser as u, tblRole as r\n"
+            + "WHERE u.roleId = r.roleId AND userId = ?";
+    private static final String CHANGE_PASSWORD = "UPDATE tblUser SET password = ? WHERE userId= ?";
+    private static final String UPDATE_ACCOUNT = "UPDATE tblUser SET fullname = ?, email = ?, facebook = ?, phone = ? WHERE userId= ?";
 
     public UserDTO login(String userId, String password) throws SQLException {
         UserDTO user = null;
@@ -45,10 +50,12 @@ public class UserDAO {
                 user.setAvatar(rs.getBytes("avatar"));
                 user.setPhone(rs.getString("phone"));
                 user.setEmail(rs.getString("email"));
-                user.setCompAddress(rs.getString("compAddress"));
-                user.setUserId(rs.getString("userId"));
+                user.setFacebook(rs.getString("facebook"));
+//                user.setCompAddress(rs.getString("compAddress"));
+//                user.setUserId(rs.getString("userId"));
                 user.setUserStatus(rs.getBoolean("userStatus"));
                 user.setHaveJob(rs.getBoolean("haveJob"));
+                user.setRoleName(rs.getString("roleName"));
             }
         } catch (Exception ex) {
             Logger.getLogger(UserDTO.class.getName()).log(Level.SEVERE, null, ex);
@@ -86,11 +93,14 @@ public class UserDAO {
                     user.setAvatar(rs.getBytes("avatar"));
                     user.setPhone(rs.getString("phone"));
                     user.setEmail(rs.getString("email"));
-                    user.setCompAddress(rs.getString("compAddress"));
-                    user.setUserId(rs.getString("userId"));
+                    user.setFacebook(rs.getString("facebook"));
+//                    user.setCompAddress(rs.getString("compAddress"));
+//                    user.setUserId(rs.getString("userId"));
                     user.setUserStatus(rs.getBoolean("userStatus"));
                     user.setHaveJob(rs.getBoolean("haveJob"));
+                    user.setRoleName(rs.getString("roleName"));
                 }
+                return user;
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -108,8 +118,8 @@ public class UserDAO {
         return null;
     }
 
-    public void signup(String fullname, String userId, String password, String email, String phone) 
-                        throws SQLException {
+    public void signup(String fullname, String userId, String password, String email, String phone)
+            throws SQLException {
         Connection conn = null;
         PreparedStatement ptm = null;
         try {
@@ -118,9 +128,9 @@ public class UserDAO {
                 ptm = conn.prepareStatement(REGISTER);
                 ptm.setString(1, fullname);
                 ptm.setString(2, userId);
-                ptm.setString(2, password);
-                ptm.setString(2, email);
-                ptm.setString(2, phone);
+                ptm.setString(3, password);
+                ptm.setString(4, email);
+                ptm.setString(5, phone);
                 ptm.executeUpdate();
             }
         } catch (Exception e) {
@@ -169,7 +179,115 @@ public class UserDAO {
 //        }
 //        return false;
 //    }
-    
-    
     //Change Password
+    public void changePassword(String userId, String newPassword)
+            throws SQLException {
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(CHANGE_PASSWORD);
+                ptm.setString(1, newPassword);
+                ptm.setString(2, userId);
+                ptm.executeUpdate();
+            }
+        } catch (Exception e) {
+
+        } finally {
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+    }
+
+    //Edit Profile
+    public void updateAccount(String userId, String fullname, String email, String facebook, String phone) throws Exception {
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        try {
+            //1. connect DB
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(UPDATE_ACCOUNT);
+                ptm.setString(1, fullname);
+                ptm.setString(2, email);
+                ptm.setString(3, facebook);
+                ptm.setString(4, phone);
+                ptm.setString(5, userId);
+                ptm.executeUpdate();
+            } //process when connection is existed
+
+        } catch (Exception e) {
+
+        }finally {
+
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+    }
+    public boolean updateUserAvatar(InputStream inputStream, String userId) throws SQLException{
+        String update = "UPDATE tblUser SET avatar = ? WHERE userId = ?";
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        try {
+            //1. connect DB
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(update);
+                ptm.setBlob(1, inputStream);
+                ptm.setString(2, userId);
+                ptm.executeUpdate();
+                return true;
+            } //process when connection is existed
+        }catch (Exception e){
+            
+        }finally {           
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return false;
+    }
+    
+    public byte[] getAvatarData(String userId) throws SQLException{
+        String getAvatar = "SELECT avatar FROM tblUser WHERE userId = ?";
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(getAvatar);
+                ptm.setString(1, userId);
+                rs = ptm.executeQuery();
+                if (rs.next()) {
+                   return rs.getBytes("avatar");
+                }    
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return null;
+    }
 }

@@ -25,11 +25,12 @@ public class UserDTO {
     private String compAddress;
     private boolean userStatus;
     private boolean haveJob;
+    private String roleName;
 
     public UserDTO() {
     }
 
-    public UserDTO(String userId, String roleId, String password, String fullname, byte[] avatar, String phone, String email, String facebook, String compName, String compDesc, String compPhone, String compEmail, String compAddress, boolean userStatus, boolean haveJob) {
+    public UserDTO(String userId, String roleId, String password, String fullname, byte[] avatar, String phone, String email, String facebook, String compName, String compDesc, String compPhone, String compEmail, String compAddress, boolean userStatus, boolean haveJob, String roleName) {
         this.userId = userId;
         this.roleId = roleId;
         this.password = password;
@@ -45,6 +46,7 @@ public class UserDTO {
         this.compAddress = compAddress;
         this.userStatus = userStatus;
         this.haveJob = haveJob;
+        this.roleName = roleName;
     }
 
     public String getUserId() {
@@ -165,6 +167,14 @@ public class UserDTO {
 
     public void setHaveJob(boolean haveJob) {
         this.haveJob = haveJob;
+    }
+
+    public String getRoleName() {
+        return roleName;
+    }
+
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
     }
 
     

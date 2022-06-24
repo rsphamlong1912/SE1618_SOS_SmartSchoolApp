@@ -17,15 +17,18 @@ public class PostDTO {
     private int categoryId;
     private byte[] postImg;
     private String description;
-    private Date date;
+    private String date;
     private boolean type;
     private String title;
     private String postStatus;
+    private String categoryName;
+
+    
 
     public PostDTO() {
     }
 
-    public PostDTO(int postId, String userId, int categoryId, byte[] postImg, String description, Date date, boolean type, String title, String postStatus) {
+    public PostDTO(int postId, String userId, int categoryId, byte[] postImg, String description, String date, boolean type, String title, String postStatus, String categoryName) {
         this.postId = postId;
         this.userId = userId;
         this.categoryId = categoryId;
@@ -35,7 +38,22 @@ public class PostDTO {
         this.type = type;
         this.title = title;
         this.postStatus = postStatus;
+        this.categoryName = categoryName;
     }
+
+
+
+//    public PostDTO(int postId, String userId, int categoryId, byte[] postImg, String description, Date date, boolean type, String title, String postStatus) {
+//        this.postId = postId;
+//        this.userId = userId;
+//        this.categoryId = categoryId;
+//        this.postImg = postImg;
+//        this.description = description;
+//        this.date = date;
+//        this.type = type;
+//        this.title = title;
+//        this.postStatus = postStatus;
+//    }
 
     public int getPostId() {
         return postId;
@@ -77,11 +95,11 @@ public class PostDTO {
         this.description = description;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
@@ -107,6 +125,14 @@ public class PostDTO {
 
     public void setPostStatus(String postStatus) {
         this.postStatus = postStatus;
+    }
+
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
     }
 
     

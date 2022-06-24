@@ -12,6 +12,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import user.UserDAO;
+import user.UserDTO;
 
 /**
  *
@@ -31,13 +34,13 @@ public class ChangePasswordController extends HttpServlet {
      */
     private static final String ERROR = "login.jsp";
     private static final String CHANGE_PASSWORD_PAGE = "changePassword.jsp";
-    
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = CHANGE_PASSWORD_PAGE;
         try {
-            
+
         } catch (Exception e) {
             log("Error at LoginController:" + e.toString());
         } finally {
@@ -71,7 +74,31 @@ public class ChangePasswordController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        String url = CHANGE_PASSWORD_PAGE;
+        try {
+            String userId = request.getParameter("userId");
+            String oldPassword = request.getParameter("oldPassword");
+            String newPassword = request.getParameter("newPassword");
+            String confirmNewPassword = request.getParameter("confirmNewPassword");
+            UserDAO dao = new UserDAO();
+            UserDTO loginUser = dao.checkAccountExist(userId);
+            if (loginUser == null) {
+                url = ERROR;
+            } else {
+                if (loginUser.getPassword().equals(oldPassword)) {
+                    url = CHANGE_PASSWORD_PAGE;
+                    dao.changePassword(loginUser.getUserId(), newPassword);
+                    request.setAttribute("message", "Đổi mật khẩu thành công!");
+                } else {
+                    url = CHANGE_PASSWORD_PAGE;
+                    request.setAttribute("errMessage", "Nhập sai mật khẩu, xin mời nhập lại!");
+                }
+            }
+        } catch (Exception e) {
+            log("Error at LoginController:" + e.toString());
+        } finally {
+            request.getRequestDispatcher(url).forward(request, response);
+        }
     }
 
     /**

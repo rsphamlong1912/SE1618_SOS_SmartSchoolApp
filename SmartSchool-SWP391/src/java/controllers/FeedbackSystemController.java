@@ -5,6 +5,8 @@
  */
 package controllers;
 
+import feedbackSystem.FeedbackSystemDAO;
+import feedbackSystem.FeedbackSystemDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -12,6 +14,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import user.UserDAO;
+import user.UserDTO;
 
 /**
  *
@@ -31,13 +35,13 @@ public class FeedbackSystemController extends HttpServlet {
      */
     private static final String ERROR = "login.jsp";
     private static final String FEEDBACK_SYSTEM_PAGE = "feedbackSystem.jsp";
-    
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = FEEDBACK_SYSTEM_PAGE;
         try {
-            
+
         } catch (Exception e) {
             log("Error at LoginController:" + e.toString());
         } finally {
@@ -71,7 +75,26 @@ public class FeedbackSystemController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        String url = FEEDBACK_SYSTEM_PAGE;
+        try {
+            String userId = request.getParameter("userId");
+            String feedbackText = request.getParameter("feedback");
+            UserDAO userDao = new UserDAO();
+            UserDTO loginUser = userDao.checkAccountExist(userId);
+            if (loginUser != null) {
+                FeedbackSystemDTO feedback = new FeedbackSystemDTO(-1, loginUser.getUserId(), feedbackText, null, null);
+                FeedbackSystemDAO feedbackDao = new FeedbackSystemDAO();
+                feedbackDao.sendFeedbackSystem(feedback);
+                request.setAttribute("MESSAGE", "Gửi phản hồi hệ thống thành công!");               
+            } else {
+                request.setAttribute("MESSAGE", "Gửi phản hồi hệ thống thất bại!");
+            }
+
+        } catch (Exception e) {
+            log("Error at LoginController:" + e.toString());
+        } finally {
+            request.getRequestDispatcher(url).forward(request, response);
+        }
     }
 
     /**

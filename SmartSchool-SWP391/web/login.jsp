@@ -3,7 +3,6 @@
     Created on : Mar 3, 2022, 8:48:02 PM
     Author     : TrinhNgocBao
 --%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en-US" dir="ltr">
@@ -64,7 +63,7 @@
             class="navbar-toggler-icon"> </span></button>
         <div class="collapse navbar-collapse border-top border-lg-0 mt-4 mt-lg-0" id="navbarSupportedContent">
           <ul class="navbar-nav ms-auto pt-2 pt-lg-0 font-base align-items-lg-center align-items-start">
-            <li class="nav-item px-3"><a class="nav-link fw-bold" aria-current="page" href="index.html">Trang chủ</a>
+            <li class="nav-item px-3"><a class="nav-link fw-bold" aria-current="page" href="lostAndfoundhome">Trang chủ</a>
             </li>
             <li class="nav-item px-3"><a class="nav-link fw-bold" aria-current="page" href="#phanloai">Phân loại</a>
             </li>
@@ -75,13 +74,11 @@
             <li class="nav-item px-3"><a class="nav-link fw-bold" aria-current="page" href="#timkiem">Tìm kiếm</a></li>
             <li class="nav-item px-3"><a class="btn btn-outline-light order-1 order-lg-0 fw-bold" href="#!">Đăng nhập /
                 Đăng ký</a></li>
-            <!-- <li class="nav-item px-3 px-xl-4"><a class="btn btn-outline-dark btn-success order-1 order-lg-0 fw-bold"
-                href="#!">Đăng ký</a></li> -->
           </ul>
         </div>
       </div>
     </nav>
-    <section class="" style="padding-top: 1rem;" id="timkiem">
+    <section class="" style="padding-top: 2rem; min-height: 61rem;">
       <div class="bg-holder"
         style="background-image:url(https://hcmuni.fpt.edu.vn/Data/Sites/1/media/hinh-gioi-thieu-dai-hoc-fpt/hcm.png);">
       </div>
@@ -90,7 +87,7 @@
       <div class="container pt-10 h-100">
         <div class="row d-flex justify-content-center align-items-center h-100">
           <div class="col-xl-10">
-            <div class="card rounded text-secondary">
+            <div class="card rounded-1 text-secondary">
               <div class="row g-0">
                 <div class="col-lg-6">
                   <div class="card-body p-md-5 mx-md-4">
@@ -106,15 +103,14 @@
     
                       <div class="form-outline mb-4">
                         <label class="form-label" for="form2Example11">Tên đăng nhập</label>
-                        <input type="text" name="userID" id="form2Example11" class="form-control"
-                          placeholder="" />
+                        <input type="text" name="userID" id="form2Example11" class="form-control" placeholder="" value="${requestScope.USERID}"/>
                         
                       </div>
     
                       <div class="form-outline mb-4">
                         <label class="form-label" for="form2Example22">Mật khẩu</label>
-                        <input type="password" name="password" id="form2Example22" class="form-control" />
-                        
+                        <input type="password" name="password" id="form2Example22" class="form-control" value="${requestScope.PASSWORD}"/>
+                        <h6 style="font-style: italic;color: red; display: inline-block; padding: 5px 0">${requestScope.ERROR}</h6>
                       </div>
     
                       <div class="text-center pt-1 mb-5 pb-1">
@@ -123,7 +119,8 @@
     
                       <div class="d-flex align-items-center justify-content-center pb-4">
                         <p class="mb-0 me-2">Chưa có tài khoản ?</p>
-                        <a class="btn btn-outline-danger" href="register.html">Đăng ký</a>
+                        <a class="btn btn-outline-danger" href="register.jsp">Đăng ký</a>
+                        
                       </div>
     
                     </form>
