@@ -13,6 +13,13 @@ var oldPassword = document.querySelector('#oldPassword');
 var newPassword = document.querySelector('#newPassword');
 var confirmNewPassword = document.querySelector('#confirmNewPassword');
 
+//Employer Upload
+var titleJob = document.querySelector("#titleJob");
+var description = document.querySelector("#floatingTextarea2");
+var amount = document.querySelector("#amount");
+var salary = document.querySelector("#salary");
+var question = document.querySelectorAll()
+
 var form = document.querySelector('form')
 
 
@@ -53,6 +60,16 @@ function checkEmptyError(listInput) {
         }
     });
     return isEmptyError
+}
+
+function checkNegativeValue(input) {
+    let isNegative = false;
+    let myValue = parseInt(input.value);
+    if(myValue <= 0) {
+        isNegative = true;
+        showError(input, "Giá trị không hợp lệ!")
+    }
+    return isNegative
 }
 
 function checkEmailError(input) {
@@ -131,6 +148,16 @@ function validateChangePassword() {
     let isPasswordEmpty = checkEmptyError([oldPassword, newPassword, confirmNewPassword])
     let isPasswordMatchError = checkMatchPasswordError(newPassword, confirmNewPassword)
     if (isPasswordEmpty || isPasswordMatchError) {
+        return false
+    }
+    return true
+}
+
+function validateEmployerUpload() {
+    let isEmptyError = checkEmptyError([titleJob, description, question])
+    let isNegative = checkNegativeValue(amount)
+    let isNegativeSalary = checkNegativeValue(salary)
+    if (isEmptyError || isNegative || isNegativeSalary) {
         return false
     }
     return true
