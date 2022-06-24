@@ -222,9 +222,11 @@
                 </div>
             </div>
 
-            <section style="padding: 50px 0;">
-
+            <section style="padding: 50px 0 ;min-height: 85vh">
                 <div class="container">
+                    <c:if test="${empty requestScope.MY_JOB_POST_DONE}">
+                        <h1 class="text-center">${ERROR}</h1>
+                    </c:if>
                     <c:if test="${!empty requestScope.MY_JOB_POST_PROCESS}">
                         <c:forEach items="${requestScope.MY_JOB_POST_PROCESS}" var="myJobPostProcess">
                             <div class="card w-100">
