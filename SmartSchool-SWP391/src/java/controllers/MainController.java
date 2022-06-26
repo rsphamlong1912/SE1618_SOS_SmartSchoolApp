@@ -55,6 +55,9 @@ public class MainController extends HttpServlet {
     private static final String MY_JOB_POST_DONE_CONTROLLER = "myJobPostDone";
     private static final String LIST_ALL = "ListAll";
     private static final String LIST_ALL_CONTROLLER = "listAll";
+    private static final String UPLOAD_POST = "UploadPost";
+    private static final String UPLOAD_POST_CONTROLLER = "uploadPost";
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -70,7 +73,7 @@ public class MainController extends HttpServlet {
             if (MY_POST.equals(action)) {
                 url = MY_POST_CONTROLLER;
             }
-       
+
             if (CHANGE_PASSWORD.equals(action)) {
                 url = CHANGE_PASSWORD_CONTROLLER;
             }
@@ -97,13 +100,16 @@ public class MainController extends HttpServlet {
             }
             if (MY_JOB_POST_PROCESS.equals(action)) {
                 url = MY_JOB_POST_PROCESS_CONTROLLER;
-            }  
+            }
             if (MY_JOB_POST_DONE.equals(action)) {
                 url = MY_JOB_POST_DONE_CONTROLLER;
-            }     
+            }
             if (LIST_ALL.equals(action)) {
                 url = LIST_ALL_CONTROLLER;
-            }     
+            }
+            if (UPLOAD_POST.equals(action)) {
+                url = UPLOAD_POST_CONTROLLER;
+            }
         } catch (Exception e) {
             log("Error at MainController: " + e.toString());
         } finally {
