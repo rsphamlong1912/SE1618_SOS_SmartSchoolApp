@@ -154,7 +154,7 @@ function validateChangePassword() {
 }
 
 function validateEmployerUpload() {
-    let isEmptyError = checkEmptyError([titleJob, description, question])
+    let isEmptyError = checkEmptyError([titleJob, description])
     let isNegative = checkNegativeValue(amount)
     let isNegativeSalary = checkNegativeValue(salary)
     if (isEmptyError || isNegative || isNegativeSalary) {
