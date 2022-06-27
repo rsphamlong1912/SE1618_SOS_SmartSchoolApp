@@ -187,7 +187,7 @@
             </nav>
             <section style="padding-top: 1rem;" id="timkiem">
                 <div class="bg-holder"
-                     style="background-image:url(https://daihoc.fpt.edu.vn/wp-content/uploads/2022/02/HCM-scaled.jpeg);">
+                     style="background-image:url(assets/img/Background-FPT.jpeg);">
                 </div>
                 <!--/.bg-holder-->
                 <div class="container">
@@ -233,70 +233,21 @@
                         <h3 class="fs-xl-10 fs-lg-8 fs-7 fw-bold text-capitalize">Các Lĩnh Vực</h3>
                     </div>
                     <div class="row">
-                        <div class="col-lg-3 col-sm-6 mb-6">
-                            <div class="card service-card shadow-hover rounded-3 text-center align-items-center">
-                                <div class="card-body p-xxl-5 p-4"> <img src="assets/img/category/icon1.png" width="75" alt="Service" />
-                                    <h4 class="mb-3">Điện Thoại</h4>
-
+                        <c:forEach items="${requestScope.LISTALLCATEGORY}" var='category'>
+                        <div class="card col-lg-4 col-sm-6 mb-6" style="max-width: 540px;">
+                            <div class="row g-0">
+                              <div class="col-md-3">
+                                <img src="${category.jobImage}" class="img-fluid" alt="...">
+                              </div>
+                              <div class="col-md-9">
+                                <div class="card-body">
+                                  <h5 class="card-title"><a class="text-decoration-none" href="/main?action=SearchByCategory&jobCategoryId=${category.jobCategoryId}">${category.jobCategoryName}</a> </h5>
+                                  <p class="card-text">${category.jobDescription}</p>
                                 </div>
+                              </div>
                             </div>
                         </div>
-                        <div class="col-lg-3 col-sm-6 mb-6">
-                            <div class="card service-card shadow-hover rounded-3 text-center align-items-center">
-                                <div class="card-body p-xxl-5 p-4"> <img src="assets/img/category/icon2.png" width="75" alt="Service" />
-                                    <h4 class="mb-3">Laptop</h4>
-
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-sm-6 mb-6">
-                            <div class="card service-card shadow-hover rounded-3 text-center align-items-center">
-                                <div class="card-body p-xxl-5 p-4"> <img src="assets/img/category/icon3.png" width="75" alt="Service" />
-                                    <h4 class="mb-3">Thẻ sinh viên</h4>
-
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-sm-6 mb-6">
-                            <div class="card service-card shadow-hover rounded-3 text-center align-items-center">
-                                <div class="card-body p-xxl-5 p-4"> <img src="assets/img/category/icon4.png" width="75" alt="Service" />
-                                    <h4 class="mb-3">Thẻ xe</h4>
-
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-sm-6 mb-6">
-                            <div class="card service-card shadow-hover rounded-3 text-center align-items-center">
-                                <div class="card-body p-xxl-5 p-4"> <img src="assets/img/category/icon4.png" width="75" alt="Service" />
-                                    <h4 class="mb-3">Thẻ xe</h4>
-
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-sm-6 mb-6">
-                            <div class="card service-card shadow-hover rounded-3 text-center align-items-center">
-                                <div class="card-body p-xxl-5 p-4"> <img src="assets/img/category/icon4.png" width="75" alt="Service" />
-                                    <h4 class="mb-3">Thẻ xe</h4>
-
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-sm-6 mb-6">
-                            <div class="card service-card shadow-hover rounded-3 text-center align-items-center">
-                                <div class="card-body p-xxl-5 p-4"> <img src="assets/img/category/icon4.png" width="75" alt="Service" />
-                                    <h4 class="mb-3">Thẻ xe</h4>
-
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-sm-6 mb-6">
-                            <div class="card service-card shadow-hover rounded-3 text-center align-items-center">
-                                <div class="card-body p-xxl-5 p-4"> <img src="assets/img/category/icon4.png" width="75" alt="Service" />
-                                    <h4 class="mb-3">Thẻ xe</h4>
-
-                                </div>
-                            </div>
-                        </div>
+                        </c:forEach>
                     </div>
                 </div><!-- end of .container-->
 

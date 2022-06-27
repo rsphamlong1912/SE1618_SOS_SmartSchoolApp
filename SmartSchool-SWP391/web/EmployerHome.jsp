@@ -184,7 +184,7 @@
             </nav>
             <section style="padding-top: 1rem;" id="timkiem">
                 <div class="bg-holder"
-                     style="background-image:url(https://daihoc.fpt.edu.vn/wp-content/uploads/2022/02/HCM-scaled.jpeg);">
+                     style="background-image:url(assets/img/Background-FPT.jpeg);">
                 </div>
                 <!--/.bg-holder-->
 
