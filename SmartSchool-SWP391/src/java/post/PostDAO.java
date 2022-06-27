@@ -5,6 +5,7 @@
  */
 package post;
 
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -30,7 +31,7 @@ public class PostDAO {
     private static final String SEARCH_3NEWLOST = "SELECT TOP(3) * FROM tblPost WHERE type=0 AND postStatus = 'true' ORDER BY postId DESC";
     private static final String SEARCH_3NEWFOUND = "SELECT TOP(3) * FROM tblPost WHERE type=1 AND postStatus = 'true' ORDER BY postId DESC";
     private static final String LIST_ALL = "SELECT * FROM tblPost WHERE postStatus='true' ORDER BY postId DESC";
-    private static final String CREATE = "INSERT INTO tblPost(userId, categoryId, postImg, description, date, type, title, postStatus) VALUES(?,?,?,?,?,?,?,?)";
+    private static final String CREATE = "INSERT INTO tblPost(userId, categoryId, postImg, description, date, type, title, postStatus) VALUES(?,?,?,?,?,?,?,'approving')";
     private static final String UPDATE = "UPDATE tblPost SET postImg=?, description=?, type=?, title=?, postStatus=? WHERE postId=?";
     private static final String DELETE = "UPDATE tblPost SET postStatus='false' WHERE postId=?";
     private static final String LIST_MYPOST = "SELECT p.postId, p.userId,p.categoryId, p.postImg, p.description,p.date,p.type,p.title,p.postStatus,c.categoryName\n"
@@ -64,21 +65,20 @@ public class PostDAO {
     }
 
     //Upload new post
-    public void uploadPost(PostDTO post) throws SQLException {
+    public void uploadPost(String userId,int categoryId , InputStream inputStream,String description, String type, String title) throws SQLException {
         Connection con = null;
         PreparedStatement ptm = null;
         try {
             con = DBUtils.getConnection();
             ptm = con.prepareStatement(CREATE);
-            ptm.setString(1, post.getUserId());
-            ptm.setInt(2, post.getCategoryId());
-            ptm.setBytes(3, post.getPostImg());
-            ptm.setString(4, post.getDescription());
+            ptm.setString(1, userId);
+            ptm.setInt(2, categoryId);
+            ptm.setBlob(3, inputStream);
+            ptm.setString(4, description);
             int date = takeMinutes();
             ptm.setInt(5, date);
-            ptm.setBoolean(6, post.getType());
-            ptm.setString(7, post.getTitle());
-            ptm.setString(8, post.getPostStatus());
+            ptm.setString(6, type);
+            ptm.setString(7, title);
             ptm.executeUpdate();
         } catch (Exception ex) {
             Logger.getLogger(PostDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -113,7 +113,7 @@ public class PostDAO {
                     int date = rs.getInt("date");
                     String newDate = checkTime(date);
                     post.setDate(newDate);
-                    post.setType(rs.getBoolean("type"));
+                    post.setType(rs.getString("type"));
                     post.setTitle(rs.getString("title"));
                     post.setPostStatus(rs.getString("postStatus"));
                     post.setCategoryName(rs.getString("categoryName"));
@@ -158,7 +158,7 @@ public class PostDAO {
                 int date = rs.getInt("date");
                 String newDate = checkTime(date);
                 post.setDate(newDate);
-                post.setType(rs.getBoolean("type"));
+                post.setType(rs.getString("type"));
                 post.setTitle(rs.getString("title"));
                 post.setPostStatus(rs.getString("postStatus"));
                 list.add(post);
@@ -212,7 +212,7 @@ public class PostDAO {
                     int date = rs.getInt("date");
                     String newDate = checkTime(date);
                     post.setDate(newDate);
-                    post.setType(rs.getBoolean("type"));
+                    post.setType(rs.getString("type"));
                     post.setTitle(rs.getString("title"));
                     post.setPostStatus(rs.getString("postStatus"));
                     list.add(post);
@@ -256,7 +256,7 @@ public class PostDAO {
                     int date = rs.getInt("date");
                     String newDate = checkTime(date);
                     post.setDate(newDate);
-                    post.setType(rs.getBoolean("type"));
+                    post.setType(rs.getString("type"));
                     post.setTitle(rs.getString("title"));
                     post.setPostStatus(rs.getString("postStatus"));
                     list.add(post);
@@ -298,7 +298,7 @@ public class PostDAO {
                     int date = rs.getInt("date");
                     String newDate = checkTime(date);
                     post.setDate(newDate);
-                    post.setType(rs.getBoolean("type"));
+                    post.setType(rs.getString("type"));
                     post.setTitle(rs.getString("title"));
                     post.setPostStatus(rs.getString("postStatus"));
                     list.add(post);
@@ -371,7 +371,7 @@ public class PostDAO {
                     int date = rs.getInt("date");
                     String newDate = checkTime(date);
                     post.setDate(newDate);
-                    post.setType(rs.getBoolean("type"));
+                    post.setType(rs.getString("type"));
                     post.setTitle(rs.getString("title"));
                     post.setPostStatus(rs.getString("postStatus"));
                     list.add(post);
@@ -401,7 +401,7 @@ public class PostDAO {
             stm = con.prepareStatement(UPDATE);
             stm.setBytes(1, post.getPostImg());
             stm.setString(2, post.getDescription());
-            stm.setBoolean(3, post.getType());
+            stm.setString(3, post.getType());
             stm.setString(4, post.getTitle());
             stm.setString(5, post.getPostStatus());
             stm.setInt(6, post.getPostId());
@@ -465,7 +465,7 @@ public class PostDAO {
                     int date = rs.getInt("date");
                     String newDate = checkTime(date);
                     post.setDate(newDate);
-                    post.setType(rs.getBoolean("type"));
+                    post.setType(rs.getString("type"));
                     post.setTitle(rs.getString("title"));
                     post.setPostStatus(rs.getString("postStatus"));
                     post.setCategoryName(rs.getString("categoryName"));

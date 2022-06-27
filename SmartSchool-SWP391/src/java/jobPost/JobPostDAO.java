@@ -30,14 +30,14 @@ public class JobPostDAO {
     private static final String GET_MYJOBPOST_DONE = "SELECT j.jobId,j.userId,j.jobCategoryId,j.title,j.description,j.salary,j.amount,j.timeJob,j.process,j.date,j.status,c.jobCategoryName\n"
             + "            FROM tblJobPost as j, tblCategoryJob as c\n"
             + "            WHERE j.jobCategoryId=c.jobCategoryId AND status=1 AND process='done' AND  userId=? ";
-    
+
     public static int takeMinutes() {
         long millis = System.currentTimeMillis();
         long minutes = TimeUnit.MILLISECONDS.toMinutes(millis);
         int minutesInt = (int) minutes;
         return minutesInt;
     }
-    
+
     public static String checkTime(int minutes) {
         String time = null;
         long millis = System.currentTimeMillis();
@@ -58,7 +58,7 @@ public class JobPostDAO {
     public int uploadJobPost(String userId, int jobCategoryId, String title, String description, float salary, int amount, int timeJob)
             throws SQLException {
         Connection conn = null;
-        PreparedStatement ptm = null;        
+        PreparedStatement ptm = null;
         ResultSet rs = null;
         try {
             conn = DBUtils.getConnection();
@@ -71,21 +71,19 @@ public class JobPostDAO {
                 ptm.setFloat(5, salary);
                 ptm.setInt(6, amount);
                 ptm.setInt(7, timeJob);
-                Date date = new Date();
-                SimpleDateFormat df = new SimpleDateFormat("hh:mm dd/MM/yyyy");
-                String newDate = df.format(date);
-                ptm.setString(8, newDate);
+                int date = takeMinutes();
+                ptm.setInt(8, date);
                 ptm.executeUpdate();
                 String sql = "SELECT TOP 1 jobId FROM tblJobPost order by jobId DESC";
-                PreparedStatement ptm2 = conn.prepareStatement(sql);;                
+                PreparedStatement ptm2 = conn.prepareStatement(sql);;
                 rs = ptm2.executeQuery();
                 if (rs.next()) {
                     int jobId = rs.getInt("jobId");
                     return jobId;
-                }                
+                }
             }
         } catch (Exception e) {
-            
+
         } finally {
             if (rs != null) {
                 rs.close();
@@ -96,11 +94,11 @@ public class JobPostDAO {
             if (conn != null) {
                 conn.close();
             }
-            
+
         }
-        return 0;        
+        return 0;
     }
-    
+
     public void uploadQuestion(int jobId, String q)
             throws SQLException {
         Connection conn = null;
@@ -114,7 +112,7 @@ public class JobPostDAO {
                 ptm.executeUpdate();
             }
         } catch (Exception e) {
-            
+
         } finally {
             if (ptm != null) {
                 ptm.close();
@@ -171,7 +169,7 @@ public class JobPostDAO {
         }
         return list;
     }
-    
+
     public List<JobPostDTO> getMyJobPostDone(String userId) throws SQLException {
         List<JobPostDTO> list = new ArrayList<>();
         Connection conn = null;

@@ -328,20 +328,19 @@
                             class="navbar-toggler-icon"> </span></button>
                     <div class="collapse navbar-collapse border-top border-lg-0 mt-4 mt-lg-0" id="navbarSupportedContent">
                         <ul class="navbar-nav ms-auto pt-2 pt-lg-0 font-base align-items-lg-center align-items-start">
-                            <li class="nav-item px-3"><a class="nav-link fw-bold" aria-current="page" href="lostAndfoundhome">Trang chủ</a>
+                            <li class="nav-item px-3"><a class="nav-link fw-bold" aria-current="page" href="lostAndfoundhome">TRANG CHỦ</a>
                             </li>
-                            <li class="nav-item px-3"><a class="nav-link fw-bold" aria-current="page" href="#phanloai">Phân loại</a>
+                            <li class="nav-item px-3"><a class="nav-link fw-bold" aria-current="page" href="#phanloai">PHÂN LOẠI</a>
                             </li>
-                            <li class="nav-item px-3"><a class="nav-link fw-bold" aria-current="page" href="#moinhatduoc">Mới nhặt
-                                    được</a></li>
-                            <li class="nav-item px-3"><a class="nav-link fw-bold" aria-current="page" href="#moithatlac">Mới thất
-                                    lạc</a></li>
-                            <li class="nav-item px-3"><a class="nav-link fw-bold" aria-current="page" href="#timkiem">Tìm kiếm</a></li>
+                            <li class="nav-item px-3"><a class="nav-link fw-bold" aria-current="page" href="#moinhatduoc">MỚI NHẶT ĐƯỢC</a></li>
+                            <li class="nav-item px-3"><a class="nav-link fw-bold" aria-current="page" href="#moithatlac">MỚI THẤT LẠC</a></li>
+                            <li class="nav-item px-3"><a class="nav-link fw-bold" aria-current="page" href="main?action=ListAll">TÌM KIẾM</a></li>
                                 <c:if test="${empty sessionScope.LOGIN_USER}">
-                                <li class="nav-item px-3"><a class="btn btn-outline-light order-1 order-lg-0 fw-bold" href="#!">Đăng nhập /
+                                <li class="nav-item px-3"><a class="btn btn-outline-light order-1 order-lg-0 fw-bold" href="login.jsp">Đăng nhập /
                                         Đăng ký</a></li>
                                     </c:if>
                                     <c:if test="${!empty sessionScope.LOGIN_USER}">
+                                        <li class="nav-item px-3"><a class="nav-link fw-bold" aria-current="page" href="#">ĐĂNG BÀI</a></li>
                                 <!-- User -->
                                 <li class="nav-item px-3 navbar-dropdown dropdown-user dropdown">
                                     <a class="btn btn-outline-light order-1 order-lg-0 fw-bold nav-link hide-arrow" id="nameLogin" href="" data-bs-toggle="dropdown">
@@ -420,19 +419,19 @@
                 <div class="container" style="max-width: 771px;">
                     <div class="card card-shadow">
                         <!--                        <form action="main" class="needs-validation" novalidate>-->
-                        <form action="main" method="POST" enctype="multipart/form-data" class="needs-validation" novalidate>
+                        <form action="main" method="POST" enctype="multipart/form-data">
                             <div class="card-header bg-white pt-4 pb-4 pl-10 pr-10 border-bottom d-md-flex">
                                 <h3 class="">ĐĂNG TIN</h3>                               
                             </div>
-                            <div class="pl-10 pr-10 pt-3"><h4 class="text-success">${requestScope.SUCCESS}</h4></div>
+<!--                            <div class="pl-10 pr-10 pt-3"><h4 class="text-success">${requestScope.MESSAGE}</h4></div>-->
                             <div class="card-body pl-10 pr-10">
                                 <div class="form-group mb-3">
                                     <label class="form-control-label fw-bold mb-3">Bạn muốn đăng loại tin nào?</label>
                                     <div class="row">
                                         <div class="col-lg-4 mb-3">
                                             <span class="w-100">
-                                                <input type="radio" class="form-check-input required" required="true" data-rule-required="true" name="timeJob" value="1" id="timeJob_1" data-validate-hide-message="1" checked="checked">
-                                                <label for="timeJobs_1">
+                                                <input type="radio" class="form-check-input required" required="true" data-rule-required="true" name="type" value="0" id="type_1" data-validate-hide-message="1" checked="checked">
+                                                <label for="type_0">
                                                     <span class="inside pt-2 pb-2">
                                                         <span class="d-block fw-500"> Đồ thất lạc</span>
                                                     </span>
@@ -441,8 +440,8 @@
                                         </div>
                                         <div class="col-lg-4 mb-3">
                                             <span class="w-100">
-                                                <input type="radio" class="form-check-input required" required="true" data-rule-required="true" name="timeJob" value="2" id="timeJob_2" data-validate-hide-message="1">
-                                                <label for="timeJobs_2">
+                                                <input type="radio" class="form-check-input required" required="true" data-rule-required="true" name="type" value="1" id="type_2" data-validate-hide-message="1">
+                                                <label for="type_1">
                                                     <span class="inside pt-2 pb-2">
                                                         <span class="d-block fw-500"> Đồ nhặt được</span>
                                                     </span>
@@ -453,7 +452,7 @@
                                 </div>
                                 <div class="form-group mb-4">
                                     <label for="title" class="form-control-label fw-bold mb-2">Tiêu đề</label>
-                                    <input type="text" name="title" value="" id="titleJob" data-validate-hide-message="1"
+                                    <input type="text" name="title" id="title" data-validate-hide-message="1"
                                            class="form-control required" required="true" data-rule-required="true" data-rule-maxlength="255">
                                     <!--                                    <div class="invalid-feedback fw-bold">
                                                                             Vui lòng nhập!
@@ -461,8 +460,8 @@
 
                                 </div>
                                 <div class="form-group mb-4">
-                                    <label for="category" class="form-control-label fw-bold mb-2">Loại đồ vật</label>
-                                    <select name="jobCategoryId" id="categoryJob" class="form-select form-select-lg mb-3 required" required="true" data-rule-required="true" aria-label=".form-select-lg example">
+                                    <label for="categoryId" class="form-control-label fw-bold mb-2">Loại đồ vật</label>
+                                    <select name="categoryId" id="category" class="form-select form-select-lg mb-3 required" required="true" data-rule-required="true" aria-label=".form-select-lg example">
                                         <option selected disabled value="">Chọn...</option>
                                         <option value="1">Điện thoại</option>
                                         <option value="2">Laptop</option>
@@ -473,20 +472,10 @@
                                         <option value="7">Chìa khóa</option>
                                         <option value="8">Khác</option>
                                     </select>
-                                    <div class="invalid-feedback fw-bold">
-                                        Vui lòng chọn!
-                                    </div>
+                                    
                                 </div>
                                 <div class="form-group mb-4">
                                     <label for="description" class="form-control-label fw-bold mb-2">Mô tả chi tiết</label>
-                                    <!--                                    <p class="" style="font-size: 0.875rem;">
-                                                                            <strong class="d-block mb-2">Gợi ý nhập mô tả chi tiết</strong>
-                                                                            <span class="text-gray-600">
-                                                                                        • Làm mất ở đâu ?<br>
-                                                                                        • Khi nào ?<br>
-                                                                                        • Các thông tin khác liên quan
-                                                                            </span>
-                                                                        </p>-->
 
                                     <div class="form-floating">
                                         <textarea class="form-control required" required="true" data-rule-required="true" name="description" placeholder=" " id="floatingTextarea2"
@@ -503,12 +492,12 @@
                                                                     <label  for="job_gallery">Ảnh:</label>
                                                                         <input type="file" name="image"accept=".png, .jpg, .jpeg">-->
                                 <!--<div class="form-group mb-4">-->
-                                <!--<div class="form-group mb-4">-->
+                                <div class="form-group mb-4">
                                     <div class="file-upload">
                                         <button class="file-upload-btn" type="button" onclick="$('.file-upload-input').trigger('click')">Add image</button>
 
                                         <div class="image-upload-wrap">
-                                            <input class="file-upload-input" type='file' onchange="readURL(this);" accept="image/*" />
+                                            <input class="file-upload-input" name="postImg" type='file' onchange="readURL(this);" accept=".png, .jpg, .jpeg" />
                                             <div class="drag-text">
                                                 Drop your image here, or select Add image
                                             </div>
@@ -521,12 +510,12 @@
                                             </div>
                                         </div>
                                     </div>
-                                <!--</div>-->
+                                </div>
                                 <!--</div>-->
                                 <div class="card-footer pt-4 pb-2">
                                     <div class="row justify-content-md-end">
                                         <div class="col-lg-3 col-md-5 mb-3">
-                                            <a href="/employerHome" class="btn btn-outline-primary btn-lg btn-block">Thoát</a>
+                                            <a href="lostAndfoundhome" class="btn btn-outline-primary btn-lg btn-block">Thoát</a>
                                         </div>
                                         <div class="col-lg-3 col-md-5 mb-3">
                                             <button type="submit" name="action" value="UploadPost"
