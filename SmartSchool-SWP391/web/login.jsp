@@ -80,7 +80,7 @@
     </nav>
     <section class="" style="padding-top: 2rem; min-height: 61rem;">
       <div class="bg-holder"
-        style="background-image:url(https://hcmuni.fpt.edu.vn/Data/Sites/1/media/hinh-gioi-thieu-dai-hoc-fpt/hcm.png);">
+        style="background-image:url(assets/img/Background-FPT-1.png);">
       </div>
       <!--/.bg-holder-->
 

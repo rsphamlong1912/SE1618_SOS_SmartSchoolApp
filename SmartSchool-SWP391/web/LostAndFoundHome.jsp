@@ -156,7 +156,7 @@
             </nav>
             <section style="padding-top: 1rem;" id="timkiem">
                 <div class="bg-holder"
-                     style="background-image:url(https://hcmuni.fpt.edu.vn/Data/Sites/1/media/hinh-gioi-thieu-dai-hoc-fpt/hcm.png);">
+                     style="background-image:url(assets/img/Background-FPT-1.png);">
                 </div>
                 <!--/.bg-holder-->
 
