@@ -71,7 +71,7 @@
                             </li>
                             <li class="nav-item px-3"><a class="nav-link fw-bold" aria-current="page" href="#linhvuc">LĨNH VỰC</a>
                             </li>
-                            <li class="nav-item px-3"><a class="nav-link fw-bold" aria-current="page" href="FreelanceList.jsp">TÌM VIỆC</a>
+                            <li class="nav-item px-3"><a class="nav-link fw-bold" aria-current="page" href="main?action=ListJobPost">TÌM VIỆC</a>
                             </li>
                             <li class="nav-item px-3 navbar-dropdown dropdown-user dropdown">
                                 <a class="btn btn-outline-light order-1 order-lg-0 fw-bold nav-link hide-arrow" id="nameLogin" href="" data-bs-toggle="dropdown">

@@ -57,6 +57,8 @@ public class MainController extends HttpServlet {
     private static final String LIST_ALL_CONTROLLER = "listAll";
     private static final String UPLOAD_POST = "UploadPost";
     private static final String UPLOAD_POST_CONTROLLER = "uploadPost";
+    private static final String LIST_ALL_JOBPOST = "ListJobPost";
+    private static final String LIST_ALL_JOBPOST_CONTROLLER = "listJobPost";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -109,6 +111,9 @@ public class MainController extends HttpServlet {
             }
             if (UPLOAD_POST.equals(action)) {
                 url = UPLOAD_POST_CONTROLLER;
+            }
+            if (LIST_ALL_JOBPOST.equals(action)) {
+                url = LIST_ALL_JOBPOST_CONTROLLER;
             }
         } catch (Exception e) {
             log("Error at MainController: " + e.toString());
