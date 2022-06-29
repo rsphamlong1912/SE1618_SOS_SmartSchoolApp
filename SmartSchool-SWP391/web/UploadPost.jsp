@@ -275,8 +275,8 @@
 
 
         .file-upload-image {
-            max-height: 200px;
-            max-width: 200px;
+            max-height: 300px;
+            max-width: 300px;
             margin: auto;
             padding: 20px;
         }
@@ -285,11 +285,11 @@
             width: 200px;
             margin: 0;
             color: #fff;
-            background: #cd4535;
+            background: linear-gradient(to right, #d89f03, #f37335);
             border: none;
             padding: 10px;
-            border-radius: 4px;
-            border-bottom: 4px solid #b02818;
+            border-radius: 6px;
+            border-bottom: 4px ;
             transition: all .2s ease;
             outline: none;
             text-transform: uppercase;
@@ -297,8 +297,11 @@
         }
 
         .remove-image:hover {
-            background: #c13b2a;
+/*            background: #c13b2a;
             color: #ffffff;
+            transition: all .2s ease;
+            cursor: pointer;*/
+                        color: #212832;
             transition: all .2s ease;
             cursor: pointer;
         }
@@ -419,7 +422,7 @@
                 <div class="container" style="max-width: 771px;">
                     <div class="card card-shadow">
                         <!--                        <form action="main" class="needs-validation" novalidate>-->
-                        <form action="main" method="POST" enctype="multipart/form-data">
+                        <form action="main" method="" enctype="multipart/form-data">
                             <div class="card-header bg-white pt-4 pb-4 pl-10 pr-10 border-bottom d-md-flex">
                                 <h3 class="">ĐĂNG TIN</h3>                               
                             </div>
@@ -494,19 +497,18 @@
                                 <!--<div class="form-group mb-4">-->
                                 <div class="form-group mb-4">
                                     <div class="file-upload">
-                                        <button class="file-upload-btn" type="button" onclick="$('.file-upload-input').trigger('click')">Add image</button>
+                                        <button class="file-upload-btn" type="button" onclick="$('.file-upload-input').trigger('click')">Thêm ảnh</button>
 
                                         <div class="image-upload-wrap">
-                                            <input class="file-upload-input" name="postImg" type='file' onchange="readURL(this);" accept=".png, .jpg, .jpeg" />
+                                            <input class="file-upload-input" name="postImg" id="postImg" type='file' onchange="readURL(this);" accept=".png, .jpg, .jpeg" />
                                             <div class="drag-text">
-                                                Drop your image here, or select Add image
+                                                Kéo và thả hình vào đây, hoặc chọn thêm ảnh
                                             </div>
                                         </div>
                                         <div class="file-upload-content">
                                             <img class="file-upload-image" src="#" alt="your image" />
                                             <div class="image-title-wrap">
                                                 <button type="button" onclick="removeUpload()" class="remove-image">Remove </button>
-<!--                                                <span class="image-title">Uploaded Image</span>-->
                                             </div>
                                         </div>
                                     </div>
@@ -636,6 +638,7 @@
             function removeUpload() {
                 $('.file-upload-input').replaceWith($('.file-upload-input').clone());
                 $('.file-upload-content').hide();
+                $('#postImg').val(null);
                 $('.image-upload-wrap').show();
             }
             $('.image-upload-wrap').bind('dragover', function () {
