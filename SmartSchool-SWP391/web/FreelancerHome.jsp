@@ -67,9 +67,11 @@
                             class="navbar-toggler-icon"> </span></button>
                     <div class="collapse navbar-collapse border-top border-lg-0 mt-4 mt-lg-0" id="navbarSupportedContent">
                         <ul class="navbar-nav ms-auto pt-2 pt-lg-0 font-base align-items-lg-center align-items-start">
-                            <li class="nav-item px-3"><a class="nav-link fw-bold" aria-current="page" href="">TRANG CHỦ</a>
+                            <li class="nav-item px-3"><a class="nav-link fw-bold" aria-current="page" href="freelancerhome">TRANG CHỦ</a>
                             </li>
-                            <li class="nav-item px-3"><a class="nav-link fw-bold" aria-current="page" href="">TÌM VIỆC</a>
+                            <li class="nav-item px-3"><a class="nav-link fw-bold" aria-current="page" href="#linhvuc">LĨNH VỰC</a>
+                            </li>
+                            <li class="nav-item px-3"><a class="nav-link fw-bold" aria-current="page" href="FreelanceList.jsp">TÌM VIỆC</a>
                             </li>
                             <li class="nav-item px-3 navbar-dropdown dropdown-user dropdown">
                                 <a class="btn btn-outline-light order-1 order-lg-0 fw-bold nav-link hide-arrow" id="nameLogin" href="" data-bs-toggle="dropdown">
@@ -224,9 +226,9 @@
 
             <!-- ============================================-->
             <!-- <section> begin ============================-->
-            <section class="pt-5 pt-md-9" id="phanloai">
+            <section class="pt-5 pt-md-9">
 
-                <div class="container">
+                <div class="container" id="linhvuc">
                     <div class="position-absolute z-index--1 end-0 d-none d-lg-block"><img src="assets/img/category/shape.svg" style="max-width: 200px" alt="service" /></div>
                     <div class="mb-7 text-center">
                         <h5 class="text-secondary">CATEGORY </h5>
@@ -241,7 +243,7 @@
                               </div>
                               <div class="col-md-9">
                                 <div class="card-body">
-                                  <h5 class="card-title"><a class="text-decoration-none" href="/main?action=SearchByCategory&jobCategoryId=${category.jobCategoryId}">${category.jobCategoryName}</a> </h5>
+                                  <h5 class="card-title"><a class="text-decoration-none stretched-link" href="/main?action=SearchByCategory&jobCategoryId=${category.jobCategoryId}">${category.jobCategoryName}</a> </h5>
                                   <p class="card-text">${category.jobDescription}</p>
                                 </div>
                               </div>

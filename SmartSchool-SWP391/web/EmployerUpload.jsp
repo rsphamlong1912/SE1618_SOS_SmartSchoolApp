@@ -273,7 +273,7 @@
                                 </div>
                                 <div class="form-group mb-4 w-50">
                                     <label for="salary" class="form-control-label fw-bold mb-2">Mức lương theo giờ (VNĐ/giờ)</label>
-                                    <input type="number" name="salary" value="100000" id="salary" data-validate-hide-message="1"
+                                    <input type="number" name="salary" value="" id="salary" data-validate-hide-message="1"
                                            class="form-control required" required="true" data-rule-required="true" data-rule-maxlength="255">
                                     <div class="invalid-feedback fw-bold">
                                         Vui lòng nhập!
@@ -282,7 +282,7 @@
                                 </div>
                                 <div class="form-group mb-4 w-50">
                                     <label for="amount" class="form-control-label fw-bold mb-2">Số người cần tuyển</label>
-                                    <input type="number" name="amount" value="3" id="amount" data-validate-hide-message="1"
+                                    <input type="number" name="amount" value="" id="amount" data-validate-hide-message="1"
                                            class="form-control required" required="true" data-rule-required="true" data-rule-maxlength="255">
                                     <div class="invalid-feedback fw-bold">
                                         Vui lòng nhập!
@@ -294,7 +294,7 @@
                                     <div class="row">
                                         <div class="col-lg-4 mb-3">
                                             <span class="w-100">
-                                                <input type="radio" class="form-check-input required" required="true" data-rule-required="true" name="timeJob" value="1" id="timeJob_1" data-validate-hide-message="1" checked="checked">
+                                                <input type="radio" class="form-check-input required" required="true" data-rule-required="true" name="timeJob" value="1" id="timeJob_1" data-validate-hide-message="1">
                                                 <label for="timeJobs_1">
                                                     <span class="inside pt-2 pb-2">
                                                         <span class="d-block fw-500"> Ít hơn 1 tháng</span>
