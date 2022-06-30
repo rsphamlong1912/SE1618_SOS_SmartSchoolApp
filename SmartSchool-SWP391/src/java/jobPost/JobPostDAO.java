@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -30,6 +31,10 @@ public class JobPostDAO {
     private static final String GET_MYJOBPOST_DONE = "SELECT j.jobId,j.userId,j.jobCategoryId,j.title,j.description,j.salary,j.amount,j.timeJob,j.process,j.date,j.status,c.jobCategoryName\n"
             + "            FROM tblJobPost as j, tblCategoryJob as c\n"
             + "            WHERE j.jobCategoryId=c.jobCategoryId AND status=1 AND process='done' AND  userId=? ";
+    private static final String LIST_ALL = "SELECT j.jobId,j.userId,j.jobCategoryId,j.title,j.description,j.salary,j.amount,j.timeJob,j.process,j.date,j.status,c.jobCategoryName, u.fullname,u.compName\n"
+            + "FROM tblJobPost as j, tblCategoryJob as c, tblUser u\n"
+            + "WHERE j.jobCategoryId=c.jobCategoryId AND j.userId=u.userId AND status=1 AND (process='new' OR process='process') \n"
+            + "ORDER BY jobId DESC";
 
     public static int takeMinutes() {
         long millis = System.currentTimeMillis();
@@ -53,6 +58,54 @@ public class JobPostDAO {
             return time = Integer.toString(minutesDistance / 43200) + " tháng trước";
         }
         return null;
+    }
+
+    public List<JobPostDTO> getAll() throws SQLException {
+        List<JobPostDTO> list = new ArrayList<>();
+        Connection con = null;
+        Statement stm = null;
+        ResultSet rs = null;
+        try {
+            //Creating and executing JDBC statements
+            con = DBUtils.getConnection();
+            stm = con.createStatement();
+            rs = stm.executeQuery(LIST_ALL);
+            //Loading data into the list
+            while (rs.next()) {
+                JobPostDTO post = new JobPostDTO();
+                post.setJobId(rs.getInt("jobId"));
+                post.setUserId(rs.getString("userId"));
+                post.setJobCategoryId(rs.getInt("jobCategoryId"));
+                post.setTitle(rs.getString("title"));
+                post.setDescription(rs.getString("description"));
+                post.setSalary(rs.getFloat("salary"));
+                post.setAmount(rs.getInt("amount"));
+                post.setTimeJob(rs.getInt("timeJob"));
+                post.setProcess(rs.getString("process"));
+                int date = rs.getInt("date");
+                String newDate = checkTime(date);
+                post.setDate(newDate);
+                post.setStatus(rs.getBoolean("status"));
+                post.setJobCategoryName(rs.getString("jobCategoryName"));
+                post.setFullname(rs.getString("fullname"));
+                post.setCompName(rs.getString("compName"));
+                list.add(post);
+            }
+
+        } catch (Exception ex) {
+            Logger.getLogger(PostDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return list;
     }
 
     public int uploadJobPost(String userId, int jobCategoryId, String title, String description, float salary, int amount, int timeJob)
