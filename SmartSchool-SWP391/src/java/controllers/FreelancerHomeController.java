@@ -33,6 +33,7 @@ public class FreelancerHomeController extends HttpServlet {
  
             List<JobCategoryDTO> listAllCategory = cdao.getAllCategory();          
             request.setAttribute("LISTALLCATEGORY", listAllCategory);
+            request.getSession().setAttribute("urlBranch", "Freelance");
         } catch (Exception e) {
         } finally {
             request.getRequestDispatcher("FreelancerHome.jsp").forward(request, response);

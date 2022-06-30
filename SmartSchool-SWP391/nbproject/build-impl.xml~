@@ -1001,9 +1001,6 @@ exists or setup the property manually. For example like this:
 
 
 
-
-
-
         <mkdir dir="${build.web.dir}/META-INF"/>
         <manifest file="${build.web.dir}/META-INF/MANIFEST.MF" mode="update"/>
     </target>
