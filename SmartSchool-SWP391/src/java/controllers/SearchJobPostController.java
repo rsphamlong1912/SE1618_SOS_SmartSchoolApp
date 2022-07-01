@@ -48,6 +48,7 @@ public class SearchJobPostController extends HttpServlet {
         String txtSearch = request.getParameter("search");
         JobPostDAO dao = new JobPostDAO();
         List<JobPostDTO> listPost = dao.searchPostByTitle(txtSearch);
+
         
         JobCategoryDAO cdao = new JobCategoryDAO();
         List<JobCategoryDTO> listAllCategory = cdao.getAllCategory();
