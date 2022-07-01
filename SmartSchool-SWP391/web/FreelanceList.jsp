@@ -234,34 +234,15 @@
                                     <div class="section-title">
                                         <h4>Categories</h4>
                                     </div>
-                                    
+
                                     <ul class="list-group list-group-flush">
                                         <c:forEach items='${requestScope.LISTJOBCATEGORY}' var='listJobCategory'>
-                                        <li class="list-group-item"><a class="text-decoration-none" href="#">${listJobCategory.jobCategoryName}</a>
-                                        </li>
-<!--                                        <li class="list-group-item"><a class="text-decoration-none" href="#">Thiết Kế - Mỹ
-                                                Thuật</a></li>
-                                        <li class="list-group-item"><a class="text-decoration-none" href="#">Giáo Dục - Đào
-                                                Tạo</a></li>
-                                        <li class="list-group-item"><a class="text-decoration-none" href="#">Truyền Thông -
-                                                Media</a></li>
-                                        <li class="list-group-item"><a class="text-decoration-none" href="#">Kế Toán - Tài
-                                                Chính</a></li>
-                                        <li class="list-group-item"><a class="text-decoration-none" href="#">Kinh Doanh -
-                                                Bán Hàng</a></li>
-                                        <li class="list-group-item"><a class="text-decoration-none" href="#">Xây Dựng</a>
-                                        </li>
-                                        <li class="list-group-item"><a class="text-decoration-none" href="#">Hành Chính -
-                                                Nhân Sự</a></li>
-                                        <li class="list-group-item"><a class="text-decoration-none" href="#">Khách Sạn - Nhà
-                                                Hàng</a></li>
-                                        <li class="list-group-item"><a class="text-decoration-none" href="#">Kỹ Thuật - Cơ
-                                                Khí</a></li>
-                                        <li class="list-group-item"><a class="text-decoration-none" href="#">Dịch Vụ</a>-->
-                                        </li>
+                                            <li class="list-group-item"><a class="text-decoration-none" href="#">${listJobCategory.jobCategoryName}</a>
+                                            </li>
+                                            </li>
                                         </c:forEach>
                                     </ul>
-                                    
+
                                 </div>
                             </div>
                         </div>
@@ -272,59 +253,60 @@
                                         <div class="card overflow-hidden shadow shadow-hover" id="hoverCard">
                                             <div class="card-body ">
                                                 <div class="row mb-3">
-                                                    <div class="col-md-2"><img
-                                                            <img src="${pageContext.servletContext.contextPath}/avatar?userId=${listJob.userId}"
-                                                        alt class="" style="width: 50px; height: 50px;"/>
-                                                    </div>
-                                                    <div class="col-md-9" style="padding-left: 0px;">
-                                                        <div
-                                                            class="d-flex flex-column flex-lg-row justify-content-between">
-                                                            <h5 class="text-secondary fw-medium text-truncate">${listJob.userId}</h5>
-                                                            <span class="fs-1 fw-medium d-flex"></span>
+                                                    <div class="col-md-2">
+                                                                
+                                                                <img src="${pageContext.servletContext.contextPath}/avatar?userId=${listJob.userId}"
+                                                                     alt class="" style="width: 50px; height: 50px;"/>
                                                         </div>
-                                                        <div class="d-flex align-items-center"><span class="fw-medium"
-                                                                                                     style="font-size: 15px;">${listJob.compName}</span>
+                                                        <div class="col-md-9" style="padding-left: 0px;">
+                                                            <div
+                                                                class="d-flex flex-column flex-lg-row justify-content-between">
+                                                                <h5 class="text-secondary fw-medium text-truncate">${listJob.fullname}</h5>
+                                                                <span class="fs-1 fw-medium d-flex"></span>
+                                                            </div>
+                                                            <div class="d-flex align-items-center"><span class="fw-medium"
+                                                                                                         style="font-size: 15px;">${listJob.compName}</span>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div class="d-flex flex-column flex-lg-row justify-content-between mb-2">
-                                                    <h5 class="text-secondary fw-medium text-truncate"><a
-                                                            class="link-901 text-decoration-none stretched-link" href="#!">${listJob.title}</a></h5><span class="fs-1 fw-medium"></span>
-                                                </div>
-                                                <div class="d-flex align-items-center mb-2"> <span
-                                                        class="fw-medium" style="font-size: 14px;">Lĩnh vực: ${listJob.jobCategoryName}</span>
-                                                </div>
-                                                <div class="d-flex align-items-center mb-2"> <img src="assets/img/dest/dollar.svg"
-                                                                                                  style="margin-right: 5px;" width="20" alt="navigation" /><span
-                                                                                                  class="fw-medium" style="font-size: 14px;">${listJob.salary} VNĐ/h</span>
-                                                </div>
-                                                <div class="d-flex align-items-center mb-2"> <img src="assets/img/dest/user.svg"
-                                                                                                  style="margin-right: 5px;" width="20" alt="navigation" /><span
-                                                                                                  class="fw-medium" style="font-size: 14px;">${listJob.amount} người</span>
-                                                </div>
-                                                <div class="d-flex align-items-center mb-5"> <img src="assets/img/dest/calendar.svg"
-                                                                                                  style="margin-right: 5px;" width="20" alt="navigation" /><span
-                                                                                                  class="fw-semibold" style="font-size: 14px;">                                            
-                                                        <c:choose> 
-                                                            <c:when test="${listJob.timeJob==1}">
-                                                                Ít hơn 1 tháng
-                                                            </c:when> 
-                                                            <c:when test="${listJob.timeJob==2}">
-                                                                1 - 3 tháng
-                                                            </c:when>
-                                                            <c:when test="${listJob.timeJob==3}">
-                                                                Hơn 3 tháng
-                                                            </c:when> 
-                                                        </c:choose></span>
+                                                    <div class="d-flex flex-column flex-lg-row justify-content-between mb-2">
+                                                        <h5 class="text-secondary fw-medium text-truncate"><a
+                                                                class="link-901 text-decoration-none stretched-link" href="#!">${listJob.title}</a></h5><span class="fs-1 fw-medium"></span>
+                                                    </div>
+                                                    <div class="d-flex align-items-center mb-2"> <span
+                                                            class="fw-medium" style="font-size: 14px;">Lĩnh vực: ${listJob.jobCategoryName}</span>
+                                                    </div>
+                                                    <div class="d-flex align-items-center mb-2"> <img src="assets/img/dest/dollar.svg"
+                                                                                                      style="margin-right: 5px;" width="20" alt="navigation" /><span
+                                                                                                      class="fw-medium" style="font-size: 14px;">${listJob.salary} VNĐ/h</span>
+                                                    </div>
+                                                    <div class="d-flex align-items-center mb-2"> <img src="assets/img/dest/user.svg"
+                                                                                                      style="margin-right: 5px;" width="20" alt="navigation" /><span
+                                                                                                      class="fw-medium" style="font-size: 14px;">${listJob.amount} người</span>
+                                                    </div>
+                                                    <div class="d-flex align-items-center mb-5"> <img src="assets/img/dest/calendar.svg"
+                                                                                                      style="margin-right: 5px;" width="20" alt="navigation" /><span
+                                                                                                      class="fw-semibold" style="font-size: 14px;">                                            
+                                                            <c:choose> 
+                                                                <c:when test="${listJob.timeJob==1}">
+                                                                    Ít hơn 1 tháng
+                                                                </c:when> 
+                                                                <c:when test="${listJob.timeJob==2}">
+                                                                    1 - 3 tháng
+                                                                </c:when>
+                                                                <c:when test="${listJob.timeJob==3}">
+                                                                    Hơn 3 tháng
+                                                                </c:when> 
+                                                            </c:choose></span>
 
-                                                </div>
-                                                <div class="d-flex align-items-center"> <img src="assets/img/dest/clock.svg"
-                                                                                             style="margin-right: 5px;" width="15" alt="navigation" /><span
-                                                                                             class="fw-medium" style="font-size: 12px;">${listJob.date}</span>
+                                                    </div>
+                                                    <div class="d-flex align-items-center"> <img src="assets/img/dest/clock.svg"
+                                                                                                 style="margin-right: 5px;" width="15" alt="navigation" /><span
+                                                                                                 class="fw-medium" style="font-size: 12px;">${listJob.date}</span>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
                                 </c:forEach>
                             </div>
                         </div>
@@ -411,7 +393,7 @@
                             function searchPost(param) {
                                 var txtSearch = param.value;
                                 $.ajax({
-                                    url: "/searchPost",
+                                    url: "/searchJobPost",
                                     type: "get",
                                     data: {
                                         search: txtSearch
