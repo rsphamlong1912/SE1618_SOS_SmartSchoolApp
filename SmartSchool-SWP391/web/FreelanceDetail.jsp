@@ -263,12 +263,11 @@
                                     <div class="content-detail mb-3">
                                         <div class="d-flex flex-column flex-lg-row justify-content-between mb-2">
                                             <h5 class="text-secondary fw-medium text-truncate"><a
-                                                    class="link-901 text-decoration-none " href="#!">Tuyển
-                                                    dụng Quản trị Web Wordpress, Lập trình Wordpress Theme</a></h5><span
+                                                    class="link-901 text-decoration-none " href="#!">${JOBDETAIL.title}</a></h5><span
                                                 class="fs-1 fw-medium"></span>
                                         </div>
                                         <div class="d-flex align-items-center mb-2">
-                                            <h6>Lĩnh vực: Lập Trình</h6>
+                                            <h6>Lĩnh vực: ${JOBDETAIL.jobCategoryName}</h6>
                                         </div>
                                     </div>
                                     <div class="content-detail mb-3">
@@ -276,31 +275,36 @@
                                             <h6>Mô tả công việc:</h6>
 
                                             <span class="fw-medium" style="font-size: 0.88889rem; line-height: 2.5;">
-                                                TUYỂN DỤNG Giảng viên hoặc nhân viên văn phòng có kinh nghiệm, đang làm
-                                                việc trong lĩnh vực IT như: Xây dựng và quản trị website WordPress Lập
-                                                trình WordPress Theme Giảng viên và học viên chủ động lựa chọn không
-                                                gian, thời gian làm việc thích hợp & hiệu quả, với một mục đích duy nhất
-                                                là đảm bảo chất lượng, tạo cảm hứng trong học tập, thúc đẩy sáng tạo !
+                                                ${JOBDETAIL.description}
                                             </span>
 
                                         </div>
                                     </div>
                                     <div class="d-flex align-items-center mb-2">
-                                        <h6>Mức lương: <span class="fw-medium" style="font-size: 14px;">10000
+                                        <h6>Mức lương: <span class="fw-medium" style="font-size: 14px;">${JOBDETAIL.salary}
                                                 VNĐ/h</span></h6>
                                     </div>
                                     <div class="d-flex align-items-center mb-2">
-                                        <h6>Số người cần tuyển: <span class="fw-medium" style="font-size: 14px;">8
+                                        <h6>Số người cần tuyển: <span class="fw-medium" style="font-size: 14px;">${JOBDETAIL.amount}
                                                 người</span></h6>
                                     </div>
                                     <div class="d-flex align-items-center mb-5">
-                                        <h6>Thời gian công việc: <span class="fw-medium" style="font-size: 14px;">1 - 3
-                                                tháng</span></h6>
+                                        <h6>Thời gian công việc: <span class="fw-medium" style="font-size: 14px;">
+                                                <c:choose> 
+                                                <c:when test="${JOBDETAIL.timeJob==1}">
+                                                    Ít hơn 1 tháng
+                                                </c:when> 
+                                                <c:when test="${JOBDETAIL.timeJob==2}">
+                                                    1 - 3 tháng
+                                                </c:when>
+                                                <c:when test="${JOBDETAIL.timeJob==3}">
+                                                    Hơn 3 tháng
+                                                </c:when> 
+                                            </c:choose></span></h6>
                                     </div>
                                     <div class="d-flex align-items-center"> <span class="fw-medium"
                                             style="font-size: 14px;"> <img src="assets/img/dest/clock.svg"
-                                                style="margin-right: 5px;" width="15" alt="navigation" /> Đã đăng 5 phút
-                                            trước</span>
+                                                style="margin-right: 5px;" width="15" alt="navigation" /> Đã đăng ${JOBDETAIL.date}</span>
                                     </div>
                                 </div>
                                 <div class="card-footer pt-4 pb-2">
