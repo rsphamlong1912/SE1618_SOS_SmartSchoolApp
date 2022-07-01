@@ -257,17 +257,17 @@
                         <div class="row mb-3">
                             <div class="card overflow-hidden shadow ">
                                 <div class="card-header bg-white pt-4 pl-10 pr-10 border-bottom d-md-flex">
-                                    <h5 class="">${requestScope.JOBDETAIL.salary}</h5>
+                                    <h5 class="">THÔNG TIN CÔNG VIỆC</h5>
                                 </div>
                                 <div class="card-body">
                                     <div class="content-detail mb-3">
                                         <div class="d-flex flex-column flex-lg-row justify-content-between mb-2">
                                             <h5 class="text-secondary fw-medium text-truncate"><a
-                                                    class="link-901 text-decoration-none " href="#!">${requestScope.JOBDETAIL.title}</a></h5><span
+                                                    class="link-901 text-decoration-none " href="#!">${JOBDETAIL.title}</a></h5><span
                                                 class="fs-1 fw-medium"></span>
                                         </div>
                                         <div class="d-flex align-items-center mb-2">
-                                            <h6>Lĩnh vực: Lập Trình</h6>
+                                            <h6>Lĩnh vực: ${JOBDETAIL.jobCategoryName}</h6>
                                         </div>
                                     </div>
                                     <div class="content-detail mb-3">
@@ -275,25 +275,36 @@
                                             <h6>Mô tả công việc:</h6>
 
                                             <span class="fw-medium" style="font-size: 0.88889rem; line-height: 2.5;">
-                                                ${requestScope.JOBDETAIL.description}
+                                                ${JOBDETAIL.description}
                                             </span>
 
                                         </div>
                                     </div>
                                     <div class="d-flex align-items-center mb-2">
-                                        <h6>Mức lương: <span class="fw-medium" style="font-size: 14px;">${requestScope.JOBDETAIL.salary}
+                                        <h6>Mức lương: <span class="fw-medium" style="font-size: 14px;">${JOBDETAIL.salary}
                                                 VNĐ/h</span></h6>
                                     </div>
                                     <div class="d-flex align-items-center mb-2">
-                                        <h6>Số người cần tuyển: <span class="fw-medium" style="font-size: 14px;">${requestScope.JOBDETAIL.amout} người</span></h6>
+                                        <h6>Số người cần tuyển: <span class="fw-medium" style="font-size: 14px;">${JOBDETAIL.amount}
+                                                người</span></h6>
                                     </div>
                                     <div class="d-flex align-items-center mb-5">
-                                        <h6>Thời gian công việc: <span class="fw-medium" style="font-size: 14px;">1 - 3
-                                                tháng</span></h6>
+                                        <h6>Thời gian công việc: <span class="fw-medium" style="font-size: 14px;">
+                                                <c:choose> 
+                                                <c:when test="${JOBDETAIL.timeJob==1}">
+                                                    Ít hơn 1 tháng
+                                                </c:when> 
+                                                <c:when test="${JOBDETAIL.timeJob==2}">
+                                                    1 - 3 tháng
+                                                </c:when>
+                                                <c:when test="${JOBDETAIL.timeJob==3}">
+                                                    Hơn 3 tháng
+                                                </c:when> 
+                                            </c:choose></span></h6>
                                     </div>
                                     <div class="d-flex align-items-center"> <span class="fw-medium"
                                             style="font-size: 14px;"> <img src="assets/img/dest/clock.svg"
-                                                style="margin-right: 5px;" width="15" alt="navigation" /> ${requestScope.JOBDETAIL.date}</span>
+                                                style="margin-right: 5px;" width="15" alt="navigation" /> Đã đăng ${JOBDETAIL.date}</span>
                                     </div>
                                 </div>
                                 <div class="card-footer pt-4 pb-2">
