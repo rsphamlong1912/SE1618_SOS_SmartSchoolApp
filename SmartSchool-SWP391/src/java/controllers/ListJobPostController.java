@@ -5,8 +5,6 @@
  */
 package controllers;
 
-import category.CategoryDAO;
-import category.CategoryDTO;
 import java.io.IOException;
 import java.util.List;
 import javax.servlet.ServletException;
@@ -14,30 +12,42 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import jobCategory.JobCategoryDAO;
+import jobCategory.JobCategoryDTO;
+import jobPost.JobPostDAO;
+import jobPost.JobPostDTO;
 import post.PostDAO;
-import post.PostDTO;
 
 /**
  *
- * @author TrinhNgocBao
+ * @author SE150925 Nguyen Van Hai Nam
  */
-@WebServlet(name = "ListPostController", urlPatterns = {"/listAll"})
-public class ListPostController extends HttpServlet {
+@WebServlet(name = "ListJobPostController", urlPatterns = {"/listJobPost"})
+public class ListJobPostController extends HttpServlet {
 
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-         try {
-            PostDAO pdao = new PostDAO();
-            CategoryDAO cdao = new CategoryDAO();
-            List<PostDTO> listAll = pdao.getAll();
-            List<CategoryDTO> listAllCategory = cdao.getAllCategory();
+                     try {
+            JobPostDAO dao = new JobPostDAO();
+            JobCategoryDAO cdao = new JobCategoryDAO();
+            List<JobPostDTO> listAll = dao.getAll();
+            List<JobCategoryDTO> listAllCategory = cdao.getAllCategory();
 
-            request.setAttribute("LISTPOST", listAll);
-            request.setAttribute("LISTALLCATEGORY", listAllCategory);
+            request.setAttribute("LISTJOBPOST", listAll);
+            request.setAttribute("LISTJOBCATEGORY", listAllCategory);
         } catch (Exception e) {
         } finally {
-            request.getRequestDispatcher("list.jsp").forward(request, response);
+            request.getRequestDispatcher("FreelanceList.jsp").forward(request, response);
         }
     }
 
