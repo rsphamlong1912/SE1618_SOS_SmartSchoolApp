@@ -258,7 +258,7 @@
                                         <li class="list-group-item"><a class="text-decoration-none" href="#">Kỹ Thuật - Cơ
                                                 Khí</a></li>
                                         <li class="list-group-item"><a class="text-decoration-none" href="#">Dịch Vụ</a>-->
-                                        </li>
+                                        </li>             
                                         </c:forEach>
                                     </ul>
                                     
