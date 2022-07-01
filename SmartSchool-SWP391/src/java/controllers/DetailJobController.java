@@ -6,53 +6,56 @@
 package controllers;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.Part;
-import user.UserDAO;
-import user.UserDTO;
+import jobCategory.JobCategoryDAO;
+import jobCategory.JobCategoryDTO;
+import jobPost.JobPostDAO;
+import jobPost.JobPostDTO;
 
 /**
  *
- * @author TQK
+ * @author SE150888 Pham Ngoc Long
  */
-@WebServlet(name = "SignUpController", urlPatterns = {"/signup"})
-public class SignUpController extends HttpServlet {
-
-    private static final String SUCCESS = "register.jsp";
-    private static final String ERROR = "register.jsp";
-
+@WebServlet(name = "DetailJobController", urlPatterns = {"/detailJob"})
+public class DetailJobController extends HttpServlet {
+    private static final String DETAIL_PAGE ="FreelanceDetail.jsp";
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = ERROR;
+        
         try {
-            String fullname = request.getParameter("fullName");
-            String userId = request.getParameter("userName");
-            String password = request.getParameter("password");
-            String rePassword = request.getParameter("repassword");
-            String email = request.getParameter("email");
-            String phone = request.getParameter("phone");
-            UserDAO dao = new UserDAO();
-            UserDTO user = dao.checkAccountExist(userId);
-            if (user != null) {
-                request.setAttribute("ERROR", "Tên đăng nhập đã tồn tại!");
-                request.setAttribute("FULLNAME", fullname);
-                request.setAttribute("USERNAME", userId);
-                request.setAttribute("EMAIL", email);
-                request.setAttribute("PHONE", phone);
-            } else {
-                dao.signup(fullname, userId, password, email, phone);
-                request.setAttribute("SUCCESS", "Đăng ký tài khoản thành công!");
-                url = SUCCESS;
-            }
-        } catch (Exception e) {
-            log("Error at SignUpController: " + e.toString());
-        } finally {
+           response.setContentType("text/html;charset=UTF-8");
+            String url = DETAIL_PAGE;
+            String jobId = request.getParameter("jobId");
+            JobPostDAO dao = new JobPostDAO();
+            JobPostDTO postJob = dao.getJobInformation(jobId);
+
+            request.setAttribute("JOBDETAIL", postJob);
+//            request.setAttribute("LISTJOBPOST", listPost);
             request.getRequestDispatcher(url).forward(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(SearchJobPostController.class.getName()).log(Level.SEVERE, null, ex);
+        
+        } finally{
+            
         }
     }
 

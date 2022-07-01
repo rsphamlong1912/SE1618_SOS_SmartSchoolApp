@@ -213,13 +213,14 @@
                 <div class="row height d-flex justify-content-center align-items-center">
 
                     <div class="offset-md-3 col-md-9">
-
-                        <div class="search">
-                            <i class="fa fa-search"></i>
-                            <input oninput="searchPost(this)" type="text" name="search" value=""
-                                   class="form-control inputSearch" placeholder="Bạn đang tìm kiếm công việc gì ?">
-                            <button class="btn btn-primary">Search</button>
-                        </div>
+                        <form action="main">
+                            <div class="search">
+                                <i class="fa fa-search"></i>
+                                <input type="text" name="search" value=""
+                                       class="form-control inputSearch" placeholder="Bạn đang tìm kiếm công việc gì ?">
+                                <button class="btn btn-primary" name="action" value="SearchJob">Search</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -234,34 +235,17 @@
                                     <div class="section-title">
                                         <h4>Categories</h4>
                                     </div>
-                                    
+
                                     <ul class="list-group list-group-flush">
                                         <c:forEach items='${requestScope.LISTJOBCATEGORY}' var='listJobCategory'>
-                                        <li class="list-group-item"><a class="text-decoration-none" href="#">${listJobCategory.jobCategoryName}</a>
-                                        </li>
-<!--                                        <li class="list-group-item"><a class="text-decoration-none" href="#">Thiết Kế - Mỹ
-                                                Thuật</a></li>
-                                        <li class="list-group-item"><a class="text-decoration-none" href="#">Giáo Dục - Đào
-                                                Tạo</a></li>
-                                        <li class="list-group-item"><a class="text-decoration-none" href="#">Truyền Thông -
-                                                Media</a></li>
-                                        <li class="list-group-item"><a class="text-decoration-none" href="#">Kế Toán - Tài
-                                                Chính</a></li>
-                                        <li class="list-group-item"><a class="text-decoration-none" href="#">Kinh Doanh -
-                                                Bán Hàng</a></li>
-                                        <li class="list-group-item"><a class="text-decoration-none" href="#">Xây Dựng</a>
-                                        </li>
-                                        <li class="list-group-item"><a class="text-decoration-none" href="#">Hành Chính -
-                                                Nhân Sự</a></li>
-                                        <li class="list-group-item"><a class="text-decoration-none" href="#">Khách Sạn - Nhà
-                                                Hàng</a></li>
-                                        <li class="list-group-item"><a class="text-decoration-none" href="#">Kỹ Thuật - Cơ
-                                                Khí</a></li>
-                                        <li class="list-group-item"><a class="text-decoration-none" href="#">Dịch Vụ</a>-->
-                                        </li>             
+
+                                                <li class="list-group-item"><a class="text-decoration-none" href="/main?jobCategoryId=${listJobCategory.jobCategoryId}&action=SearchJobByCategory">${listJobCategory.jobCategoryName}</a>
+                                            </li>
+
+
                                         </c:forEach>
                                     </ul>
-                                    
+
                                 </div>
                             </div>
                         </div>
@@ -272,14 +256,15 @@
                                         <div class="card overflow-hidden shadow shadow-hover" id="hoverCard">
                                             <div class="card-body ">
                                                 <div class="row mb-3">
-                                                    <div class="col-md-2"><img
-                                                            <img src="${pageContext.servletContext.contextPath}/avatar?userId=${listJob.userId}"
-                                                        alt class="" style="width: 50px; height: 50px;"/>
+                                                    <div class="col-md-2">
+
+                                                        <img src="${pageContext.servletContext.contextPath}/avatar?userId=${listJob.userId}"
+                                                             alt class="" style="width: 50px; height: 50px;"/>
                                                     </div>
                                                     <div class="col-md-9" style="padding-left: 0px;">
                                                         <div
                                                             class="d-flex flex-column flex-lg-row justify-content-between">
-                                                            <h5 class="text-secondary fw-medium text-truncate">${listJob.userId}</h5>
+                                                            <h5 class="text-secondary fw-medium text-truncate">${listJob.fullname}</h5>
                                                             <span class="fs-1 fw-medium d-flex"></span>
                                                         </div>
                                                         <div class="d-flex align-items-center"><span class="fw-medium"
@@ -289,7 +274,7 @@
                                                 </div>
                                                 <div class="d-flex flex-column flex-lg-row justify-content-between mb-2">
                                                     <h5 class="text-secondary fw-medium text-truncate"><a
-                                                            class="link-901 text-decoration-none stretched-link" href="#!">${listJob.title}</a></h5><span class="fs-1 fw-medium"></span>
+                                                            class="link-901 text-decoration-none stretched-link" href="/main?jobId=${listJob.jobId}&action=DetailJob">${listJob.title}</a></h5><span class="fs-1 fw-medium"></span>
                                                 </div>
                                                 <div class="d-flex align-items-center mb-2"> <span
                                                         class="fw-medium" style="font-size: 14px;">Lĩnh vực: ${listJob.jobCategoryName}</span>
@@ -411,7 +396,7 @@
                             function searchPost(param) {
                                 var txtSearch = param.value;
                                 $.ajax({
-                                    url: "/searchPost",
+                                    url: "/searchJobPost",
                                     type: "get",
                                     data: {
                                         search: txtSearch
