@@ -32,8 +32,12 @@ public class JobPostDAO {
             + "            FROM tblJobPost as j, tblCategoryJob as c\n"
             + "            WHERE j.jobCategoryId=c.jobCategoryId AND status=1 AND process='done' AND  userId=? ";
     private static final String LIST_ALL = "SELECT j.jobId,j.userId,j.jobCategoryId,j.title,j.description,j.salary,j.amount,j.timeJob,j.process,j.date,j.status,c.jobCategoryName, u.fullname,u.compName\n"
-            + "FROM tblJobPost as j, tblCategoryJob as c, tblUser u\n"
+            + "FROM tblJobPost as j, tblCategoryJob as c, tblUser as u\n"
             + "WHERE j.jobCategoryId=c.jobCategoryId AND j.userId=u.userId AND status=1 AND (process='new' OR process='process') \n"
+            + "ORDER BY jobId DESC";
+    private static final String SEARCH_BY_TITLE = "SELECT j.jobId,j.userId,j.jobCategoryId,j.title,j.description,j.salary,j.amount,j.timeJob,j.process,j.date,j.status,c.jobCategoryName, u.fullname,u.compName \n"
+            + "FROM  tblJobPost as j, tblCategoryJob as c, tblUser as u \n"
+            + "WHERE j.jobCategoryId=c.jobCategoryId AND j.userId=u.userId AND status=1 AND  (dbo.removeMark(title) LIKE '%chuyen%' OR title LIKE '%chuyen%') AND (process = 'new' OR process='process')\n"
             + "ORDER BY jobId DESC";
 
     public static int takeMinutes() {
@@ -250,6 +254,55 @@ public class JobPostDAO {
                     post.setDate(newDate);
                     post.setStatus(rs.getBoolean("status"));
                     post.setJobCategoryName(rs.getString("jobCategoryName"));
+                    list.add(post);
+                }
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(PostDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return list;
+    }
+
+    public List<JobPostDTO> searchPostByTitle(String search) throws SQLException {
+        List<JobPostDTO> list = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(SEARCH_BY_TITLE);
+                ptm.setString(1, "%" + search + "%");
+                ptm.setString(2, "%" + search + "%");
+                rs = ptm.executeQuery();
+                while (rs.next()) {
+                    JobPostDTO post = new JobPostDTO();
+                    post.setJobId(rs.getInt("jobId"));
+                    post.setUserId(rs.getString("userId"));
+                    post.setJobCategoryId(rs.getInt("jobCategoryId"));
+                    post.setTitle(rs.getString("title"));
+                    post.setDescription(rs.getString("description"));
+                    post.setSalary(rs.getFloat("salary"));
+                    post.setAmount(rs.getInt("amount"));
+                    post.setTimeJob(rs.getInt("timeJob"));
+                    post.setProcess(rs.getString("process"));
+                    int date = rs.getInt("date");
+                    String newDate = checkTime(date);
+                    post.setDate(newDate);
+                    post.setStatus(rs.getBoolean("status"));
+                    post.setJobCategoryName(rs.getString("jobCategoryName"));
+                    post.setFullname(rs.getString("fullname"));
+                    post.setCompName(rs.getString("compName"));
                     list.add(post);
                 }
             }
