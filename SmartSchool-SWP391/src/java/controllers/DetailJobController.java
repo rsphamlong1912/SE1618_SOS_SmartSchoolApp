@@ -20,6 +20,8 @@ import jobCategory.JobCategoryDAO;
 import jobCategory.JobCategoryDTO;
 import jobPost.JobPostDAO;
 import jobPost.JobPostDTO;
+import user.UserDAO;
+import user.UserDTO;
 
 /**
  *
@@ -47,6 +49,10 @@ public class DetailJobController extends HttpServlet {
             String jobId = request.getParameter("jobId");
             JobPostDAO dao = new JobPostDAO();
             JobPostDTO postJob = dao.getJobInformation(jobId);
+            String userId=request.getParameter("userId");
+            UserDAO udao=new UserDAO();
+            UserDTO user=udao.GetEmployerInfor(userId);
+            request.setAttribute("USERINFOR", user);
 
             request.setAttribute("JOBDETAIL", postJob);
 //            request.setAttribute("LISTJOBPOST", listPost);
