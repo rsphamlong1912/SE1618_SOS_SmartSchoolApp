@@ -266,7 +266,7 @@
                                     </div>
 
                                     <div class="row justify-content-end">
-                                        <a href="#" class="col-md-2 btn btn-primary gradient-custom-2">Xem chi tiết</a>
+                                        <a href="/main?jobId=${myJobPostProcess.jobId}&userId=${myJobPostProcess.userId}&action=DetailJob" class="col-md-2 btn btn-primary gradient-custom-2">Xem chi tiết</a>
                                     </div>
                                 </div>
                             </div>

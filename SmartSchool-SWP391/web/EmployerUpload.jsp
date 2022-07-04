@@ -260,10 +260,9 @@
                                     </p>
                                     
                                     <div class="form-floating">
-                                        <textarea class="form-control required" required="true" data-rule-required="true" name="description" placeholder=" " id="floatingTextarea2"
+                                        <textarea class="form-control required" required="true" data-rule-required="true" name="description" placeholder="Nhập mô tả" id="floatingTextarea2"
                                                   style="height: 150px"></textarea>
                                                   <small></small>
-                                        <label for="floatingTextarea2">Nhập mô tả</label>
                                     </div>
 <!--                                    <div class="invalid-feedback fw-bold">
                                         Vui lòng nhập!
