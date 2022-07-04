@@ -345,7 +345,7 @@
                                                 </c:forEach>
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                                                <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Hủy</button>
                                                 <button type="button" class="btn btn-primary gradient-custom-2">Gửi</button>
                                             </div>
                                         </div>
@@ -452,35 +452,35 @@
                                             <div class="d-flex align-items-center justify-content-center">
                                                 <h6 style="line-height: 2.5;">Thông tin công ty</h6>
                                             </div>
-                                            <c:if test="${!empty USERINFOR.compName}">
+                                           
                                                 <div class="d-flex align-items-center">
                                                     <h6 style="line-height: 2.5;">Tên công ty: <span class="fw-medium"
                                                                                                      style="font-size: 14px; "> ${USERINFOR.compName}</span></h6>
                                                 </div>
-                                            </c:if>
+                                
 
                                             <div class="d-flex align-items-center">
                                                 <h6 style="line-height: 2.5;">Số điện thoại: <span class="fw-medium"
                                                                                                    style="font-size: 14px; "> ${USERINFOR.phone}</span></h6>
                                             </div>
-                                            <c:if test="${!empty USERINFOR.email}">
+                                           
                                                 <div class="d-flex align-items-center">
                                                     <h6 style="line-height: 2.5;">Email: <span class="fw-medium text-break"
                                                                                                style="font-size: 14px;"> ${USERINFOR.email}</span></h6>
                                                 </div>
-                                            </c:if>
-                                            <c:if test="${!empty USERINFOR.compAddress}">
+                                          
+                                           
                                                 <div class="d-flex align-items-center">
-                                                    <h6 style="line-height: 2.5;">Email: <span class="fw-medium text-break"
+                                                    <h6 style="line-height: 2.5;">Địa chỉ: <span class="fw-medium text-break"
                                                                                                style="font-size: 14px;"> ${USERINFOR.compAddress}</span></h6>
                                                 </div>
-                                            </c:if>
-                                            <c:if test="${!empty USERINFOR.facebook}">
+                                           
+                                           
                                                 <div class="d-flex align-items-center">
-                                                    <h6 style="line-height: 2.5;">Email: <span class="fw-medium text-break"
+                                                    <h6 style="line-height: 2.5;">Facebook: <span class="fw-medium text-break"
                                                                                                style="font-size: 14px;"> ${USERINFOR.facebook}</span></h6>
                                                 </div>
-                                            </c:if>
+                                      
 
                                         </div>
 
