@@ -4,6 +4,7 @@
     Author     : TrinhNgocBao
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en-US" dir="ltr">
@@ -238,8 +239,10 @@
 
                                     <ul class="list-group list-group-flush">
                                         <c:forEach items='${requestScope.LISTJOBCATEGORY}' var='listJobCategory'>
+
                                                 <li class="list-group-item"><a class="text-decoration-none" href="/main?jobCategoryId=${listJobCategory.jobCategoryId}&action=SearchJobByCategory">${listJobCategory.jobCategoryName}</a>
                                             </li>
+
 
                                         </c:forEach>
                                     </ul>
@@ -272,14 +275,14 @@
                                                 </div>
                                                 <div class="d-flex flex-column flex-lg-row justify-content-between mb-2">
                                                     <h5 class="text-secondary fw-medium text-truncate"><a
-                                                            class="link-901 text-decoration-none stretched-link" href="/main?jobId=${listJob.jobId}&action=DetailJob">${listJob.title}</a></h5><span class="fs-1 fw-medium"></span>
+                                                            class="link-901 text-decoration-none stretched-link" href="/main?jobId=${listJob.jobId}&userId=${listJob.userId}&action=DetailJob">${listJob.title}</a></h5><span class="fs-1 fw-medium"></span>
                                                 </div>
                                                 <div class="d-flex align-items-center mb-2"> <span
                                                         class="fw-medium" style="font-size: 14px;">Lĩnh vực: ${listJob.jobCategoryName}</span>
                                                 </div>
                                                 <div class="d-flex align-items-center mb-2"> <img src="assets/img/dest/dollar.svg"
                                                                                                   style="margin-right: 5px;" width="20" alt="navigation" /><span
-                                                                                                  class="fw-medium" style="font-size: 14px;">${listJob.salary} VNĐ/h</span>
+                                                                                                  class="fw-medium" style="font-size: 14px;"><fmt:formatNumber value="${listJob.salary} " pattern="#,##0 VNĐ/h"/></span>
                                                 </div>
                                                 <div class="d-flex align-items-center mb-2"> <img src="assets/img/dest/user.svg"
                                                                                                   style="margin-right: 5px;" width="20" alt="navigation" /><span

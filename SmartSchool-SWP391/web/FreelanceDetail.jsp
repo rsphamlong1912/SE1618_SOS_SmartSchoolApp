@@ -4,6 +4,7 @@
     Author     : TrinhNgocBao
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en-US" dir="ltr">
@@ -281,8 +282,9 @@
                                         </div>
                                     </div>
                                     <div class="d-flex align-items-center mb-2">
-                                        <h6>Mức lương: <span class="fw-medium" style="font-size: 14px;">${JOBDETAIL.salary}
-                                                VNĐ/h</span></h6>
+                                        <h6>Mức lương: <span class="fw-medium" style="font-size: 14px;">                                                
+                                         <fmt:formatNumber value="${JOBDETAIL.salary}" pattern="#,### VNĐ/giờ"/>
+                                                </span></h6>
                                     </div>
                                     <div class="d-flex align-items-center mb-2">
                                         <h6>Số người cần tuyển: <span class="fw-medium" style="font-size: 14px;">${JOBDETAIL.amount}
@@ -400,11 +402,11 @@
                                     <div class="content-detail mb-3">
                                         <div class="avatar-upload ">
                                             <div class="text-center avatar-preview">
-                                                <img src="https://toigingiuvedep.vn/wp-content/uploads/2021/06/hinh-anh-hoat-hinh-de-thuong-cute-lam-avatar.jpg"
+                                                <img src="${pageContext.servletContext.contextPath}/avatar?userId=${JOBDETAIL.userId}"
                                                     width="164" height="164" />
                                                 </br>
                                                 </br>
-                                                <h5 class="mb-3">Trịnh Ngọc Bảo</h5>
+                                                <h5 class="mb-3">${USERINFOR.fullname}</h5>
                                             </div>
                                         </div>
                                     </div>
@@ -413,20 +415,24 @@
                                             <h6 style="line-height: 2.5;">Thông tin công ty</h6>
                                         </div>
                                         <div class="d-flex align-items-center">
+                                            <h6 style="line-height: 2.5;">Tên công ty: <span class="fw-medium"
+                                                    style="font-size: 14px; "> ${USERINFOR.compName}</span></h6>
+                                        </div>
+                                        <div class="d-flex align-items-center">
                                             <h6 style="line-height: 2.5;">Số điện thoại: <span class="fw-medium"
-                                                    style="font-size: 14px; "> 0838439296</span></h6>
+                                                    style="font-size: 14px; "> ${USERINFOR.phone}</span></h6>
                                         </div>
                                         <div class="d-flex align-items-center">
                                             <h6 style="line-height: 2.5;">Email: <span class="fw-medium text-break"
-                                                    style="font-size: 14px;"> ngbao1592001@gmail.comm</span></h6>
+                                                    style="font-size: 14px;"> ${USERINFOR.email}</span></h6>
                                         </div>
                                         <div class="d-flex align-items-center">
                                             <h6 style="line-height: 2.5;">Địa chỉ: <span class="fw-medium text-break"
-                                                    style="font-size: 14px;"> </span></h6>
+                                                    style="font-size: 14px;">${USERINFOR.compAddress} </span></h6>
                                         </div>
                                         <div class="d-flex align-items-center">
                                             <h6 style="line-height: 2.5;">Facebook: <span class="fw-medium text-break"
-                                                    style="font-size: 14px;"> https://www.facebook.com/ngocbao159</span>
+                                                    style="font-size: 14px;"> ${USERINFOR.facebook}</span>
                                             </h6>
                                         </div>
                                     </div>
