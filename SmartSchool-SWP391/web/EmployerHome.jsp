@@ -182,7 +182,8 @@
                                     </ul>
                                 </li>
                                 <!--/ User -->    
-                            </c:if>   
+                            </c:if>
+                                <li class="nav-item px-3"><a class="btn btn-outline-light order-1 order-lg-0 fw-bold" href="EmployerUpload.jsp">Đăng tuyển</a></li>
                         </ul>
                     </div>
                 </div>
