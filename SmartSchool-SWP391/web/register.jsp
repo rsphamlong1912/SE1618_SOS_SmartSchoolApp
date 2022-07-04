@@ -84,7 +84,7 @@
             </nav>
             <section style="padding-top: 0px">
                 <div class="bg-holder"
-                     style="background-image:url(https://hcmuni.fpt.edu.vn/Data/Sites/1/media/hinh-gioi-thieu-dai-hoc-fpt/hcm.png);">
+                     style="background-image:url(assets/img/Background-FPT-1.png);">
                 </div>
                 <!--/.bg-holder-->
 
@@ -92,7 +92,7 @@
                     <div class="row d-flex justify-content-center align-items-center h-100">
                         <div class="col-xl-10">
                             <div class="card rounded-1 text-secondary">
-                                <form onsubmit="return validate()" action="main" method="POST">
+                                <form onsubmit="return validate()" action="main" method="POST" >
                                     <div class="row g-0">
                                         <div class="text-center mt-5">
                                             <img src="https://upload.wikimedia.org/wikipedia/vi/1/1d/Logo_%C4%90%E1%BA%A1i_h%E1%BB%8Dc_FPT.png"
@@ -127,33 +127,33 @@
                                                 </div>
                                             </div>
                                         </div>
-                                            <div class="col-lg-6">
-                                                <div class="card-body p-md-5 mx-md-4">
-                                                    <div class="form-outline mb-2">
-                                                        <label class="form-label" for="form2Example11">Email</label>
-                                                        <input type="email" id="email" class="form-control" name="email"
-                                                               value="${requestScope.EMAIL}" placeholder="" />
-                                                        <small class="fw-bold"></small>                      
-                                                    </div>
-                                                    <div class="form-outline mb-2">
-                                                        <label class="form-label" for="form2Example11">Số điện thoại</label>
-                                                        <input type="tel" id="phone" class="form-control" name="phone"
-                                                               value="${requestScope.PHONE}" placeholder="" />
-                                                        <small class="fw-bold"></small>                      
-                                                    </div>
-                                                    <div class="text-center pt-1 mb-5 pb-1">
-                                                        <c:if test="${empty requestScope.ERROR}">
-                                                            <h6 style="color: green; display: inline-block; padding: 5px 0">${requestScope.SUCCESS}</h6></br>
-                                                        </c:if>
-                                                        <button class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="submit" name="action" value="SignUp">Đăng ký</button>                       
-                                                    </div>                     
-                                                    <div class="d-flex align-items-center justify-content-center pb-4">
-                                                        <p class="mb-0 me-2">Đã có tài khoản ?</p>
-                                                        <a class="btn btn-outline-danger" href="login.jsp">Đăng nhập</a>
-                                                    </div>
+                                        <div class="col-lg-6">
+                                            <div class="card-body p-md-5 mx-md-4">
+                                                <div class="form-outline mb-2">
+                                                    <label class="form-label" for="form2Example11">Email</label>
+                                                    <input type="email" id="email" class="form-control" name="email"
+                                                           value="${requestScope.EMAIL}" placeholder="" />
+                                                    <small class="fw-bold"></small>                      
+                                                </div>
+                                                <div class="form-outline mb-2">
+                                                    <label class="form-label" for="form2Example11">Số điện thoại</label>
+                                                    <input type="tel" id="phone" class="form-control" name="phone"
+                                                           value="${requestScope.PHONE}" placeholder="" />
+                                                    <small class="fw-bold"></small>                      
+                                                </div>
+                                                <div class="text-center pt-1 mb-5 pb-1">
+                                                    <c:if test="${empty requestScope.ERROR}">
+                                                        <h6 style="color: green; display: inline-block; padding: 5px 0">${requestScope.SUCCESS}</h6></br>
+                                                    </c:if>
+                                                    <button class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="submit" name="action" value="SignUp">Đăng ký</button>                       
+                                                </div>                     
+                                                <div class="d-flex align-items-center justify-content-center pb-4">
+                                                    <p class="mb-0 me-2">Đã có tài khoản ?</p>
+                                                    <a class="btn btn-outline-danger" href="login.jsp">Đăng nhập</a>
                                                 </div>
                                             </div>
                                         </div>
+                                    </div>
                                 </form>  
                             </div>
                         </div>
@@ -239,10 +239,10 @@
         <script src="assets/js/extention/choices.js"></script>
         <script src="assets/js/extention/validation.js"></script>
         <script>
-                                    const choices = new Choices('[data-trigger]',
-                                            {
-                                                searchEnabled: false
-                                            });
+                                                        const choices = new Choices('[data-trigger]',
+                                                                {
+                                                                    searchEnabled: false
+                                                                });
 
         </script>
         <link

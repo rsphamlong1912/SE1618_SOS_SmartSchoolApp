@@ -18,11 +18,10 @@ public class JobPostDTO {
     private String date;
     private boolean status;
     private String jobCategoryName;
+    private String fullname;
+    private String compName;
 
-    public JobPostDTO() {
-    }
-
-    public JobPostDTO(int jobId, String userId, int jobCategoryId, String title, String description, float salary, int amount, int timeJob, String process, String date, boolean status, String jobCategoryName) {
+    public JobPostDTO(int jobId, String userId, int jobCategoryId, String title, String description, float salary, int amount, int timeJob, String process, String date, boolean status, String jobCategoryName, String fullname, String compName) {
         this.jobId = jobId;
         this.userId = userId;
         this.jobCategoryId = jobCategoryId;
@@ -35,9 +34,12 @@ public class JobPostDTO {
         this.date = date;
         this.status = status;
         this.jobCategoryName = jobCategoryName;
+        this.fullname = fullname;
+        this.compName = compName;
     }
 
-
+    public JobPostDTO() {
+    }
 
     public int getJobId() {
         return jobId;
@@ -134,6 +136,24 @@ public class JobPostDTO {
     public void setJobCategoryName(String jobCategoryName) {
         this.jobCategoryName = jobCategoryName;
     }
+
+    public String getFullname() {
+        return fullname;
+    }
+
+    public void setFullname(String fullname) {
+        this.fullname = fullname;
+    }
+
+    public String getCompName() {
+        return compName;
+    }
+
+    public void setCompName(String compName) {
+        this.compName = compName;
+    }
+
+    
     
     
     

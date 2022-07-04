@@ -8,7 +8,6 @@ package controllers;
 import category.CategoryDAO;
 import category.CategoryDTO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

@@ -71,12 +71,16 @@
                             </li>
                             <li class="nav-item px-3"><a class="nav-link fw-bold" aria-current="page" href="#moinhatduoc">MỚI NHẶT ĐƯỢC</a></li>
                             <li class="nav-item px-3"><a class="nav-link fw-bold" aria-current="page" href="#moithatlac">MỚI THẤT LẠC</a></li>
-                            <li class="nav-item px-3"><a class="nav-link fw-bold" aria-current="page" href="/listAll">TÌM KIẾM</a></li>
+                            <li class="nav-item px-3"><a class="nav-link fw-bold" aria-current="page" href="main?action=ListAll">TÌM KIẾM</a></li>
+                            
+                            
                                 <c:if test="${empty sessionScope.LOGIN_USER}">
                                 <li class="nav-item px-3"><a class="btn btn-outline-light order-1 order-lg-0 fw-bold" href="login.jsp">ĐĂNG NHẬP /
                                         ĐĂNG KÝ</a></li>
                                     </c:if>
                                     <c:if test="${!empty sessionScope.LOGIN_USER}">
+<!--                                        <li class="nav-item px-3"><a class="nav-link fw-bold" aria-current="page" href="main?action=UploadPost">ĐĂNG BÀI</a></li>-->
+                                        
                                 <!-- User -->
                                 <li class="nav-item px-3 navbar-dropdown dropdown-user dropdown">
                                     <a class="btn btn-outline-light order-1 order-lg-0 fw-bold nav-link hide-arrow" id="nameLogin" href="" data-bs-toggle="dropdown">
@@ -145,6 +149,7 @@
                                         </li>
                                     </ul>
                                 </li>
+                                <li class="nav-item px-3"><a class="btn btn-outline-light order-1 order-lg-0 fw-bold" href="uploadPost">ĐĂNG BÀI</a></li>
                                 <!--/ User -->    
                             </c:if>    
                         </ul>
@@ -153,7 +158,7 @@
             </nav>
             <section style="padding-top: 1rem;" id="timkiem">
                 <div class="bg-holder"
-                     style="background-image:url(https://hcmuni.fpt.edu.vn/Data/Sites/1/media/hinh-gioi-thieu-dai-hoc-fpt/hcm.png);">
+                     style="background-image:url(assets/img/Background-FPT-1.png);">
                 </div>
                 <!--/.bg-holder-->
 
@@ -172,7 +177,7 @@
                             1px 2px 10px rgb(16 16 16 / 20%), 
                             1px 25px 35px rgb(16 16 16 / 20%), 
                             1px 30px 60px rgb(16 16 16 / 40%); top: 7.5rem;">FPT
-                            University </br>Tìm kiếm đồ thất lạc</h1>
+                            SmartSchool </br>Tìm kiếm đồ thất lạc</h1>
                         <div class="s131">
 
                             <form style="box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px; ">

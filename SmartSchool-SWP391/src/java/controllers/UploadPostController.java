@@ -6,54 +6,68 @@
 package controllers;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
-import user.UserDAO;
+import post.PostDAO;
 import user.UserDTO;
 
 /**
  *
- * @author TQK
+ * @author SE150925 Nguyen Van Hai Nam
  */
-@WebServlet(name = "SignUpController", urlPatterns = {"/signup"})
-public class SignUpController extends HttpServlet {
+@WebServlet(name = "UploadPostController", urlPatterns = {"/uploadPost"})
+@MultipartConfig(maxFileSize = 16177215)
+public class UploadPostController extends HttpServlet {
 
-    private static final String SUCCESS = "register.jsp";
-    private static final String ERROR = "register.jsp";
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    private static final String ERROR = "UploadPost.jsp";
+    private static final String PROFILE_DETAIL_PAGE = "UploadPost.jsp";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        String url = ERROR;
+        String url = PROFILE_DETAIL_PAGE;
         try {
-            String fullname = request.getParameter("fullName");
-            String userId = request.getParameter("userName");
-            String password = request.getParameter("password");
-            String rePassword = request.getParameter("repassword");
-            String email = request.getParameter("email");
-            String phone = request.getParameter("phone");
-            UserDAO dao = new UserDAO();
-            UserDTO user = dao.checkAccountExist(userId);
-            if (user != null) {
-                request.setAttribute("ERROR", "Tên đăng nhập đã tồn tại!");
-                request.setAttribute("FULLNAME", fullname);
-                request.setAttribute("USERNAME", userId);
-                request.setAttribute("EMAIL", email);
-                request.setAttribute("PHONE", phone);
-            } else {
-                dao.signup(fullname, userId, password, email, phone);
-                request.setAttribute("SUCCESS", "Đăng ký tài khoản thành công!");
-                url = SUCCESS;
+            response.setContentType("text/html;charset=UTF-8");
+            HttpSession session = request.getSession();
+            UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
+            String userId = loginUser.getUserId();
+            int categoryId = Integer.parseInt(request.getParameter("categoryId"));
+            InputStream inputStream = null;
+            Part filePart = request.getPart("postImg");
+            if (filePart != null) {
+                inputStream = filePart.getInputStream();
             }
+            String title = request.getParameter("title");
+            String description = request.getParameter("description");
+            String type = request.getParameter("type");
+            PostDAO dao = new PostDAO();
+            dao.uploadPost(userId, categoryId, inputStream, description, type, title);
+            request.setAttribute("MESSAGE", "Đăng bài thành công!");
+            url = PROFILE_DETAIL_PAGE;
         } catch (Exception e) {
-            log("Error at SignUpController: " + e.toString());
+            Logger.getLogger("Error at UploadPostController: " + e.toString());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

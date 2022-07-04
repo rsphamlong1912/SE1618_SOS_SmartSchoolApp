@@ -23,12 +23,15 @@ public class UserDAO {
     private static final String REGISTER = "INSERT INTO tblUser(fullname, userId, password, email, phone, roleId) VALUES (?, ?, ?, ?, ?, 'US')";
     private static final String LOGIN = "SELECT u.userId, u.roleId, u.password, u.fullname, u.avatar, u.phone, u.email, u.facebook, u.userStatus, u.haveJob, r.roleName\n"
             + "FROM tblUser as u, tblRole as r\n"
-            + "WHERE u.roleId = r.roleId AND userId = ? AND password = ?";    
-    private static final String CHECK_ACCOUNT =  "SELECT u.userId, u.roleId, u.password, u.fullname, u.avatar, u.phone, u.email, u.facebook, u.userStatus, u.haveJob, r.roleName\n"
+            + "WHERE u.roleId = r.roleId AND userId = ? AND password = ?";
+    private static final String CHECK_ACCOUNT = "SELECT u.userId, u.roleId, u.password, u.fullname, u.avatar, u.phone, u.email, u.facebook, u.userStatus, u.haveJob, r.roleName\n"
             + "FROM tblUser as u, tblRole as r\n"
             + "WHERE u.roleId = r.roleId AND userId = ?";
     private static final String CHANGE_PASSWORD = "UPDATE tblUser SET password = ? WHERE userId= ?";
     private static final String UPDATE_ACCOUNT = "UPDATE tblUser SET fullname = ?, email = ?, facebook = ?, phone = ? WHERE userId= ?";
+    private static final String EMPLOYER_INFOR = "SELECT u.userId, u.roleId, u.password, u.fullname, u.avatar, u.phone, u.email, u.facebook,u.compName,u.compDesc,u.compPhone,u.compEmail,u.compAddress, u.userStatus, u.haveJob, r.roleName\n"
+            + "            FROM tblUser as u, tblRole as r\n"
+            + "            WHERE u.roleId = r.roleId AND userId = ?";
 
     public UserDTO login(String userId, String password) throws SQLException {
         UserDTO user = null;
@@ -96,6 +99,54 @@ public class UserDAO {
                     user.setFacebook(rs.getString("facebook"));
 //                    user.setCompAddress(rs.getString("compAddress"));
 //                    user.setUserId(rs.getString("userId"));
+                    user.setUserStatus(rs.getBoolean("userStatus"));
+                    user.setHaveJob(rs.getBoolean("haveJob"));
+                    user.setRoleName(rs.getString("roleName"));
+                }
+                return user;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return null;
+    }
+
+    public UserDTO GetEmployerInfor(String userId) throws SQLException {
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        UserDTO user = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(EMPLOYER_INFOR);
+                ptm.setString(1, userId);
+                rs = ptm.executeQuery();
+                while (rs.next()) {
+                    user = new UserDTO();
+                    user.setUserId(rs.getString("userId"));
+                    user.setRoleId(rs.getString("roleId"));
+                    user.setPassword(rs.getString("password"));
+                    user.setFullname(rs.getString("fullname"));
+                    user.setAvatar(rs.getBytes("avatar"));
+                    user.setPhone(rs.getString("phone"));
+                    user.setEmail(rs.getString("email"));
+                    user.setFacebook(rs.getString("facebook"));
+                    user.setCompName(rs.getString("compName"));
+                    user.setCompDesc(rs.getString("compDesc"));
+                    user.setCompPhone(rs.getString("compPhone"));
+                    user.setCompEmail(rs.getString("compEmail"));
+                    user.setCompAddress(rs.getString("compAddress"));
                     user.setUserStatus(rs.getBoolean("userStatus"));
                     user.setHaveJob(rs.getBoolean("haveJob"));
                     user.setRoleName(rs.getString("roleName"));
@@ -223,7 +274,7 @@ public class UserDAO {
 
         } catch (Exception e) {
 
-        }finally {
+        } finally {
 
             if (ptm != null) {
                 ptm.close();
@@ -233,7 +284,8 @@ public class UserDAO {
             }
         }
     }
-    public boolean updateUserAvatar(InputStream inputStream, String userId) throws SQLException{
+
+    public boolean updateUserAvatar(InputStream inputStream, String userId) throws SQLException {
         String update = "UPDATE tblUser SET avatar = ? WHERE userId = ?";
         Connection conn = null;
         PreparedStatement ptm = null;
@@ -247,9 +299,9 @@ public class UserDAO {
                 ptm.executeUpdate();
                 return true;
             } //process when connection is existed
-        }catch (Exception e){
-            
-        }finally {           
+        } catch (Exception e) {
+
+        } finally {
             if (ptm != null) {
                 ptm.close();
             }
@@ -259,8 +311,8 @@ public class UserDAO {
         }
         return false;
     }
-    
-    public byte[] getAvatarData(String userId) throws SQLException{
+
+    public byte[] getAvatarData(String userId) throws SQLException {
         String getAvatar = "SELECT avatar FROM tblUser WHERE userId = ?";
         Connection conn = null;
         PreparedStatement ptm = null;
@@ -272,8 +324,8 @@ public class UserDAO {
                 ptm.setString(1, userId);
                 rs = ptm.executeQuery();
                 if (rs.next()) {
-                   return rs.getBytes("avatar");
-                }    
+                    return rs.getBytes("avatar");
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();
