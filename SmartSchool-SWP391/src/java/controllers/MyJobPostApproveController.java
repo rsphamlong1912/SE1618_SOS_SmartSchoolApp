@@ -7,6 +7,7 @@ package controllers;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,17 +15,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import jobPost.JobPostDAO;
+import jobPost.JobPostDTO;
 import user.UserDTO;
 
 /**
  *
  * @author TrinhNgocBao
  */
-@WebServlet(name = "UploadJobPostController", urlPatterns = {"/uploadJobPost"})
-public class UploadJobPostController extends HttpServlet {
+@WebServlet(name = "MyJobPostApproveController", urlPatterns = {"/myJobPostApprove"})
+public class MyJobPostApproveController extends HttpServlet {
 
-    private static final String ERROR = "EmployerUpload.jsp";
-    private static final String SUCCESS = "main?action=MyJobPostApprove";
+    private static final String ERROR = "EmployerJobApprove.jsp";
+    private static final String MY_JOB_POST_APPROVE_PAGE = "EmployerJobApprove.jsp";
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -33,26 +35,20 @@ public class UploadJobPostController extends HttpServlet {
             HttpSession session = request.getSession();
             UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
             String userId = loginUser.getUserId();
-            int jobCategoryId = Integer.parseInt(request.getParameter("jobCategoryId"));
-            String title = request.getParameter("title");
-            String description = request.getParameter("description");
-            float salary = Float.parseFloat(request.getParameter("salary"));
-            int amount = Integer.parseInt(request.getParameter("amount"));
-            int timeJob = Integer.parseInt(request.getParameter("timeJob"));
-            String[] question = request.getParameterValues("question");
             JobPostDAO dao = new JobPostDAO();
-            int jobId = dao.uploadJobPost(userId, jobCategoryId, title, description, salary, amount, timeJob);
-            boolean success = false;
-            for (String q : question) {
-                success = dao.uploadQuestion(jobId,q);
+            List<JobPostDTO> list = dao.getMyJobPostApprove(userId);
+
+            if (!list.isEmpty()) {
+                request.setAttribute("MY_JOB_POST_APPROVE", list);
+                url = MY_JOB_POST_APPROVE_PAGE;
+            } else {
+                request.setAttribute("ERROR", "Bạn chưa có bài đăng nào");
+                url = ERROR;
             }
-            if(success = true) {
-                url = SUCCESS;
-            }
-        }catch (Exception e) {
-            log("Error at UploadJobPostController: " + e.toString());
+        } catch (Exception e) {
+            log("Error at MyPostController:" + e.toString());
         } finally {
-            request.getRequestDispatcher(SUCCESS).forward(request, response);
+            request.getRequestDispatcher(url).forward(request, response);
         }
     }
 

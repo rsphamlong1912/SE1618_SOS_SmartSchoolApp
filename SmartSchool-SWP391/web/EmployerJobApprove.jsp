@@ -1,6 +1,6 @@
 <%-- 
-    Document   : EmployerUpload
-    Created on : Jun 16, 2022, 3:16:54 PM
+    Document   : EmployerJobDone
+    Created on : Jun 16, 2022, 3:16:03 PM
     Author     : TrinhNgocBao
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -17,7 +17,7 @@
         <!-- ===============================================-->
         <!--    Document Title-->
         <!-- ===============================================-->
-        <title>Upload | FPTU Freelance Job</title>
+        <title>FPTU Freelance Job</title>
 
 
         <!-- ===============================================-->
@@ -45,47 +45,33 @@
         <link href="./assets/css/theme.css" rel="stylesheet" />
         <link href="./assets/css/main.css" rel="stylesheet" />
         <link href="./assets/css/style.css" rel="stylesheet" />
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
         <style>
-            .container {
-                width: 100%;
-                padding-right: 15px;
-                padding-left: 15px;
-                margin-right: auto;
-                margin-left: auto;
+            .row-content {
+                margin: 7rem auto 0;
+                /* padding: 0px 50px; */ 
+                border-bottom: 1px ridge;
+                min-height: 50px;
             }
 
-            .card-footer {
-                background-color: #ffffff;
+            .choosen {
+                border-bottom: 5px solid #F26F21;
             }
 
-            .btn-block {
-                display: block;
-                width: 100%;
+            .card-body {
+                border-bottom: 1px ridge;
             }
 
-            .card-shadow {
-                box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
-                border-radius: 0.5rem;
+            .card-body h5{
+                font-size: 20px;
+                line-height: 2rem;
             }
-            .pl-10 {
-                padding-left: 1.875rem!important;
-            }
-            .pr-10 {
-                padding-right: 1.875rem!important;
-            }
-            .form-group small {
-                color: #F21F26;
-                padding-left: 10px;
-                font-weight: 700 !important;
-            }
+
+
         </style>
     </head>
 
 
     <body>
-
 
         <!-- ===============================================-->
         <!--    Main Content-->
@@ -94,14 +80,14 @@
         <main class="main" id="top">
             <!-- here  data-navbar-on-scroll="data-navbar-on-scroll"-->
             <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3 d-block gradient-custom-2">
-                <div class="container"><a class="navbar-brand" href="EmployerHome.jsp"><img
+                <div class="container"><a class="navbar-brand" href="index.html"><img
                             src="https://hcmuni.fpt.edu.vn/landing-page/images/logo-top.png" height="46" alt="logo" /></a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
                             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span
                             class="navbar-toggler-icon"> </span></button>
                     <div class="collapse navbar-collapse border-top border-lg-0 mt-4 mt-lg-0" id="navbarSupportedContent">
                         <ul class="navbar-nav ms-auto pt-2 pt-lg-0 font-base align-items-lg-center align-items-start">
-                            <li class="nav-item px-3"><a class="nav-link fw-bold" aria-current="page" href="EmployerHome.html">TRANG CHỦ</a>
+                            <li class="nav-item px-3"><a class="nav-link fw-bold" aria-current="page" href="index.html">TRANG CHỦ</a>
                             </li>
                             <li class="nav-item px-3"><a class="nav-link fw-bold" aria-current="page" href="#phanloai">DASHBOARD</a>
                             </li>
@@ -117,7 +103,12 @@
                                     </div>
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end">
-
+                                    <li>
+                                        <a class="dropdown-item" href="#">
+                                            <i class="bx bx-user me-2"></i>
+                                            <span class="align-middle"> VIỆC CHỜ PHÊ DUYỆT</span>
+                                        </a>
+                                    </li>
                                     <li>
                                         <a class="dropdown-item" href="main?action=MyJobPostProcess">
                                             <i class="bx bx-user me-2"></i>
@@ -127,14 +118,14 @@
                                     <li>
                                         <a class="dropdown-item" href="main?action=MyJobPostDone">
                                             <i class="bx bx-user me-2"></i>
-                                            <span class="align-middle"> VIỆC ĐÃ TUYỂN</span>
+                                            <span class="align-middle"> VIỆC ĐÃ TUYỂN XONG</span>
                                         </a>
                                     </li>
                                     <li>
                                         <div class="dropdown-divider"></div>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="#">
+                                        <a class="dropdown-item" href="main?action=UploadJobPost">
                                             <i class="bx bx-user me-2"></i>
                                             <span class="align-middle"> ĐĂNG TUYỂN</span>
                                         </a>
@@ -220,159 +211,70 @@
                     </div>
                 </div>
             </nav>
-            <section class="bg-gray-75 pt-10 pb-8">
-                <div class="container" style="max-width: 771px;">
-                    <div class="card card-shadow">
-<!--                        <form action="main" class="needs-validation" novalidate>-->
-                            <form onsubmit="return validateEmployerUpload()" action="main" method="POST" class="needs-validation" novalidate>
-                            <div class="card-header bg-white pt-4 pb-4 pl-10 pr-10 border-bottom d-md-flex">
-                                <h3 class="">ĐĂNG VIỆC FREELANCE</h3>                               
-                            </div>
-                            <div class="card-body pl-10 pr-10">
-                                <div class="form-group mb-4">
-                                    <label for="title" class="form-control-label fw-bold mb-2">Nhập tên công việc</label>
-                                    <input type="text" name="title" value="" id="titleJob" data-validate-hide-message="1"
-                                           class="form-control required" required="true" data-rule-required="true" data-rule-maxlength="255">
-<!--                                    <div class="invalid-feedback fw-bold">
-                                        Vui lòng nhập!
-                                    </div>-->
-                                    <small></small>
-                                </div>
-                                <div class="form-group mb-4">
-                                    <label for="category" class="form-control-label fw-bold mb-2">Chọn lĩnh vực</label>
-                                    <select name="jobCategoryId" id="categoryJob" class="form-select form-select-lg mb-3 required" required="true" data-rule-required="true" aria-label=".form-select-lg example">
-                                        <option selected disabled value="">Chọn...</option>
-                                        <option value="1">Lập trình</option>
-                                        <option value="2">Thiết Kế - Mỹ Thuật</option>
-                                        <option value="3">Giáo dục - Đào Tạo</option>
-                                    </select>
-                                    <div class="invalid-feedback fw-bold">
-                                        Vui lòng chọn!
-                                    </div>
-                                </div>
-                                <div class="form-group mb-4">
-                                    <label for="description" class="form-control-label fw-bold mb-2">Thông tin mô tả</label>
-                                    <p class="" style="font-size: 0.875rem;">
-                                        <strong class="d-block mb-2">Gợi ý nhập thông tin mô tả</strong>
-                                        <span class="text-gray-600">• Bạn cần làm công việc gì?<br>
-                                            • Mô tả cụ thể yêu cầu cho công việc mà bạn cần làm<br>
-                                            • Các thông tin khác liên quan</span>
-                                    </p>
-                                    
-                                    <div class="form-floating">
-                                        <textarea class="form-control required" required="true" data-rule-required="true" name="description" placeholder=" " id="floatingTextarea2"
-                                                  style="height: 150px"></textarea>
-                                                  <small></small>
-                                        <label for="floatingTextarea2">Nhập mô tả</label>
-                                    </div>
-<!--                                    <div class="invalid-feedback fw-bold">
-                                        Vui lòng nhập!
-                                    </div>-->
-                                    
-                                </div>
-                                <div class="form-group mb-4 w-50">
-                                    <label for="salary" class="form-control-label fw-bold mb-2">Mức lương theo giờ (VNĐ/giờ)</label>
-                                    <input type="number" name="salary" value="" id="salary" data-validate-hide-message="1"
-                                           class="form-control required" required="true" data-rule-required="true" data-rule-maxlength="255">
-                                    <div class="invalid-feedback fw-bold">
-                                        Vui lòng nhập!
-                                    </div>
-                                    <small></small>
-                                </div>
-                                <div class="form-group mb-4 w-50">
-                                    <label for="amount" class="form-control-label fw-bold mb-2">Số người cần tuyển</label>
-                                    <input type="number" name="amount" value="" id="amount" data-validate-hide-message="1"
-                                           class="form-control required" required="true" data-rule-required="true" data-rule-maxlength="255">
-                                    <div class="invalid-feedback fw-bold">
-                                        Vui lòng nhập!
-                                    </div>
-                                    <small></small>
-                                </div>
-                                <div class="form-group mb-3">
-                                    <label class="form-control-label fw-bold mb-3">Công việc của bạn dự kiến kéo dài bao lâu</label>
-                                    <div class="row">
-                                        <div class="col-lg-4 mb-3">
-                                            <span class="w-100">
-                                                <input type="radio" class="form-check-input required" required="true" data-rule-required="true" name="timeJob" value="1" id="timeJob_1" data-validate-hide-message="1">
-                                                <label for="timeJobs_1">
-                                                    <span class="inside pt-2 pb-2">
-                                                        <span class="d-block fw-500"> Ít hơn 1 tháng</span>
-                                                    </span>
-                                                </label>
-                                            </span>
-                                        </div>
-                                        <div class="col-lg-4 mb-3">
-                                            <span class="w-100">
-                                                <input type="radio" class="form-check-input required" required="true" data-rule-required="true" name="timeJob" value="2" id="timeJob_2" data-validate-hide-message="1">
-                                                <label for="timeJobs_2">
-                                                    <span class="inside pt-2 pb-2">
-                                                        <span class="d-block fw-500"> 1 - 3 tháng</span>
-                                                    </span>
-                                                </label>
-                                            </span>
-                                        </div>
-                                        <div class="col-lg-4 mb-3">
-                                            <span class="w-100">
-                                                <input type="radio" class="form-check-input required" required="true" data-rule-required="true" name="timeJob" value="3" id="timeJob_3" data-validate-hide-message="1">
-                                                <label for="timeJobs_3">
-                                                    <span class="pt-2 pb-2">
-                                                        <span class="d-block fw-500"> Hơn 3 tháng</span>
-                                                    </span>
-                                                </label>
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group mb-4">
-                                    <label for="formQuestion" class="form-control-label fw-bold mb-3">Câu hỏi Form đăng ký công
-                                        việc (ít nhất 1 câu hỏi)</label>
+            <div class="container">
+                <div class="row row-cols-3 row-content text-center ">
+                    <a class="text-decoration-none fw-bold choosen" href="#">
+
+                        <div class="col">
+                            VIỆC CHỜ PHÊ DUYỆT
+                        </div>
+                    </a>
+                    <a class="text-decoration-none fw-bold " href="main?action=MyJobPostProcess">
+                        <div class="col">
+                            VIỆC ĐANG TUYỂN
+                        </div>
+                    </a>
+                    <a class="text-decoration-none fw-bold" href="main?action=MyJobPostDone">
+
+                        <div class="col">
+                            VIỆC ĐÃ TUYỂN XONG
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <section style="padding: 50px 0 ;min-height: 85vh">
+                <div class="container">
+                    <c:if test="${empty requestScope.MY_JOB_POST_APPROVE}">
+                        <h1 class="text-center">${ERROR}</h1>
+                    </c:if>
+
+                    <c:if test="${!empty requestScope.MY_JOB_POST_APPROVE}">
+                        <c:forEach items="${requestScope.MY_JOB_POST_APPROVE}" var="myJobPostApprove">
+                            <div class="card w-100">
+                                <div class="card-body">
+                                    <h5 class="card-title mb-3">${myJobPostApprove.title}</h5>
+                                    <p class="card-text"><i class="fa fa-clock" aria-hidden="true"></i> ${myJobPostApprove.date}</p>
                                     <div class="row mb-3">
-                                        <div class="input-group">
-                                            <input type="text" name="question" class="form-control m-input question" required>
-                                            <div class="input-group-prepend">
-                                                <button class="btn btn-danger" id="DeleteRowDisable" type="button">
-                                                    <i class="fa fa-trash"></i>
-                                                </button>
-                                            </div> 
-                                            <br>
-                                            <small></small>
-                                            
-                                        </div>
-                                        
+                                        <p class="col-md-4 card-text">Lĩnh vực: ${myJobPostApprove.jobCategoryName} </p>
+                                        <p class="col-md-4 card-text">Yêu cầu số người:  ${myJobPostApprove.amount} </p>
+                                        <!--<p class="col-md-4 card-text">Thời gian: 1-3 tháng </p>-->
+                                        <p class="col-md-4 card-text">
+                                            Thời gian: 
+                                            <c:choose> 
+                                                <c:when test="${myJobPostApprove.timeJob==1}">
+                                                    Ít hơn 1 tháng
+                                                </c:when> 
+                                                <c:when test="${myJobPostApprove.timeJob==2}">
+                                                    1 - 3 tháng
+                                                </c:when>
+                                                <c:when test="${myJobPostApprove.timeJob==3}">
+                                                    Hơn 3 tháng
+                                                </c:when> 
+                                            </c:choose>
+                                        </p>
                                     </div>
 
-                                    <div id="newinput"></div>
-
-                                    <button id="rowAdder" type="button" class="btn btn-success">
-                                        <span class="fa fa-plus-square">
-                                        </span> Thêm câu hỏi
-                                    </button>
-                                </div>
-                                <div class="card-footer pt-4 pb-2">
-                                    <div class="row justify-content-md-end">
-                                        <div class="col-lg-3 col-md-5 mb-3">
-                                            <a href="/employerHome" class="btn btn-outline-primary btn-lg btn-block">Thoát</a>
-                                        </div>
-                                        <div class="col-lg-3 col-md-5 mb-3">
-                                            <button type="submit" name="action" value="UploadJobPost"
-                                                    class="btn btn-primary btn-lg btn-block gradient-custom-2">Đăng bài</button>
-                                        </div>
+                                    <div class="row justify-content-end">
+                                        <a href="#" class="col-md-2 btn btn-outline-primary mt-2">Hủy bỏ</a>
+                                        <a href="#" class="col-md-2 btn btn-primary gradient-custom-2 ms-3 mt-2">Chỉnh sửa</a>
                                     </div>
                                 </div>
                             </div>
-                        </form>
-                    </div>
+                        </c:forEach>
+                    </c:if>
                 </div>
             </section>
-
-
-
-
-            <!-- <section> close ============================-->
-            <!-- ============================================-->
-
-
-
 
             <!-- ============================================-->
             <!-- <section> begin ============================-->
@@ -449,47 +351,12 @@
         <script src="vendors/fontawesome/all.min.js"></script>
         <script src="assets/js/theme.js"></script>
         <script src="assets/js/extention/choices.js"></script>
-        <script src="assets/js/extention/validation.js"></script>
         <script>
             const choices = new Choices('[data-trigger]',
                     {
                         searchEnabled: false
                     });
-            (function () {
-                'use strict'
 
-                // Fetch all the forms we want to apply custom Bootstrap validation styles to
-                var forms = document.querySelectorAll('.needs-validation')
-
-                // Loop over them and prevent submission
-                Array.prototype.slice.call(forms)
-                        .forEach(function (form) {
-                            form.addEventListener('submit', function (event) {
-                                if (!form.checkValidity()) {
-                                    event.preventDefault()
-                                    event.stopPropagation()
-                                }
-
-                                form.classList.add('was-validated')
-                            }, false)
-                        })
-            })()
-        </script>
-        <script type="text/javascript">
-
-            $("#rowAdder").click(function () {
-                newRowAdd =
-                        '<div class="row mb-3"> <div class="input-group">' +
-                        '<input type="text" name="question" class="form-control m-inputque question" required>' +
-                        '<div class="input-group-prepend">' +
-                        '<button class="btn btn-danger" id="DeleteRow" type="button"> <i class="fa fa-trash"></i></button> </div>' +
-                        '</div> </div> </div>';
-                $('#newinput').append(newRowAdd);
-            });
-
-            $("body").on("click", "#DeleteRow", function () {
-                $(this).parents(".row").remove();
-            })
         </script>
         <link
             href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&amp;family=Volkhov:wght@700&amp;display=swap"
