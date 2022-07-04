@@ -20,6 +20,8 @@ import jobCategory.JobCategoryDAO;
 import jobCategory.JobCategoryDTO;
 import jobPost.JobPostDAO;
 import jobPost.JobPostDTO;
+import jobPostQuestion.JobPostQuestionDAO;
+import jobPostQuestion.JobPostQuestionDTO;
 import user.UserDAO;
 import user.UserDTO;
 
@@ -49,11 +51,13 @@ public class DetailJobController extends HttpServlet {
             String jobId = request.getParameter("jobId");
             JobPostDAO dao = new JobPostDAO();
             JobPostDTO postJob = dao.getJobInformation(jobId);
+            JobPostQuestionDAO questionDao = new JobPostQuestionDAO();
+            List<JobPostQuestionDTO> listQuestion = questionDao.getQuestionJobPost(jobId);
             String userId=request.getParameter("userId");
             UserDAO udao=new UserDAO();
             UserDTO user=udao.GetEmployerInfor(userId);
             request.setAttribute("USERINFOR", user);
-
+            request.setAttribute("LISTQUESTION", listQuestion);
             request.setAttribute("JOBDETAIL", postJob);
 //            request.setAttribute("LISTJOBPOST", listPost);
             request.getRequestDispatcher(url).forward(request, response);
