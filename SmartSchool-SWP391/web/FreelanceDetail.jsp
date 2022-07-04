@@ -91,7 +91,15 @@
                 box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px !important;
 
             }
-
+            .modal-content {
+                border-radius: 0.5rem;
+                border: 0;
+            }
+            
+            .modal-header {
+                border-top-right-radius:0.5rem;
+                border-top-left-radius:0.5rem;             
+            } 
         </style>
     </head>
 
@@ -223,9 +231,9 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="breadcrumb__links">
-                                <a href="#"><i class="fa fa-home"></i> Home</a>
-                                <a href="#">Danh sách</a>
-                                <span>Thiết Kế - Mỹ Thuật</span>
+                                <a href="freelancerhome"><i class="fa fa-home"></i> Home</a>
+                                <a href="main?action=ListJobPost">Danh sách</a>
+                                <span>${JOBDETAIL.jobCategoryName}</span>
                             </div>
                         </div>
                     </div>
@@ -312,14 +320,37 @@
                                     <div class="card-footer pt-4 pb-2">
                                         <div class="row justify-content-md-end">
                                             <div class="col-lg-4 col-md-5 mb-3">
-                                                <button type="submit" name="action" value="UploadJobPost"
-                                                        class="btn btn-primary btn-lg btn-block gradient-custom-2">Đăng ký công
+                                                <button type="button"
+                                                        class="btn btn-primary btn-lg btn-block gradient-custom-2" data-bs-toggle="modal" data-bs-target="#exampleModal" >Đăng ký công
                                                     việc</button>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-
+                                <!-- Modal -->
+                                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="modal-header gradient-custom-2" >
+                                                <h5 class="modal-title" id="exampleModalLabel" style="color: #ffffff;">Câu hỏi đăng ký công việc</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body" style="padding: 1.5rem;">
+                                                <c:forEach items="${requestScope.LISTQUESTION}" var="listQuestion" >
+                                                <div class="mb-4">
+                                                    <label for="formGroupExampleInput" class="form-label">${listQuestion.question}</label>
+                                                    <input type="hidden" class="form-control" id="formGroupExampleInput" value="${listQuestion.questionId}" placeholder="QuestionId">
+                                                    <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Câu trả lời">
+                                                </div>
+                                                </c:forEach>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                                                <button type="button" class="btn btn-primary gradient-custom-2">Gửi</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
 
                             </div>
                             <div class="row">
@@ -427,6 +458,7 @@
                                                                                                      style="font-size: 14px; "> ${USERINFOR.compName}</span></h6>
                                                 </div>
                                             </c:if>
+
                                             <div class="d-flex align-items-center">
                                                 <h6 style="line-height: 2.5;">Số điện thoại: <span class="fw-medium"
                                                                                                    style="font-size: 14px; "> ${USERINFOR.phone}</span></h6>
@@ -455,16 +487,16 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-md-3 contact">
-                                            <a href="#" class="btn btn-success btn-sm w-100" style="background: linear-gradient(to right, #99df20, #009245 ); border:none;"> Gọi <i class="fa fa-phone"
-                                                                                                                                                                                    aria-hidden="true"></i></a>
+                                            <a href="tel:${USERINFOR.phone}" class="btn btn-success btn-sm w-100" style="background: linear-gradient(to right, #99df20, #009245 ); border:none;"> Gọi <i class="fa fa-phone"
+                                                                                                                                                                                                        aria-hidden="true"></i></a>
                                         </div>
                                         <div class="col-md-6 contact">
-                                            <a href="https://www.facebook.com/ngocbao159" class="btn btn-success btn-sm w-100" style="background: linear-gradient(to right, #12c2e9, #c471ed, #f64f59); border:none;" > Messenger <i class="fa fa-comment"
+                                            <a href="${USERINFOR.facebook}" class="btn btn-success btn-sm w-100" style="background: linear-gradient(to right, #12c2e9, #c471ed, #f64f59); border:none;" > Messenger <i class="fa fa-comment"
                                                                                                                                                                                                         aria-hidden="true"></i></a>
                                         </div>
                                         <div class="col-md-3 contact">
-                                            <a href="#" class="btn btn-success btn-sm w-100" style="background: linear-gradient(to right, #43cea2, #1174d7); border:none;"> Mail <i class="fa fa-envelope"
-                                                                                                                                                                                    aria-hidden="true"></i></a>
+                                            <a href="mailto:${USERINFOR.email}" class="btn btn-success btn-sm w-100" style="background: linear-gradient(to right, #43cea2, #1174d7); border:none;"> Mail <i class="fa fa-envelope"
+                                                                                                                                                                                                        aria-hidden="true"></i></a>
                                         </div>
 
                                     </div>
