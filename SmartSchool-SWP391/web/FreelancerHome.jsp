@@ -73,7 +73,7 @@
                             </li>
                             <li class="nav-item px-3"><a class="nav-link fw-bold" aria-current="page" href="main?action=ListJobPost">TÌM VIỆC</a>
                             </li>
-                            <li class="nav-item px-3 navbar-dropdown dropdown-user dropdown">
+<!--                            <li class="nav-item px-3 navbar-dropdown dropdown-user dropdown">
                                 <a class="btn btn-outline-light order-1 order-lg-0 fw-bold nav-link hide-arrow" id="nameLogin" href="" data-bs-toggle="dropdown">
                                     <div class="avatar avatar-online">
 
@@ -107,7 +107,7 @@
                                         </a>
                                     </li>
                                 </ul>
-                            </li>
+                            </li>-->
                             <c:if test="${empty sessionScope.LOGIN_USER}">
                                 <li class="nav-item px-3"><a class="btn btn-outline-light order-1 order-lg-0 fw-bold" href="FreelancerLogin.jsp">Đăng nhập /
                                         Đăng ký</a></li>
@@ -243,7 +243,7 @@
                               </div>
                               <div class="col-md-9">
                                 <div class="card-body">
-                                  <h5 class="card-title"><a class="text-decoration-none stretched-link" href="/main?action=SearchByCategory&jobCategoryId=${category.jobCategoryId}">${category.jobCategoryName}</a> </h5>
+                                  <h5 class="card-title"><a class="text-decoration-none stretched-link" href="/main?jobCategoryId=${category.jobCategoryId}&action=SearchJobByCategory">${category.jobCategoryName}</a> </h5>
                                   <p class="card-text">${category.jobDescription}</p>
                                 </div>
                               </div>

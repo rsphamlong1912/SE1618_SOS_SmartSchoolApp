@@ -114,10 +114,10 @@
                 <div class="collapse navbar-collapse border-top border-lg-0 mt-4 mt-lg-0" id="navbarSupportedContent">
                     <ul class="navbar-nav ms-auto pt-2 pt-lg-0 font-base align-items-lg-center align-items-start">
                         <li class="nav-item px-3"><a class="nav-link fw-bold" aria-current="page"
-                                href="lostAndfoundhome">TRANG CHỦ</a>
+                                href="freelancerhome">TRANG CHỦ</a>
                         </li>
                         <li class="nav-item px-3"><a class="nav-link fw-bold" aria-current="page"
-                                href="lostAndfoundhome#phanloai">PHÂN LOẠI</a>
+                                href="freelancerhome#linhvuc">PHÂN LOẠI</a>
                         </li>
                         <li class="nav-item px-3"><a class="nav-link fw-bold" aria-current="page" href="#">TÌM KIẾM</a>
                         </li>
@@ -263,12 +263,13 @@
                                 <div class="card-body">
                                     <div class="content-detail mb-3">
                                         <div class="d-flex flex-column flex-lg-row justify-content-between mb-2">
-                                            <h5 class="text-secondary fw-medium text-truncate"><a
+                                            <h5 class="text-secondary fw-medium text-truncated"><a
                                                     class="link-901 text-decoration-none " href="#!">${JOBDETAIL.title}</a></h5><span
                                                 class="fs-1 fw-medium"></span>
                                         </div>
                                         <div class="d-flex align-items-center mb-2">
-                                            <h6>Lĩnh vực: ${JOBDETAIL.jobCategoryName}</h6>
+                                            <h6>Lĩnh vực: 
+                                            <span class="fw-medium" style="font-size: 14px;"> ${JOBDETAIL.jobCategoryName}</span></h6>
                                         </div>
                                     </div>
                                     <div class="content-detail mb-3">
@@ -444,7 +445,7 @@
                                             aria-hidden="true"></i></a>
                                     </div>
                                     <div class="col-md-6 contact">
-                                        <a href="https://www.facebook.com/ngocbao159" class="btn btn-success btn-sm w-100" style="background: linear-gradient(to right, #12c2e9, #c471ed, #f64f59); border:none;" > Messenger <i class="fa fa-comment"
+                                        <a href="${USERINFOR.facebook}" class="btn btn-success btn-sm w-100" style="background: linear-gradient(to right, #12c2e9, #c471ed, #f64f59); border:none;" > Messenger <i class="fa fa-comment"
                                             aria-hidden="true"></i></a>
                                     </div>
                                     <div class="col-md-3 contact">
