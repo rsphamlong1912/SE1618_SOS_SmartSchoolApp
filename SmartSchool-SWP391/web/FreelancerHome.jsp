@@ -211,12 +211,14 @@
                             SmartSchool </br>Tìm kiếm việc Freelance</h1>
                         <div class="row text-center justify-content-center" style="--bs-gutter-x: 0rem;">
                             <div class="col-lg-6">
-                                <div class="input-group">
-                                    <input type="text" name="" class="form-control"  placeholder="Bạn đang tìm kiếm công việc gì..." style="line-height:2.5; text-indent: 1rem; border-radius: 0.2rem 0 0 0.2rem; ">
-                                    <button type="button" class="btn btn-primary gradient-custom-2" style="width:8rem;">
-                                       Tìm kiếm
-                                    </button>
-                                </div>
+                                <form action="main">
+                                    <div class="input-group">
+                                        <input type="text" name="search" class="form-control"  placeholder="Bạn đang tìm kiếm công việc gì..." style="line-height:2.5; text-indent: 1rem; border-radius: 0.2rem 0 0 0.2rem; ">
+                                        <button class="btn btn-primary gradient-custom-2" style="width:8rem;" name="action" value="SearchJob">
+                                            Tìm kiếm
+                                        </button>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -236,19 +238,20 @@
                     </div>
                     <div class="row">
                         <c:forEach items="${requestScope.LISTALLCATEGORY}" var='category'>
-                        <div class="card col-lg-4 col-sm-6 mb-6" style="max-width: 540px;">
-                            <div class="row g-0">
-                              <div class="col-md-3">
-                                <img src="${category.jobImage}" class="img-fluid" alt="...">
-                              </div>
-                              <div class="col-md-9">
-                                <div class="card-body">
-                                  <h5 class="card-title"><a class="text-decoration-none stretched-link" href="/main?jobCategoryId=${category.jobCategoryId}&action=SearchJobByCategory">${category.jobCategoryName}</a> </h5>
-                                  <p class="card-text">${category.jobDescription}</p>
+
+                            <div class="card col-lg-4 col-sm-6 mb-6" style="max-width: 540px;">
+                                <div class="row g-0">
+                                    <div class="col-md-3">
+                                        <img src="${category.jobImage}" class="img-fluid" alt="...">
+                                    </div>
+                                    <div class="col-md-9">
+                                        <div class="card-body">
+                                            <h5 class="card-title"><a class="text-decoration-none stretched-link" href="/main?jobCategoryId=${category.jobCategoryId}&action=SearchJobByCategory">${category.jobCategoryName}</a> </h5>
+                                            <p class="card-text">${category.jobDescription}</p>
+                                        </div>
+                                    </div>
                                 </div>
-                              </div>
                             </div>
-                        </div>
                         </c:forEach>
                     </div>
                 </div><!-- end of .container-->

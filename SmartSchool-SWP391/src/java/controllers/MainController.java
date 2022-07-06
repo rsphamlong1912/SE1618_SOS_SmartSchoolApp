@@ -53,6 +53,8 @@ public class MainController extends HttpServlet {
     private static final String MY_JOB_POST_PROCESS_CONTROLLER = "myJobPostProcess";
     private static final String MY_JOB_POST_DONE = "MyJobPostDone";
     private static final String MY_JOB_POST_DONE_CONTROLLER = "myJobPostDone";
+    private static final String MY_JOB_POST_APPROVE = "MyJobPostApprove";
+    private static final String MY_JOB_POST_APPROVE_CONTROLLER = "myJobPostApprove";
     private static final String LIST_ALL = "ListAll";
     private static final String LIST_ALL_CONTROLLER = "listAll";
     private static final String UPLOAD_POST = "UploadPost";
@@ -129,6 +131,9 @@ public class MainController extends HttpServlet {
             }
             if (DETAIL_JOB.equals(action)) {
                 url = DETAIL_JOB_CONTROLLER;
+            }
+            if (MY_JOB_POST_APPROVE.equals(action)) {
+                url = MY_JOB_POST_APPROVE_CONTROLLER;
             }
         } catch (Exception e) {
             log("Error at MainController: " + e.toString());

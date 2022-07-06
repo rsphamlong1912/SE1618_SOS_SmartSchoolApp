@@ -1,9 +1,9 @@
 <%-- 
-    Document   : EmployerJobProcess
-    Created on : Jun 16, 2022, 3:15:29 PM
+    Document   : EmployerJobDone
+    Created on : Jun 16, 2022, 3:16:03 PM
     Author     : TrinhNgocBao
 --%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en-US" dir="ltr">
@@ -104,13 +104,13 @@
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end">
                                     <li>
-                                        <a class="dropdown-item" href="main?action=MyJobPostApprove">
+                                        <a class="dropdown-item" href="#">
                                             <i class="bx bx-user me-2"></i>
                                             <span class="align-middle"> VIỆC CHỜ PHÊ DUYỆT</span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="#">
+                                        <a class="dropdown-item" href="main?action=MyJobPostProcess">
                                             <i class="bx bx-user me-2"></i>
                                             <span class="align-middle"> VIỆC ĐANG TUYỂN</span>
                                         </a>
@@ -213,52 +213,52 @@
             </nav>
             <div class="container">
                 <div class="row row-cols-3 row-content text-center ">
-                    <a class="text-decoration-none fw-bold" href="main?action=MyJobPostApprove">
+                    <a class="text-decoration-none fw-bold choosen" href="#">
 
                         <div class="col">
                             VIỆC CHỜ PHÊ DUYỆT
                         </div>
                     </a>
-                    <a class="text-decoration-none fw-bold choosen" href="#">
+                    <a class="text-decoration-none fw-bold " href="main?action=MyJobPostProcess">
                         <div class="col">
                             VIỆC ĐANG TUYỂN
-                        </div>       
+                        </div>
                     </a>
+                    <a class="text-decoration-none fw-bold" href="main?action=MyJobPostDone">
 
-                    <a class="text-decoration-none fw-bold " href="main?action=MyJobPostDone">
                         <div class="col">
                             VIỆC ĐÃ TUYỂN XONG
                         </div>
                     </a>
-                    
                 </div>
             </div>
 
             <section style="padding: 50px 0 ;min-height: 85vh">
                 <div class="container">
-                    <c:if test="${empty requestScope.MY_JOB_POST_DONE}">
+                    <c:if test="${empty requestScope.MY_JOB_POST_APPROVE}">
                         <h1 class="text-center">${ERROR}</h1>
                     </c:if>
-                    <c:if test="${!empty requestScope.MY_JOB_POST_PROCESS}">
-                        <c:forEach items="${requestScope.MY_JOB_POST_PROCESS}" var="myJobPostProcess">
+
+                    <c:if test="${!empty requestScope.MY_JOB_POST_APPROVE}">
+                        <c:forEach items="${requestScope.MY_JOB_POST_APPROVE}" var="myJobPostApprove">
                             <div class="card w-100">
                                 <div class="card-body">
-                                    <h5 class="card-title mb-3">${myJobPostProcess.title}</h5>
-                                    <p class="card-text"><i class="fa fa-clock" aria-hidden="true"></i> ${myJobPostProcess.date}</p>
+                                    <h5 class="card-title mb-3">${myJobPostApprove.title}</h5>
+                                    <p class="card-text"><i class="fa fa-clock" aria-hidden="true"></i> ${myJobPostApprove.date}</p>
                                     <div class="row mb-3">
-                                        <p class="col-md-4 card-text">Lĩnh vực: ${myJobPostProcess.jobCategoryName} </p>
-                                        <p class="col-md-4 card-text">Yêu cầu số người:  ${myJobPostProcess.amount} </p>
+                                        <p class="col-md-4 card-text">Lĩnh vực: ${myJobPostApprove.jobCategoryName} </p>
+                                        <p class="col-md-4 card-text">Yêu cầu số người:  ${myJobPostApprove.amount} </p>
                                         <!--<p class="col-md-4 card-text">Thời gian: 1-3 tháng </p>-->
                                         <p class="col-md-4 card-text">
                                             Thời gian: 
                                             <c:choose> 
-                                                <c:when test="${myJobPostProcess.timeJob==1}">
+                                                <c:when test="${myJobPostApprove.timeJob==1}">
                                                     Ít hơn 1 tháng
                                                 </c:when> 
-                                                <c:when test="${myJobPostProcess.timeJob==2}">
+                                                <c:when test="${myJobPostApprove.timeJob==2}">
                                                     1 - 3 tháng
                                                 </c:when>
-                                                <c:when test="${myJobPostProcess.timeJob==3}">
+                                                <c:when test="${myJobPostApprove.timeJob==3}">
                                                     Hơn 3 tháng
                                                 </c:when> 
                                             </c:choose>
@@ -266,49 +266,14 @@
                                     </div>
 
                                     <div class="row justify-content-end">
-                                        <a href="/main?jobId=${myJobPostProcess.jobId}&userId=${myJobPostProcess.userId}&action=DetailJob" class="col-md-2 btn btn-primary gradient-custom-2">Xem chi tiết</a>
+                                        <a href="#" class="col-md-2 btn btn-outline-primary mt-2">Hủy bỏ</a>
+                                        <a href="#" class="col-md-2 btn btn-primary gradient-custom-2 ms-3 mt-2">Chỉnh sửa</a>
                                     </div>
                                 </div>
                             </div>
                         </c:forEach>
                     </c:if>
-
-                    <!--                        <div class="card w-100">
-                                                <div class="card-body">
-                                                    <h5 class="card-title mb-3">Cần tuyển gấp freelancer thiết kế Website + Logo</h5>
-                                                    <p class="card-text"><i class="fa fa-clock" aria-hidden="true"></i> 10:33 15/06/2022</p>
-                                                    <div class="row mb-3">
-                                                        <p class="col-md-4 card-text">Lĩnh vực: Công nghệ </p>
-                                                        <p class="col-md-4 card-text">Yêu cầu số người: 8 </p>
-                                                        <p class="col-md-4 card-text">Thời gian: 1-3 tháng </p>
-                                                    </div>
-                    
-                                                    <div class="row justify-content-end">
-                                                        <a href="#" class="col-md-2 btn btn-primary gradient-custom-2">Xem chi tiết</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                    
-                                            <div class="card w-100">
-                                                <div class="card-body">
-                                                    <h5 class="card-title mb-3">CTV Thiết Kế Thời Trang</h5>
-                                                    <p class="card-text"><i class="fa fa-clock" aria-hidden="true"></i> 10:33 15/06/2022</p>
-                                                    <div class="row mb-3">
-                                                        <p class="col-md-4 card-text">Lĩnh vực: Thiết kế mỹ thuật </p>
-                                                        <p class="col-md-4 card-text">Yêu cầu số người: 8 </p>
-                                                        <p class="col-md-4 card-text">Thời gian: 1-3 tháng </p>
-                                                    </div>
-                    
-                                                    <div class="row justify-content-end">
-                                                        <a href="#" class="col-md-2 btn btn-primary gradient-custom-2">Xem chi tiết</a>
-                                                    </div>
-                                                </div>
-                                            </div>-->
-
-
                 </div>
-
-
             </section>
 
             <!-- ============================================-->

@@ -7,65 +7,48 @@ package controllers;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.SQLException;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import jobCategory.JobCategoryDAO;
-import jobCategory.JobCategoryDTO;
+import javax.servlet.http.HttpSession;
 import jobPost.JobPostDAO;
 import jobPost.JobPostDTO;
-import jobPostQuestion.JobPostQuestionDAO;
-import jobPostQuestion.JobPostQuestionDTO;
-import user.UserDAO;
 import user.UserDTO;
 
 /**
  *
- * @author SE150888 Pham Ngoc Long
+ * @author TrinhNgocBao
  */
-@WebServlet(name = "DetailJobController", urlPatterns = {"/detailJob"})
-public class DetailJobController extends HttpServlet {
-    private static final String DETAIL_PAGE ="FreelanceDetail.jsp";
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+@WebServlet(name = "MyJobPostApproveController", urlPatterns = {"/myJobPostApprove"})
+public class MyJobPostApproveController extends HttpServlet {
+
+    private static final String ERROR = "EmployerJobApprove.jsp";
+    private static final String MY_JOB_POST_APPROVE_PAGE = "EmployerJobApprove.jsp";
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
+        String url = ERROR;
         try {
-           response.setContentType("text/html;charset=UTF-8");
-            String url = DETAIL_PAGE;
-            String jobId = request.getParameter("jobId");
+            HttpSession session = request.getSession();
+            UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
+            String userId = loginUser.getUserId();
             JobPostDAO dao = new JobPostDAO();
-            JobPostDTO postJob = dao.getJobInformation(jobId);
-            JobPostQuestionDAO questionDao = new JobPostQuestionDAO();
-            List<JobPostQuestionDTO> listQuestion = questionDao.getQuestionJobPost(jobId);
-            String userId=request.getParameter("userId");
-            UserDAO udao=new UserDAO();
-            UserDTO user=udao.GetEmployerInfor(userId);
-            request.setAttribute("USERINFOR", user);
-            request.setAttribute("LISTQUESTION", listQuestion);
-            request.setAttribute("JOBDETAIL", postJob);
-//            request.setAttribute("LISTJOBPOST", listPost);
+            List<JobPostDTO> list = dao.getMyJobPostApprove(userId);
+
+            if (!list.isEmpty()) {
+                request.setAttribute("MY_JOB_POST_APPROVE", list);
+                url = MY_JOB_POST_APPROVE_PAGE;
+            } else {
+                request.setAttribute("ERROR", "Bạn chưa có bài đăng nào");
+                url = ERROR;
+            }
+        } catch (Exception e) {
+            log("Error at MyPostController:" + e.toString());
+        } finally {
             request.getRequestDispatcher(url).forward(request, response);
-        } catch (SQLException ex) {
-            Logger.getLogger(SearchJobPostController.class.getName()).log(Level.SEVERE, null, ex);
-        
-        } finally{
-            
         }
     }
 

@@ -23,7 +23,7 @@ import utills.DBUtils;
  */
 public class JobPostDAO {
 
-    private static final String UPLOAD_JOB_POST = "INSERT INTO tblJobPost(userId, jobCategoryId, title, description, salary, amount, timeJob, process, date, status) VALUES (?, ?, ?, ?, ?, ?, ?, 'new', ?, 1)";
+    private static final String UPLOAD_JOB_POST = "INSERT INTO tblJobPost(userId, jobCategoryId, title, description, salary, amount, timeJob, process, date, status) VALUES (?, ?, ?, ?, ?, ?, ?, 'approving', ?, 1)";
     private static final String UPLOAD_QUESTION = "INSERT INTO tblQuestion(jobId, question) VALUES (?, ?)";
     private static final String GET_MYJOBPOST_PROCESS = "SELECT j.jobId,j.userId,j.jobCategoryId,j.title,j.description,j.salary,j.amount,j.timeJob,j.process,j.date,j.status,c.jobCategoryName\n"
             + "            FROM tblJobPost as j, tblCategoryJob as c\n"
@@ -31,6 +31,9 @@ public class JobPostDAO {
     private static final String GET_MYJOBPOST_DONE = "SELECT j.jobId,j.userId,j.jobCategoryId,j.title,j.description,j.salary,j.amount,j.timeJob,j.process,j.date,j.status,c.jobCategoryName\n"
             + "            FROM tblJobPost as j, tblCategoryJob as c\n"
             + "            WHERE j.jobCategoryId=c.jobCategoryId AND status=1 AND process='done' AND  userId=? ";
+    private static final String GET_MYJOBPOST_APPROVE = "SELECT j.jobId,j.userId,j.jobCategoryId,j.title,j.description,j.salary,j.amount,j.timeJob,j.process,j.date,j.status,c.jobCategoryName\n"
+            + "            FROM tblJobPost as j, tblCategoryJob as c\n"
+            + "            WHERE j.jobCategoryId=c.jobCategoryId AND status=1 AND process='approving' AND  userId=? ";
     private static final String LIST_ALL = "SELECT j.jobId,j.userId,j.jobCategoryId,j.title,j.description,j.salary,j.amount,j.timeJob,j.process,j.date,j.status,c.jobCategoryName, u.fullname,u.compName\n"
             + "FROM tblJobPost as j, tblCategoryJob as c, tblUser as u\n"
             + "WHERE j.jobCategoryId=c.jobCategoryId AND j.userId=u.userId AND status=1 AND (process='new' OR process='process') \n"
@@ -139,7 +142,7 @@ public class JobPostDAO {
                 ptm.setInt(8, date);
                 ptm.executeUpdate();
                 String sql = "SELECT TOP 1 jobId FROM tblJobPost order by jobId DESC";
-                PreparedStatement ptm2 = conn.prepareStatement(sql);;
+                PreparedStatement ptm2 = conn.prepareStatement(sql);
                 rs = ptm2.executeQuery();
                 if (rs.next()) {
                     int jobId = rs.getInt("jobId");
@@ -163,7 +166,7 @@ public class JobPostDAO {
         return 0;
     }
 
-    public void uploadQuestion(int jobId, String q)
+    public boolean uploadQuestion(int jobId, String q)
             throws SQLException {
         Connection conn = null;
         PreparedStatement ptm = null;
@@ -174,6 +177,7 @@ public class JobPostDAO {
                 ptm.setInt(1, jobId);
                 ptm.setString(2, q);
                 ptm.executeUpdate();
+                return true;
             }
         } catch (Exception e) {
 
@@ -185,6 +189,7 @@ public class JobPostDAO {
                 conn.close();
             }
         }
+        return false; 
     }
 
     public List<JobPostDTO> getMyJobPostProcess(String userId) throws SQLException {
@@ -243,6 +248,52 @@ public class JobPostDAO {
             conn = DBUtils.getConnection();
             if (conn != null) {
                 ptm = conn.prepareStatement(GET_MYJOBPOST_DONE);
+                ptm.setString(1, userId);
+                rs = ptm.executeQuery();
+                while (rs.next()) {
+                    JobPostDTO post = new JobPostDTO();
+                    post.setJobId(rs.getInt("jobId"));
+                    post.setUserId(rs.getString("userId"));
+                    post.setJobCategoryId(rs.getInt("jobCategoryId"));
+                    post.setTitle(rs.getString("title"));
+                    post.setDescription(rs.getString("description"));
+                    post.setSalary(rs.getFloat("salary"));
+                    post.setAmount(rs.getInt("amount"));
+                    post.setTimeJob(rs.getInt("timeJob"));
+                    post.setProcess(rs.getString("process"));
+                    int date = rs.getInt("date");
+                    String newDate = checkTime(date);
+                    post.setDate(newDate);
+                    post.setStatus(rs.getBoolean("status"));
+                    post.setJobCategoryName(rs.getString("jobCategoryName"));
+                    list.add(post);
+                }
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(PostDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return list;
+    }
+    
+        public List<JobPostDTO> getMyJobPostApprove(String userId) throws SQLException {
+        List<JobPostDTO> list = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(GET_MYJOBPOST_APPROVE);
                 ptm.setString(1, userId);
                 rs = ptm.executeQuery();
                 while (rs.next()) {
