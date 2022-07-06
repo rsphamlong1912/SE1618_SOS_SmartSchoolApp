@@ -73,7 +73,7 @@
                             </li>
                             <li class="nav-item px-3"><a class="nav-link fw-bold" aria-current="page" href="main?action=ListJobPost">TÌM VIỆC</a>
                             </li>
-                            <li class="nav-item px-3 navbar-dropdown dropdown-user dropdown">
+<!--                            <li class="nav-item px-3 navbar-dropdown dropdown-user dropdown">
                                 <a class="btn btn-outline-light order-1 order-lg-0 fw-bold nav-link hide-arrow" id="nameLogin" href="" data-bs-toggle="dropdown">
                                     <div class="avatar avatar-online">
 
@@ -107,7 +107,7 @@
                                         </a>
                                     </li>
                                 </ul>
-                            </li>
+                            </li>-->
                             <c:if test="${empty sessionScope.LOGIN_USER}">
                                 <li class="nav-item px-3"><a class="btn btn-outline-light order-1 order-lg-0 fw-bold" href="FreelancerLogin.jsp">Đăng nhập /
                                         Đăng ký</a></li>
@@ -238,6 +238,7 @@
                     </div>
                     <div class="row">
                         <c:forEach items="${requestScope.LISTALLCATEGORY}" var='category'>
+
                             <div class="card col-lg-4 col-sm-6 mb-6" style="max-width: 540px;">
                                 <div class="row g-0">
                                     <div class="col-md-3">
