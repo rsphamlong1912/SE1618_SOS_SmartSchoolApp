@@ -93,7 +93,7 @@
                                                          href="freelancerhome">TRANG CHỦ</a>
                             </li>
                             <li class="nav-item px-3"><a class="nav-link fw-bold" aria-current="page"
-                                                         href="freelancerhome#phanloai">PHÂN LOẠI</a>
+                                                         href="freelancerhome#linhvuc">PHÂN LOẠI</a>
                             </li>
                             <li class="nav-item px-3"><a class="nav-link fw-bold" aria-current="page" href="#">TÌM KIẾM</a>
                             </li>

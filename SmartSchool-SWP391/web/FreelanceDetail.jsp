@@ -96,6 +96,7 @@
                 border: 0;
             }
             
+
             .modal-header {
                 border-top-right-radius:0.5rem;
                 border-top-left-radius:0.5rem;             
@@ -256,6 +257,7 @@
                         </div>
                     </div>
                 </div>
+
             </div> -->
             <!-- Seach End-->
 
