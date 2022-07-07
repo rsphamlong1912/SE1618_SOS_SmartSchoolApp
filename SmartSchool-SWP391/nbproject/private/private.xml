@@ -3,17 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/ROG%20STRIX/SE1618_SOS_SmartSchoolApp/SmartSchool-SWP391/web/EmployerJobApprove.jsp</file>
-            <file>file:/C:/Users/ROG%20STRIX/SE1618_SOS_SmartSchoolApp/SmartSchool-SWP391/web/EmployerHome.jsp</file>
-            <file>file:/C:/Users/ROG%20STRIX/SE1618_SOS_SmartSchoolApp/SmartSchool-SWP391/src/java/jobPost/JobPostDAO.java</file>
-            <file>file:/C:/Users/ROG%20STRIX/SE1618_SOS_SmartSchoolApp/SmartSchool-SWP391/web/FreelanceDetail.jsp</file>
-            <file>file:/C:/Users/ROG%20STRIX/SE1618_SOS_SmartSchoolApp/SmartSchool-SWP391/src/java/controllers/MainController.java</file>
-            <file>file:/C:/Users/ROG%20STRIX/SE1618_SOS_SmartSchoolApp/SmartSchool-SWP391/src/java/controllers/UploadJobPostController.java</file>
-            <file>file:/C:/Users/ROG%20STRIX/SE1618_SOS_SmartSchoolApp/SmartSchool-SWP391/src/java/controllers/MyJobPostApproveController.java</file>
-            <file>file:/C:/Users/ROG%20STRIX/SE1618_SOS_SmartSchoolApp/SmartSchool-SWP391/web/EmployerUpload.jsp</file>
-            <file>file:/C:/Users/ROG%20STRIX/SE1618_SOS_SmartSchoolApp/SmartSchool-SWP391/web/EmployerJobProcess.jsp</file>
-            <file>file:/C:/Users/ROG%20STRIX/SE1618_SOS_SmartSchoolApp/SmartSchool-SWP391/web/EmployerJobDone.jsp</file>
-            <file>file:/C:/Users/ROG%20STRIX/SE1618_SOS_SmartSchoolApp/SmartSchool-SWP391/src/java/controllers/MyJobPostDoneController.java</file>
+            <file>file:/C:/Users/nguye/OneDrive/Documents/NetBeansProjects/SE1618_SOS_SmartSchoolApp/SmartSchool-SWP391/src/java/jobPost/JobPostDAO.java</file>
+            <file>file:/C:/Users/nguye/OneDrive/Documents/NetBeansProjects/SE1618_SOS_SmartSchoolApp/SmartSchool-SWP391/src/java/controllers/MyJobPostApproveController.java</file>
+            <file>file:/C:/Users/nguye/OneDrive/Documents/NetBeansProjects/SE1618_SOS_SmartSchoolApp/SmartSchool-SWP391/web/FreelanceList.jsp</file>
+            <file>file:/C:/Users/nguye/OneDrive/Documents/NetBeansProjects/SE1618_SOS_SmartSchoolApp/SmartSchool-SWP391/web/EmployerJobApprove.jsp</file>
         </group>
     </open-files>
 </project-private>

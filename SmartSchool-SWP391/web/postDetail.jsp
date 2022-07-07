@@ -59,7 +59,6 @@
             .imgPost img {
                 width: 400px;
                 height: 290px;
-                border: 1px solid #433535;
                 border-radius: 10px;
             }
 
@@ -203,7 +202,7 @@
                     </div>
                 </div>
             </nav>
-            <section class="container" style="padding-top: 3rem;" id="timkiem">
+            <section class="container" style="padding-top: 7rem; min-height: 90vh;" id="timkiem">
                 <h1 class="mb-8" style="margin-top: 50px; text-align: center;">Chỉnh sửa bài đăng</h1>
                 <div class="row">
                     <div class="col-12 col-md-4">
@@ -242,7 +241,8 @@
                     <div class="col-12 col-md-3 profileUserPost">
                         
                         <div class="card align-items-center" style="width: 18rem;">
-                            <h3>Người đăng</h3>
+                            <h4 class="mb-3">Người đăng</h4>
+                            <div class="avatar-preview">
                             <c:choose>
                                 <c:when test="${sessionScope.LOGIN_USER.avatar==null}">
                                     <img src="https://unloc.online/wp-content/uploads/2020/04/283-2833820_user-icon-orange-png.png?fbclid=IwAR133UMM9dPj2fhzsRFAVrcTvgHaJBLsIbkkwQbqx1dv_3FTf8OQfqcIRcM" alt >
@@ -251,6 +251,7 @@
                                     <img src="${pageContext.servletContext.contextPath}/avatar?userId=${requestScope.POST.userId}" alt="User Post">
                                 </c:otherwise>
                             </c:choose>
+                            </div>
                             <div class="card-body">
                                 <h5 class="card-title text-center">${requestScope.USER_POST.fullname}</h5>
                             </div>
