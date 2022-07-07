@@ -67,6 +67,8 @@ public class MainController extends HttpServlet {
     private static final String SEARCH_JOBBYCATEGORY_CONTROLLER = "searchJobByCategoryId";
        private static final String DETAIL_JOB = "DetailJob";
     private static final String DETAIL_JOB_CONTROLLER = "detailJob";
+       private static final String ADMIN_LOSTANDFOUND = "AdminLostAndFound";
+    private static final String ADMIN_LOSTANDFOUND_CONTROLLER = "adminLostAndFound";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -134,6 +136,9 @@ public class MainController extends HttpServlet {
             }
             if (MY_JOB_POST_APPROVE.equals(action)) {
                 url = MY_JOB_POST_APPROVE_CONTROLLER;
+            }
+            if (ADMIN_LOSTANDFOUND.equals(action)) {
+                url = ADMIN_LOSTANDFOUND_CONTROLLER;
             }
         } catch (Exception e) {
             log("Error at MainController: " + e.toString());
