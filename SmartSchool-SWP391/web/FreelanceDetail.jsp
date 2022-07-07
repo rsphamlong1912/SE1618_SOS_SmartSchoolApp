@@ -96,6 +96,7 @@
                 border: 0;
             }
             
+
             .modal-header {
                 border-top-right-radius:0.5rem;
                 border-top-left-radius:0.5rem;             
@@ -256,6 +257,7 @@
                         </div>
                     </div>
                 </div>
+
             </div> -->
             <!-- Seach End-->
 
@@ -345,7 +347,7 @@
                                                 </c:forEach>
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                                                <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Hủy</button>
                                                 <button type="button" class="btn btn-primary gradient-custom-2">Gửi</button>
                                             </div>
                                         </div>
@@ -433,8 +435,15 @@
                                         <div class="content-detail mb-3">
                                             <div class="avatar-upload ">
                                                 <div class="text-center avatar-preview">
-                                                    <img src="${pageContext.servletContext.contextPath}/avatar?userId=${JOBDETAIL.userId}"
-                                                         width="164" height="164" />
+                                                    <c:if test="${!empty USERINFOR.avatar}">
+                                                        <img src="${pageContext.servletContext.contextPath}/avatar?userId=${JOBDETAIL.userId}"
+                                                             width="164" height="164" />
+                                                    </c:if>
+                                                    <c:if test="${empty USERINFOR.avatar}">
+                                                        <img src="https://gtjai.com.vn/wp-content/uploads/2021/07/avt.png"
+                                                             width="164" height="164" />
+                                                    </c:if>
+
                                                     </br>
                                                     </br>
                                                     <h5 class="mb-3">${USERINFOR.fullname}</h5>
@@ -445,27 +454,36 @@
                                             <div class="d-flex align-items-center justify-content-center">
                                                 <h6 style="line-height: 2.5;">Thông tin công ty</h6>
                                             </div>
-                                            <div class="d-flex align-items-center">
-                                                <h6 style="line-height: 2.5;">Tên công ty: <span class="fw-medium"
-                                                                                                 style="font-size: 14px; "> ${USERINFOR.compName}</span></h6>
-                                            </div>
+                                           
+                                                <div class="d-flex align-items-center">
+                                                    <h6 style="line-height: 2.5;">Tên công ty: <span class="fw-medium"
+                                                                                                     style="font-size: 14px; "> ${USERINFOR.compName}</span></h6>
+                                                </div>
+                                
+
                                             <div class="d-flex align-items-center">
                                                 <h6 style="line-height: 2.5;">Số điện thoại: <span class="fw-medium"
                                                                                                    style="font-size: 14px; "> ${USERINFOR.phone}</span></h6>
                                             </div>
-                                            <div class="d-flex align-items-center">
-                                                <h6 style="line-height: 2.5;">Email: <span class="fw-medium text-break"
-                                                                                           style="font-size: 14px;"> ${USERINFOR.email}</span></h6>
-                                            </div>
-                                            <div class="d-flex align-items-center">
-                                                <h6 style="line-height: 2.5;">Địa chỉ: <span class="fw-medium text-break"
-                                                                                             style="font-size: 14px;">${USERINFOR.compAddress} </span></h6>
-                                            </div>
-                                            <div class="d-flex align-items-center">
-                                                <h6 style="line-height: 2.5;">Facebook: <span class="fw-medium text-break"
-                                                                                              style="font-size: 14px;"> ${USERINFOR.facebook}</span>
-                                                </h6>
-                                            </div>
+                                           
+                                                <div class="d-flex align-items-center">
+                                                    <h6 style="line-height: 2.5;">Email: <span class="fw-medium text-break"
+                                                                                               style="font-size: 14px;"> ${USERINFOR.email}</span></h6>
+                                                </div>
+                                          
+                                           
+                                                <div class="d-flex align-items-center">
+                                                    <h6 style="line-height: 2.5;">Địa chỉ: <span class="fw-medium text-break"
+                                                                                               style="font-size: 14px;"> ${USERINFOR.compAddress}</span></h6>
+                                                </div>
+                                           
+                                           
+                                                <div class="d-flex align-items-center">
+                                                    <h6 style="line-height: 2.5;">Facebook: <span class="fw-medium text-break"
+                                                                                               style="font-size: 14px;"> ${USERINFOR.facebook}</span></h6>
+                                                </div>
+                                      
+
                                         </div>
 
                                     </div>

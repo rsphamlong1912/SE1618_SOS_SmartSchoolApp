@@ -23,9 +23,12 @@ import user.UserDTO;
 @WebServlet(name = "UploadJobPostController", urlPatterns = {"/uploadJobPost"})
 public class UploadJobPostController extends HttpServlet {
 
+    private static final String ERROR = "EmployerUpload.jsp";
+    private static final String SUCCESS = "main?action=MyJobPostApprove";
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        String url = ERROR;
         try {
             HttpSession session = request.getSession();
             UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
@@ -39,14 +42,17 @@ public class UploadJobPostController extends HttpServlet {
             String[] question = request.getParameterValues("question");
             JobPostDAO dao = new JobPostDAO();
             int jobId = dao.uploadJobPost(userId, jobCategoryId, title, description, salary, amount, timeJob);
+            boolean success = false;
             for (String q : question) {
-                dao.uploadQuestion(jobId,q);
-            }           
-            request.setAttribute("SUCCESS", "Đăng bài thành công !");
+                success = dao.uploadQuestion(jobId,q);
+            }
+            if(success = true) {
+                url = SUCCESS;
+            }
         }catch (Exception e) {
             log("Error at UploadJobPostController: " + e.toString());
         } finally {
-            request.getRequestDispatcher("EmployerUpload.jsp").forward(request, response);
+            request.getRequestDispatcher(SUCCESS).forward(request, response);
         }
     }
 

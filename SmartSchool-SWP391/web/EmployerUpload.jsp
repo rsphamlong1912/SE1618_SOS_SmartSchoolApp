@@ -101,7 +101,7 @@
                             class="navbar-toggler-icon"> </span></button>
                     <div class="collapse navbar-collapse border-top border-lg-0 mt-4 mt-lg-0" id="navbarSupportedContent">
                         <ul class="navbar-nav ms-auto pt-2 pt-lg-0 font-base align-items-lg-center align-items-start">
-                            <li class="nav-item px-3"><a class="nav-link fw-bold" aria-current="page" href="EmployerHome.html">TRANG CHỦ</a>
+                            <li class="nav-item px-3"><a class="nav-link fw-bold" aria-current="page" href="EmployerHome.jsp">TRANG CHỦ</a>
                             </li>
                             <li class="nav-item px-3"><a class="nav-link fw-bold" aria-current="page" href="#phanloai">DASHBOARD</a>
                             </li>
@@ -228,7 +228,6 @@
                             <div class="card-header bg-white pt-4 pb-4 pl-10 pr-10 border-bottom d-md-flex">
                                 <h3 class="">ĐĂNG VIỆC FREELANCE</h3>                               
                             </div>
-                            <div class="pl-10 pr-10 pt-3"><h4 class="text-success">${requestScope.SUCCESS}</h4></div>
                             <div class="card-body pl-10 pr-10">
                                 <div class="form-group mb-4">
                                     <label for="title" class="form-control-label fw-bold mb-2">Nhập tên công việc</label>
@@ -261,9 +260,10 @@
                                     </p>
                                     
                                     <div class="form-floating">
-                                        <textarea class="form-control required" required="true" data-rule-required="true" name="description" placeholder="Nhập mô tả" id="floatingTextarea2"
+                                        <textarea class="form-control required" required="true" data-rule-required="true" name="description" placeholder=" " id="floatingTextarea2"
                                                   style="height: 150px"></textarea>
                                                   <small></small>
+                                                  <label for="floatingTextarea2">Nhập mô tả</label>
                                     </div>
 <!--                                    <div class="invalid-feedback fw-bold">
                                         Vui lòng nhập!

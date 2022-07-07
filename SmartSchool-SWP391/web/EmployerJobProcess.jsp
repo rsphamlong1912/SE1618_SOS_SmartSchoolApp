@@ -103,7 +103,12 @@
                                     </div>
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end">
-
+                                    <li>
+                                        <a class="dropdown-item" href="main?action=MyJobPostApprove">
+                                            <i class="bx bx-user me-2"></i>
+                                            <span class="align-middle"> VIỆC CHỜ PHÊ DUYỆT</span>
+                                        </a>
+                                    </li>
                                     <li>
                                         <a class="dropdown-item" href="#">
                                             <i class="bx bx-user me-2"></i>
@@ -207,7 +212,13 @@
                 </div>
             </nav>
             <div class="container">
-                <div class="row row-cols-2 row-content text-center ">
+                <div class="row row-cols-3 row-content text-center ">
+                    <a class="text-decoration-none fw-bold" href="main?action=MyJobPostApprove">
+
+                        <div class="col">
+                            VIỆC CHỜ PHÊ DUYỆT
+                        </div>
+                    </a>
                     <a class="text-decoration-none fw-bold choosen" href="#">
                         <div class="col">
                             VIỆC ĐANG TUYỂN
@@ -219,6 +230,7 @@
                             VIỆC ĐÃ TUYỂN XONG
                         </div>
                     </a>
+                    
                 </div>
             </div>
 

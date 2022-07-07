@@ -93,7 +93,7 @@
                                                          href="freelancerhome">TRANG CHỦ</a>
                             </li>
                             <li class="nav-item px-3"><a class="nav-link fw-bold" aria-current="page"
-                                                         href="freelancerhome#phanloai">PHÂN LOẠI</a>
+                                                         href="freelancerhome#linhvuc">LĨNH VỰC</a>
                             </li>
                             <li class="nav-item px-3"><a class="nav-link fw-bold" aria-current="page" href="#">TÌM KIẾM</a>
                             </li>
@@ -240,7 +240,7 @@
                                     <ul class="list-group list-group-flush">
                                         <c:forEach items='${requestScope.LISTJOBCATEGORY}' var='listJobCategory'>
 
-                                                <li class="list-group-item"><a class="text-decoration-none" href="/main?jobCategoryId=${listJobCategory.jobCategoryId}&action=SearchJobByCategory">${listJobCategory.jobCategoryName}</a>
+                                            <li class="list-group-item"><a class="text-decoration-none" href="/main?jobCategoryId=${listJobCategory.jobCategoryId}&action=SearchJobByCategory">${listJobCategory.jobCategoryName}</a>
                                             </li>
 
 
@@ -258,9 +258,8 @@
                                             <div class="card-body ">
                                                 <div class="row mb-3">
                                                     <div class="col-md-2">
-
                                                         <img src="${pageContext.servletContext.contextPath}/avatar?userId=${listJob.userId}"
-                                                             alt class="" style="width: 50px; height: 50px;"/>
+                                                             alt class="" style="width: 50px; height: 50px;"/>                                                  
                                                     </div>
                                                     <div class="col-md-9" style="padding-left: 0px;">
                                                         <div
