@@ -422,11 +422,11 @@
                 <div class="container" style="max-width: 771px;">
                     <div class="card card-shadow">
                         <!--                        <form action="main" class="needs-validation" novalidate>-->
-                        <form action="main" method="" enctype="multipart/form-data">
+                        <form action="main" method="POST" enctype="multipart/form-data">
                             <div class="card-header bg-white pt-4 pb-4 pl-10 pr-10 border-bottom d-md-flex">
                                 <h3 class="">ĐĂNG TIN</h3>                               
                             </div>
-<!--                            <div class="pl-10 pr-10 pt-3"><h4 class="text-success">${requestScope.MESSAGE}</h4></div>-->
+                            <div class="pl-10 pr-10 pt-3"><h4 class="text-success">${requestScope.MESSAGE}</h4></div>
                             <div class="card-body pl-10 pr-10">
                                 <div class="form-group mb-3">
                                     <label class="form-control-label fw-bold mb-3">Bạn muốn đăng loại tin nào?</label>
