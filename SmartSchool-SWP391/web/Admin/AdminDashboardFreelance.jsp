@@ -49,7 +49,7 @@
           </a>
           <ul id="ddmenu_1" class="collapse show dropdown-nav">
             <li>
-              <a href="index.html" class=""> Lost And Found </a>
+              <a href="/adminLostAndFound" class=""> Lost And Found </a>
             </li>
             <li>
               <a href="index.html" class="active"> Freelance Job </a>

@@ -48,7 +48,7 @@ public class AdminLostAndFoundController extends HttpServlet {
             int countLostPost = dao.getTotalLostPost();
             int countFoundPost = dao.getTotalFoundPost();
             int countUser = udao.getTotalUser();
-            List<UserDTO> list5User=udao.get5NewLost();
+            List<UserDTO> list5User=udao.get5NewUser();
             request.setAttribute("TOTALUSER", countUser);
             request.setAttribute("TOTALPOST", count);
             request.setAttribute("TOTALLOSTPOST", countLostPost);
