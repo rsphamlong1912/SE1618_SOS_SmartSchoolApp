@@ -76,7 +76,8 @@ public class AdminLostAndFoundController extends HttpServlet {
             int totalFoundOf6DayAgo = dao.getTotalFound6DayAgo();
             int totalFoundOf7DayAgo = dao.getTotalFound7DayAgo();
             
-            List<UserDTO> list5User=udao.get5NewLost();
+            List<UserDTO> list5User=udao.get5NewUser();
+
             request.setAttribute("TOTALUSER", countUser);
             request.setAttribute("TOTALPOST", count);
             request.setAttribute("TOTALLOSTPOST", countLostPost);

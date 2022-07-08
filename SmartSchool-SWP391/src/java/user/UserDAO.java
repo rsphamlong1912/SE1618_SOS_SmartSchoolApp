@@ -36,11 +36,12 @@ public class UserDAO {
             + "            FROM tblUser as u, tblRole as r\n"
             + "            WHERE u.roleId = r.roleId AND userId = ?";
     private static final String GET_TOTAL_USER = "    SELECT COUNT(userId) AS totalUser FROM tblUser WHERE roleId='US'";
+    private static final String SEARCH_5NEWUSER = "SELECT TOP(5) * FROM tblUser WHERE roleId='US' ORDER BY serial DESC";
     private static final String SEARCH_5NEWUSER = "SELECT TOP(5) * FROM tblUser  ORDER BY serial DESC";
     private static final String GET_TOP5_NEW_EMPLOYER = "SELECT TOP(5) * FROM tblUser WHERE roleId = 'EM'  ORDER BY serial DESC";
     private static final String GET_TOTAL_EMPLOYER = "SELECT COUNT(userId) as totalEmployer FROM tblUser WHERE roleId = 'EM'";
 
-    public List<UserDTO> get5NewLost() throws SQLException {
+    public List<UserDTO> get5NewUser() throws SQLException {
         List<UserDTO> list = new ArrayList<>();
         Connection conn = null;
         PreparedStatement ptm = null;
