@@ -7,54 +7,44 @@ package controllers;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import jobPost.JobPostDAO;
-import user.UserDTO;
+import jobCategory.JobCategoryDAO;
 
 /**
  *
- * @author TrinhNgocBao
+ * @author SE150925 Nguyen Van Hai Nam
  */
-@WebServlet(name = "UploadJobPostController", urlPatterns = {"/uploadJobPost"})
-public class UploadJobPostController extends HttpServlet {
+@WebServlet(name = "DeleteJobCategoryController", urlPatterns = {"/deleteJobCategory"})
+public class DeleteJobCategoryController extends HttpServlet {
 
-    private static final String ERROR = "EmployerUpload.jsp";
-    private static final String SUCCESS = "main?action=MyJobPostApprove";
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        String url = ERROR;
         try {
-            HttpSession session = request.getSession();
-            UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
-            String userId = loginUser.getUserId();
-            int jobCategoryId = Integer.parseInt(request.getParameter("jobCategoryId"));
-            String title = request.getParameter("title");
-            String description = request.getParameter("description");
-            float salary = Float.parseFloat(request.getParameter("salary"));
-            int amount = Integer.parseInt(request.getParameter("amount"));
-            int timeJob = Integer.parseInt(request.getParameter("timeJob"));
-            String[] question = request.getParameterValues("question");
-            JobPostDAO dao = new JobPostDAO();
-            int jobId = dao.uploadJobPost(userId, jobCategoryId, title, description, salary, amount, timeJob);
-            boolean success = false;
-            for (String q : question) {
-                success = dao.uploadQuestion(jobId,q);
-            }
-            if(success = true) {
-                url = SUCCESS;
-            }
-        }catch (Exception e) {
-            log("Error at UploadJobPostController: " + e.toString());
-        } finally {
-//            request.getRequestDispatcher(SUCCESS).forward(request, response);
-            response.sendRedirect(SUCCESS);
+            response.setContentType("text/html;charset=UTF-8");
+            int jobCategoryId=Integer.parseInt(request.getParameter("jobCategoryId"));
+            JobCategoryDAO dao=new JobCategoryDAO();
+            dao.deleteJobCategory(jobCategoryId);
+            response.sendRedirect("main?action=JobCategory");
+        } catch (SQLException ex) {
+            Logger.getLogger(DeleteJobCategoryController.class.getName()).log(Level.SEVERE, null, ex);
         }
+       
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

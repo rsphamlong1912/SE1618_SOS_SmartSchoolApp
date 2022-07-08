@@ -32,11 +32,11 @@ public class PostDAO {
     private static final String SEARCH_3NEWFOUND = "SELECT TOP(3) * FROM tblPost WHERE type=1 AND postStatus = 'true' ORDER BY postId DESC";
     private static final String SEARCH_5NEWLOST = "  SELECT TOP(5) p.postId, p.userId,p.categoryId, p.postImg, p.description,p.date,p.type,p.title,p.postStatus,c.categoryName \n"
             + "  FROM tblPost as p, tblCategory as c \n"
-            + "  WHERE p.categoryId=c.categoryId AND type=0 \n"
+            + "  WHERE p.categoryId=c.categoryId AND type=0 AND postStatus='true'\n"
             + "  ORDER BY postId DESC";
     private static final String SEARCH_5NEWFOUND = "  SELECT TOP(5) p.postId, p.userId,p.categoryId, p.postImg, p.description,p.date,p.type,p.title,p.postStatus,c.categoryName \n"
             + "  FROM tblPost as p, tblCategory as c \n"
-            + "  WHERE p.categoryId=c.categoryId AND type=1 \n"
+            + "  WHERE p.categoryId=c.categoryId AND type=1 AND postStatus='true' \n"
             + "  ORDER BY postId DESC";
     private static final String LIST_ALL = "SELECT * FROM tblPost WHERE postStatus='true' ORDER BY postId DESC";
     private static final String CREATE = "INSERT INTO tblPost(userId, categoryId, postImg, description, date, type, title, postStatus) VALUES(?,?,?,?,?,?,?,'approving')";
