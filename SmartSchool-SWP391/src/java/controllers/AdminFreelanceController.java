@@ -7,6 +7,7 @@ package controllers;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -42,28 +43,48 @@ public class AdminFreelanceController extends HttpServlet {
         try {
             UserDAO udao = new UserDAO();
             JobPostDAO jdao = new JobPostDAO();
-            
+
             int totalEmployer = udao.getTotalEmployer();
             int totalUser = udao.getTotalUser();
             int totalJobPost = jdao.getTotalJobPost();
+            int totalJobPostLastWeek = jdao.getTotalJobPostLastWeek();
+            int totalJobPostOf1DayAgo = jdao.getTotalJobPost1DayAgo();
+            int totalJobPostOf2DayAgo = jdao.getTotalJobPost2DayAgo();
+            int totalJobPostOf3DayAgo = jdao.getTotalJobPost3DayAgo();
+            int totalJobPostOf4DayAgo = jdao.getTotalJobPost4DayAgo();
+            int totalJobPostOf5DayAgo = jdao.getTotalJobPost5DayAgo();
+            int totalJobPostOf6DayAgo = jdao.getTotalJobPost6DayAgo();
+            int totalJobPostOf7DayAgo = jdao.getTotalJobPost7DayAgo();
+            
+            
+            
             List<JobPostDTO> listJobPost = jdao.getTop5NewJobPost();
             List<UserDTO> list5NewEmployer = udao.get5NewEmployer();
-            
+
             for (JobPostDTO jobPost : listJobPost) {
                 if (jobPost.getTitle().length() > 50) {
                     String title = jobPost.getTitle().substring(0, 50);
                     jobPost.setTitle(title + "...");
                 }
-                
+
             }
+
+            int[] dataPost = {totalJobPostOf7DayAgo, 
+                              totalJobPostOf6DayAgo, 
+                              totalJobPostOf5DayAgo, 
+                              totalJobPostOf4DayAgo, 
+                              totalJobPostOf3DayAgo, 
+                              totalJobPostOf2DayAgo, 
+                              totalJobPostOf1DayAgo};
+            
             request.setAttribute("TOTAL_EMPLOYER", totalEmployer);
             request.setAttribute("TOTAL_USER", totalUser);
             request.setAttribute("TOTAL_JOB_POST", totalJobPost);
+            request.setAttribute("TOTAL_JOB_POST_LAST_WEEK", totalJobPostLastWeek);
             request.setAttribute("TOP5_JOB_POST", listJobPost);
             request.setAttribute("TOP5_NEW_EMPLOYER", list5NewEmployer);
-            
-            
-                    
+            request.setAttribute("DATA", dataPost);
+
         } catch (Exception ex) {
             Logger.getLogger(AdminLostAndFoundController.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
