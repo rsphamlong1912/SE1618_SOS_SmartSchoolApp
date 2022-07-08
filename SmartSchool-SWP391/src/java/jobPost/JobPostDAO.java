@@ -49,6 +49,11 @@ public class JobPostDAO {
     private static final String JOB_DETAIL = "SELECT j.jobId,j.userId,j.jobCategoryId,j.title,j.description,j.salary,j.amount,j.timeJob,j.process,j.date,j.status,c.jobCategoryName, u.fullname,u.compName\n"
             + "FROM  tblJobPost as j, tblCategoryJob as c, tblUser as u\n"
             + "WHERE j.jobCategoryId=c.jobCategoryId AND j.userId=u.userId AND status=1 AND (process = 'new' OR process='process') AND j.jobId=?\n";
+    private static final String GET_TOTAL_JOB_POST = "  SELECT COUNT(jobId) AS totalJobPost FROM tblJobPost WHERE status = 1";
+    private static final String GET_TOP5_NEW_JOB_POST = "SELECT TOP(5) j.jobId,j.userId,j.jobCategoryId,j.title,j.description,j.salary,j.amount,j.timeJob,j.process,j.date,j.status,c.jobCategoryName, u.fullname,u.compName \n"
+            + "FROM  tblJobPost as j, tblCategoryJob as c, tblUser as u\n"
+            + "WHERE j.jobCategoryId=c.jobCategoryId AND j.userId=u.userId AND status=1 \n"
+            + "ORDER BY jobId DESC";
 
     public static int takeMinutes() {
         long millis = System.currentTimeMillis();
@@ -189,7 +194,7 @@ public class JobPostDAO {
                 conn.close();
             }
         }
-        return false; 
+        return false;
     }
 
     public List<JobPostDTO> getMyJobPostProcess(String userId) throws SQLException {
@@ -284,8 +289,8 @@ public class JobPostDAO {
         }
         return list;
     }
-    
-        public List<JobPostDTO> getMyJobPostApprove(String userId) throws SQLException {
+
+    public List<JobPostDTO> getMyJobPostApprove(String userId) throws SQLException {
         List<JobPostDTO> list = new ArrayList<>();
         Connection conn = null;
         PreparedStatement ptm = null;
@@ -379,6 +384,7 @@ public class JobPostDAO {
         }
         return list;
     }
+
     public List<JobPostDTO> searchPostByJobCategoryId(String search) throws SQLException {
         List<JobPostDTO> list = new ArrayList<>();
         Connection conn = null;
@@ -426,9 +432,9 @@ public class JobPostDAO {
         }
         return list;
     }
-    
+
     public JobPostDTO getJobInformation(String jobId) throws SQLException {
-        
+
         JobPostDTO post = new JobPostDTO();
         Connection conn = null;
         PreparedStatement ptm = null;
@@ -473,5 +479,83 @@ public class JobPostDAO {
             }
         }
         return null;
+    }
+
+    public int getTotalJobPost() throws SQLException {
+        Connection con = null;
+        ResultSet rs = null;
+        PreparedStatement ptm = null;
+        try {
+            con = DBUtils.getConnection();
+            if (con != null) {
+                ptm = con.prepareStatement(GET_TOTAL_JOB_POST);
+                rs = ptm.executeQuery();
+                if (rs.next()) {
+                    return rs.getInt("totalJobPost");
+                }
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(PostDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+
+        }
+
+        return 0;
+    }
+    
+    public List<JobPostDTO> getTop5NewJobPost() throws SQLException {
+        List<JobPostDTO> list = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(GET_TOP5_NEW_JOB_POST);
+                rs = ptm.executeQuery();
+                while (rs.next()) {
+                    JobPostDTO post = new JobPostDTO();
+                    post.setJobId(rs.getInt("jobId"));
+                    post.setUserId(rs.getString("userId"));
+                    post.setJobCategoryId(rs.getInt("jobCategoryId"));
+                    post.setTitle(rs.getString("title"));
+                    post.setDescription(rs.getString("description"));
+                    post.setSalary(rs.getFloat("salary"));
+                    post.setAmount(rs.getInt("amount"));
+                    post.setTimeJob(rs.getInt("timeJob"));
+                    post.setProcess(rs.getString("process"));
+                    int date = rs.getInt("date");
+                    String newDate = checkTime(date);
+                    post.setDate(newDate);
+                    post.setStatus(rs.getBoolean("status"));
+                    post.setJobCategoryName(rs.getString("jobCategoryName"));
+                    post.setFullname(rs.getString("fullname"));
+                    post.setCompName(rs.getString("compName"));
+                    list.add(post);
+                }
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(PostDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return list;
     }
 }
