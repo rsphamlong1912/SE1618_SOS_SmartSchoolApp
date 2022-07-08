@@ -273,7 +273,7 @@
                                     <div class="card-body">
                                         <div class="content-detail mb-3">
                                             <div class="d-flex flex-column flex-lg-row justify-content-between mb-2">
-                                                <h5 class="text-secondary fw-medium text-truncate"><a
+                                                <h5 class="text-secondary fw-medium text-truncated"><a
                                                         class="link-901 text-decoration-none " href="#!">${JOBDETAIL.title}</a></h5><span
                                                     class="fs-1 fw-medium"></span>
                                             </div>

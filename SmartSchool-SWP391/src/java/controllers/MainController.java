@@ -69,7 +69,14 @@ public class MainController extends HttpServlet {
     private static final String DETAIL_JOB_CONTROLLER = "detailJob";
        private static final String ADMIN_LOSTANDFOUND = "AdminLostAndFound";
     private static final String ADMIN_LOSTANDFOUND_CONTROLLER = "adminLostAndFound";
-
+       private static final String JOB_CATEGORY = "JobCategory";
+    private static final String JOB_CATEGORY_CONTROLLER = "jobCategory";
+       private static final String ADD_JOB_CATEGORY = "AddJobCategory";
+    private static final String ADD_JOB_CATEGORY_CONTROLLER = "addJobCategory";
+    private static final String DELETE_JOB_CATEGORY = "DeleteJobCategory";
+    private static final String DELETE_JOB_CATEGORY_CONTROLLER = "deleteJobCategory";
+    private static final String EDIT_JOB_CATEGORY = "EditJobCategory";
+    private static final String EDIT_JOB_CATEGORY_CONTROLLER = "editJobCategory";
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -139,6 +146,18 @@ public class MainController extends HttpServlet {
             }
             if (ADMIN_LOSTANDFOUND.equals(action)) {
                 url = ADMIN_LOSTANDFOUND_CONTROLLER;
+            }
+            if (JOB_CATEGORY.equals(action)) {
+                url = JOB_CATEGORY_CONTROLLER;
+            }
+            if (ADD_JOB_CATEGORY.equals(action)) {
+                url = ADD_JOB_CATEGORY_CONTROLLER;
+            }
+            if (DELETE_JOB_CATEGORY.equals(action)) {
+                url = DELETE_JOB_CATEGORY_CONTROLLER;
+            }
+            if (EDIT_JOB_CATEGORY.equals(action)) {
+                url = EDIT_JOB_CATEGORY_CONTROLLER;
             }
         } catch (Exception e) {
             log("Error at MainController: " + e.toString());

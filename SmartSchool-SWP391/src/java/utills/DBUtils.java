@@ -18,7 +18,7 @@ public class DBUtils {
     public static Connection getConnection() throws Exception {
         String url = "jdbc:sqlserver://localhost:1433;databaseName=SmartSchool";
         Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-        return DriverManager.getConnection(url, "sa", "12345");
+        return DriverManager.getConnection(url, "sa", "123456");
     }
     
         public static void main(String[] args) {
