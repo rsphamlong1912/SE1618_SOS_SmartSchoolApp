@@ -37,6 +37,9 @@ public class UserDAO {
             + "            WHERE u.roleId = r.roleId AND userId = ?";
     private static final String GET_TOTAL_USER = "    SELECT COUNT(userId) AS totalUser FROM tblUser WHERE roleId='US'";
     private static final String SEARCH_5NEWUSER = "SELECT TOP(5) * FROM tblUser WHERE roleId='US' ORDER BY serial DESC";
+    private static final String SEARCH_5NEWUSER = "SELECT TOP(5) * FROM tblUser  ORDER BY serial DESC";
+    private static final String GET_TOP5_NEW_EMPLOYER = "SELECT TOP(5) * FROM tblUser WHERE roleId = 'EM'  ORDER BY serial DESC";
+    private static final String GET_TOTAL_EMPLOYER = "SELECT COUNT(userId) as totalEmployer FROM tblUser WHERE roleId = 'EM'";
 
     public List<UserDTO> get5NewUser() throws SQLException {
         List<UserDTO> list = new ArrayList<>();
@@ -420,5 +423,81 @@ public class UserDAO {
             }
         }
         return 0;
+    }
+    
+    public int getTotalEmployer() throws SQLException {
+        Connection con = null;
+        ResultSet rs = null;
+        PreparedStatement ptm = null;
+        try {
+            con = DBUtils.getConnection();
+            if (con != null) {
+                ptm = con.prepareStatement(GET_TOTAL_EMPLOYER);
+                rs = ptm.executeQuery();
+                if (rs.next()) {
+                    return rs.getInt("totalEmployer");
+                }
+            }   
+        } catch (Exception ex) {
+            Logger.getLogger(PostDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+            
+        }
+        
+        return 0;
+        
+    }
+    
+    public List<UserDTO> get5NewEmployer() throws SQLException {
+        List<UserDTO> list = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(GET_TOP5_NEW_EMPLOYER);
+                rs = ptm.executeQuery();
+                while (rs.next()) {
+                    UserDTO user = new UserDTO();
+                    user.setUserId(rs.getString("userId"));
+                    user.setRoleId(rs.getString("roleId"));
+                    user.setPassword(rs.getString("password"));
+                    user.setFullname(rs.getString("fullname"));
+                    user.setAvatar(rs.getBytes("avatar"));
+                    user.setPhone(rs.getString("phone"));
+                    user.setEmail(rs.getString("email"));
+                    user.setFacebook(rs.getString("facebook"));
+//                user.setCompAddress(rs.getString("compAddress"));
+//                user.setUserId(rs.getString("userId"));
+                    user.setUserStatus(rs.getBoolean("userStatus"));
+                    user.setHaveJob(rs.getBoolean("haveJob"));
+//                    user.setRoleName(rs.getString("roleName"));
+                    list.add(user);
+                }
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(PostDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return list;
     }
 }
