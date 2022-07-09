@@ -26,28 +26,32 @@ public class CategoryDAO {
     
     private static final String LISTALL_CATEGORY = "select * from tblCategory where categoryId=? and categoryStatus=1";
     private static final String LISTALL_CATEGORY_BYID = "select * from tblCategory where categoryStatus=1";
+    private static final String CREATE = "INSERT INTO tblCategory(categoryName, categoryStatus, categoryImg) VALUES(?,1,?)";
+    private static final String DELETE = "UPDATE tblCategory SET categoryStatus=0 WHERE categoryId=?";
+    private static final String UPDATE = "UPDATE tblCategory SET categoryName=?, categoryImg=? WHERE categoryId=?";
     
     public List<CategoryDTO> getAllCategory() throws SQLException {
         List<CategoryDTO> list = new ArrayList<>();
         Connection con = null;
-        Statement stm = null;
+        PreparedStatement stm = null;
         ResultSet rs = null;
         try {
             con = DBUtils.getConnection();
-            stm = con.createStatement();
-            rs = stm.executeQuery(LISTALL_CATEGORY_BYID);
-            //Loading data into the list
-            while (rs.next()) {
-                CategoryDTO category = new CategoryDTO();
-                category.setCategoryId(rs.getInt("categoryId"));
-                category.setCategoryName(rs.getString("categoryName"));
-                category.setCategoryStatus(rs.getBoolean("categoryStatus"));
-                category.setCategoryImg(rs.getString("categoryImg"));
-                list.add(category);
+            if (con != null) {
+                stm = con.prepareStatement(LISTALL_CATEGORY_BYID);
+                rs = stm.executeQuery();
+                //Loading data into the list
+                while (rs.next()) {
+                    CategoryDTO category = new CategoryDTO();
+                    category.setCategoryId(rs.getInt("categoryId"));
+                    category.setCategoryName(rs.getString("categoryName"));
+                    category.setCategoryStatus(rs.getBoolean("categoryStatus"));
+                    category.setCategoryImg(rs.getString("categoryImg"));
+                    list.add(category);
+                }
             }
-
         } catch (Exception ex) {
-            Logger.getLogger(PostDAO.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
         } finally {
             if (rs != null) {
                 rs.close();
@@ -66,7 +70,7 @@ public class CategoryDAO {
         Connection conn = null;
         PreparedStatement ptm = null;
         ResultSet rs = null;
-        CategoryDTO category=null;
+        CategoryDTO category = null;
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
@@ -74,7 +78,7 @@ public class CategoryDAO {
                 ptm.setInt(1, categoryId);
                 rs = ptm.executeQuery();
                 while (rs.next()) {
-                    category= new CategoryDTO();
+                    category = new CategoryDTO();
                     category.setCategoryId(rs.getInt("categoryId"));
                     category.setCategoryName(rs.getString("categoryName"));
                     category.setCategoryStatus(rs.getBoolean("categoryStatus"));
@@ -82,7 +86,7 @@ public class CategoryDAO {
                 }
             }
         } catch (Exception ex) {
-            Logger.getLogger(PostDAO.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
         } finally {
             if (rs != null) {
                 rs.close();
@@ -95,5 +99,71 @@ public class CategoryDAO {
             }
         }
         return category;
+    }
+    
+    public void updateCategory( int categoryId,String categoryName,String categoryImg) throws SQLException {
+        Connection con = null;
+        PreparedStatement ptm = null;
+        try {
+            con = DBUtils.getConnection();
+            ptm = con.prepareStatement(UPDATE);
+            ptm.setString(1,categoryName);
+            ptm.setString(2, categoryImg);
+            ptm.setInt(3, categoryId);
+            ptm.executeUpdate();
+        } catch (Exception ex) {
+            Logger.getLogger(CategoryDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+    }
+    
+    public void deleteCategory(int categoryId) throws SQLException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        try {
+            con = DBUtils.getConnection();
+            stm = con.prepareStatement(DELETE);
+            stm.setInt(1, categoryId);
+            stm.executeUpdate();
+        } catch (Exception ex) {
+            Logger.getLogger(CategoryDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+    }
+    
+    //add Category
+     public void uploadCategory(String categoryName, String categoryImg ) throws SQLException {
+        Connection con = null;
+        PreparedStatement ptm = null;
+        try {
+            con = DBUtils.getConnection();
+            ptm = con.prepareStatement(CREATE);
+            ptm.setString(1, categoryName);
+            ptm.setString(2, categoryImg);
+            ptm.executeUpdate();
+        } catch (Exception ex) {
+            Logger.getLogger(CategoryDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
     }
 }
