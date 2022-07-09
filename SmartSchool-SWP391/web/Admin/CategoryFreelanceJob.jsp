@@ -23,6 +23,13 @@
         <link rel="stylesheet" href="/Admin/assets/css/fullcalendar.css" />
         <link rel="stylesheet" href="/Admin/assets/css/main.css" />
         <link rel="stylesheet" href="/Admin/assets/css/styles.css" />
+        <style>
+            #ModalAddCategory small, #ModalEditCategory small {
+                color: #F21F26;
+                padding-left: 10px;
+                font-weight: 700 !important;
+            }
+        </style>
     </head>
 
     <body>
@@ -407,26 +414,29 @@
                                                     <h4 class="modal-title" id="exampleModalLabel">Add New Category</h4>
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
-                                                <form action="main" method="POST">
+                                                <form onsubmit="return validateAddCategory()" action="main" method="POST">
                                                     <div class="modal-body">
 
                                                         <div class="row justify-content-center">
                                                             <div class="col-11">
                                                                 <div class="input-style-1">
                                                                     <label>Category Name</label>
-                                                                    <input type="text" placeholder="Type here" name="jobCategoryName" />
+                                                                    <input type="text" id="cateName" placeholder="Type here" name="jobCategoryName" />
+                                                                    <small></small>
                                                                 </div>
                                                             </div>
                                                             <div class="col-11">
                                                                 <div class="input-style-1">
                                                                     <label>Category Description</label>
-                                                                    <textarea placeholder="Type here" rows="2" name="jobDescription"></textarea>
+                                                                    <textarea id="cateDesc" placeholder="Type here" rows="2" name="jobDescription"></textarea>
+                                                                    <small></small>
                                                                 </div>
                                                             </div>
                                                             <div class="col-11">
                                                                 <div class="input-style-1">
                                                                     <label>Category Image (Please copy URL Image)</label>
-                                                                    <textarea placeholder="Type here" rows="5" name="jobImage"></textarea>
+                                                                    <textarea id="cateImage" placeholder="Type here" rows="5" name="jobImage"></textarea>
+                                                                    <small></small>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -493,7 +503,7 @@
                                                     </td>
                                                     <td>
                                                         <div class="action justify-content-center icon purple">
-                                                            <button onclick="truyenDataEdit(this.getAttribute('data-editCateId'),this.getAttribute('data-editCateName'),this.getAttribute('data-editCateDesc'),this.getAttribute('data-editCateImage'))" class="text-gray" style="font-size:20px;" data-bs-toggle="modal"
+                                                            <button onclick="truyenDataEdit(this.getAttribute('data-editCateId'), this.getAttribute('data-editCateName'), this.getAttribute('data-editCateDesc'), this.getAttribute('data-editCateImage'))" class="text-gray" style="font-size:20px;" data-bs-toggle="modal"
                                                                     data-bs-target="#ModalEditCategory"  data-editCateId="${jobCategory.jobCategoryId}" data-editCateName="${jobCategory.jobCategoryName}"
                                                                     data-editCateDesc="${jobCategory.jobDescription}" data-editCateImage="${jobCategory.jobImage}">
                                                                 <i class="lni lni-pencil-alt fw-bold"></i>
@@ -518,7 +528,7 @@
                     <!-- End Row -->
                 </div>
                 <!-- Modal -->
-                <form action="main" method="POST">
+                <form onsubmit="return validateEditCategory()" action="main" method="POST">
                     <div class="modal fade" id="ModalEditCategory" tabindex="-1" aria-labelledby="exampleModalLabel"
                          aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered">
@@ -534,18 +544,21 @@
                                             <div class="input-style-1">
                                                 <label>Category Name</label>
                                                 <input name="jobCategoryName" id="EditCateName" type="text" placeholder="Type here" />
+                                                <small></small>
                                             </div>
                                         </div>
                                         <div class="col-11">
                                             <div class="input-style-1">
                                                 <label>Category Description</label>
                                                 <textarea name="jobDescription" id="EditCateDesc" placeholder="Type here" rows="2"></textarea>
+                                                <small></small>
                                             </div>
                                         </div>
                                         <div class="col-11">
                                             <div class="input-style-1">
                                                 <label>Category Image (Please copy URL Image)</label>
                                                 <textarea name="jobImage" id="EditCateImage" placeholder="Type here" rows="5"></textarea>
+                                                <small></small>
                                             </div>
                                         </div>
                                     </div>
@@ -622,6 +635,7 @@
         <script src="/Admin/assets/js/world-merc.js"></script>
         <script src="/Admin/assets/js/polyfill.js"></script>
         <script src="/Admin/assets/js/main.js"></script>
+        <script src="/Admin/assets/js/validation.js"></script>
 
         <!--        <script>
                                                                         function truyendulieu() {
@@ -632,7 +646,7 @@
                                                                 function truyenIdDelete(CateId) {
                                                                     document.getElementById("CateId2").value = CateId;
                                                                 }
-                                                                function truyenDataEdit(CateId,CateName,CateDesc,CateImage) {
+                                                                function truyenDataEdit(CateId, CateName, CateDesc, CateImage) {
                                                                     document.getElementById("EditCateId").value = CateId;
                                                                     document.getElementById("EditCateName").value = CateName;
                                                                     document.getElementById("EditCateDesc").innerHTML = CateDesc;
