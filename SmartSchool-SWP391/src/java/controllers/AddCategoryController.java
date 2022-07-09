@@ -5,6 +5,7 @@
  */
 package controllers;
 
+import category.CategoryDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -12,48 +13,38 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import jobPost.JobPostDAO;
-import user.UserDTO;
 
 /**
  *
- * @author TrinhNgocBao
+ * @author TQK
  */
-@WebServlet(name = "UploadJobPostController", urlPatterns = {"/uploadJobPost"})
-public class UploadJobPostController extends HttpServlet {
+@WebServlet(name = "AddCategoryController", urlPatterns = {"/addCategory"})
+public class AddCategoryController extends HttpServlet {
 
-    private static final String ERROR = "EmployerUpload.jsp";
-    private static final String SUCCESS = "main?action=MyJobPostApprove";
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = ERROR;
         try {
-            HttpSession session = request.getSession();
-            UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
-            String userId = loginUser.getUserId();
-            int jobCategoryId = Integer.parseInt(request.getParameter("jobCategoryId"));
-            String title = request.getParameter("title");
-            String description = request.getParameter("description");
-            float salary = Float.parseFloat(request.getParameter("salary"));
-            int amount = Integer.parseInt(request.getParameter("amount"));
-            int timeJob = Integer.parseInt(request.getParameter("timeJob"));
-            String[] question = request.getParameterValues("question");
-            JobPostDAO dao = new JobPostDAO();
-            int jobId = dao.uploadJobPost(userId, jobCategoryId, title, description, salary, amount, timeJob);
-            boolean success = false;
-            for (String q : question) {
-                success = dao.uploadQuestion(jobId,q);
-            }
-            if(success = true) {
-                url = SUCCESS;
-            }
-        }catch (Exception e) {
-            log("Error at UploadJobPostController: " + e.toString());
-        } finally {
-//            request.getRequestDispatcher(SUCCESS).forward(request, response);
-            response.sendRedirect(SUCCESS);
+            response.setContentType("text/html;charset=UTF-8");
+            CategoryDAO dao=new CategoryDAO();
+            String categoryName=request.getParameter("categoryName");
+            String categoryImg=request.getParameter("categoryImg");
+            dao.uploadCategory(categoryName, categoryImg);
+            request.setAttribute("MESSAGE", "Đăng bài thành công!");
+        } catch (Exception e) {
+            log("Error at AddCategoryController: " + e.toString());
+        }finally {
+//            request.getRequestDispatcher("main?action=JobCategory").forward(request, response);
+            response.sendRedirect("main?action=Category");
         }
     }
 

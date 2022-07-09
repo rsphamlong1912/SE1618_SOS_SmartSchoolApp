@@ -428,7 +428,7 @@
                                     <i class="lni lni-package"></i>
                                 </div>
                                 <div class="content">
-                                    <h6 class="mb-10">Total Job Posts</h6>
+                                    <h6 class="mb-10">Total Posts</h6>
                                     <h3 class="text-bold mb-10">${requestScope.TOTAL_JOB_POST}</h3>
                                     <p class="text-sm text-success">
                                         <i class="lni lni-arrow-up"></i> +2.00%
@@ -483,7 +483,7 @@
                                         <h6 class="text-medium mb-10">Posts by last 7 days</h6>
                                     </div>
                                     <div class="right">
-                                        <h5 class="text-bold">Total: 323 posts</h5>
+                                        <h5 class="text-bold">Total: ${requestScope.TOTAL_JOB_POST_LAST_WEEK} posts</h5>
                                     </div>
                                 </div>
                                 <!-- End Title -->
@@ -653,7 +653,7 @@
                                                                     src="${pageContext.servletContext.contextPath}/avatar?userId=${jobPost.userId}"
                                                                     alt="" />
                                                             </div>
-                                                            <p class="text-sm">${jobPost.fullname}</p>
+                                                                    <p class="text-sm">${jobPost.fullname}</p>
                                                         </div>
                                                     </td>
                                                     <td>
@@ -695,6 +695,7 @@
                                                     </td>
                                                 </tr>
                                             </c:forEach>
+
                                         </tbody>
                                     </table>
                                     <!-- End Table -->
@@ -813,28 +814,28 @@
             // =========== chart one start
             const ctx1 = document.getElementById("Chart1").getContext("2d");
             const chart1 = new Chart(ctx1, {
-                // The type of chart we want to create
-                type: "line", // also try bar or other graph types
+                // The type of chart 
+                type: "line",
 
                 // The data for our dataset
                 data: {
                     labels: [
-                        "Day 1",
-                        "Day 2",
-                        "Day 3",
-                        "Day 4",
-                        "Day 5",
-                        "Day 6",
-                        "Day 7",
+                        "7 day ago",
+                        "6 day ago",
+                        "5 day ago",
+                        "4 day ago",
+                        "3 day ago",
+                        "2 day ago",
+                        "1 day ago",
                     ],
                     // Information about the dataset
                     datasets: [
                         {
-                            label: "",
+                            label: "Number Of Post",
                             backgroundColor: "transparent",
                             borderColor: "#9b51e0",
                             data: [
-                                0, 10, 35, 42, 61, 51, 11,
+            ${requestScope.DATA[0]}, ${requestScope.DATA[1]}, ${requestScope.DATA[2]}, ${requestScope.DATA[3]}, ${requestScope.DATA[4]}, ${requestScope.DATA[5]}, ${requestScope.DATA[6]},
                             ],
                             pointBackgroundColor: "transparent",
                             pointHoverBackgroundColor: "#9b51e0",
@@ -894,7 +895,7 @@
                                 },
                                 ticks: {
                                     padding: 35,
-                                    max: 100,
+                                    max: 10,
                                     min: 0,
                                 },
                             },

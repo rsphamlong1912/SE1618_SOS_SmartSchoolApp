@@ -500,7 +500,7 @@
                   <h6 class="text-medium mb-10">Posts by last 7 days</h6>
                 </div>
                 <div class="right">
-                  <h5 class="text-bold">Total: 323 posts</h5>
+                    <h5 class="text-bold">Total: ${requestScope.TOTAL_POST_LAST_WEEK} posts</h5>
                 </div>
               </div>
               <!-- End Title -->
@@ -531,7 +531,7 @@
                           <span class="bg-color orange-bg"> </span>
                           <div class="text">
                             <p class="text-sm">
-                              <span class="text-dark">Lost Items: <span class="text-orange">126</span></span>
+                              <span class="text-dark">Lost Items: <span class="text-orange">${requestScope.TOTAL_LOST_LAST_WEEK}</span></span>
 
                             </p>
                           </div>
@@ -542,7 +542,7 @@
                           <span class="bg-color success-bg"></span>
                           <div class="text">
                             <p class="text-sm">
-                              <span class="text-dark">Found Items: <span class="text-success">197</span></span>
+                              <span class="text-dark">Found Items: <span class="text-success">${requestScope.TOTAL_FOUND_LAST_WEEK}</span></span>
                             </p>
                           </div>
                         </div>
@@ -1025,13 +1025,13 @@
       // The data for our dataset
       data: {
         labels: [
-          "Day 1",
-          "Day 2",
-          "Day 3",
-          "Day 4",
-          "Day 5",
-          "Day 6",
-          "Day 7",
+          "7 day ago",
+          "6 day ago",
+          "5 day ago",
+          "4 day ago",
+          "3 day ago",
+          "2 day ago",
+          "1 day ago",
         ],
         // Information about the dataset
         datasets: [
@@ -1040,7 +1040,7 @@
             backgroundColor: "transparent",
             borderColor: "#9b51e0",
             data: [
-              0, 10, 35, 42, 61, 51, 11,
+                ${requestScope.DATA[0]}, ${requestScope.DATA[1]}, ${requestScope.DATA[2]}, ${requestScope.DATA[3]}, ${requestScope.DATA[4]}, ${requestScope.DATA[5]}, ${requestScope.DATA[6]},
             ],
             pointBackgroundColor: "transparent",
             pointHoverBackgroundColor: "#9b51e0",
@@ -1100,7 +1100,7 @@
               },
               ticks: {
                 padding: 35,
-                max: 100,
+                max: 10,
                 min: 0,
               },
             },
@@ -1131,13 +1131,13 @@
       // The data for our dataset
       data: {
         labels: [
-          "Day 1",
-          "Day 2",
-          "Day 3",
-          "Day 4",
-          "Day 5",
-          "Day 6",
-          "Day 7",],
+          "7 day ago",
+          "6 day ago",
+          "5 day ago",
+          "4 day ago",
+          "3 day ago",
+          "2 day ago",
+          "1 day ago",],
         // Information about the dataset
         datasets: [
           {
@@ -1145,14 +1145,18 @@
             backgroundColor: "#f2994a",
             barThickness: "flex",
             maxBarThickness: 8,
-            data: [60, 70, 34, 50, 65, 23, 11],
+            data: [
+                ${requestScope.DATA_LOST[0]}, ${requestScope.DATA_LOST[1]}, ${requestScope.DATA_LOST[2]}, ${requestScope.DATA_LOST[3]}, ${requestScope.DATA_LOST[4]}, ${requestScope.DATA_LOST[5]}, ${requestScope.DATA_LOST[6]},
+            ],
           },
           {
             label: "",
             backgroundColor: "#219653",
             barThickness: "flex",
             maxBarThickness: 8,
-            data: [69, 74, 72, 50, 45, 90, 31],
+            data: [
+                ${requestScope.DATA_FOUND[0]}, ${requestScope.DATA_FOUND[1]}, ${requestScope.DATA_FOUND[2]}, ${requestScope.DATA_FOUND[3]}, ${requestScope.DATA_FOUND[4]}, ${requestScope.DATA_FOUND[5]}, ${requestScope.DATA_FOUND[6]},
+            ],
           },
         ],
       },
@@ -1200,7 +1204,7 @@
               },
               ticks: {
                 padding: 35,
-                max: 100,
+                max: 10,
                 min: 0,
               },
             },
