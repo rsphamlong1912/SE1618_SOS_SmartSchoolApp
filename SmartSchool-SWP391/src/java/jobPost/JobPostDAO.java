@@ -54,6 +54,16 @@ public class JobPostDAO {
             + "FROM  tblJobPost as j, tblCategoryJob as c, tblUser as u\n"
             + "WHERE j.jobCategoryId=c.jobCategoryId AND j.userId=u.userId AND status=1 \n"
             + "ORDER BY jobId DESC";
+    
+    //FOR CHART
+    private static final String GET_TOTAL_POST_LAST_WEEK = "SELECT COUNT(jobId) as totalJob from tblJobPost WHERE date BETWEEN (DATEDIFF(mi, '1970-01-01 00:00:00', GETUTCDATE())-10080) AND DATEDIFF(mi, '1970-01-01 00:00:00', GETUTCDATE())";
+    private static final String GET_TOTAL_POST_1DAY_AGO = "SELECT COUNT(jobId) as totalJob from tblJobPost WHERE date BETWEEN (DATEDIFF(mi, '1970-01-01 00:00:00', GETUTCDATE())-1440) AND DATEDIFF(mi, '1970-01-01 00:00:00', GETUTCDATE())";
+    private static final String GET_TOTAL_POST_2DAY_AGO = "SELECT COUNT(jobId) as totalJob from tblJobPost WHERE date BETWEEN (DATEDIFF(mi, '1970-01-01 00:00:00', GETUTCDATE())-2880) AND (DATEDIFF(mi, '1970-01-01 00:00:00', GETUTCDATE())-1440)";
+    private static final String GET_TOTAL_POST_3DAY_AGO = "SELECT COUNT(jobId) as totalJob from tblJobPost WHERE date BETWEEN (DATEDIFF(mi, '1970-01-01 00:00:00', GETUTCDATE())-4320) AND (DATEDIFF(mi, '1970-01-01 00:00:00', GETUTCDATE())-2880)";
+    private static final String GET_TOTAL_POST_4DAY_AGO = "SELECT COUNT(jobId) as totalJob from tblJobPost WHERE date BETWEEN (DATEDIFF(mi, '1970-01-01 00:00:00', GETUTCDATE())-5760) AND (DATEDIFF(mi, '1970-01-01 00:00:00', GETUTCDATE())-4320)";
+    private static final String GET_TOTAL_POST_5DAY_AGO = "SELECT COUNT(jobId) as totalJob from tblJobPost WHERE date BETWEEN (DATEDIFF(mi, '1970-01-01 00:00:00', GETUTCDATE())-7200) AND (DATEDIFF(mi, '1970-01-01 00:00:00', GETUTCDATE())-5760)";
+    private static final String GET_TOTAL_POST_6DAY_AGO = "SELECT COUNT(jobId) as totalJob from tblJobPost WHERE date BETWEEN (DATEDIFF(mi, '1970-01-01 00:00:00', GETUTCDATE())-8640) AND (DATEDIFF(mi, '1970-01-01 00:00:00', GETUTCDATE())-7200)";
+    private static final String GET_TOTAL_POST_7DAY_AGO = "SELECT COUNT(jobId) as totalJob from tblJobPost WHERE date BETWEEN (DATEDIFF(mi, '1970-01-01 00:00:00', GETUTCDATE())-10080) AND (DATEDIFF(mi, '1970-01-01 00:00:00', GETUTCDATE())-8640)";
 
     public static int takeMinutes() {
         long millis = System.currentTimeMillis();
@@ -558,4 +568,254 @@ public class JobPostDAO {
         }
         return list;
     }
+    
+    public int getTotalJobPostLastWeek() throws SQLException {
+        Connection con = null;
+        ResultSet rs = null;
+        PreparedStatement ptm = null;
+        try {
+            con = DBUtils.getConnection();
+            if (con != null) {
+                ptm = con.prepareStatement(GET_TOTAL_POST_LAST_WEEK);
+                rs = ptm.executeQuery();
+                if (rs.next()) {
+                    return rs.getInt("totalJob");
+                }
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(PostDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+
+        }
+
+        return 0;
+    }
+    
+    public int getTotalJobPost1DayAgo() throws SQLException {
+        Connection con = null;
+        ResultSet rs = null;
+        PreparedStatement ptm = null;
+        try {
+            con = DBUtils.getConnection();
+            if (con != null) {
+                ptm = con.prepareStatement(GET_TOTAL_POST_1DAY_AGO);
+                rs = ptm.executeQuery();
+                if (rs.next()) {
+                    return rs.getInt("totalJob");
+                }
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(PostDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+
+        }
+
+        return 0;
+    }
+    
+    public int getTotalJobPost2DayAgo() throws SQLException {
+        Connection con = null;
+        ResultSet rs = null;
+        PreparedStatement ptm = null;
+        try {
+            con = DBUtils.getConnection();
+            if (con != null) {
+                ptm = con.prepareStatement(GET_TOTAL_POST_2DAY_AGO);
+                rs = ptm.executeQuery();
+                if (rs.next()) {
+                    return rs.getInt("totalJob");
+                }
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(PostDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+
+        }
+
+        return 0;
+    }
+    
+    public int getTotalJobPost3DayAgo() throws SQLException {
+        Connection con = null;
+        ResultSet rs = null;
+        PreparedStatement ptm = null;
+        try {
+            con = DBUtils.getConnection();
+            if (con != null) {
+                ptm = con.prepareStatement(GET_TOTAL_POST_3DAY_AGO);
+                rs = ptm.executeQuery();
+                if (rs.next()) {
+                    return rs.getInt("totalJob");
+                }
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(PostDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+
+        }
+
+        return 0;
+    }
+    
+    public int getTotalJobPost4DayAgo() throws SQLException {
+        Connection con = null;
+        ResultSet rs = null;
+        PreparedStatement ptm = null;
+        try {
+            con = DBUtils.getConnection();
+            if (con != null) {
+                ptm = con.prepareStatement(GET_TOTAL_POST_4DAY_AGO);
+                rs = ptm.executeQuery();
+                if (rs.next()) {
+                    return rs.getInt("totalJob");
+                }
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(PostDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+
+        }
+
+        return 0;
+    }
+    
+    public int getTotalJobPost5DayAgo() throws SQLException {
+        Connection con = null;
+        ResultSet rs = null;
+        PreparedStatement ptm = null;
+        try {
+            con = DBUtils.getConnection();
+            if (con != null) {
+                ptm = con.prepareStatement(GET_TOTAL_POST_5DAY_AGO);
+                rs = ptm.executeQuery();
+                if (rs.next()) {
+                    return rs.getInt("totalJob");
+                }
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(PostDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+
+        }
+
+        return 0;
+    }
+    
+    public int getTotalJobPost6DayAgo() throws SQLException {
+        Connection con = null;
+        ResultSet rs = null;
+        PreparedStatement ptm = null;
+        try {
+            con = DBUtils.getConnection();
+            if (con != null) {
+                ptm = con.prepareStatement(GET_TOTAL_POST_6DAY_AGO);
+                rs = ptm.executeQuery();
+                if (rs.next()) {
+                    return rs.getInt("totalJob");
+                }
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(PostDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+
+        }
+
+        return 0;
+    }
+    
+    public int getTotalJobPost7DayAgo() throws SQLException {
+        Connection con = null;
+        ResultSet rs = null;
+        PreparedStatement ptm = null;
+        try {
+            con = DBUtils.getConnection();
+            if (con != null) {
+                ptm = con.prepareStatement(GET_TOTAL_POST_7DAY_AGO);
+                rs = ptm.executeQuery();
+                if (rs.next()) {
+                    return rs.getInt("totalJob");
+                }
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(PostDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+
+        }
+
+        return 0;
+    }
+    
+    
 }

@@ -400,18 +400,18 @@ h6,
 
 /* warning buttons */
 .warning-btn {
-  background: #f7c800;
+  background: #f26f21;
   color: #fff; }
   .warning-btn:hover {
     color: #fff; }
 
 .warning-btn-outline {
   background: transparent;
-  color: #f7c800;
-  border-color: #f7c800; }
+  color: #f26f21;
+  border-color: #f26f21; }
   .warning-btn-outline:hover {
     color: #fff;
-    background: #f7c800; }
+    background: #f26f21; }
 
 /* info buttons */
 .info-btn {
@@ -1014,7 +1014,9 @@ h6,
 .top-selling-table .product {
   display: flex;
   align-items: center;
-  min-width: 150px; }
+  min-width: 150px; 
+  padding-left: 25px;
+}
   .top-selling-table .product .image {
     border-radius: 4px;
     overflow: hidden;

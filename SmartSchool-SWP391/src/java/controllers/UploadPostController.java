@@ -61,11 +61,12 @@ public class UploadPostController extends HttpServlet {
             PostDAO dao = new PostDAO();
             dao.uploadPost(userId, categoryId, inputStream, description, type, title);
             request.setAttribute("MESSAGE", "Đăng bài thành công!");
-            url = PROFILE_DETAIL_PAGE;
+//            url = PROFILE_DETAIL_PAGE;
         } catch (Exception e) {
             Logger.getLogger("Error at UploadPostController: " + e.toString());
         } finally {
-            request.getRequestDispatcher(url).forward(request, response);
+//            request.getRequestDispatcher(url).forward(request, response);
+                response.sendRedirect(PROFILE_DETAIL_PAGE);
         }
 
     }

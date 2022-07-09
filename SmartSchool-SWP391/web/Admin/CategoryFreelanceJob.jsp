@@ -1,6 +1,6 @@
 <%-- 
-    Document   : AdminDashboardFreelance.jsp
-    Created on : Jul 7, 2022, 6:17:43 PM
+    Document   : CategoryFreelanceJob
+    Created on : Jul 8, 2022, 10:54:47 AM
     Author     : TrinhNgocBao
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -12,8 +12,8 @@
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="shortcut icon" href="assets/images/favicon.svg" type="image/x-icon" />
-        <title>Admin Freelance Job</title>
+        <link rel="shortcut icon" href="/Admin/assets/images/favicon.svg" type="image/x-icon" />
+        <title>Admin</title>
 
         <!-- ========== All CSS files linkup ========= -->
         <link rel="stylesheet" href="/Admin/assets/css/bootstrap.min.css" />
@@ -23,6 +23,13 @@
         <link rel="stylesheet" href="/Admin/assets/css/fullcalendar.css" />
         <link rel="stylesheet" href="/Admin/assets/css/main.css" />
         <link rel="stylesheet" href="/Admin/assets/css/styles.css" />
+        <style>
+            #ModalAddCategory small, #ModalEditCategory small {
+                color: #F21F26;
+                padding-left: 10px;
+                font-weight: 700 !important;
+            }
+        </style>
     </head>
 
     <body>
@@ -37,73 +44,19 @@
             <nav class="sidebar-nav">
                 <ul>
                     <li class="nav-item nav-item-has-children">
-                        <a href="#0" data-bs-toggle="collapse" data-bs-target="#ddmenu_1" aria-controls="ddmenu_1"
+                        <a href="#0" class="collapsed" data-bs-toggle="collapse" data-bs-target="#ddmenu_1" aria-controls="ddmenu_1"
                            aria-expanded="false" aria-label="Toggle navigation">
                             <span class="icon">
-                                <svg width="22" height="22" viewBox="0 0 22 22">
-                                <path
-                                    d="M17.4167 4.58333V6.41667H13.75V4.58333H17.4167ZM8.25 4.58333V10.0833H4.58333V4.58333H8.25ZM17.4167 11.9167V17.4167H13.75V11.9167H17.4167ZM8.25 15.5833V17.4167H4.58333V15.5833H8.25ZM19.25 2.75H11.9167V8.25H19.25V2.75ZM10.0833 2.75H2.75V11.9167H10.0833V2.75ZM19.25 10.0833H11.9167V19.25H19.25V10.0833ZM10.0833 13.75H2.75V19.25H10.0833V13.75Z" />
-                                </svg>
+                                <i class="lni lni-bar-chart" style="font-weight: 700;"></i>
                             </span>
                             <span class="text">Dashboard</span>
                         </a>
-                        <ul id="ddmenu_1" class="collapse show dropdown-nav">
+                        <ul id="ddmenu_1" class="collapse dropdown-nav">
                             <li>
-                                <a href="index.html" class=""> Lost And Found </a>
+                                <a href="index.html" class="active"> Lost And Found </a>
                             </li>
                             <li>
-                                <a href="index.html" class="active"> Freelance Job </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="nav-item nav-item-has-children">
-                        <a href="#0" class="collapsed" data-bs-toggle="collapse" data-bs-target="#ddmenu_2" aria-controls="ddmenu_2"
-                           aria-expanded="false" aria-label="Toggle navigation">
-                            <span class="icon">
-                                <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M12.8334 1.83325H5.50008C5.01385 1.83325 4.54754 2.02641 4.20372 2.37022C3.8599 2.71404 3.66675 3.18036 3.66675 3.66659V18.3333C3.66675 18.8195 3.8599 19.2858 4.20372 19.6296C4.54754 19.9734 5.01385 20.1666 5.50008 20.1666H16.5001C16.9863 20.1666 17.4526 19.9734 17.7964 19.6296C18.1403 19.2858 18.3334 18.8195 18.3334 18.3333V7.33325L12.8334 1.83325ZM16.5001 18.3333H5.50008V3.66659H11.9167V8.24992H16.5001V18.3333Z" />
-                                </svg>
-                            </span>
-                            <span class="text">Pages</span>
-                        </a>
-                        <ul id="ddmenu_2" class="collapse dropdown-nav">
-                            <li>
-                                <a href="settings.html"> Settings </a>
-                            </li>
-                            <li>
-                                <a href="blank-page.html"> Blank Page </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="nav-item">
-                        <a href="invoice.html">
-                            <span class="icon">
-                                <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M17.4166 7.33333C18.9383 7.33333 20.1666 8.56167 20.1666 10.0833V15.5833H16.4999V19.25H5.49992V15.5833H1.83325V10.0833C1.83325 8.56167 3.06159 7.33333 4.58325 7.33333H5.49992V2.75H16.4999V7.33333H17.4166ZM7.33325 4.58333V7.33333H14.6666V4.58333H7.33325ZM14.6666 17.4167V13.75H7.33325V17.4167H14.6666ZM16.4999 13.75H18.3333V10.0833C18.3333 9.57917 17.9208 9.16667 17.4166 9.16667H4.58325C4.07909 9.16667 3.66659 9.57917 3.66659 10.0833V13.75H5.49992V11.9167H16.4999V13.75ZM17.4166 10.5417C17.4166 11.0458 17.0041 11.4583 16.4999 11.4583C15.9958 11.4583 15.5833 11.0458 15.5833 10.5417C15.5833 10.0375 15.9958 9.625 16.4999 9.625C17.0041 9.625 17.4166 10.0375 17.4166 10.5417Z" />
-                                </svg>
-                            </span>
-                            <span class="text">Invoice</span>
-                        </a>
-                    </li>
-                    <li class="nav-item nav-item-has-children">
-                        <a href="#0" class="collapsed" data-bs-toggle="collapse" data-bs-target="#ddmenu_3" aria-controls="ddmenu_3"
-                           aria-expanded="false" aria-label="Toggle navigation">
-                            <span class="icon">
-                                <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M12.9067 14.2908L15.2808 11.9167H6.41667V10.0833H15.2808L12.9067 7.70917L14.2083 6.41667L18.7917 11L14.2083 15.5833L12.9067 14.2908ZM17.4167 2.75C17.9029 2.75 18.3692 2.94315 18.713 3.28697C19.0568 3.63079 19.25 4.0971 19.25 4.58333V8.86417L17.4167 7.03083V4.58333H4.58333V17.4167H17.4167V14.9692L19.25 13.1358V17.4167C19.25 17.9029 19.0568 18.3692 18.713 18.713C18.3692 19.0568 17.9029 19.25 17.4167 19.25H4.58333C3.56583 19.25 2.75 18.425 2.75 17.4167V4.58333C2.75 3.56583 3.56583 2.75 4.58333 2.75H17.4167Z" />
-                                </svg>
-                            </span>
-                            <span class="text">Auth</span>
-                        </a>
-                        <ul id="ddmenu_3" class="collapse dropdown-nav">
-                            <li>
-                                <a href="signin.html"> Sign In </a>
-                            </li>
-                            <li>
-                                <a href="signup.html"> Sign Up </a>
+                                <a href="index.html" class=""> Freelance Job </a>
                             </li>
                         </ul>
                     </li>
@@ -111,48 +64,53 @@
                         <hr />
                     </span>
                     <li class="nav-item nav-item-has-children">
-                        <a href="#0" class="collapsed" data-bs-toggle="collapse" data-bs-target="#ddmenu_4" aria-controls="ddmenu_4"
+                        <a href="#0" data-bs-toggle="collapse" data-bs-target="#ddmenu_2" aria-controls="ddmenu_2"
                            aria-expanded="false" aria-label="Toggle navigation">
                             <span class="icon">
-                                <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M3.66675 4.58325V16.4999H19.2501V4.58325H3.66675ZM5.50008 14.6666V6.41659H8.25008V14.6666H5.50008ZM10.0834 14.6666V11.4583H12.8334V14.6666H10.0834ZM17.4167 14.6666H14.6667V11.4583H17.4167V14.6666ZM10.0834 9.62492V6.41659H17.4167V9.62492H10.0834Z" />
-                                </svg>
+                                <i class="lni lni-text-align-justify" style="font-weight: 700;"></i>
                             </span>
-                            <span class="text">UI Elements </span>
+                            <span class="text">Category</span>
                         </a>
-                        <ul id="ddmenu_4" class="collapse dropdown-nav">
+                        <ul id="ddmenu_2" class="collapse show dropdown-nav">
                             <li>
-                                <a href="alerts.html"> Alerts </a>
+                                <a href="CategoryLostAndFound.html" class=""> Category Lost & Found </a>
                             </li>
                             <li>
-                                <a href="buttons.html"> Buttons </a>
-                            </li>
-                            <li>
-                                <a href="cards.html"> Cards </a>
-                            </li>
-                            <li>
-                                <a href="typography.html"> Typography </a>
+                                <a href="" class="active"> Category Freelance Job </a>
                             </li>
                         </ul>
                     </li>
                     <li class="nav-item nav-item-has-children">
-                        <a href="#0" class="collapsed" data-bs-toggle="collapse" data-bs-target="#ddmenu_55" aria-controls="ddmenu_55"
+                        <a href="#0" class="collapsed" data-bs-toggle="collapse" data-bs-target="#ddmenu_3" aria-controls="ddmenu_3"
                            aria-expanded="false" aria-label="Toggle navigation">
                             <span class="icon">
-                                <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M1.83325 19.25V17.4167H18.3333V19.25H1.83325ZM18.3333 7.33333V4.58333H16.4999V7.33333H18.3333ZM18.3333 2.75C18.8195 2.75 19.2858 2.94315 19.6296 3.28697C19.9734 3.63079 20.1666 4.0971 20.1666 4.58333V7.33333C20.1666 7.81956 19.9734 8.28588 19.6296 8.6297C19.2858 8.97351 18.8195 9.16667 18.3333 9.16667H16.4999V11.9167C16.4999 12.8891 16.1136 13.8218 15.426 14.5094C14.7383 15.197 13.8057 15.5833 12.8333 15.5833H7.33325C6.36079 15.5833 5.42816 15.197 4.74053 14.5094C4.05289 13.8218 3.66659 12.8891 3.66659 11.9167V2.75H18.3333ZM14.6666 4.58333H5.49992V11.9167C5.49992 12.4029 5.69307 12.8692 6.03689 13.213C6.38071 13.5568 6.84702 13.75 7.33325 13.75H12.8333C13.3195 13.75 13.7858 13.5568 14.1296 13.213C14.4734 12.8692 14.6666 12.4029 14.6666 11.9167V4.58333Z" />
-                                </svg>
+                                <i class="lni lni-add-files" style="font-weight: 700;"></i>
                             </span>
-                            <span class="text">Icons</span>
+                            <span class="text">Approve Posts</span>
                         </a>
-                        <ul id="ddmenu_55" class="collapse dropdown-nav">
+                        <ul id="ddmenu_3" class="collapse dropdown-nav">
                             <li>
-                                <a href="icons.html"> LineIcons </a>
+                                <a href=""> Lost & Found Posts </a>
                             </li>
                             <li>
-                                <a href="mdi-icons.html"> MDI Icons </a>
+                                <a href=""> Freelance Job Posts </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item nav-item-has-children">
+                        <a href="#0" class="collapsed" data-bs-toggle="collapse" data-bs-target="#ddmenu_4" aria-controls="ddmenu_4"
+                           aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="icon">
+                                <i class="lni lni-empty-file" style="font-weight: 700;"></i>
+                            </span>
+                            <span class="text">Posts</span>
+                        </a>
+                        <ul id="ddmenu_4" class="collapse dropdown-nav">
+                            <li>
+                                <a href=""> Lost & Found </a>
+                            </li>
+                            <li>
+                                <a href=""> Freelance Job </a>
                             </li>
                         </ul>
                     </li>
@@ -160,45 +118,50 @@
                         <a href="#0" class="collapsed" data-bs-toggle="collapse" data-bs-target="#ddmenu_5" aria-controls="ddmenu_5"
                            aria-expanded="false" aria-label="Toggle navigation">
                             <span class="icon">
-                                <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M13.75 4.58325H16.5L15.125 6.41659L13.75 4.58325ZM4.58333 1.83325H17.4167C18.4342 1.83325 19.25 2.65825 19.25 3.66659V18.3333C19.25 19.3508 18.4342 20.1666 17.4167 20.1666H4.58333C3.575 20.1666 2.75 19.3508 2.75 18.3333V3.66659C2.75 2.65825 3.575 1.83325 4.58333 1.83325ZM4.58333 3.66659V7.33325H17.4167V3.66659H4.58333ZM4.58333 18.3333H17.4167V9.16659H4.58333V18.3333ZM6.41667 10.9999H15.5833V12.8333H6.41667V10.9999ZM6.41667 14.6666H15.5833V16.4999H6.41667V14.6666Z" />
-                                </svg>
+                                <i class="lni lni-remove-file" style="font-weight: 700;"></i>
                             </span>
-                            <span class="text"> Forms </span>
+                            <span class="text">Report Posts</span>
                         </a>
                         <ul id="ddmenu_5" class="collapse dropdown-nav">
                             <li>
-                                <a href="form-elements.html"> From Elements </a>
+                                <a href=""> Lost & Found </a>
+                            </li>
+                            <li>
+                                <a href=""> Freelance Job </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <span class="divider">
+                        <hr />
+                    </span>
+                    <li class="nav-item nav-item-has-children">
+                        <a href="#0" class="collapsed" data-bs-toggle="collapse" data-bs-target="#ddmenu_6" aria-controls="ddmenu_6"
+                           aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="icon">
+                                <i class="lni lni-users" style="font-weight: 700;"></i>
+                            </span>
+                            <span class="text">Users</span>
+                        </a>
+                        <ul id="ddmenu_6" class="collapse dropdown-nav">
+                            <li>
+                                <a href=""> Manage </a>
+                            </li>
+                            <li>
+                                <a href=""> Banned </a>
                             </li>
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a href="tables.html">
+                        <a href="">
                             <span class="icon">
-                                <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M4.58333 3.66675H17.4167C17.9029 3.66675 18.3692 3.8599 18.713 4.20372C19.0568 4.54754 19.25 5.01385 19.25 5.50008V16.5001C19.25 16.9863 19.0568 17.4526 18.713 17.7964C18.3692 18.1403 17.9029 18.3334 17.4167 18.3334H4.58333C4.0971 18.3334 3.63079 18.1403 3.28697 17.7964C2.94315 17.4526 2.75 16.9863 2.75 16.5001V5.50008C2.75 5.01385 2.94315 4.54754 3.28697 4.20372C3.63079 3.8599 4.0971 3.66675 4.58333 3.66675ZM4.58333 7.33341V11.0001H10.0833V7.33341H4.58333ZM11.9167 7.33341V11.0001H17.4167V7.33341H11.9167ZM4.58333 12.8334V16.5001H10.0833V12.8334H4.58333ZM11.9167 12.8334V16.5001H17.4167V12.8334H11.9167Z" />
-                                </svg>
+                                <i class="lni lni-bubble" style="font-weight: 700;"></i>
                             </span>
-                            <span class="text">Tables</span>
+                            <span class="text">Feedback System</span>
                         </a>
                     </li>
                     <span class="divider">
                         <hr />
                     </span>
-
-                    <li class="nav-item">
-                        <a href="notification.html">
-                            <span class="icon">
-                                <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M9.16667 19.25H12.8333C12.8333 20.2584 12.0083 21.0834 11 21.0834C9.99167 21.0834 9.16667 20.2584 9.16667 19.25ZM19.25 17.4167V18.3334H2.75V17.4167L4.58333 15.5834V10.0834C4.58333 7.24171 6.41667 4.76671 9.16667 3.94171V3.66671C9.16667 2.65837 9.99167 1.83337 11 1.83337C12.0083 1.83337 12.8333 2.65837 12.8333 3.66671V3.94171C15.5833 4.76671 17.4167 7.24171 17.4167 10.0834V15.5834L19.25 17.4167ZM15.5833 10.0834C15.5833 7.51671 13.5667 5.50004 11 5.50004C8.43333 5.50004 6.41667 7.51671 6.41667 10.0834V16.5H15.5833V10.0834Z" />
-                                </svg>
-                            </span>
-                            <span class="text">Notifications</span>
-                        </a>
-                    </li>
                 </ul>
             </nav>
             <!-- <div class="promo-box">
@@ -226,7 +189,7 @@
                         <div class="col-lg-5 col-md-5 col-6">
                             <div class="header-left d-flex align-items-center">
                                 <div class="menu-toggle-btn mr-20">
-                                    <button id="menu-toggle" class="main-btn primary-btn btn-hover">
+                                    <button id="menu-toggle" class="main-btn warning-btn btn-hover">
                                         <i class="lni lni-chevron-left me-2"></i> Menu
                                     </button>
                                 </div>
@@ -251,7 +214,7 @@
                                         <li>
                                             <a href="#0">
                                                 <div class="image">
-                                                    <img src="assets/images/lead/lead-6.png" alt="" />
+                                                    <img src="/Admin/assets/images/lead/lead-6.png" alt="" />
                                                 </div>
                                                 <div class="content">
                                                     <h6>
@@ -271,7 +234,7 @@
                                         <li>
                                             <a href="#0">
                                                 <div class="image">
-                                                    <img src="assets/images/lead/lead-1.png" alt="" />
+                                                    <img src="/Admin/assets/images/lead/lead-1.png" alt="" />
                                                 </div>
                                                 <div class="content">
                                                     <h6>
@@ -302,7 +265,7 @@
                                         <li>
                                             <a href="#0">
                                                 <div class="image">
-                                                    <img src="assets/images/lead/lead-5.png" alt="" />
+                                                    <img src="/Admin/assets/images/lead/lead-5.png" alt="" />
                                                 </div>
                                                 <div class="content">
                                                     <h6>Jacob Jones</h6>
@@ -314,7 +277,7 @@
                                         <li>
                                             <a href="#0">
                                                 <div class="image">
-                                                    <img src="assets/images/lead/lead-3.png" alt="" />
+                                                    <img src="/Admin/assets/images/lead/lead-3.png" alt="" />
                                                 </div>
                                                 <div class="content">
                                                     <h6>John Doe</h6>
@@ -326,7 +289,7 @@
                                         <li>
                                             <a href="#0">
                                                 <div class="image">
-                                                    <img src="assets/images/lead/lead-2.png" alt="" />
+                                                    <img src="/Admin/assets/images/lead/lead-2.png" alt="" />
                                                 </div>
                                                 <div class="content">
                                                     <h6>Anee Lee</h6>
@@ -353,7 +316,7 @@
                                             <div class="info">
                                                 <h6>John Doe</h6>
                                                 <div class="image">
-                                                    <img src="assets/images/profile/profile-image.png" alt="" />
+                                                    <img src="/Admin/assets/images/profile/profile-image.png" alt="" />
                                                     <span class="status"></span>
                                                 </div>
                                             </div>
@@ -398,7 +361,7 @@
                         <div class="row align-items-center">
                             <div class="col-md-6">
                                 <div class="title mb-30">
-                                    <h2>Freelance Job Dashboard</h2>
+                                    <h2>Category Management: Freelance Job</h2>
                                 </div>
                             </div>
                             <!-- end col -->
@@ -407,7 +370,7 @@
                                     <nav aria-label="breadcrumb">
                                         <ol class="breadcrumb">
                                             <li class="breadcrumb-item">
-                                                <a href="#0">Dashboard</a>
+                                                <a href="#0">Category</a>
                                             </li>
                                             <li class="breadcrumb-item active" aria-current="page">
                                                 Freelance Job
@@ -421,183 +384,8 @@
                         <!-- end row -->
                     </div>
                     <!-- ========== title-wrapper end ========== -->
-                    <div class="row">
-                        <div class="col-xl-4 col-lg-4 col-sm-6">
-                            <div class="icon-card mb-30">
-                                <div class="icon purple">
-                                    <i class="lni lni-package"></i>
-                                </div>
-                                <div class="content">
-                                    <h6 class="mb-10">Total Posts</h6>
-                                    <h3 class="text-bold mb-10">${requestScope.TOTAL_JOB_POST}</h3>
-                                    <p class="text-sm text-success">
-                                        <i class="lni lni-arrow-up"></i> +2.00%
-                                        <span class="text-gray">()</span>
-                                    </p>
-                                </div>
-                            </div>
-                            <!-- End Icon Cart -->
-                        </div>
-                        <!-- End Col -->
-                        <div class="col-xl-4 col-lg-4 col-sm-6">
-                            <div class="icon-card mb-30">
-                                <div class="icon orange">
-                                    <i class="lni lni-user"></i>
-                                </div>
-                                <div class="content">
-                                    <h6 class="mb-10">Employer</h6>
-                                    <h3 class="text-bold mb-10">${requestScope.TOTAL_EMPLOYER}</h3>
-                                    <p class="text-sm text-success">
-                                        <i class="lni lni-arrow-up"></i> +5.45%
-                                        <span class="text-gray">Increased</span>
-                                    </p>
-                                </div>
-                            </div>
-                            <!-- End Icon Cart -->
-                        </div>
-                        <!-- End Col -->
-                        <div class="col-xl-4 col-lg-4 col-sm-6">
-                            <div class="icon-card mb-30">
-                                <div class="icon success">
-                                    <i class="lni lni-users"></i>
-                                </div>
-                                <div class="content">
-                                    <h6 class="mb-10">Freelancer</h6>
-                                    <h3 class="text-bold mb-10">${requestScope.TOTAL_USER}</h3>
-                                    <p class="text-sm text-danger">
-                                        <i class="lni lni-arrow-down"></i> -2.00%
-                                        <span class="text-gray">Expense</span>
-                                    </p>
-                                </div>
-                            </div>
-                            <!-- End Icon Cart -->
-                        </div>
-                        <!-- End Col -->
-                    </div>
                     <!-- End Row -->
                     <div class="row">
-                        <div class="col-lg-6">
-                            <div class="card-style mb-30">
-                                <div class="title d-flex flex-wrap justify-content-between">
-                                    <div class="left">
-                                        <h6 class="text-medium mb-10">Posts by last 7 days</h6>
-                                    </div>
-                                    <div class="right">
-                                        <h5 class="text-bold">Total: ${requestScope.TOTAL_JOB_POST_LAST_WEEK} posts</h5>
-                                    </div>
-                                </div>
-                                <!-- End Title -->
-                                <div class="chart">
-                                    <canvas id="Chart1" style="width: 100%; height: 433px"></canvas>
-                                </div>
-                                <!-- End Chart -->
-                            </div>
-                        </div>
-                        <!-- End Col -->
-                        <div class="col-lg-6">
-                            <div class="card-style mb-30">
-                                <div class="
-                                     title
-                                     d-flex
-                                     flex-wrap
-                                     align-items-center
-                                     justify-content-between
-                                     ">
-                                    <div class="left">
-                                        <h6 class="text-medium mb-30">New Employers</h6>
-                                    </div>
-                                    <div class="right">
-                                        <!-- <div class="select-style-1">
-                                          <div class="select-position select-sm">
-                                            <select class="light-bg">
-                                              <option value="">Today</option>
-                                              <option value="">Yesterday</option>
-                                            </select>
-                                          </div>
-                                        </div> -->
-                                    </div>
-                                </div>
-                                <!-- End Title -->
-                                <div class="table-responsive">
-                                    <table class="table top-selling-table">
-                                        <thead>
-                                        <th>
-                                            <h6 class="text-sm text-medium">Name</h6>
-                                        </th>
-                                        <th class="min-width">
-                                            <h6 class="text-sm text-medium">Phone</h6>
-                                        </th>
-                                        <th class="min-width">
-                                            <h6 class="text-sm text-medium">Email</h6>
-                                        </th>
-                                        <th class="min-width">
-                                            <h6 class="text-sm text-medium text-center">Status</h6>
-                                        </th>
-                                        <th class="min-width">
-                                            <h6 class="text-sm text-medium text-center">Action</h6>
-                                        </th>
-                                        </thead>
-                                        <tbody>
-                                            <c:forEach items="${requestScope.TOP5_NEW_EMPLOYER}" var="employer">
-                                            <tr>
-                                                <td>
-                                                    <div class="product">
-                                                        <div class="image user-image">
-                                                            <img src="${pageContext.servletContext.contextPath}/avatar?userId=${employer.userId}" alt="" />
-                                                        </div>
-                                                        <p class="text-sm">${employer.fullname}</p>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <p class="text-sm">${employer.phone}</p>
-                                                </td>
-                                                <td>
-                                                    <p class="text-sm">${employer.email}</p>
-                                                </td>
-                                                <td>
-                                                    <div class="action justify-content-center">
-                                                        <span class="status-btn success-btn">Active</span>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="action justify-content-center">
-                                                        <button type="submit" name="" value="" class="edit" >
-                                                            <span class="status-btn danger-btn" style="font-weight: 700;"><i class="lni lni-ban" style="font-weight: 700;"></i> Ban</span>                     
-                                                        </button>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            </c:forEach>
-                                        </tbody>
-                                    </table>
-                                    <!-- End Table -->
-                                </div>
-                            </div>
-                        </div>
-                        <!-- End Row -->
-                    </div>
-                    <!-- End Row -->
-                    <div class="row">
-                        <!-- <div class="col-lg-5">
-                            <div class="card-style mb-30">
-                              <div
-                                class="
-                                  title
-                                  d-flex
-                                  justify-content-between
-                                  align-items-center
-                                "
-                              >
-                                <div class="left">
-                                  <h6 class="text-medium mb-30">Sells by State</h6>
-                                </div>
-                              </div>
-                              
-                              <div id="map" style="width: 100%; height: 400px"></div>
-                              <p>Last updated: 7 days ago</p>
-                            </div>
-                          </div> -->
-                        <!-- End Col -->
                         <div class="col-lg-12">
                             <div class="card-style mb-30">
                                 <div class="
@@ -608,7 +396,60 @@
                                      align-items-center
                                      ">
                                     <div class="left">
-                                        <h6 class="text-medium mb-30">New Freelance Job Posts</h6>
+                                        <h6 class="text-medium mb-30">Category</h6>
+                                    </div>
+                                    <div class="right">
+                                        <div class="title d-flex align-items-center flex-wrap mb-30">
+                                            <button type="button" class="main-btn warning-btn btn-hover btn-sm" data-bs-toggle="modal"
+                                                    data-bs-target="#ModalAddCategory">
+                                                <i class="lni lni-plus mr-5"></i>Add New Category</button>
+                                        </div>
+                                    </div>
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="ModalAddCategory" tabindex="-1" aria-labelledby="exampleModalLabel"
+                                         aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h4 class="modal-title" id="exampleModalLabel">Add New Category</h4>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <form onsubmit="return validateAddCategory()" action="main" method="POST">
+                                                    <div class="modal-body">
+
+                                                        <div class="row justify-content-center">
+                                                            <div class="col-11">
+                                                                <div class="input-style-1">
+                                                                    <label>Category Name</label>
+                                                                    <input type="text" id="cateName" placeholder="Type here" name="jobCategoryName" />
+                                                                    <small></small>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-11">
+                                                                <div class="input-style-1">
+                                                                    <label>Category Description</label>
+                                                                    <textarea id="cateDesc" placeholder="Type here" rows="2" name="jobDescription"></textarea>
+                                                                    <small></small>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-11">
+                                                                <div class="input-style-1">
+                                                                    <label>Category Image (Please copy URL Image)</label>
+                                                                    <textarea id="cateImage" placeholder="Type here" rows="5" name="jobImage"></textarea>
+                                                                    <small></small>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="main-btn light-btn btn-hover btn-sm"
+                                                                data-bs-dismiss="modal">Close</button>
+                                                        <button type="submit" name="action" value="AddJobCategory" class="main-btn warning-btn btn-hover btn-sm">Save changes</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <!-- End Title -->
@@ -616,86 +457,66 @@
                                     <table class="table top-selling-table">
                                         <thead>
                                             <tr>
-
+                                                <th></th>
                                                 <th>
-                                                    <h6 class="text-sm text-medium">Employer</h6>
+                                                    <h6 class="text-sm text-medium">Category Image</h6>
                                                 </th>
                                                 <th class="min-width">
-                                                    <h6 class="text-sm text-medium">Freelance Job</h6>
+                                                    <h6 class="text-sm text-medium">Category Name</h6>
                                                 </th>
                                                 <th class="min-width">
-                                                    <h6 class="text-sm text-medium">Category</h6>
+                                                    <h6 class="text-sm text-medium">Category Description</h6>
                                                 </th>
                                                 <th class="min-width">
-                                                    <h6 class="text-sm text-medium">Salary</h6>
+                                                    <h6 class="text-sm text-medium text-center">Status</h6>
                                                 </th>
                                                 <th class="min-width">
-                                                    <h6 class="text-sm text-medium">Amount</h6>
-                                                </th>
-                                                <th class="min-width">
-                                                    <h6 class="text-sm text-medium">Time Job</h6>
-                                                </th>
-                                                <th class="min-width">
-                                                    <h6 class="text-sm text-medium">Time</h6>
-                                                </th>
-                                                <th class="min-width">
-                                                    <h6 class="text-sm text-medium text-center">View Detail</h6>
+                                                    <h6 class="text-sm text-medium text-center">Action</h6>
                                                 </th>
                                             </tr>
                                         </thead>
+
                                         <tbody>
-                                            <c:forEach items="${requestScope.TOP5_JOB_POST}" var="jobPost">
+                                            <c:forEach items="${requestScope.LISTJOBCATEGORY}" var="jobCategory" varStatus="count">
                                                 <tr>
                                                     <td>
+                                                        <input id="CateId1" type="hidden" value="${jobCategory.jobCategoryId}"/>
+                                                        <h6 class="text-sm">#${count.index + 1}</h6>
+                                                    </td>
+                                                    <td>
                                                         <div class="product">
-                                                            <div class="image user-image">
-                                                                <img
-                                                                    src="${pageContext.servletContext.contextPath}/avatar?userId=${jobPost.userId}"
-                                                                    alt="" />
+                                                            <div class="image">
+                                                                <img src="${jobCategory.jobImage}" alt="" />
                                                             </div>
-                                                                    <p class="text-sm">${jobPost.fullname}</p>
                                                         </div>
                                                     </td>
                                                     <td>
-                                                        <p class="text-sm">${jobPost.title}</p>
+                                                        <p class="text-sm">${jobCategory.jobCategoryName}</p>
                                                     </td>
                                                     <td>
-                                                        <p class="text-sm">${jobPost.jobCategoryName}</p>
-                                                    </td>
-                                                    <td>
-                                                        <p class="text-sm">${jobPost.salary}VNĐ / giờ</p>
-                                                    </td>
-                                                    <td>
-                                                        <p class="text-sm">${jobPost.amount} người</p>
-                                                    </td>
-                                                    <td>
-                                                        <p class="text-sm">
-                                                            <c:choose> 
-                                                                <c:when test="${jobPost.timeJob==1}">
-                                                                    Ít hơn 1 tháng
-                                                                </c:when> 
-                                                                <c:when test="${jobPost.timeJob==2}">
-                                                                    1 - 3 tháng
-                                                                </c:when>
-                                                                <c:when test="${jobPost.timeJob==3}">
-                                                                    Hơn 3 tháng
-                                                                </c:when> 
-                                                            </c:choose>
-                                                        </p>
-                                                    </td>
-                                                    <td>
-                                                        <p class="text-sm">${jobPost.date}</p>
+                                                        <p class="text-sm">${jobCategory.jobDescription}</p>
                                                     </td>
                                                     <td>
                                                         <div class="action justify-content-center">
-                                                            <button>
-                                                                <i class="lni lni-eye"></i>
+                                                            <span class="status-btn success-btn">Active</span>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="action justify-content-center icon purple">
+                                                            <button onclick="truyenDataEdit(this.getAttribute('data-editCateId'), this.getAttribute('data-editCateName'), this.getAttribute('data-editCateDesc'), this.getAttribute('data-editCateImage'))" class="text-gray" style="font-size:20px;" data-bs-toggle="modal"
+                                                                    data-bs-target="#ModalEditCategory"  data-editCateId="${jobCategory.jobCategoryId}" data-editCateName="${jobCategory.jobCategoryName}"
+                                                                    data-editCateDesc="${jobCategory.jobDescription}" data-editCateImage="${jobCategory.jobImage}">
+                                                                <i class="lni lni-pencil-alt fw-bold"></i>
+                                                            </button>
+
+                                                            <button onclick="truyenIdDelete(this.getAttribute('data-CateId'))" class="text-gray" style="font-size:20px;" data-bs-toggle="modal"
+                                                                    data-bs-target="#ModalDeleteCategory" data-CateId="${jobCategory.jobCategoryId}">
+                                                                <i class="lni lni-trash-can fw-bold"></i>
                                                             </button>
                                                         </div>
                                                     </td>
                                                 </tr>
                                             </c:forEach>
-
                                         </tbody>
                                     </table>
                                     <!-- End Table -->
@@ -706,6 +527,69 @@
                     </div>
                     <!-- End Row -->
                 </div>
+                <!-- Modal -->
+                <form onsubmit="return validateEditCategory()" action="main" method="POST">
+                    <div class="modal fade" id="ModalEditCategory" tabindex="-1" aria-labelledby="exampleModalLabel"
+                         aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title" id="exampleModalLabel">Edit Category</h4>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <input name="jobCategoryId" type="hidden" id="EditCateId">
+                                    <div class="row justify-content-center">
+                                        <div class="col-11">
+                                            <div class="input-style-1">
+                                                <label>Category Name</label>
+                                                <input name="jobCategoryName" id="EditCateName" type="text" placeholder="Type here" />
+                                                <small></small>
+                                            </div>
+                                        </div>
+                                        <div class="col-11">
+                                            <div class="input-style-1">
+                                                <label>Category Description</label>
+                                                <textarea name="jobDescription" id="EditCateDesc" placeholder="Type here" rows="2"></textarea>
+                                                <small></small>
+                                            </div>
+                                        </div>
+                                        <div class="col-11">
+                                            <div class="input-style-1">
+                                                <label>Category Image (Please copy URL Image)</label>
+                                                <textarea name="jobImage" id="EditCateImage" placeholder="Type here" rows="5"></textarea>
+                                                <small></small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="main-btn light-btn btn-hover btn-sm" data-bs-dismiss="modal">Close</button>
+                                    <button type="submit" name="action" value="EditJobCategory" class="main-btn warning-btn btn-hover btn-sm">Save changes</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+                <form action="main">
+                    <div class="modal fade" id="ModalDeleteCategory" tabindex="-1" aria-labelledby="exampleModalLabel"
+                         aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered modal-sm">
+                            <div class="modal-content">
+                                <div class="modal-header justify-content-center">
+                                    <h4 class="modal-title" id="exampleModalLabel">Are you sure?</h4>
+                                </div>
+                                <div class="modal-footer justify-content-center">
+                                    <button type="button" class="main-btn warning-btn-outline btn-hover btn-sm"
+                                            data-bs-dismiss="modal">No</button>
+                                    <input type="hidden" id="CateId2"  name="jobCategoryId"/>
+                                    <button type="submit" name="action" value="DeleteJobCategory" class="main-btn warning-btn btn-hover btn-sm">Yes</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
                 <!-- end container -->
             </section>
             <!-- ========== section end ========== -->
@@ -751,7 +635,24 @@
         <script src="/Admin/assets/js/world-merc.js"></script>
         <script src="/Admin/assets/js/polyfill.js"></script>
         <script src="/Admin/assets/js/main.js"></script>
+        <script src="/Admin/assets/js/validation.js"></script>
 
+        <!--        <script>
+                                                                        function truyendulieu() {
+                                                                            document.getElementById("CateId1").value = document.getElementById("CateId2").value;
+                                                                        }
+                </script>-->
+        <script>
+                                                                function truyenIdDelete(CateId) {
+                                                                    document.getElementById("CateId2").value = CateId;
+                                                                }
+                                                                function truyenDataEdit(CateId, CateName, CateDesc, CateImage) {
+                                                                    document.getElementById("EditCateId").value = CateId;
+                                                                    document.getElementById("EditCateName").value = CateName;
+                                                                    document.getElementById("EditCateDesc").innerHTML = CateDesc;
+                                                                    document.getElementById("EditCateImage").innerHTML = CateImage;
+                                                                }
+        </script>
         <script>
             // ======== jvectormap activation
             var markers = [
@@ -814,28 +715,28 @@
             // =========== chart one start
             const ctx1 = document.getElementById("Chart1").getContext("2d");
             const chart1 = new Chart(ctx1, {
-                // The type of chart 
-                type: "line",
+                // The type of chart we want to create
+                type: "line", // also try bar or other graph types
 
                 // The data for our dataset
                 data: {
                     labels: [
-                        "7 day ago",
-                        "6 day ago",
-                        "5 day ago",
-                        "4 day ago",
-                        "3 day ago",
-                        "2 day ago",
-                        "1 day ago",
+                        "Day 1",
+                        "Day 2",
+                        "Day 3",
+                        "Day 4",
+                        "Day 5",
+                        "Day 6",
+                        "Day 7",
                     ],
                     // Information about the dataset
                     datasets: [
                         {
-                            label: "Number Of Post",
+                            label: "",
                             backgroundColor: "transparent",
                             borderColor: "#9b51e0",
                             data: [
-            ${requestScope.DATA[0]}, ${requestScope.DATA[1]}, ${requestScope.DATA[2]}, ${requestScope.DATA[3]}, ${requestScope.DATA[4]}, ${requestScope.DATA[5]}, ${requestScope.DATA[6]},
+                                0, 10, 35, 42, 61, 51, 11,
                             ],
                             pointBackgroundColor: "transparent",
                             pointHoverBackgroundColor: "#9b51e0",
@@ -895,7 +796,7 @@
                                 },
                                 ticks: {
                                     padding: 35,
-                                    max: 10,
+                                    max: 100,
                                     min: 0,
                                 },
                             },
@@ -917,6 +818,106 @@
             });
 
             // =========== chart one end
+
+            // ================== chart two start
+            const ctx2 = document.getElementById("Chart2").getContext("2d");
+            const chart2 = new Chart(ctx2, {
+                // The type of chart we want to create
+                type: "bar", // also try bar or other graph types
+                // The data for our dataset
+                data: {
+                    labels: [
+                        "Day 1",
+                        "Day 2",
+                        "Day 3",
+                        "Day 4",
+                        "Day 5",
+                        "Day 6",
+                        "Day 7", ],
+                    // Information about the dataset
+                    datasets: [
+                        {
+                            label: "",
+                            backgroundColor: "#f2994a",
+                            barThickness: "flex",
+                            maxBarThickness: 8,
+                            data: [60, 70, 34, 50, 65, 23, 11],
+                        },
+                        {
+                            label: "",
+                            backgroundColor: "#219653",
+                            barThickness: "flex",
+                            maxBarThickness: 8,
+                            data: [69, 74, 72, 50, 45, 90, 31],
+                        },
+                    ],
+                },
+                // Configuration options
+                options: {
+                    borderColor: "#F3F6F8",
+                    borderWidth: 15,
+                    backgroundColor: "#F3F6F8",
+                    tooltips: {
+                        callbacks: {
+                            labelColor: function (tooltipItem, chart) {
+                                return {
+                                    backgroundColor: "rgba(104, 110, 255, .0)",
+                                };
+                            },
+                        },
+                        backgroundColor: "#F3F6F8",
+                        titleFontColor: "#8F92A1",
+                        titleFontSize: 12,
+                        bodyFontColor: "#171717",
+                        bodyFontStyle: "bold",
+                        bodyFontSize: 16,
+                        multiKeyBackground: "transparent",
+                        displayColors: false,
+                        xPadding: 30,
+                        yPadding: 10,
+                        bodyAlign: "center",
+                        titleAlign: "center",
+                    },
+
+                    title: {
+                        display: false,
+                    },
+                    legend: {
+                        display: false,
+                    },
+
+                    scales: {
+                        yAxes: [
+                            {
+                                gridLines: {
+                                    display: false,
+                                    drawTicks: false,
+                                    drawBorder: false,
+                                },
+                                ticks: {
+                                    padding: 35,
+                                    max: 100,
+                                    min: 0,
+                                },
+                            },
+                        ],
+                        xAxes: [
+                            {
+                                gridLines: {
+                                    display: false,
+                                    drawBorder: false,
+                                    color: "rgba(143, 146, 161, .1)",
+                                    zeroLineColor: "rgba(143, 146, 161, .1)",
+                                },
+                                ticks: {
+                                    padding: 20,
+                                },
+                            },
+                        ],
+                    },
+                },
+            });
+            // =========== chart four end
         </script>
     </body>
 
