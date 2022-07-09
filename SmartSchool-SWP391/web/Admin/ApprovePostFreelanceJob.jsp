@@ -16,13 +16,13 @@
   <title>Admin</title>
 
   <!-- ========== All CSS files linkup ========= -->
-  <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
-  <link rel="stylesheet" href="assets/css/lineicons.css" />
-  <link rel="stylesheet" href="assets/css/materialdesignicons.min.css" />
-  <link rel="stylesheet" href="assets/css/fullcalendar.css" />
-  <link rel="stylesheet" href="assets/css/fullcalendar.css" />
-  <link rel="stylesheet" href="assets/css/main.css" />
-  <link rel="stylesheet" href="assets/css/styles.css" />
+  <link rel="stylesheet" href="/Admin/assets/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="/Admin/assets/css/lineicons.css" />
+  <link rel="stylesheet" href="/Admin/assets/css/materialdesignicons.min.css" />
+  <link rel="stylesheet" href="/Admin/assets/css/fullcalendar.css" />
+  <link rel="stylesheet" href="/Admin/assets/css/fullcalendar.css" />
+  <link rel="stylesheet" href="/Admin/assets/css/main.css" />
+  <link rel="stylesheet" href="/Admin/assets/css/styles.css" />
   <style>
     .content-detail {
       border-bottom: 1px solid #EEEEEE !important;
@@ -591,15 +591,15 @@
   <!-- ======== main-wrapper end =========== -->
 
   <!-- ========= All Javascript files linkup ======== -->
-  <script src="assets/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/js/Chart.min.js"></script>
-  <script src="assets/js/dynamic-pie-chart.js"></script>
-  <script src="assets/js/moment.min.js"></script>
-  <script src="assets/js/fullcalendar.js"></script>
-  <script src="assets/js/jvectormap.min.js"></script>
-  <script src="assets/js/world-merc.js"></script>
-  <script src="assets/js/polyfill.js"></script>
-  <script src="assets/js/main.js"></script>
+  <script src="/Admin/assets/js/bootstrap.bundle.min.js"></script>
+  <script src="/Admin/assets/js/Chart.min.js"></script>
+  <script src="/Admin/assets/js/dynamic-pie-chart.js"></script>
+  <script src="/Admin/assets/js/moment.min.js"></script>
+  <script src="/Admin/assets/js/fullcalendar.js"></script>
+  <script src="/Admin/assets/js/jvectormap.min.js"></script>
+  <script src="/Admin/assets/js/world-merc.js"></script>
+  <script src="/Admin/assets/js/polyfill.js"></script>
+  <script src="/Admin/assets/js/main.js"></script>
 
   <script>
     // ======== jvectormap activation
