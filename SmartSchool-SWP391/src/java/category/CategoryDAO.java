@@ -112,7 +112,7 @@ public class CategoryDAO {
             ptm.setInt(3, categoryId);
             ptm.executeUpdate();
         } catch (Exception ex) {
-            Logger.getLogger(CategoryDAO.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
         } finally {
 
             if (ptm != null) {
@@ -155,7 +155,7 @@ public class CategoryDAO {
             ptm.setString(2, categoryImg);
             ptm.executeUpdate();
         } catch (Exception ex) {
-            Logger.getLogger(CategoryDAO.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
         } finally {
 
             if (ptm != null) {
