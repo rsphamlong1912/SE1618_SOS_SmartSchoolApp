@@ -86,7 +86,13 @@ public class MainController extends HttpServlet {
     private static final String DELETE_JOB_CATEGORY_CONTROLLER = "deleteJobCategory";
     private static final String EDIT_JOB_CATEGORY = "EditJobCategory";
     private static final String EDIT_JOB_CATEGORY_CONTROLLER = "editJobCategory";
-
+    
+    private static final String APPROVE_JOB_POST = "ApproveJobPost";
+    private static final String APPROVE_JOB_POST_CONTROLLER = "approveJobPost";
+    private static final String APPROVE_JOB = "ApproveJob";
+    private static final String APPROVE_JOB_CONTROLLER = "approveJob";
+    private static final String NO_APPROVE_JOB = "NoApproveJob";
+    private static final String NO_APPROVE_JOB_CONTROLLER = "noApproveJob";
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -169,9 +175,6 @@ public class MainController extends HttpServlet {
             if (DELETE_CATEGORY.equals(action)) {
                 url = DELETE_CATEGORY_LOSTANDFOUND_CONTROLLER;
             }
-            if (CATEGORY.equals(action)) {
-                url = CATEGORY_LOSTANDFOUND_CONTROLLER;
-            }
             if (JOB_CATEGORY.equals(action)) {
                 url = JOB_CATEGORY_CONTROLLER;
             }
@@ -183,6 +186,15 @@ public class MainController extends HttpServlet {
             }
             if (EDIT_JOB_CATEGORY.equals(action)) {
                 url = EDIT_JOB_CATEGORY_CONTROLLER;
+            }
+            if (APPROVE_JOB_POST.equals(action)) {
+                url = APPROVE_JOB_POST_CONTROLLER;
+            }
+            if (APPROVE_JOB.equals(action)) {
+                url = APPROVE_JOB_CONTROLLER;
+            }
+            if (NO_APPROVE_JOB.equals(action)) {
+                url = NO_APPROVE_JOB_CONTROLLER;
             }
         } catch (Exception e) {
             log("Error at MainController: " + e.toString());
