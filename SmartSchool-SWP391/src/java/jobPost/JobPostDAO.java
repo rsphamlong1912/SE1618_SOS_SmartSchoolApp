@@ -64,7 +64,16 @@ public class JobPostDAO {
     private static final String GET_TOTAL_POST_5DAY_AGO = "SELECT COUNT(jobId) as totalJob from tblJobPost WHERE date BETWEEN (DATEDIFF(mi, '1970-01-01 00:00:00', GETUTCDATE())-7200) AND (DATEDIFF(mi, '1970-01-01 00:00:00', GETUTCDATE())-5760)";
     private static final String GET_TOTAL_POST_6DAY_AGO = "SELECT COUNT(jobId) as totalJob from tblJobPost WHERE date BETWEEN (DATEDIFF(mi, '1970-01-01 00:00:00', GETUTCDATE())-8640) AND (DATEDIFF(mi, '1970-01-01 00:00:00', GETUTCDATE())-7200)";
     private static final String GET_TOTAL_POST_7DAY_AGO = "SELECT COUNT(jobId) as totalJob from tblJobPost WHERE date BETWEEN (DATEDIFF(mi, '1970-01-01 00:00:00', GETUTCDATE())-10080) AND (DATEDIFF(mi, '1970-01-01 00:00:00', GETUTCDATE())-8640)";
-
+    
+//    Approve Post
+    private static final String LIST_APPROVE_POST = "SELECT j.jobId,j.userId,j.jobCategoryId,j.title,j.description,j.salary,j.amount,j.timeJob,j.process,j.date,j.status,c.jobCategoryName, u.avatar, u.fullname,u.compName\n"
+            + "FROM tblJobPost as j, tblCategoryJob as c, tblUser as u\n"
+            + "WHERE j.jobCategoryId=c.jobCategoryId AND j.userId=u.userId AND status=1 AND process='approving' \n"
+            + "ORDER BY jobId DESC";
+    private static final String APPROVE_POST = "UPDATE tblJobPost SET process='new' WHERE jobId=?";
+    private static final String DONT_APPROVE_POST = "UPDATE tblJobPost SET status=0 WHERE jobId=? AND process='approving'";
+    
+    
     public static int takeMinutes() {
         long millis = System.currentTimeMillis();
         long minutes = TimeUnit.MILLISECONDS.toMinutes(millis);
@@ -118,6 +127,7 @@ public class JobPostDAO {
                 post.setJobCategoryName(rs.getString("jobCategoryName"));
                 post.setFullname(rs.getString("fullname"));
                 post.setCompName(rs.getString("compName"));
+                post.setAvatar(rs.getString("avatar"));
                 list.add(post);
             }
 
@@ -327,6 +337,7 @@ public class JobPostDAO {
                     post.setDate(newDate);
                     post.setStatus(rs.getBoolean("status"));
                     post.setJobCategoryName(rs.getString("jobCategoryName"));
+                    post.setAvatar(rs.getString("avatar"));
                     list.add(post);
                 }
             }
@@ -817,5 +828,93 @@ public class JobPostDAO {
         return 0;
     }
     
+    public List<JobPostDTO> getApprovePost() throws SQLException {
+        List<JobPostDTO> list = new ArrayList<>();
+        Connection con = null;
+        Statement stm = null;
+        ResultSet rs = null;
+        try {
+            //Creating and executing JDBC statements
+            con = DBUtils.getConnection();
+            stm = con.createStatement();
+            rs = stm.executeQuery(LIST_APPROVE_POST);
+            //Loading data into the list
+            while (rs.next()) {
+                JobPostDTO post = new JobPostDTO();
+                post.setJobId(rs.getInt("jobId"));
+                post.setUserId(rs.getString("userId"));
+                post.setJobCategoryId(rs.getInt("jobCategoryId"));
+                post.setTitle(rs.getString("title"));
+                post.setDescription(rs.getString("description"));
+                post.setSalary(rs.getFloat("salary"));
+                post.setAmount(rs.getInt("amount"));
+                post.setTimeJob(rs.getInt("timeJob"));
+                post.setProcess(rs.getString("process"));
+                int date = rs.getInt("date");
+                String newDate = checkTime(date);
+                post.setDate(newDate);
+                post.setStatus(rs.getBoolean("status"));
+                post.setJobCategoryName(rs.getString("jobCategoryName"));
+                post.setFullname(rs.getString("fullname"));
+                post.setCompName(rs.getString("compName"));
+                post.setAvatar(rs.getString("avatar"));
+                list.add(post);
+            }
+
+        } catch (Exception ex) {
+            Logger.getLogger(PostDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return list;
+    }
     
+    
+    public void approvePost(int jobId) throws SQLException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        try {
+            con = DBUtils.getConnection();
+            stm = con.prepareStatement(APPROVE_POST);
+            stm.setInt(1, jobId);
+            stm.executeUpdate();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+    }
+    
+    public void dontApprovePost(int jobId) throws SQLException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        try {
+            con = DBUtils.getConnection();
+            stm = con.prepareStatement(DONT_APPROVE_POST);
+            stm.setInt(1, jobId);
+            stm.executeUpdate();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+    }
 }

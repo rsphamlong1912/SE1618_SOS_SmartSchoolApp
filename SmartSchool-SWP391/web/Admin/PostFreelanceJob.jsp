@@ -1,9 +1,9 @@
 <%-- 
-    Document   : ApprovePostLostAndFound
-    Created on : Jul 9, 2022, 2:05:34 AM
+    Document   : PostFreelanceJob
+    Created on : Jul 9, 2022, 9:31:42 PM
     Author     : TrinhNgocBao
 --%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -16,23 +16,20 @@
   <title>Admin</title>
 
   <!-- ========== All CSS files linkup ========= -->
-  <link rel="stylesheet" href="/Admin/assets/css/bootstrap.min.css" />
-  <link rel="stylesheet" href="/Admin/assets/css/lineicons.css" />
-  <link rel="stylesheet" href="/Admin/assets/css/materialdesignicons.min.css" />
-  <link rel="stylesheet" href="/Admin/assets/css/fullcalendar.css" />
-  <link rel="stylesheet" href="/Admin/assets/css/fullcalendar.css" />
-  <link rel="stylesheet" href="/Admin/assets/css/main.css" />
-  <link rel="stylesheet" href="/Admin/assets/css/styles.css" />
+  <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="assets/css/lineicons.css" />
+  <link rel="stylesheet" href="assets/css/materialdesignicons.min.css" />
+  <link rel="stylesheet" href="assets/css/fullcalendar.css" />
+  <link rel="stylesheet" href="assets/css/fullcalendar.css" />
+  <link rel="stylesheet" href="assets/css/main.css" />
+  <link rel="stylesheet" href="assets/css/styles.css" />
   <style>
-    .top-selling-table .product{
-      min-width: 70px;
+    .content-detail {
+      border-bottom: 1px solid #EEEEEE !important;
     }
-
-    .top-selling-table .product .image {
-      height: 100%;
-      max-width: 150px;
+    .modal-body {
+      padding: 2rem;
     }
-
   </style>
 </head>
 
@@ -85,16 +82,16 @@
           </ul>
         </li>
         <li class="nav-item nav-item-has-children">
-          <a href="#0"  data-bs-toggle="collapse" data-bs-target="#ddmenu_3" aria-controls="ddmenu_3"
+          <a href="#0" class="collapsed" data-bs-toggle="collapse" data-bs-target="#ddmenu_3" aria-controls="ddmenu_3"
             aria-expanded="false" aria-label="Toggle navigation">
             <span class="icon">
               <i class="lni lni-add-files" style="font-weight: 700;"></i>
             </span>
             <span class="text">Approve Posts</span>
           </a>
-          <ul id="ddmenu_3" class="collapse show dropdown-nav">
+          <ul id="ddmenu_3" class="collapse dropdown-nav">
             <li>
-              <a href="" class="active"> Lost & Found Posts </a>
+              <a href=""> Lost & Found Posts </a>
             </li>
             <li>
               <a href=""> Freelance Job Posts </a>
@@ -102,19 +99,19 @@
           </ul>
         </li>
         <li class="nav-item nav-item-has-children">
-          <a href="#0" class="collapsed" data-bs-toggle="collapse" data-bs-target="#ddmenu_4" aria-controls="ddmenu_4"
+          <a href="#0" data-bs-toggle="collapse" data-bs-target="#ddmenu_4" aria-controls="ddmenu_4"
             aria-expanded="false" aria-label="Toggle navigation">
             <span class="icon">
               <i class="lni lni-empty-file" style="font-weight: 700;"></i>
             </span>
             <span class="text">Posts</span>
           </a>
-          <ul id="ddmenu_4" class="collapse dropdown-nav">
+          <ul id="ddmenu_4" class="collapse show dropdown-nav">
             <li>
               <a href=""> Lost & Found </a>
             </li>
             <li>
-              <a href=""> Freelance Job </a>
+              <a href=""  class="active"> Freelance Job </a>
             </li>
           </ul>
         </li>
@@ -365,7 +362,7 @@
           <div class="row align-items-center">
             <div class="col-md-6">
               <div class="title mb-30">
-                <h2>Approve Posts: Lost And Found</h2>
+                <h2>Posts: Freelance Job</h2>
               </div>
             </div>
             <!-- end col -->
@@ -376,11 +373,8 @@
                     <li class="breadcrumb-item">
                       <a href="#0">Posts</a>
                     </li>
-                    <li class="breadcrumb-item">
-                      <a href="#0">Approve Posts</a>
-                    </li>
                     <li class="breadcrumb-item active" aria-current="page">
-                      Lost And Found
+                      Freelance Job
                     </li>
                   </ol>
                 </nav>
@@ -408,7 +402,7 @@
                 <div class="right">
                   <div class="title d-flex align-items-center flex-wrap mb-30">
                     <button type="button" class="main-btn warning-btn btn-hover btn-sm">
-                      <i class="lni lni-add-files mr-5" style="font-size: 20px;"></i>Total: 30 posts</button>
+                      <i class="lni lni-empty-file mr-5" style="font-size: 20px;"></i>Total: 30 posts</button>
                   </div>
                 </div>
               </div>
@@ -416,30 +410,24 @@
               <div class="table-responsive">
                 <table class="table top-selling-table">
                   <thead>
-                    <tr>                    
+                    <tr>
                       <th>
-                        <h6 class="text-sm text-medium">Image</h6>
+                        <h6 class="text-sm text-medium">Employer</h6>
                       </th>
                       <th class="min-width">
-                        <h6 class="text-sm text-medium">Title</h6>
-                      </th>
-                      <th class="min-width">
-                        <h6 class="text-sm text-medium">Description</h6>
+                        <h6 class="text-sm text-medium">Freelance Job</h6>
                       </th>
                       <th class="min-width">
                         <h6 class="text-sm text-medium">Category</h6>
                       </th>
                       <th class="min-width">
-                        <h6 class="text-sm text-medium">User</h6>
+                        <h6 class="text-sm text-medium">Time</h6>
                       </th>
                       <th class="min-width">
-                        <h6 class="text-sm text-medium text-center">Type</h6>
+                        <h6 class="text-sm text-medium text-center">View Detail</h6>
                       </th>
                       <th class="min-width">
-                        <h6 class="text-sm text-medium text-center">Approve</h6>
-                      </th>
-                      <th class="min-width">
-                        <h6 class="text-sm text-medium text-center">Cancel</h6>
+                        <h6 class="text-sm text-medium text-center">Action</h6>
                       </th>
                     </tr>
                   </thead>
@@ -447,83 +435,36 @@
                     <tr>
                       <td>
                         <div class="product">
-                          <div class="image">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/e/e6/IPhone_XS_1_2018-11-02.jpg" alt="" />
+                          <div class="image user-image">
+                            <img src="https://tophinhanh.com/wp-content/uploads/2021/12/anh-avatar-dep-cho-con-gai.jpg"
+                              alt="" />
                           </div>
+                          <p class="text-sm">Phạm Ngọc Long</p>
                         </div>
                       </td>
                       <td>
-                        <p class="text-sm">Mất laptop</p>
+                        <p class="text-sm">Cần tuyển nhân sự thiết kế Web</p>
                       </td>
                       <td>
-                        <p class="text-sm">Lập Trình Front-End, Lập Trình Back-End, Fullstack Engineer,...Lập Trình Front-End, Lập Trình Back-End, Fullstack Engineer,...</p>
+                        <p class="text-sm">Thiết kế - Mỹ Thuật</p>
                       </td>
                       <td>
-                        <p class="text-sm">Laptop</p>
-                      </td>
-                      <td>
-                        <p class="text-sm">nguyennam44</p>
+                        <p class="text-sm">1 giờ trước</p>
                       </td>
                       <td>
                         <div class="action justify-content-center">
-                          <span class="status-btn success-btn">Found</span>
-                        </div>
-                      </td>
-                      <td>
-                        <div class="action justify-content-center icon purple">
-                          <button class="text-gray" style="font-size:25px;">
-                            <i class="lni lni-checkmark fw-bold"></i>
+                          <button  style="font-size:23px;">
+                            <a href="main?action=" class="text-gray"><i class="lni lni-eye fw-bold"></i></a>
                           </button>
                         </div>
                       </td>
                       <td>
-                        <div class="action justify-content-center icon purple">
-                          <button class="text-gray" style="font-size:20px;">
-                            <i class="lni lni-close fw-bold"></i>
+                        <div class="action justify-content-center">
+                          <button class="text-gray" style="font-size:23px;">
+                            <a href="main?action=" class="text-danger"><i class="lni lni-trash-can fw-bold"></i></a>
                           </button>
                         </div>
                       </td>
-                    </tr>
-                    <tr>
-                      <tr>
-                        <td>
-                          <div class="product">
-                            <div class="image">
-                              <img src="https://image.thanhnien.vn/w1024/Uploaded/2022/yfrph/2022_04_12/47cb7a75-7dd8-45e5-b0be-989eedf68d4c-4196.jpeg" alt="" />
-                            </div>
-                          </div>
-                        </td>
-                        <td>
-                          <p class="text-sm">Tìm thấy Điện thoại </p>
-                        </td>
-                        <td>
-                          <p class="text-sm">Lập Trình Front-End, Lập Trình Back-End, Fullstack Engineer,...</p>
-                        </td>
-                        <td>
-                          <p class="text-sm">Điện thoại</p>
-                        </td>
-                        <td>
-                          <p class="text-sm">ngoclongvip</p>
-                        </td>
-                        <td>
-                          <div class="action justify-content-center">
-                            <span class="status-btn warning-btn">Lost</span>
-                          </div>
-                        </td>
-                        <td>
-                          <div class="action justify-content-center icon purple">
-                            <button class="text-gray" style="font-size:25px;">
-                              <i class="lni lni-checkmark fw-bold"></i>
-                            </button>
-                          </div>
-                        </td>
-                        <td>
-                          <div class="action justify-content-center icon purple">
-                            <button class="text-gray" style="font-size:20px;">
-                              <i class="lni lni-close fw-bold"></i>
-                            </button>
-                          </div>
-                        </td>
                     </tr>
                   </tbody>
                 </table>
@@ -534,6 +475,71 @@
           <!-- End Col -->
         </div>
         <!-- End Row -->
+      </div>
+      <!--Modal-->
+      <div class="modal fade" id="ModalDetailPost" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-xl">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title" id="exampleModalLabel">Freelance Job Information</h4>
+            </div>
+            <div class="modal-body">
+              <div class="content-detail mb-3">
+                <div class="d-flex flex-column flex-lg-row justify-content-between mb-3">
+                  <h4 class="text-gray fw-medium text-truncate"><a class="text-decoration-none">Tuyển
+                      dụng Quản trị Web Wordpress, Lập trình Wordpress Theme</a></h4><span
+                    class="fs-1 fw-medium"></span>
+                </div>
+                <div class="d-flex align-items-center mb-3">
+                  <h6>Lĩnh vực: Lập Trình</h6>
+                </div>
+              </div>
+              <div class="content-detail mb-3">
+                <div class="align-items-center mb-2">
+                  <h6 class="mb-2">Mô tả công việc:</h6>
+                  <span class="fw-medium" style="font-size: 0.88889rem; line-height: 2.5;">
+                    TUYỂN DỤNG Giảng viên hoặc nhân viên văn phòng có kinh nghiệm, đang làm
+                    việc trong lĩnh vực IT như: Xây dựng và quản trị website WordPress Lập
+                    trình WordPress Theme Giảng viên và học viên chủ động lựa chọn không
+                    gian, thời gian làm việc thích hợp & hiệu quả, với một mục đích duy nhất
+                    là đảm bảo chất lượng, tạo cảm hứng trong học tập, thúc đẩy sáng tạo !
+                  </span>
+
+                </div>
+              </div>
+              <div class="d-flex align-items-center mb-3">
+                <h6>Mức lương: <span class="fw-medium" style="font-size: 14px;">10000
+                    VNĐ/h</span></h6>
+              </div>
+              <div class="d-flex align-items-center mb-3">
+                <h6>Số người cần tuyển: <span class="fw-medium" style="font-size: 14px;">8
+                    người</span></h6>
+              </div>
+              <div class="d-flex align-items-center mb-3">
+                <h6>Thời gian công việc: <span class="fw-medium" style="font-size: 14px;">1 - 3
+                    tháng</span></h6>
+              </div>
+              <p class="mb-2">Posted by</p>
+              <div class="d-flex align-items-center top-selling-table mb-3">
+                <div class="product">
+                  <div class="image user-image">
+                    <img src="https://tophinhanh.com/wp-content/uploads/2021/12/anh-avatar-dep-cho-con-gai.jpg"
+                      alt="" />
+                  </div>
+                  <p class="text-sm">Phạm Ngọc Long</p>
+                </div>
+              </div>
+              <div class="d-flex align-items-center"> <span class="fw-medium" style="font-size: 14px;"> <img
+                    src="assets/images/clock.svg" style="margin-right: 5px;" width="15" alt="navigation" />5
+                  phút
+                  trước</span>
+              </div>
+            </div>
+            <div class="modal-footer justify-content-center">
+              <button type="button" class="main-btn light-btn btn-hover btn-sm" data-bs-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
       </div>
       <!-- end container -->
     </section>
@@ -571,15 +577,15 @@
   <!-- ======== main-wrapper end =========== -->
 
   <!-- ========= All Javascript files linkup ======== -->
-  <script src="/Admin/assets/js/bootstrap.bundle.min.js"></script>
-  <script src="/Admin/assets/js/Chart.min.js"></script>
-  <script src="/Admin/assets/js/dynamic-pie-chart.js"></script>
-  <script src="/Admin/assets/js/moment.min.js"></script>
-  <script src="/Admin/assets/js/fullcalendar.js"></script>
-  <script src="/Admin/assets/js/jvectormap.min.js"></script>
-  <script src="/Admin/assets/js/world-merc.js"></script>
-  <script src="/Admin/assets/js/polyfill.js"></script>
-  <script src="/Admin/assets/js/main.js"></script>
+  <script src="assets/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/js/Chart.min.js"></script>
+  <script src="assets/js/dynamic-pie-chart.js"></script>
+  <script src="assets/js/moment.min.js"></script>
+  <script src="assets/js/fullcalendar.js"></script>
+  <script src="assets/js/jvectormap.min.js"></script>
+  <script src="assets/js/world-merc.js"></script>
+  <script src="assets/js/polyfill.js"></script>
+  <script src="assets/js/main.js"></script>
 
   <script>
     // ======== jvectormap activation

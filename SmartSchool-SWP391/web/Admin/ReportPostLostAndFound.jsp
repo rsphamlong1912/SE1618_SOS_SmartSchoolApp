@@ -1,9 +1,9 @@
 <%-- 
-    Document   : ApprovePostLostAndFound
-    Created on : Jul 9, 2022, 2:05:34 AM
+    Document   : ReportPostLostAndFound
+    Created on : Jul 9, 2022, 9:32:27 PM
     Author     : TrinhNgocBao
 --%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -16,13 +16,13 @@
   <title>Admin</title>
 
   <!-- ========== All CSS files linkup ========= -->
-  <link rel="stylesheet" href="/Admin/assets/css/bootstrap.min.css" />
-  <link rel="stylesheet" href="/Admin/assets/css/lineicons.css" />
-  <link rel="stylesheet" href="/Admin/assets/css/materialdesignicons.min.css" />
-  <link rel="stylesheet" href="/Admin/assets/css/fullcalendar.css" />
-  <link rel="stylesheet" href="/Admin/assets/css/fullcalendar.css" />
-  <link rel="stylesheet" href="/Admin/assets/css/main.css" />
-  <link rel="stylesheet" href="/Admin/assets/css/styles.css" />
+  <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="assets/css/lineicons.css" />
+  <link rel="stylesheet" href="assets/css/materialdesignicons.min.css" />
+  <link rel="stylesheet" href="assets/css/fullcalendar.css" />
+  <link rel="stylesheet" href="assets/css/fullcalendar.css" />
+  <link rel="stylesheet" href="assets/css/main.css" />
+  <link rel="stylesheet" href="assets/css/styles.css" />
   <style>
     .top-selling-table .product{
       min-width: 70px;
@@ -85,16 +85,16 @@
           </ul>
         </li>
         <li class="nav-item nav-item-has-children">
-          <a href="#0"  data-bs-toggle="collapse" data-bs-target="#ddmenu_3" aria-controls="ddmenu_3"
+          <a href="#0" class="collapsed" data-bs-toggle="collapse" data-bs-target="#ddmenu_3" aria-controls="ddmenu_3"
             aria-expanded="false" aria-label="Toggle navigation">
             <span class="icon">
               <i class="lni lni-add-files" style="font-weight: 700;"></i>
             </span>
             <span class="text">Approve Posts</span>
           </a>
-          <ul id="ddmenu_3" class="collapse show dropdown-nav">
+          <ul id="ddmenu_3" class="collapse dropdown-nav">
             <li>
-              <a href="" class="active"> Lost & Found Posts </a>
+              <a href=""> Lost & Found Posts </a>
             </li>
             <li>
               <a href=""> Freelance Job Posts </a>
@@ -119,16 +119,16 @@
           </ul>
         </li>
         <li class="nav-item nav-item-has-children">
-          <a href="#0" class="collapsed" data-bs-toggle="collapse" data-bs-target="#ddmenu_5" aria-controls="ddmenu_5"
+          <a href="#0" data-bs-toggle="collapse" data-bs-target="#ddmenu_5" aria-controls="ddmenu_5"
             aria-expanded="false" aria-label="Toggle navigation">
             <span class="icon">
               <i class="lni lni-remove-file" style="font-weight: 700;"></i>
             </span>
             <span class="text">Report Posts</span>
           </a>
-          <ul id="ddmenu_5" class="collapse dropdown-nav">
+          <ul id="ddmenu_5" class="collapse show dropdown-nav">
             <li>
-              <a href=""> Lost & Found </a>
+              <a href="" class="active"> Lost & Found </a>
             </li>
             <li>
               <a href=""> Freelance Job </a>
@@ -365,7 +365,7 @@
           <div class="row align-items-center">
             <div class="col-md-6">
               <div class="title mb-30">
-                <h2>Approve Posts: Lost And Found</h2>
+                <h2>Report Posts: Lost And Found</h2>
               </div>
             </div>
             <!-- end col -->
@@ -374,10 +374,7 @@
                 <nav aria-label="breadcrumb">
                   <ol class="breadcrumb">
                     <li class="breadcrumb-item">
-                      <a href="#0">Posts</a>
-                    </li>
-                    <li class="breadcrumb-item">
-                      <a href="#0">Approve Posts</a>
+                      <a href="#0">Report Posts</a>
                     </li>
                     <li class="breadcrumb-item active" aria-current="page">
                       Lost And Found
@@ -403,12 +400,12 @@
                     align-items-center
                   ">
                 <div class="left">
-                  <h6 class="text-medium mb-30">Approve Posts</h6>
+                  <h6 class="text-medium mb-30">Report Posts</h6>
                 </div>
                 <div class="right">
                   <div class="title d-flex align-items-center flex-wrap mb-30">
                     <button type="button" class="main-btn warning-btn btn-hover btn-sm">
-                      <i class="lni lni-add-files mr-5" style="font-size: 20px;"></i>Total: 30 posts</button>
+                      <i class="lni lni-remove-file mr-5" style="font-size: 20px;"></i>Total: 30 posts</button>
                   </div>
                 </div>
               </div>
@@ -424,22 +421,25 @@
                         <h6 class="text-sm text-medium">Title</h6>
                       </th>
                       <th class="min-width">
-                        <h6 class="text-sm text-medium">Description</h6>
-                      </th>
-                      <th class="min-width">
                         <h6 class="text-sm text-medium">Category</h6>
                       </th>
                       <th class="min-width">
                         <h6 class="text-sm text-medium">User</h6>
                       </th>
                       <th class="min-width">
+                        <h6 class="text-sm text-medium">Reason</h6>
+                      </th>
+                      <th class="min-width">
+                        <h6 class="text-sm text-medium">User Report</h6>
+                      </th>
+                      <th class="min-width">
                         <h6 class="text-sm text-medium text-center">Type</h6>
                       </th>
                       <th class="min-width">
-                        <h6 class="text-sm text-medium text-center">Approve</h6>
+                        <h6 class="text-sm text-medium text-center">Detail</h6>
                       </th>
                       <th class="min-width">
-                        <h6 class="text-sm text-medium text-center">Cancel</h6>
+                        <h6 class="text-sm text-medium text-center">Action</h6>
                       </th>
                     </tr>
                   </thead>
@@ -456,30 +456,33 @@
                         <p class="text-sm">Mất laptop</p>
                       </td>
                       <td>
-                        <p class="text-sm">Lập Trình Front-End, Lập Trình Back-End, Fullstack Engineer,...Lập Trình Front-End, Lập Trình Back-End, Fullstack Engineer,...</p>
+                        <p class="text-sm">Laptop</p>
                       </td>
                       <td>
-                        <p class="text-sm">Laptop</p>
+                        <p class="text-sm">ngoclong12</p>
+                      </td>
+                      <td>
+                        <p class="text-sm fw-bold">Gian lận lừa đảo</p>
                       </td>
                       <td>
                         <p class="text-sm">nguyennam44</p>
                       </td>
                       <td>
                         <div class="action justify-content-center">
-                          <span class="status-btn success-btn">Found</span>
+                          <span class="status-btn success-btn fw-bold">Found</span>
                         </div>
                       </td>
                       <td>
-                        <div class="action justify-content-center icon purple">
-                          <button class="text-gray" style="font-size:25px;">
-                            <i class="lni lni-checkmark fw-bold"></i>
+                        <div class="action justify-content-center">
+                          <button  style="font-size:23px;">
+                            <a href="main?action=" class="text-gray"><i class="lni lni-eye fw-bold"></i></a>
                           </button>
                         </div>
                       </td>
                       <td>
-                        <div class="action justify-content-center icon purple">
-                          <button class="text-gray" style="font-size:20px;">
-                            <i class="lni lni-close fw-bold"></i>
+                        <div class="action justify-content-center">
+                          <button class="text-gray" style="font-size:23px;">
+                            <a href="main?action=" class="text-danger"><i class="lni lni-trash-can fw-bold"></i></a>
                           </button>
                         </div>
                       </td>
@@ -497,30 +500,33 @@
                           <p class="text-sm">Tìm thấy Điện thoại </p>
                         </td>
                         <td>
-                          <p class="text-sm">Lập Trình Front-End, Lập Trình Back-End, Fullstack Engineer,...</p>
+                          <p class="text-sm">Điện thoại</p>
                         </td>
                         <td>
-                          <p class="text-sm">Điện thoại</p>
+                          <p class="text-sm">baovip</p>
+                        </td>
+                        <td>
+                          <p class="text-sm fw-bold">Thông tin sai sự thật</p>
                         </td>
                         <td>
                           <p class="text-sm">ngoclongvip</p>
                         </td>
                         <td>
                           <div class="action justify-content-center">
-                            <span class="status-btn warning-btn">Lost</span>
+                            <span class="status-btn warning-btn fw-bold">Lost</span>
                           </div>
                         </td>
                         <td>
-                          <div class="action justify-content-center icon purple">
-                            <button class="text-gray" style="font-size:25px;">
-                              <i class="lni lni-checkmark fw-bold"></i>
+                          <div class="action justify-content-center">
+                            <button  style="font-size:23px;">
+                              <a href="main?action=" class="text-gray"><i class="lni lni-eye fw-bold"></i></a>
                             </button>
                           </div>
                         </td>
                         <td>
-                          <div class="action justify-content-center icon purple">
-                            <button class="text-gray" style="font-size:20px;">
-                              <i class="lni lni-close fw-bold"></i>
+                          <div class="action justify-content-center">
+                            <button class="text-gray" style="font-size:23px;">
+                              <a href="main?action=" class="text-danger"><i class="lni lni-trash-can fw-bold"></i></a>
                             </button>
                           </div>
                         </td>
@@ -571,15 +577,15 @@
   <!-- ======== main-wrapper end =========== -->
 
   <!-- ========= All Javascript files linkup ======== -->
-  <script src="/Admin/assets/js/bootstrap.bundle.min.js"></script>
-  <script src="/Admin/assets/js/Chart.min.js"></script>
-  <script src="/Admin/assets/js/dynamic-pie-chart.js"></script>
-  <script src="/Admin/assets/js/moment.min.js"></script>
-  <script src="/Admin/assets/js/fullcalendar.js"></script>
-  <script src="/Admin/assets/js/jvectormap.min.js"></script>
-  <script src="/Admin/assets/js/world-merc.js"></script>
-  <script src="/Admin/assets/js/polyfill.js"></script>
-  <script src="/Admin/assets/js/main.js"></script>
+  <script src="assets/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/js/Chart.min.js"></script>
+  <script src="assets/js/dynamic-pie-chart.js"></script>
+  <script src="assets/js/moment.min.js"></script>
+  <script src="assets/js/fullcalendar.js"></script>
+  <script src="assets/js/jvectormap.min.js"></script>
+  <script src="assets/js/world-merc.js"></script>
+  <script src="assets/js/polyfill.js"></script>
+  <script src="assets/js/main.js"></script>
 
   <script>
     // ======== jvectormap activation
