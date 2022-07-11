@@ -50,7 +50,7 @@ public class PostDAO {
     private static final String GET_TOTALPOST = "SELECT COUNT(postId) AS count FROM tblPost WHERE postStatus='true'";
     private static final String GET_TOTALLOSTPOST = "SELECT COUNT(postId) AS countLostPost FROM tblPost WHERE postStatus='true' AND type=0";
     private static final String GET_TOTALFOUNDPOST = "SELECT COUNT(postId) AS countFoundPost FROM tblPost WHERE postStatus='true' AND type=1";
-    
+
     private static final String GET_TOTAL_POST_LAST_WEEK = "SELECT COUNT(postId) as totalPost from tblPost WHERE date BETWEEN (DATEDIFF(mi, '1970-01-01 00:00:00', GETUTCDATE())-10080) AND DATEDIFF(mi, '1970-01-01 00:00:00', GETUTCDATE())";
     private static final String GET_TOTAL_POST_1DAY_AGO = "SELECT COUNT(postId) as totalPost from tblPost WHERE date BETWEEN (DATEDIFF(mi, '1970-01-01 00:00:00', GETUTCDATE())-1440) AND DATEDIFF(mi, '1970-01-01 00:00:00', GETUTCDATE())";
     private static final String GET_TOTAL_POST_2DAY_AGO = "SELECT COUNT(postId) as totalPost from tblPost WHERE date BETWEEN (DATEDIFF(mi, '1970-01-01 00:00:00', GETUTCDATE())-2880) AND (DATEDIFF(mi, '1970-01-01 00:00:00', GETUTCDATE())-1440)";
@@ -59,7 +59,7 @@ public class PostDAO {
     private static final String GET_TOTAL_POST_5DAY_AGO = "SELECT COUNT(postId) as totalPost from tblPost WHERE date BETWEEN (DATEDIFF(mi, '1970-01-01 00:00:00', GETUTCDATE())-7200) AND (DATEDIFF(mi, '1970-01-01 00:00:00', GETUTCDATE())-5760)";
     private static final String GET_TOTAL_POST_6DAY_AGO = "SELECT COUNT(postId) as totalPost from tblPost WHERE date BETWEEN (DATEDIFF(mi, '1970-01-01 00:00:00', GETUTCDATE())-8640) AND (DATEDIFF(mi, '1970-01-01 00:00:00', GETUTCDATE())-7200)";
     private static final String GET_TOTAL_POST_7DAY_AGO = "SELECT COUNT(postId) as totalPost from tblPost WHERE date BETWEEN (DATEDIFF(mi, '1970-01-01 00:00:00', GETUTCDATE())-10080) AND (DATEDIFF(mi, '1970-01-01 00:00:00', GETUTCDATE())-8640)";
-    
+
     private static final String GET_TOTAL_LOST_LAST_WEEK = "SELECT COUNT(postId) as totalPost from tblPost WHERE type = 0 AND date BETWEEN (DATEDIFF(mi, '1970-01-01 00:00:00', GETUTCDATE())-10080) AND DATEDIFF(mi, '1970-01-01 00:00:00', GETUTCDATE())";
     private static final String GET_TOTAL_LOST_1DAY_AGO = "SELECT COUNT(postId) as totalPost from tblPost WHERE type = 0 AND date BETWEEN (DATEDIFF(mi, '1970-01-01 00:00:00', GETUTCDATE())-1440) AND DATEDIFF(mi, '1970-01-01 00:00:00', GETUTCDATE())";
     private static final String GET_TOTAL_LOST_2DAY_AGO = "SELECT COUNT(postId) as totalPost from tblPost WHERE type = 0 AND date BETWEEN (DATEDIFF(mi, '1970-01-01 00:00:00', GETUTCDATE())-2880) AND (DATEDIFF(mi, '1970-01-01 00:00:00', GETUTCDATE())-1440)";
@@ -68,7 +68,7 @@ public class PostDAO {
     private static final String GET_TOTAL_LOST_5DAY_AGO = "SELECT COUNT(postId) as totalPost from tblPost WHERE type = 0 AND date BETWEEN (DATEDIFF(mi, '1970-01-01 00:00:00', GETUTCDATE())-7200) AND (DATEDIFF(mi, '1970-01-01 00:00:00', GETUTCDATE())-5760)";
     private static final String GET_TOTAL_LOST_6DAY_AGO = "SELECT COUNT(postId) as totalPost from tblPost WHERE type = 0 AND date BETWEEN (DATEDIFF(mi, '1970-01-01 00:00:00', GETUTCDATE())-8640) AND (DATEDIFF(mi, '1970-01-01 00:00:00', GETUTCDATE())-7200)";
     private static final String GET_TOTAL_LOST_7DAY_AGO = "SELECT COUNT(postId) as totalPost from tblPost WHERE type = 0 AND date BETWEEN (DATEDIFF(mi, '1970-01-01 00:00:00', GETUTCDATE())-10080) AND (DATEDIFF(mi, '1970-01-01 00:00:00', GETUTCDATE())-8640)";
-    
+
     private static final String GET_TOTAL_FOUND_LAST_WEEK = "SELECT COUNT(postId) as totalPost from tblPost WHERE type = 1 AND date BETWEEN (DATEDIFF(mi, '1970-01-01 00:00:00', GETUTCDATE())-10080) AND DATEDIFF(mi, '1970-01-01 00:00:00', GETUTCDATE())";
     private static final String GET_TOTAL_FOUND_1DAY_AGO = "SELECT COUNT(postId) as totalPost from tblPost WHERE type = 1 AND date BETWEEN (DATEDIFF(mi, '1970-01-01 00:00:00', GETUTCDATE())-1440) AND DATEDIFF(mi, '1970-01-01 00:00:00', GETUTCDATE())";
     private static final String GET_TOTAL_FOUND_2DAY_AGO = "SELECT COUNT(postId) as totalPost from tblPost WHERE type = 1 AND date BETWEEN (DATEDIFF(mi, '1970-01-01 00:00:00', GETUTCDATE())-2880) AND (DATEDIFF(mi, '1970-01-01 00:00:00', GETUTCDATE())-1440)";
@@ -77,6 +77,10 @@ public class PostDAO {
     private static final String GET_TOTAL_FOUND_5DAY_AGO = "SELECT COUNT(postId) as totalPost from tblPost WHERE type = 1 AND date BETWEEN (DATEDIFF(mi, '1970-01-01 00:00:00', GETUTCDATE())-7200) AND (DATEDIFF(mi, '1970-01-01 00:00:00', GETUTCDATE())-5760)";
     private static final String GET_TOTAL_FOUND_6DAY_AGO = "SELECT COUNT(postId) as totalPost from tblPost WHERE type = 1 AND date BETWEEN (DATEDIFF(mi, '1970-01-01 00:00:00', GETUTCDATE())-8640) AND (DATEDIFF(mi, '1970-01-01 00:00:00', GETUTCDATE())-7200)";
     private static final String GET_TOTAL_FOUND_7DAY_AGO = "SELECT COUNT(postId) as totalPost from tblPost WHERE type = 1 AND date BETWEEN (DATEDIFF(mi, '1970-01-01 00:00:00', GETUTCDATE())-10080) AND (DATEDIFF(mi, '1970-01-01 00:00:00', GETUTCDATE())-8640)";
+
+//    Approve Post
+    private static final String LIST_POST_APPROVE = "SELECT * FROM tblPost WHERE postStatus='true' ORDER BY postId DESC";
+
     public static int takeMinutes() {
         long millis = System.currentTimeMillis();
         long minutes = TimeUnit.MILLISECONDS.toMinutes(millis);
@@ -713,7 +717,7 @@ public class PostDAO {
         }
         return list;
     }
-    
+
     public int getTotalPostLastWeek() throws SQLException {
         Connection con = null;
         ResultSet rs = null;
@@ -744,7 +748,7 @@ public class PostDAO {
 
         return 0;
     }
-    
+
     public int getTotalPost1DayAgo() throws SQLException {
         Connection con = null;
         ResultSet rs = null;
@@ -775,7 +779,7 @@ public class PostDAO {
 
         return 0;
     }
-    
+
     public int getTotalPost2DayAgo() throws SQLException {
         Connection con = null;
         ResultSet rs = null;
@@ -806,7 +810,7 @@ public class PostDAO {
 
         return 0;
     }
-    
+
     public int getTotalPost3DayAgo() throws SQLException {
         Connection con = null;
         ResultSet rs = null;
@@ -837,7 +841,7 @@ public class PostDAO {
 
         return 0;
     }
-    
+
     public int getTotalPost4DayAgo() throws SQLException {
         Connection con = null;
         ResultSet rs = null;
@@ -868,7 +872,7 @@ public class PostDAO {
 
         return 0;
     }
-    
+
     public int getTotalPost5DayAgo() throws SQLException {
         Connection con = null;
         ResultSet rs = null;
@@ -899,7 +903,7 @@ public class PostDAO {
 
         return 0;
     }
-    
+
     public int getTotalPost6DayAgo() throws SQLException {
         Connection con = null;
         ResultSet rs = null;
@@ -930,7 +934,7 @@ public class PostDAO {
 
         return 0;
     }
-    
+
     public int getTotalPost7DayAgo() throws SQLException {
         Connection con = null;
         ResultSet rs = null;
@@ -961,7 +965,7 @@ public class PostDAO {
 
         return 0;
     }
-    
+
     public int getTotalLostLastWeek() throws SQLException {
         Connection con = null;
         ResultSet rs = null;
@@ -992,7 +996,7 @@ public class PostDAO {
 
         return 0;
     }
-    
+
     public int getTotalLost1DayAgo() throws SQLException {
         Connection con = null;
         ResultSet rs = null;
@@ -1023,7 +1027,7 @@ public class PostDAO {
 
         return 0;
     }
-    
+
     public int getTotalLost2DayAgo() throws SQLException {
         Connection con = null;
         ResultSet rs = null;
@@ -1054,7 +1058,7 @@ public class PostDAO {
 
         return 0;
     }
-    
+
     public int getTotalLost3DayAgo() throws SQLException {
         Connection con = null;
         ResultSet rs = null;
@@ -1085,7 +1089,7 @@ public class PostDAO {
 
         return 0;
     }
-    
+
     public int getTotalLost4DayAgo() throws SQLException {
         Connection con = null;
         ResultSet rs = null;
@@ -1116,7 +1120,7 @@ public class PostDAO {
 
         return 0;
     }
-    
+
     public int getTotalLost5DayAgo() throws SQLException {
         Connection con = null;
         ResultSet rs = null;
@@ -1147,7 +1151,7 @@ public class PostDAO {
 
         return 0;
     }
-    
+
     public int getTotalLost6DayAgo() throws SQLException {
         Connection con = null;
         ResultSet rs = null;
@@ -1178,7 +1182,7 @@ public class PostDAO {
 
         return 0;
     }
-    
+
     public int getTotalLost7DayAgo() throws SQLException {
         Connection con = null;
         ResultSet rs = null;
@@ -1209,7 +1213,7 @@ public class PostDAO {
 
         return 0;
     }
-    
+
     public int getTotalFoundLastWeek() throws SQLException {
         Connection con = null;
         ResultSet rs = null;
@@ -1240,7 +1244,7 @@ public class PostDAO {
 
         return 0;
     }
-    
+
     public int getTotalFound1DayAgo() throws SQLException {
         Connection con = null;
         ResultSet rs = null;
@@ -1271,7 +1275,7 @@ public class PostDAO {
 
         return 0;
     }
-    
+
     public int getTotalFound2DayAgo() throws SQLException {
         Connection con = null;
         ResultSet rs = null;
@@ -1302,7 +1306,7 @@ public class PostDAO {
 
         return 0;
     }
-    
+
     public int getTotalFound3DayAgo() throws SQLException {
         Connection con = null;
         ResultSet rs = null;
@@ -1333,7 +1337,7 @@ public class PostDAO {
 
         return 0;
     }
-    
+
     public int getTotalFound4DayAgo() throws SQLException {
         Connection con = null;
         ResultSet rs = null;
@@ -1364,7 +1368,7 @@ public class PostDAO {
 
         return 0;
     }
-    
+
     public int getTotalFound5DayAgo() throws SQLException {
         Connection con = null;
         ResultSet rs = null;
@@ -1395,7 +1399,7 @@ public class PostDAO {
 
         return 0;
     }
-    
+
     public int getTotalFound6DayAgo() throws SQLException {
         Connection con = null;
         ResultSet rs = null;
@@ -1426,7 +1430,7 @@ public class PostDAO {
 
         return 0;
     }
-    
+
     public int getTotalFound7DayAgo() throws SQLException {
         Connection con = null;
         ResultSet rs = null;

@@ -5,7 +5,6 @@
  */
 package controllers;
 
-import category.CategoryDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -13,13 +12,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import jobPost.JobPostDAO;
 
 /**
  *
  * @author TQK
  */
-@WebServlet(name = "AddCategoryController", urlPatterns = {"/addCategory"})
-public class AddCategoryController extends HttpServlet {
+@WebServlet(name = "ApproveJobController", urlPatterns = {"/approveJob"})
+public class ApproveJobController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,15 +34,13 @@ public class AddCategoryController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try {
-            CategoryDAO dao=new CategoryDAO();
-            String categoryName=request.getParameter("categoryName");
-            String categoryImg=request.getParameter("categoryImg");
-            dao.uploadCategory(categoryName, categoryImg);
-            request.setAttribute("MESSAGE", "Đăng bài thành công!");
+            int jobId = Integer.parseInt(request.getParameter("jobId"));
+            JobPostDAO dao = new JobPostDAO();
+            dao.approvePost(jobId);
+//            response.sendRedirect("main?action=ApproveJobPost");
+            request.getRequestDispatcher("main?action=ApproveJobPost").forward(request, response);
         } catch (Exception e) {
-            log("Error at AddCategoryController: " + e.toString());
-        }finally {
-            response.sendRedirect("main?action=Category");
+            log("Error at ApproveJobController: " + e.toString());
         }
     }
 

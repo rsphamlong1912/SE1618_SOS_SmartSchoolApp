@@ -34,7 +34,7 @@ public class DeleteCategoryController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try {
-            response.setContentType("text/html;charset=UTF-8");
+//            response.setContentType("text/html;charset=UTF-8");
             int categoryId=Integer.parseInt(request.getParameter("categoryId"));
             CategoryDAO dao=new CategoryDAO();
             dao.deleteCategory(categoryId); 

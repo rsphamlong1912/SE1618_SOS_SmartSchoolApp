@@ -208,7 +208,7 @@
                                         <li>
                                             <a href="#0">
                                                 <div class="image">
-                                                    <img src="assets/images/lead/lead-6.png" alt="" />
+                                                    <img src="/Admin/assets/images/lead/lead-6.png" alt="" />
                                                 </div>
                                                 <div class="content">
                                                     <h6>
@@ -259,7 +259,7 @@
                                         <li>
                                             <a href="#0">
                                                 <div class="image">
-                                                    <img src="assets/images/lead/lead-5.png" alt="" />
+                                                    <img src="/Admin/assets/images/lead/lead-5.png" alt="" />
                                                 </div>
                                                 <div class="content">
                                                     <h6>Jacob Jones</h6>
@@ -271,7 +271,7 @@
                                         <li>
                                             <a href="#0">
                                                 <div class="image">
-                                                    <img src="assets/images/lead/lead-3.png" alt="" />
+                                                    <img src="/Admin/assets/images/lead/lead-3.png" alt="" />
                                                 </div>
                                                 <div class="content">
                                                     <h6>John Doe</h6>
@@ -283,7 +283,7 @@
                                         <li>
                                             <a href="#0">
                                                 <div class="image">
-                                                    <img src="assets/images/lead/lead-2.png" alt="" />
+                                                    <img src="/Admin/assets/images/lead/lead-2.png" alt="" />
                                                 </div>
                                                 <div class="content">
                                                     <h6>Anee Lee</h6>
@@ -310,7 +310,7 @@
                                             <div class="info">
                                                 <h6>John Doe</h6>
                                                 <div class="image">
-                                                    <img src="assets/images/profile/profile-image.png" alt="" />
+                                                    <img src="/Admin/assets/images/profile/profile-image.png" alt="" />
                                                     <span class="status"></span>
                                                 </div>
                                             </div>
@@ -408,28 +408,28 @@
                                                     <h4 class="modal-title" id="exampleModalLabel">Add New Category</h4>
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
-                                                <div class="modal-body">
-                                                    <form action="main" method="POST">
+                                                <form action="main" method="POST">
+                                                    <div class="modal-body">
                                                         <div class="row justify-content-center">
                                                             <div class="col-11">
                                                                 <div class="input-style-1">
                                                                     <label>Category Name</label>
-                                                                    <input type="text" placeholder="Type here" name="categoryName" />
+                                                                    <input id="cateName" type="text" placeholder="Type here" name="categoryName" />
                                                                 </div>
                                                             </div>
                                                             <div class="col-11">
                                                                 <div class="input-style-1">
                                                                     <label>Category Image (Please copy URL Image)</label>
-                                                                    <textarea placeholder="Type here" rows="6" name="categoryImg"></textarea>
+                                                                    <textarea id="cateImage" placeholder="Type here" rows="6" name="categoryImg"></textarea>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </form>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="main-btn light-btn btn-hover btn-sm" data-bs-dismiss="modal">Close</button>
-                                                    <button type="submit" name="action" value="AddCategory" class="main-btn warning-btn btn-hover btn-sm">Save changes</button>
-                                                </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="main-btn light-btn btn-hover btn-sm" data-bs-dismiss="modal">Close</button>
+                                                        <button type="submit" name="action" value="AddCategory" class="main-btn warning-btn btn-hover btn-sm">Save changes</button>
+                                                    </div>
+                                                </form>
                                             </div>
                                         </div>
                                     </div>
@@ -458,7 +458,7 @@
                                             <c:forEach items="${requestScope.LISTALLCATEGORY}" var="listCategory" varStatus="count">
                                                 <tr>
                                                     <td>
-                                                        <input id="CateId1" type="hidden" value="${listCategory.categoryId}"/>
+                                                        <input type="hidden" value="${listCategory.categoryId}"/>
                                                         <h6 class="text-sm">#${count.index + 1}</h6>
                                                     </td>
                                                     <td>
@@ -473,21 +473,21 @@
                                                     </td>
                                                     <td>
                                                         <div class="action justify-content-center">
-                                                            <span class="status-btn success-btn">${listCategory.categoryStatus}</span>
+                                                            <span class="status-btn success-btn">Active</span>
                                                         </div>
                                                     </td>
                                                     <td>
                                                         <div class="action justify-content-center icon purple">
                                                             <button class="text-gray" style="font-size:20px;" data-bs-toggle="modal"
-                                                                    data-bs-target="#ModalEditCategory" onclick="truyenDataEdit(this.getAttribute('data-cateID'), this.getAttribute('data-cateImg'), this.getAttribute('date-cateName'))"
-                                                                    data-cateID="${listCategory.categoryId}"
-                                                                    data-cateImg="${listCategory.categoryImg}"
-                                                                    date-cateName="${listCategory.categoryName}">
+                                                                    data-bs-target="#ModalEditCategory" onclick="truyenDataEdit(this.getAttribute('data-editCateID'), this.getAttribute('date-editCateName'), this.getAttribute('data-editCateImg'))"
+                                                                    data-editCateID="${listCategory.categoryId}"
+                                                                    data-editCateImg="${listCategory.categoryImg}"
+                                                                    date-editCateName="${listCategory.categoryName}">
                                                                 <i class="lni lni-pencil-alt fw-bold"></i>
                                                             </button>
                                                             <button class="text-gray" style="font-size:20px;" data-bs-toggle="modal"
-                                                                    data-bs-target="#ModalDeleteCategory" onclick="truyenIdDelete(this.getAttribute('data-editCate'))"
-                                                                    data-editCate="${listCategory.categoryId}" >
+                                                                    data-bs-target="#ModalDeleteCategory" onclick="truyenIdDelete(this.getAttribute('data-cateId'))"
+                                                                    data-cateId="${listCategory.categoryId}" >
                                                                 <i class="lni lni-trash-can fw-bold"></i>
                                                             </button>
                                                         </div>
@@ -515,15 +515,14 @@
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
-                                    <form action="" method="">
                                         <div class="row justify-content-center">
                                             <div>
-                                                <input id="CateId" type="hidden" name="categoryId" />
+                                                <input id="CateId1" type="hidden" name="categoryId" />
                                             </div>
                                             <div class="col-11">
                                                 <div class="input-style-1">
                                                     <label>Category Name</label>
-                                                    <input id="CateN" type="text" placeholder="Type here" name="categoryName" required/>
+                                                    <input id="CateN" type="text" placeholder="Type here" name="categoryName"/>
                                                 </div>
                                             </div>
                                             <div class="col-11">
@@ -533,11 +532,10 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </form>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="main-btn light-btn btn-hover btn-sm" data-bs-dismiss="modal">Close</button>
-                                    <button type="submit" name="action" value="EditCategory" class="main-btn warning-btn btn-hover btn-sm">Save changes</button>
+                                    <button type="submit" name="action" value="EditCategogy" class="main-btn warning-btn btn-hover btn-sm">Save changes</button>
                                 </div>
                             </div>
                         </div>
@@ -545,7 +543,7 @@
                 </form>
 
                 <!--Modal Delete-->
-                <form action="main" method="POST">
+                <form action="main">
                     <div class="modal fade" id="ModalDeleteCategory" tabindex="-1" aria-labelledby="exampleModalLabel"
                          aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered modal-sm">
@@ -609,16 +607,16 @@
         <script src="/Admin/assets/js/main.js"></script>
 
         <script>
-                                                                        function truyenDataEdit(cateID, cateImg, cateName) {
-                                                                            document.getElementById("CateId").value = cateID;
+                                                                        function truyenDataEdit(cateID, cateName, cateImage) {
+                                                                            document.getElementById("CateId1").value = cateID;
                                                                             document.getElementById("CateN").value = cateName;
-                                                                            document.getElementById("CateImg").innerHTML = cateImg;
+                                                                            document.getElementById("CateImg").innerHTML = cateImage;
                                                                         }
         </script>
 
         <script>
-            function truyenIdDelete(editCate) {
-                document.getElementById("CateId2").value = editCate;
+            function truyenIdDelete(cateID) {
+                document.getElementById("CateId2").value = cateID;
             }
         </script>
 
