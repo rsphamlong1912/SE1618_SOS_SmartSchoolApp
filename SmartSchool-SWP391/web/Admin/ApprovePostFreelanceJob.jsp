@@ -440,6 +440,7 @@
                                         </thead>
                                         <tbody>
                                             <c:forEach items="${requestScope.LISTAPPROVE}" var="approve">
+                                            <form action="main" method="POST">
                                                 <tr>
                                                     <td>
                                                         <div class="product">
@@ -449,9 +450,9 @@
                                                             <input id="amountDe" type="hidden" name="amount" value="${approve.amount}" />
                                                             <input id="timeDe" type="hidden" name="timeJob" value="${approve.timeJob}" />
                                                             <div class="image user-image">
-                                                                <img src="https://tophinhanh.com/wp-content/uploads/2021/12/anh-avatar-dep-cho-con-gai.jpg" alt="" />
+                                                                <img id="imgDe" src="${pageContext.servletContext.contextPath}/avatar?userId=${approve.userId}" alt="" />
                                                             </div>
-                                                                <p id="name" class="text-sm">${approve.fullname}</p>
+                                                            <p id="name" class="text-sm">${approve.fullname}</p>
                                                         </div>
                                                     </td>
                                                     <td>
@@ -465,12 +466,12 @@
                                                     </td>
                                                     <td>
                                                         <div class="action justify-content-center">
-                                                            <button class="text-gray" style="font-size:23px;" data-bs-toggle="modal"
-                                                                    data-bs-target="#ModalDetailPost" onclick="truyenDataDetail(this.getAttribute('data-jobIdDe'), 
-                                                                                this.getAttribute('data-titleDe'), this.getAttribute('data-descripDe'), 
-                                                                                this.getAttribute('data-cateName'),this.getAttribute('data-salaryDe'),
-                                                                                this.getAttribute('data-amountDe'),this.getAttribute('data-timeDe'),
-                                                                                this.getAttribute('data-avatar'),this.getAttribute('data-name'),this.getAttribute('data-date'))"
+                                                            <button type="button" class="text-gray" style="font-size:23px;" data-bs-toggle="modal"
+                                                                    data-bs-target="#ModalDetailPost" onclick="truyenDataDetail(this.getAttribute('data-jobIdDe'),
+                                                                                    this.getAttribute('data-titleDe'), this.getAttribute('data-descripDe'),
+                                                                                    this.getAttribute('data-cateName'), this.getAttribute('data-salaryDe'),
+                                                                                    this.getAttribute('data-amountDe'), this.getAttribute('data-timeDe'),
+                                                                                    this.getAttribute('data-avatar'), this.getAttribute('data-name'), this.getAttribute('data-date'))"
                                                                     data-jobIdDe="${approve.jobId}" 
                                                                     data-titleDe="${approve.title}" 
                                                                     data-descripDe="${approve.description}" 
@@ -481,7 +482,7 @@
                                                                     data-avatar="${approve.avatar}" 
                                                                     data-name="${approve.fullname}" 
                                                                     data-date="${approve.date}">
-                                                                
+
                                                                 <i class="lni lni-eye fw-bold"></i>
                                                             </button>
                                                         </div>
@@ -501,7 +502,8 @@
                                                         </div>
                                                     </td>
                                                 </tr>
-                                            </c:forEach>
+                                            </form>
+                                        </c:forEach>
                                         </tbody>
                                     </table>
                                     <!-- End Table -->
@@ -527,7 +529,7 @@
                                             class="fs-1 fw-medium"></span>
                                     </div>
                                     <div class="d-flex align-items-center mb-3">
-                                        
+
                                         <h6 id="CateD" name="jobCategoryName"></h6>
                                     </div>
                                 </div>
@@ -539,11 +541,11 @@
                                 </div>
                                 <div class="d-flex align-items-center mb-3">
                                     <h6>Mức lương: <span id="salaryDe1" name="salary" class="fw-medium" style="font-size: 14px;">
-                                            </span></h6>
+                                        </span></h6>
                                 </div>
                                 <div class="d-flex align-items-center mb-3">
                                     <h6>Số người cần tuyển: <span id="amountD" name="amount" class="fw-medium" style="font-size: 14px;">
-                                            </span></h6>
+                                        </span></h6>
                                 </div>
                                 <div class="d-flex align-items-center mb-3">
                                     <h6>Thời gian công việc: <span id="timeDe1" name="timeJob" class="fw-medium" style="font-size: 14px;"></span></h6>
@@ -560,7 +562,7 @@
                                 </div>
                                 <div class="d-flex align-items-center"> <span class="fw-medium" style="font-size: 14px;" id="dateDe" name="date" > <img
                                             src="/Admin/assets/images/clock.svg" style="margin-right: 5px;" width="15" alt="navigation" />
-                                        </span>
+                                    </span>
                                 </div>
                             </div>
                             <div class="modal-footer justify-content-center">
@@ -616,18 +618,18 @@
         <script src="/Admin/assets/js/main.js"></script>
 
         <script>
-                                                                function truyenDataDetail(jobIdDe, titleDe, descripDe, cateName, salary, amountDe, timeJob, avatar, name, date) {
-                                                                    document.getElementById("IdDe").value = jobIdDe;
-                                                                    document.getElementById("titleD").innerHTML = titleDe;
-                                                                    document.getElementById("DesD").innerHTML = descripDe;
-                                                                    document.getElementById("CateD").innerHTML = "Lĩnh vực: " + cateName;
-                                                                    document.getElementById("salaryDe1").innerHTML = salary + " VNĐ/h";
-                                                                    document.getElementById("amountD").innerHTML = amountDe + " người";
-                                                                    document.getElementById("timeDe1").innerHTML = timeJob + " tháng";
-                                                                    document.getElementById("img").innerHTML = avatar;
-                                                                    document.getElementById("nameDe").innerHTML = name;
-                                                                    document.getElementById("dateDe").innerHTML = date;
-                                                                }
+                                                                        function truyenDataDetail(jobIdDe, titleDe, descripDe, cateName, salary, amountDe, timeJob, avatar, name, date) {
+                                                                            document.getElementById("IdDe").value = jobIdDe;
+                                                                            document.getElementById("titleD").innerHTML = titleDe;
+                                                                            document.getElementById("DesD").innerHTML = descripDe;
+                                                                            document.getElementById("CateD").innerHTML = "Lĩnh vực: " + cateName;
+                                                                            document.getElementById("salaryDe1").innerHTML = salary + " VNĐ/h";
+                                                                            document.getElementById("amountD").innerHTML = amountDe + " người";
+                                                                            document.getElementById("timeDe1").innerHTML = timeJob + " tháng";
+                                                                            document.getElementById("img").innerHTML = avatar;
+                                                                            document.getElementById("nameDe").innerHTML = name;
+                                                                            document.getElementById("dateDe").innerHTML = date;
+                                                                        }
         </script>
         <script>
             // ======== jvectormap activation
