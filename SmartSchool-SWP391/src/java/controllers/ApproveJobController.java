@@ -37,7 +37,8 @@ public class ApproveJobController extends HttpServlet {
             int jobId = Integer.parseInt(request.getParameter("jobId"));
             JobPostDAO dao = new JobPostDAO();
             dao.approvePost(jobId);
-            response.sendRedirect("main?action=ApproveJobPost");
+//            response.sendRedirect("main?action=ApproveJobPost");
+            request.getRequestDispatcher("main?action=ApproveJobPost").forward(request, response);
         } catch (Exception e) {
             log("Error at ApproveJobController: " + e.toString());
         }
