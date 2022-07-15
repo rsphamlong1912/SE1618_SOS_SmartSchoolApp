@@ -298,7 +298,7 @@
                                     <div class="row">
                                         <div class="col-lg-4 mb-3">
                                             <span class="w-100">
-                                                <input type="radio" class="form-check-input required" required="true" data-rule-required="true" name="timeJob" value="1" id="timeJob_1" data-validate-hide-message="1">
+                                                <input type="radio" class="form-check-input required" required="true" data-rule-required="true" name="timeJob" value="1" id="timeJob_1" data-validate-hide-message="1" checked>
                                                 <label for="timeJobs_1">
                                                     <span class="inside pt-2 pb-2">
                                                         <span class="d-block fw-500"> Ít hơn 1 tháng</span>
@@ -333,7 +333,7 @@
                                         việc (ít nhất 1 câu hỏi)</label>
                                     <div class="row mb-3">
                                         <div class="input-group">
-                                            <input type="text" name="question" class="form-control m-input question" required>
+                                            <input type="text" name="question" class="form-control m-input question" id="question" required>
                                             <div class="input-group-prepend">
                                                 <button class="btn btn-danger" id="DeleteRowDisable" type="button">
                                                     <i class="fa fa-trash"></i>
@@ -485,9 +485,9 @@
             $("#rowAdder").click(function () {
                 newRowAdd =
                         '<div class="row mb-3"> <div class="input-group">' +
-                        '<input type="text" name="question" class="form-control m-inputque question" required>' +
+                        '<input type="text" name="question" class="form-control m-inputque questionm" required />' +
                         '<div class="input-group-prepend">' +
-                        '<button class="btn btn-danger" id="DeleteRow" type="button"> <i class="fa fa-trash"></i></button> </div>' +
+                        '<button class="btn btn-danger" id="DeleteRow" type="button"> <i class="fa fa-trash"></i></button><small></small> </div>' +
                         '</div> </div> </div>';
                 $('#newinput').append(newRowAdd);
             });
