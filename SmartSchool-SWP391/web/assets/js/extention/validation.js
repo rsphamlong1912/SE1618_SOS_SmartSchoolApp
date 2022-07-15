@@ -18,8 +18,7 @@ var titleJob = document.querySelector("#titleJob");
 var description = document.querySelector("#floatingTextarea2");
 var amount = document.querySelector("#amount");
 var salary = document.querySelector("#salary");
-var question = document.querySelectorAll()
-
+var question = document.querySelector("#question");
 var form = document.querySelector('form')
 
 
@@ -154,10 +153,53 @@ function validateChangePassword() {
 }
 
 function validateEmployerUpload() {
-    let isEmptyError = checkEmptyError([titleJob, description])
+    let isEmptyError = checkEmptyError([titleJob, description, question])
     let isNegative = checkNegativeValue(amount)
     let isNegativeSalary = checkNegativeValue(salary)
-    if (isEmptyError || isNegative || isNegativeSalary) {
+    console.log(question)
+    let questionm = document.getElementById("newinput").getElementsByClassName('questionm')[0];
+    let isEmptyQuestionM = true;
+    isEmptyQuestionM = checkEmptyErrorOneParam(questionm);
+    
+    let questionm2 = document.getElementById("newinput").getElementsByClassName('questionm')[1];
+    let isEmptyQuestionM2 = true;
+    isEmptyQuestionM2  = checkEmptyErrorOneParam(questionm2) 
+    
+        let questionm3 = document.getElementById("newinput").getElementsByClassName('questionm')[2];
+    let isEmptyQuestionM3 = true;
+    isEmptyQuestionM3  = checkEmptyErrorOneParam(questionm3) 
+    
+        let questionm4 = document.getElementById("newinput").getElementsByClassName('questionm')[3];
+    let isEmptyQuestionM4 = true;
+    isEmptyQuestionM4  = checkEmptyErrorOneParam(questionm4) 
+    
+        let questionm5 = document.getElementById("newinput").getElementsByClassName('questionm')[4];
+    let isEmptyQuestionM5 = true;
+    isEmptyQuestionM5  = checkEmptyErrorOneParam(questionm5)   
+    
+    let questionm6 = document.getElementById("newinput").getElementsByClassName('questionm')[5];
+    let isEmptyQuestionM6 = true;
+    isEmptyQuestionM6  = checkEmptyErrorOneParam(questionm6) 
+    
+        let questionm7 = document.getElementById("newinput").getElementsByClassName('questionm')[6];
+    let isEmptyQuestionM7 = true;
+    isEmptyQuestionM7  = checkEmptyErrorOneParam(questionm7) 
+    
+        let questionm8 = document.getElementById("newinput").getElementsByClassName('questionm')[7];
+    let isEmptyQuestionM8 = true;
+    isEmptyQuestionM8  = checkEmptyErrorOneParam(questionm8) 
+    
+        let questionm9 = document.getElementById("newinput").getElementsByClassName('questionm')[8];
+    let isEmptyQuestionM9 = true;
+    isEmptyQuestionM9  = checkEmptyErrorOneParam(questionm9) 
+    
+        let questionm10 = document.getElementById("newinput").getElementsByClassName('questionm')[9];
+    let isEmptyQuestionM10 = true;
+    isEmptyQuestionM10  = checkEmptyErrorOneParam(questionm10) 
+    
+//    questionm.forEach(element => console.log(element));
+    if (isEmptyError || isNegative || isNegativeSalary || isEmptyQuestionM || isEmptyQuestionM2 || isEmptyQuestionM3 ||
+            isEmptyQuestionM4|| isEmptyQuestionM5|| isEmptyQuestionM6||isEmptyQuestionM7||isEmptyQuestionM8 || isEmptyQuestionM9 || isEmptyQuestionM10) {
         return false
     }
     return true
