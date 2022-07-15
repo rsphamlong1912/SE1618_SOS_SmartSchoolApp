@@ -5,9 +5,12 @@
  */
 package controllers;
 
+import applyJob.ApplyJobDAO;
+import applyJob.ApplyJobDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -16,49 +19,35 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import jobCategory.JobCategoryDAO;
-import jobCategory.JobCategoryDTO;
-import jobPost.JobPostDAO;
-import jobPost.JobPostDTO;
+import jobPostAnswer.JobPostAnswerDAO;
+import jobPostAnswer.JobPostAnswerDTO;
+import user.UserDAO;
+import user.UserDTO;
 
 /**
  *
- * @author SE150888 Pham Ngoc Long
+ * @author TrinhNgocBao
  */
-@WebServlet(name = "SearchJobByCategoryIdController", urlPatterns = {"/searchJobByCategoryId"})
-public class SearchJobByCategoryIdController extends HttpServlet {
-
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    private static final String LIST_POST_PAGE = "FreelanceList.jsp";
+@WebServlet(name = "ApproveUserWaitingController", urlPatterns = {"/approveUserWaiting"})
+public class ApproveUserWaitingController extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
-        try {
-            response.setContentType("text/html;charset=UTF-8");
-            String url = LIST_POST_PAGE;
-            String Search = request.getParameter("jobCategoryId");
-            JobPostDAO dao = new JobPostDAO();
-            List<JobPostDTO> listPost = dao.searchPostByJobCategoryId(Search);
-
-            JobCategoryDAO cdao = new JobCategoryDAO();
-            List<JobCategoryDTO> listAllCategory = cdao.getAllCategory();
-
-            request.setAttribute("LISTJOBCATEGORY", listAllCategory);
-            request.setAttribute("LISTJOBPOST", listPost);
-            request.setAttribute("TAGCATE", Search);
-            request.getRequestDispatcher(url).forward(request, response);
-        } catch (SQLException ex) {
-            Logger.getLogger(SearchJobPostController.class.getName()).log(Level.SEVERE, null, ex);
+        PrintWriter out = response.getWriter();
+        String buttonValue = request.getParameter("buttonValue");
+        String jobId = request.getParameter("jobId");
+        String userId = request.getParameter("userId");
+        ApplyJobDAO aDao = new ApplyJobDAO();
+        UserDAO uDao = new UserDAO();
+        if ("approved".equals(buttonValue)) {
+            aDao.setApplyJobDoing(jobId, userId);
+            uDao.setHaveJobPlusOne(userId);
+        } else if ("denied".equals(buttonValue)) {
+            aDao.setApplyJobDenied(jobId, userId);
         }
+
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -73,7 +62,11 @@ public class SearchJobByCategoryIdController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(ApproveUserWaitingController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -87,7 +80,11 @@ public class SearchJobByCategoryIdController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(ApproveUserWaitingController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

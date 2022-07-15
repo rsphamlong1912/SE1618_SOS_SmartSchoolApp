@@ -19,15 +19,6 @@ import javax.servlet.http.HttpServletResponse;
 @MultipartConfig(maxFileSize = 16177215)
 public class MainController extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     private static final String ERROR = "error.jsp";
     private static final String LOGIN = "Login";
     private static final String LOGIN_CONTROLLER = "login";
@@ -93,6 +84,26 @@ public class MainController extends HttpServlet {
     private static final String APPROVE_JOB_CONTROLLER = "approveJob";
     private static final String NO_APPROVE_JOB = "NoApproveJob";
     private static final String NO_APPROVE_JOB_CONTROLLER = "noApproveJob";
+    private static final String SUBMIT_FORMJOB = "SubmitFormJob";
+    private static final String SUBMIT_FORMJOB_CONTROLLER = "submitFormJob";
+    
+    private static final String MY_JOB_WAITING = "MyJobWaiting";
+    private static final String MY_JOB_WAITING_CONTROLLER = "myJobWaiting";
+    private static final String MY_JOB_DOING = "MyJobDoing";
+    private static final String MY_JOB_DOING_CONTROLLER = "myJobDoing";
+    
+    private static final String MY_JOB_POST_PROCESS_DETAIL = "MyJobPostProcessDetail";
+    private static final String MY_JOB_POST_PROCESS_DETAIL_CONTROLLER = "myJobPostProcessDetail";
+    
+    private static final String EMPLOYER_UPLOAD_JOBPOST = "EmployerUploadJobPost";
+    private static final String EMPLOYER_UPLOAD_JOBPOST_CONTROLLER = "employerUploadJobPost";
+    
+    private static final String UPLOAD_LOSTANDFOUND_POST = "UploadLostAndFoundPost";
+    private static final String UPLOAD_LOSTANDFOUND_POST_CONTROLLER = "uploadLostAndFoundPost";
+    
+    private static final String SET_JOB_APPROVE_DONE = "SetJobApproveDone";
+    private static final String SET_JOB_APPROVE_DONE_CONTROLLER = "setJobApproveDone";
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -195,6 +206,28 @@ public class MainController extends HttpServlet {
             }
             if (NO_APPROVE_JOB.equals(action)) {
                 url = NO_APPROVE_JOB_CONTROLLER;
+            }
+            if (SUBMIT_FORMJOB.equals(action)) {
+                url = SUBMIT_FORMJOB_CONTROLLER;
+            }
+            
+            if (MY_JOB_WAITING.equals(action)) {
+                url = MY_JOB_WAITING_CONTROLLER;
+            }
+            if (MY_JOB_DOING.equals(action)) {
+                url = MY_JOB_DOING_CONTROLLER;
+            }          
+            if (MY_JOB_POST_PROCESS_DETAIL.equals(action)) {
+                url = MY_JOB_POST_PROCESS_DETAIL_CONTROLLER;
+            }
+            if (EMPLOYER_UPLOAD_JOBPOST.equals(action)) {
+                url = EMPLOYER_UPLOAD_JOBPOST_CONTROLLER;
+            }
+            if (UPLOAD_LOSTANDFOUND_POST.equals(action)) {
+                url = UPLOAD_LOSTANDFOUND_POST_CONTROLLER;
+            }
+            if (SET_JOB_APPROVE_DONE.equals(action)) {
+                url = SET_JOB_APPROVE_DONE_CONTROLLER;
             }
         } catch (Exception e) {
             log("Error at MainController: " + e.toString());

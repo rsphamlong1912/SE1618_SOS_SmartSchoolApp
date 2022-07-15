@@ -1,9 +1,8 @@
 <%-- 
-    Document   : LostAndFoundHome
-    Created on : Jun 3, 2022, 11:05:25 AM
+    Document   : EmployerJobDone
+    Created on : Jun 16, 2022, 3:16:03 PM
     Author     : TrinhNgocBao
 --%>
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -18,7 +17,7 @@
         <!-- ===============================================-->
         <!--    Document Title-->
         <!-- ===============================================-->
-        <title>FPTU Lost & Found</title>
+        <title>FPTU Freelance Job</title>
 
 
         <!-- ===============================================-->
@@ -46,6 +45,29 @@
         <link href="./assets/css/theme.css" rel="stylesheet" />
         <link href="./assets/css/main.css" rel="stylesheet" />
         <link href="./assets/css/style.css" rel="stylesheet" />
+        <style>
+            .row-content {
+                margin: 7rem auto 0;
+                /* padding: 0px 50px; */ 
+                border-bottom: 1px ridge;
+                min-height: 50px;
+            }
+
+            .choosen {
+                border-bottom: 5px solid #F26F21;
+            }
+
+            .card-body {
+                border-bottom: 1px ridge;
+            }
+
+            .card-body h5{
+                font-size: 20px;
+                line-height: 2rem;
+            }
+
+
+        </style>
     </head>
 
 
@@ -65,22 +87,43 @@
                             class="navbar-toggler-icon"> </span></button>
                     <div class="collapse navbar-collapse border-top border-lg-0 mt-4 mt-lg-0" id="navbarSupportedContent">
                         <ul class="navbar-nav ms-auto pt-2 pt-lg-0 font-base align-items-lg-center align-items-start">
-                            <li class="nav-item px-3"><a class="nav-link fw-bold" aria-current="page" href="lostAndfoundhome">TRANG CHỦ</a>
+                            <li class="nav-item px-3"><a class="nav-link fw-bold" aria-current="page" href="freelancerhome">TRANG CHỦ</a>
                             </li>
-                            <li class="nav-item px-3"><a class="nav-link fw-bold" aria-current="page" href="#phanloai">PHÂN LOẠI</a>
+                            <li class="nav-item px-3"><a class="nav-link fw-bold" aria-current="page" href="freelancerhome#linhvuc">LĨNH VỰC</a>
                             </li>
-                            <li class="nav-item px-3"><a class="nav-link fw-bold" aria-current="page" href="#moinhatduoc">MỚI NHẶT ĐƯỢC</a></li>
-                            <li class="nav-item px-3"><a class="nav-link fw-bold" aria-current="page" href="#moithatlac">MỚI THẤT LẠC</a></li>
-                            <li class="nav-item px-3"><a class="nav-link fw-bold" aria-current="page" href="main?action=ListAll">TÌM KIẾM</a></li>
-                            
-                            
-                                <c:if test="${empty sessionScope.LOGIN_USER}">
-                                <li class="nav-item px-3"><a class="btn btn-outline-light order-1 order-lg-0 fw-bold" href="login.jsp">ĐĂNG NHẬP /
-                                        ĐĂNG KÝ</a></li>
+                            <li class="nav-item px-3"><a class="nav-link fw-bold" aria-current="page" href="main?action=ListJobPost">TÌM VIỆC</a>
+                            </li>
+                            <li class="nav-item px-3 navbar-dropdown dropdown-user dropdown">
+                                <a class="btn btn-outline-light order-1 order-lg-0 fw-bold nav-link hide-arrow" id="nameLogin" href="" data-bs-toggle="dropdown">
+                                    <div class="avatar avatar-online">
+
+
+                                        QUẢN LÝ CÔNG VIỆC
+
+
+                                    </div>
+                                </a>          
+                                <ul class="dropdown-menu dropdown-menu-end">              
+
+                                    <li>
+                                        <a class="dropdown-item" href="main?action=MyJobWaiting">
+                                            <i class="bx bx-user me-2"></i>
+                                            <span class="align-middle"> VIỆC CHỜ ỨNG TUYỂN</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="">
+                                            <i class="bx bx-user me-2"></i>
+                                            <span class="align-middle"> VIỆC ĐANG THỰC HIỆN</span>
+                                        </a>
+                                    </li>                                   
+                                </ul>
+                            </li>
+                            <c:if test="${empty sessionScope.LOGIN_USER}">
+                                <li class="nav-item px-3"><a class="btn btn-outline-light order-1 order-lg-0 fw-bold" href="#!">Đăng nhập /
+                                        Đăng ký</a></li>
                                     </c:if>
                                     <c:if test="${!empty sessionScope.LOGIN_USER}">
-<!--                                        <li class="nav-item px-3"><a class="nav-link fw-bold" aria-current="page" href="main?action=UploadPost">ĐĂNG BÀI</a></li>-->
-                                        
                                 <!-- User -->
                                 <li class="nav-item px-3 navbar-dropdown dropdown-user dropdown">
                                     <a class="btn btn-outline-light order-1 order-lg-0 fw-bold nav-link hide-arrow" id="nameLogin" href="" data-bs-toggle="dropdown">
@@ -149,162 +192,68 @@
                                         </li>
                                     </ul>
                                 </li>
-                                <li class="nav-item px-3"><a class="btn btn-outline-light order-1 order-lg-0 fw-bold" href="main?action=UploadLostAndFoundPost">ĐĂNG BÀI</a></li>
                                 <!--/ User -->    
-                            </c:if>    
+                            </c:if>   
                         </ul>
                     </div>
                 </div>
             </nav>
-            <section style="padding-top: 1rem;" id="timkiem">
-                <div class="bg-holder"
-                     style="background-image:url(assets/img/Background-FPT-1.png);">
-                </div>
-                <!--/.bg-holder-->
-
-                <div class="container">
-
-                    <div class="row align-items-center">
-                        <h1 class="fw-bold text-light mb-3 text-center hero-title"
-                            style="font-family: 'Inter', sans-serif; text-shadow: 1px 1px 1px #ffffff, 
-                            1px 2px 1px #919191, 
-                            1px 3px 1px #919191, 
-                            1px 4px 1px #919191, 
-                            1px 5px 1px #919191, 
-                            1px 6px 1px #919191, 
-                            1px 7px 1px #919191, 
-                            1px 10px 6px rgb(16 16 16 / 40%), 
-                            1px 2px 10px rgb(16 16 16 / 20%), 
-                            1px 25px 35px rgb(16 16 16 / 20%), 
-                            1px 30px 60px rgb(16 16 16 / 40%); top: 7.5rem;">FPT
-                            SmartSchool </br>Tìm kiếm đồ thất lạc</h1>
-                        <div class="s131">
-
-                            <form style="box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px; ">
-                                <div class="inner-form">
-                                    <div class="input-field first-wrap">
-                                        <input id="search" type="text" placeholder="Bạn đang tìm kiếm gì?" />
-                                    </div>
-                                    <div class="input-field second-wrap" style="font-family: 'Inter', sans-serif;">
-                                        <div class="input-select">
-                                            <select data-trigger="" name="choices-single-defaul">
-                                                <option placeholder="">Danh sách</option>
-                                                <option>Đồ thất lạc</option>
-                                                <option>Đồ nhặt được</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="input-field third-wrap">
-                                        <button class="btn-search" type="button">Tìm kiếm</button>
-                                    </div>
-                                </div>
-                            </form>
-
+            <div class="container">
+                <div class="row row-cols-2 row-content text-center ">
+                    <a class="text-decoration-none fw-bold " href="main?action=MyJobWaiting">
+                        <div class="col">
+                           VIỆC CHỜ ỨNG TUYỂN
                         </div>
-                    </div>
+                    </a>
+                    <a class="text-decoration-none fw-bold choosen" href="">
+                        <div class="col">
+                           VIỆC ĐANG THỰC HIỆN
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <section style="padding: 50px 0 ;min-height: 85vh">
+                <div class="container">
+                    <c:if test="${empty requestScope.MY_JOB_DOING}">
+                        <h1 class="text-center">${ERROR}</h1>
+                    </c:if>
+
+                    <c:if test="${!empty requestScope.MY_JOB_DOING}">
+                        <c:forEach items="${requestScope.MY_JOB_DOING}" var="myJobDoing">
+                            <div class="card w-100">
+                                <div class="card-body">
+                                    <h5 class="card-title mb-3">${myJobDoing.title}</h5>
+                                    <p class="card-text"><i class="fa fa-clock" aria-hidden="true"></i> ${myJobDoing.date}</p>
+                                    <div class="row mb-3">
+                                        <p class="col-md-4 card-text">Lĩnh vực: ${myJobDoing.jobCategoryName} </p>
+                                        <p class="col-md-4 card-text">Yêu cầu số người:  ${myJobDoing.amount} </p>
+                                        <!--<p class="col-md-4 card-text">Thời gian: 1-3 tháng </p>-->
+                                        <p class="col-md-4 card-text">
+                                            Thời gian: 
+                                            <c:choose> 
+                                                <c:when test="${myJobDoing.timeJob==1}">
+                                                    Ít hơn 1 tháng
+                                                </c:when> 
+                                                <c:when test="${myJobDoing.timeJob==2}">
+                                                    1 - 3 tháng
+                                                </c:when>
+                                                <c:when test="${myJobDoing.timeJob==3}">
+                                                    Hơn 3 tháng
+                                                </c:when> 
+                                            </c:choose>
+                                        </p>
+                                    </div>
+
+                                    <div class="row justify-content-end">
+                                        <a href="#" class="col-md-2 btn btn-primary gradient-custom-2">Xem chi tiết</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </c:forEach>
+                    </c:if>
                 </div>
             </section>
-
-
-            <!-- ============================================-->
-            <!-- <section> begin ============================-->
-            <section class="pt-5 pt-md-9" id="phanloai">
-
-                <div class="container">
-                    <div class="position-absolute z-index--1 end-0 d-none d-lg-block"><img src="assets/img/category/shape.svg"
-                                                                                           style="max-width: 200px" alt="service" /></div>
-                    <div class="mb-7 text-center">
-                        <h5 class="text-secondary">CATEGORY </h5>
-                        <h3 class="fs-xl-10 fs-lg-8 fs-7 fw-bold text-capitalize">Phân loại đồ</h3>
-                    </div>
-                    <div class="row">
-                        <c:forEach items="${requestScope.LISTALLCATEGORY}" var="listAllCategory">
-                            <div class="col-lg-3 col-sm-6 mb-6">
-                                <div class="card service-card shadow-hover rounded-2 text-center align-items-center">
-                                    <div class="card-body p-xxl-5 p-4"> <img src="${listAllCategory.categoryImg}" width="75" alt="Service" />
-                                        <h4 class="mb-3">${listAllCategory.categoryName}</h4>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </c:forEach>                       
-                    </div>
-                </div><!-- end of .container-->
-
-            </section>
-            <!-- <section> close ============================-->
-            <!-- ============================================-->
-
-
-
-
-            <!-- ============================================-->
-            <!-- <section> begin ============================-->
-            <section class="pt-5" id="moinhatduoc">
-
-                <div class="container">
-                    <div class="position-absolute start-100 bottom-0 translate-middle-x d-none d-xl-block ms-xl-n4"><img
-                            src="assets/img/dest/shape.svg" alt="destination" /></div> 
-                    <div class="mb-7 text-center">
-                        <h5 class="text-secondary">TIN MỚI NHẤT </h5>
-                        <h3 class="fs-xl-10 fs-lg-8 fs-7 fw-bold text-capitalize"><a href="list.jsp">Mới thất lạc</a> </h3>
-                    </div>
-                    <div class="row">
-                        <c:forEach items="${requestScope.LIST3LOST}" var="itemLost">
-                            <div class="col-md-4 mb-4">
-                                <div class="card overflow-hidden shadow shadow-hover" id="hoverCard"> <img class="card-img-top" src="${pageContext.servletContext.contextPath}/item?postId=${itemLost.postId}"
-                                                                                                           alt="Lost Item" style="height: 18rem;" />
-                                    <div class="card-body py-4 px-3">
-                                        <div class="d-flex flex-column flex-lg-row justify-content-between mb-3">
-                                            <h4 class="text-secondary fw-medium"><a class="link-901 text-decoration-none stretched-link"
-                                                                                    href="#!">${itemLost.title}</a></h4><span class="fs-1 fw-medium">${itemLost.postId}</span>
-                                        </div>
-                                        <div class="d-flex align-items-center"> <img src="assets/img/dest/clock.svg"
-                                                                                     style="margin-right: 14px" width="20" alt="navigation" /><span class="fs-0 fw-medium">${itemLost.date}</span></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </c:forEach>
-                    </div>
-                </div><!-- end of .container-->
-
-            </section>
-            <!-- <section> close ============================-->
-            <!-- ============================================-->
-            <section class="pt-5" id="moithatlac">
-
-                <div class="container">
-                    <div class="position-absolute start-100 bottom-0 translate-middle-x d-none d-xl-block ms-xl-n4"><img
-                            src="assets/img/dest/shape.svg" alt="destination" /></div>
-                    <div class="mb-7 text-center">
-                        <h5 class="text-secondary">TIN MỚI NHẤT </h5>
-                        <h3 class="fs-xl-10 fs-lg-8 fs-7 fw-bold text-capitalize"><a href="list.jsp">Mới nhặt được</a></h3>
-                    </div>
-                    <div class="row">
-                        <c:forEach items="${requestScope.LIST3FOUND}" var="itemFound">
-                            <div class="col-md-4 mb-4">
-                                <div class="card overflow-hidden shadow shadow-hover" id="hoverCard"> <img class="card-img-top" src="${pageContext.servletContext.contextPath}/item?postId=${itemFound.postId}"
-                                                                                                           alt="Found Item" style="height: 18rem;" />
-                                    <div class="card-body py-4 px-3">
-                                        <div class="d-flex flex-column flex-lg-row justify-content-between mb-3">
-                                            <h4 class="text-secondary fw-medium"><a class="link-901 text-decoration-none stretched-link"
-                                                                                    href="#!">${itemFound.title}</a></h4><span class="fs-1 fw-medium">${itemFound.postId}</span>
-                                        </div>
-                                        <div class="d-flex align-items-center"> <img src="assets/img/dest/clock.svg"
-                                                                                     style="margin-right: 14px" width="20" alt="navigation" /><span class="fs-0 fw-medium">${itemFound.date}</span></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </c:forEach>
-                    </div>
-                </div><!-- end of .container-->
-
-            </section>
-            <!-- <section> close ============================-->
-            <!-- ============================================-->
-
-
-
 
             <!-- ============================================-->
             <!-- <section> begin ============================-->

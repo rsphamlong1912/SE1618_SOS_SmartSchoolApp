@@ -68,6 +68,10 @@
                 box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px !important;
 
             }
+            
+            .forcusCate {
+                color: #F1A501;
+            }
         </style>
     </head>
 
@@ -95,8 +99,36 @@
                             <li class="nav-item px-3"><a class="nav-link fw-bold" aria-current="page"
                                                          href="freelancerhome#linhvuc">LĨNH VỰC</a>
                             </li>
-                            <li class="nav-item px-3"><a class="nav-link fw-bold" aria-current="page" href="#">TÌM KIẾM</a>
+                            <li class="nav-item px-3"><a class="nav-link fw-bold" aria-current="page" href="#">TÌM VIỆC</a>
                             </li>
+                            <c:if test="${!empty sessionScope.LOGIN_USER}">
+                             <li class="nav-item px-3 navbar-dropdown dropdown-user dropdown">
+                                <a class="btn btn-outline-light order-1 order-lg-0 fw-bold nav-link hide-arrow" id="nameLogin" href="" data-bs-toggle="dropdown">
+                                    <div class="avatar avatar-online">
+
+
+                                        QUẢN LÝ CÔNG VIỆC
+
+
+                                    </div>
+                                </a>          
+                                <ul class="dropdown-menu dropdown-menu-end">              
+
+                                    <li>
+                                        <a class="dropdown-item" href="main?action=MyJobWaiting">
+                                            <i class="bx bx-user me-2"></i>
+                                            <span class="align-middle"> VIỆC CHỜ ỨNG TUYỂN</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="main?action=MyJobDoing">
+                                            <i class="bx bx-user me-2"></i>
+                                            <span class="align-middle"> VIỆC ĐANG THỰC HIỆN</span>
+                                        </a>
+                                    </li>                                   
+                                </ul>
+                            </li>
+                            </c:if>
                             <c:if test="${empty sessionScope.LOGIN_USER}">
                                 <li class="nav-item px-3"><a class="btn btn-outline-light order-1 order-lg-0 fw-bold"
                                                              href="FreelancerLogin.jsp">ĐĂNG NHẬP /
@@ -240,7 +272,7 @@
                                     <ul class="list-group list-group-flush">
                                         <c:forEach items='${requestScope.LISTJOBCATEGORY}' var='listJobCategory'>
 
-                                            <li class="list-group-item"><a class="text-decoration-none" href="/main?jobCategoryId=${listJobCategory.jobCategoryId}&action=SearchJobByCategory">${listJobCategory.jobCategoryName}</a>
+                                            <li class="list-group-item"><a class="text-decoration-none ${TAGCATE == listJobCategory.jobCategoryId ? "forcusCate":""}" href="/main?jobCategoryId=${listJobCategory.jobCategoryId}&action=SearchJobByCategory">${listJobCategory.jobCategoryName}</a>
                                             </li>
 
 

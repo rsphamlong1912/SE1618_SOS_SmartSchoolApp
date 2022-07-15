@@ -479,7 +479,7 @@
                                                                     data-salaryDe="${approve.salary}"
                                                                     data-amountDe="${approve.amount}" 
                                                                     data-timeDe="${approve.timeJob}" 
-                                                                    data-avatar="${approve.avatar}" 
+                                                                    data-avatar="${approve.userId}" 
                                                                     data-name="${approve.fullname}" 
                                                                     data-date="${approve.date}">
 
@@ -554,7 +554,7 @@
                                 <div class="d-flex align-items-center top-selling-table mb-3">
                                     <div class="product">
                                         <div class="image user-image">
-                                            <img id="img" name="avatar" src="https://tophinhanh.com/wp-content/uploads/2021/12/anh-avatar-dep-cho-con-gai.jpg"
+                                            <img id="img" name="avatar"
                                                  alt="" />
                                         </div>
                                         <p id="nameDe" name="fullname" class="text-sm"></p>
@@ -626,7 +626,7 @@
                                                                             document.getElementById("salaryDe1").innerHTML = salary + " VNĐ/h";
                                                                             document.getElementById("amountD").innerHTML = amountDe + " người";
                                                                             document.getElementById("timeDe1").innerHTML = timeJob + " tháng";
-                                                                            document.getElementById("img").innerHTML = avatar;
+                                                                            document.getElementById("img").setAttribute("src", "/avatar?userId="+avatar);
                                                                             document.getElementById("nameDe").innerHTML = name;
                                                                             document.getElementById("dateDe").innerHTML = date;
                                                                         }

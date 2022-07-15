@@ -37,9 +37,12 @@ public class UserDAO {
             + "            WHERE u.roleId = r.roleId AND userId = ?";
     private static final String GET_TOTAL_USER = "    SELECT COUNT(userId) AS totalUser FROM tblUser WHERE roleId='US'";
     private static final String SEARCH_5NEWUSER = "SELECT TOP(5) * FROM tblUser WHERE roleId='US' ORDER BY serial DESC";
+    private static final String GET_USER_WAIT = "SELECT * FROM tblUser WHERE userId=?";
 //    private static final String SEARCH_5NEWUSER = "SELECT TOP(5) * FROM tblUser  ORDER BY serial DESC";
     private static final String GET_TOP5_NEW_EMPLOYER = "SELECT TOP(5) * FROM tblUser WHERE roleId = 'EM'  ORDER BY serial DESC";
     private static final String GET_TOTAL_EMPLOYER = "SELECT COUNT(userId) as totalEmployer FROM tblUser WHERE roleId = 'EM'";
+    private static final String SET_HAVE_JOB_PLUS_ONE = "UPDATE tblUser SET haveJob = haveJob + 1 where userId = ?";
+    private static final String SET_HAVE_JOB_MINUS_ONE = "UPDATE tblUser SET haveJob = haveJob - 1 where userId = ?";
 
     public List<UserDTO> get5NewUser() throws SQLException {
         List<UserDTO> list = new ArrayList<>();
@@ -83,6 +86,93 @@ public class UserDAO {
             }
         }
         return list;
+    }
+
+    public UserDTO getUserWaitingForJob(String userId) throws SQLException {
+        UserDTO user = new UserDTO();
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(GET_USER_WAIT);
+                ptm.setString(1, userId);
+                rs = ptm.executeQuery();
+                while (rs.next()) {
+                    user.setUserId(rs.getString("userId"));
+                    user.setRoleId(rs.getString("roleId"));
+                    user.setPassword(rs.getString("password"));
+                    user.setFullname(rs.getString("fullname"));
+                    user.setAvatar(rs.getBytes("avatar"));
+                    user.setPhone(rs.getString("phone"));
+                    user.setEmail(rs.getString("email"));
+                    user.setFacebook(rs.getString("facebook"));
+                    user.setUserStatus(rs.getBoolean("userStatus"));
+                    user.setHaveJob(rs.getBoolean("haveJob"));
+                }
+                return user;
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(PostDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return null;
+    }
+
+    public void setHaveJobPlusOne(String userId)
+            throws SQLException {
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(SET_HAVE_JOB_PLUS_ONE);
+                ptm.setString(1, userId);
+                ptm.executeUpdate();
+            }
+        } catch (Exception e) {
+
+        } finally {
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+    }
+
+    public void setHaveJobMinusOne(String userId)
+            throws SQLException {
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(SET_HAVE_JOB_MINUS_ONE);
+                ptm.setString(1, userId);
+                ptm.executeUpdate();
+            }
+        } catch (Exception e) {
+
+        } finally {
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
     }
 
     public UserDTO login(String userId, String password) throws SQLException {
@@ -424,7 +514,7 @@ public class UserDAO {
         }
         return 0;
     }
-    
+
     public int getTotalEmployer() throws SQLException {
         Connection con = null;
         ResultSet rs = null;
@@ -437,7 +527,7 @@ public class UserDAO {
                 if (rs.next()) {
                     return rs.getInt("totalEmployer");
                 }
-            }   
+            }
         } catch (Exception ex) {
             Logger.getLogger(PostDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
@@ -450,13 +540,13 @@ public class UserDAO {
             if (con != null) {
                 con.close();
             }
-            
+
         }
-        
+
         return 0;
-        
+
     }
-    
+
     public List<UserDTO> get5NewEmployer() throws SQLException {
         List<UserDTO> list = new ArrayList<>();
         Connection conn = null;

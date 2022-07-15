@@ -39,11 +39,11 @@ public class UploadPostController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     private static final String ERROR = "UploadPost.jsp";
-    private static final String PROFILE_DETAIL_PAGE = "UploadPost.jsp";
+    private static final String YOUR_POST = "UploadPost.jsp";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String url = PROFILE_DETAIL_PAGE;
+        String url = YOUR_POST;
         try {
             response.setContentType("text/html;charset=UTF-8");
             HttpSession session = request.getSession();
@@ -66,7 +66,7 @@ public class UploadPostController extends HttpServlet {
             Logger.getLogger("Error at UploadPostController: " + e.toString());
         } finally {
 //            request.getRequestDispatcher(url).forward(request, response);
-                response.sendRedirect(PROFILE_DETAIL_PAGE);
+                response.sendRedirect(YOUR_POST);
         }
 
     }
