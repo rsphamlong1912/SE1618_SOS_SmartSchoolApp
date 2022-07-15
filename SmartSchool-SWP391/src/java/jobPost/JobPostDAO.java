@@ -127,7 +127,7 @@ public class JobPostDAO {
                 post.setJobCategoryName(rs.getString("jobCategoryName"));
                 post.setFullname(rs.getString("fullname"));
                 post.setCompName(rs.getString("compName"));
-                post.setAvatar(rs.getString("avatar"));
+               
                 list.add(post);
             }
 
