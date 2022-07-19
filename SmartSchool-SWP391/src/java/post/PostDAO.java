@@ -38,9 +38,12 @@ public class PostDAO {
             + "  FROM tblPost as p, tblCategory as c \n"
             + "  WHERE p.categoryId=c.categoryId AND type=1 AND postStatus='true' \n"
             + "  ORDER BY postId DESC";
-        private static final String LIST_ALL ="SELECT p.postId, p.userId,p.categoryId, p.postImg, p.description,p.date,p.type,p.title,p.postStatus,c.categoryName\n"
+    private static final String LIST_ALL = "SELECT p.postId, p.userId,p.categoryId, p.postImg, p.description,p.date,p.type,p.title,p.postStatus,c.categoryName\n"
             + "FROM tblPost as p, tblCategory as c\n"
             + "WHERE p.categoryId=c.categoryId AND postStatus='true' ORDER BY postId DESC";
+    private static final String LIST_POST_BY_CATEGORYID = "SELECT p.postId, p.userId,p.categoryId, p.postImg, p.description,p.date,p.type,p.title,p.postStatus,c.categoryName\n"
+            + "FROM tblPost as p, tblCategory as c\n"
+            + "WHERE p.categoryId=c.categoryId AND p.categoryId=? AND p.type=? AND postStatus='true' ORDER BY postId DESC";
 //    private static final String LIST_ALL = "SELECT * FROM tblPost WHERE postStatus='true' ORDER BY postId DESC";
     private static final String CREATE = "INSERT INTO tblPost(userId, categoryId, postImg, description, date, type, title, postStatus) VALUES(?,?,?,?,?,?,?,'approving')";
     private static final String UPDATE = "UPDATE tblPost SET postImg=?, description=?, type=?, title=?, postStatus=? WHERE postId=?";
@@ -220,6 +223,51 @@ public class PostDAO {
             }
             if (con != null) {
                 con.close();
+            }
+        }
+        return list;
+    }
+
+    public List<PostDTO> searchPostByJobCategoryId(int categoryId, int type) throws SQLException {
+        List<PostDTO> list = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(LIST_POST_BY_CATEGORYID);
+                ptm.setInt(1, categoryId);
+                ptm.setInt(2, type);
+                rs = ptm.executeQuery();
+                while (rs.next()) {
+                    PostDTO post = new PostDTO();
+                    post.setPostId(rs.getInt("postId"));
+                    post.setUserId(rs.getString("userId"));
+                    post.setCategoryId(rs.getInt("categoryId"));
+                    post.setPostImg(rs.getBytes("postImg"));
+                    post.setDescription(rs.getString("description"));
+                    int date = rs.getInt("date");
+                    String newDate = checkTime(date);
+                    post.setDate(newDate);
+                    post.setType(rs.getString("type"));
+                    post.setTitle(rs.getString("title"));
+                    post.setPostStatus(rs.getString("postStatus"));
+                    post.setCategoryName(rs.getString("categoryName"));
+                    list.add(post);
+                }
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(PostDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
             }
         }
         return list;

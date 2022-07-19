@@ -57,6 +57,8 @@ public class MainController extends HttpServlet {
     private static final String MY_JOB_POST_APPROVE_CONTROLLER = "myJobPostApprove";
     private static final String LIST_ALL = "ListAll";
     private static final String LIST_ALL_CONTROLLER = "listAll";
+    private static final String LIST_POST_BY_CATEGORYID = "SearchPostByCategoryId";
+    private static final String LIST_POST_BY_CATEGORYID_CONTROLLER = "searchPostByCategotyId";
     private static final String UPLOAD_POST = "UploadPost";
     private static final String UPLOAD_POST_CONTROLLER = "uploadPost";
     private static final String LIST_ALL_JOBPOST = "ListJobPost";
@@ -144,6 +146,9 @@ public class MainController extends HttpServlet {
             }
             if (LIST_ALL.equals(action)) {
                 url = LIST_ALL_CONTROLLER;
+            }
+            if (LIST_POST_BY_CATEGORYID.equals(action)) {
+                url = LIST_POST_BY_CATEGORYID_CONTROLLER;
             }
             if (UPLOAD_POST.equals(action)) {
                 url = UPLOAD_POST_CONTROLLER;
