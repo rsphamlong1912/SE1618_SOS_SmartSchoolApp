@@ -41,7 +41,6 @@ public class JobPostDAO {
             + "FROM tblJobPost as j, tblCategoryJob as c, tblUser as u\n"
             + "WHERE j.jobCategoryId=c.jobCategoryId AND j.userId=u.userId AND status=1 AND (process='new' OR process='process') \n"
             + "ORDER BY jobId DESC";
-
     private static final String SEARCH_BY_TITLE = "SELECT j.jobId,j.userId,j.jobCategoryId,j.title,j.description,j.salary,j.amount,j.timeJob,j.process,j.date,j.status,c.jobCategoryName, u.fullname,u.compName \n"
             + "FROM  tblJobPost as j, tblCategoryJob as c, tblUser as u \n"
             + "WHERE j.jobCategoryId=c.jobCategoryId AND j.userId=u.userId AND status=1 AND  (dbo.removeMark(title) LIKE ? OR title LIKE ?) AND (process = 'new' OR process='process')\n"
