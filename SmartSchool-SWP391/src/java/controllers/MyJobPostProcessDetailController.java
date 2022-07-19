@@ -6,72 +6,69 @@
 package controllers;
 
 import applyJob.ApplyJobDAO;
+import applyJob.ApplyJobDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import jobCategory.JobCategoryDAO;
-import jobCategory.JobCategoryDTO;
 import jobPost.JobPostDAO;
 import jobPost.JobPostDTO;
-import jobPostQuestion.JobPostQuestionDAO;
-import jobPostQuestion.JobPostQuestionDTO;
+import jobPostAnswer.JobPostAnswerDAO;
+import jobPostAnswer.JobPostAnswerDTO;
 import user.UserDAO;
 import user.UserDTO;
 
 /**
  *
- * @author SE150888 Pham Ngoc Long
+ * @author TrinhNgocBao
  */
-@WebServlet(name = "DetailJobController", urlPatterns = {"/detailJob"})
-public class DetailJobController extends HttpServlet {
+@WebServlet(name = "MyJobPostProcessDetailController", urlPatterns = {"/myJobPostProcessDetail"})
+public class MyJobPostProcessDetailController extends HttpServlet {
 
-    private static final String DETAIL_PAGE = "FreelanceDetail.jsp";
+    private static final String ERROR = "EmployerJobProcessDetail.jsp";
+    private static final String MY_JOB_POST_PROCESS_DETAIL_PAGE = "EmployerJobProcessDetail.jsp";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = DETAIL_PAGE;
+        String url = ERROR;
         try {
-            HttpSession session = request.getSession();        
-            if ((UserDTO) session.getAttribute("LOGIN_USER") != null) {
-                UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
-                String userId1 = loginUser.getUserId();
-                String jobId = request.getParameter("jobId");
-                ApplyJobDAO aDao = new ApplyJobDAO();
-                String status = aDao.getStatusCheckApplyJob(jobId, userId1);
-                if ("waiting".equals(status) || "doing".equals(status)) {
-                    request.setAttribute("EXISTJOB", status);
-                }
-            }
             String jobId = request.getParameter("jobId");
             JobPostDAO dao = new JobPostDAO();
             JobPostDTO postJob = dao.getJobInformation(jobId);
-            JobPostQuestionDAO questionDao = new JobPostQuestionDAO();
-            List<JobPostQuestionDTO> listQuestion = questionDao.getQuestionJobPost(jobId);
-            String userId = request.getParameter("userId");
-            UserDAO udao = new UserDAO();
-            UserDTO user = udao.GetEmployerInfor(userId);
-            request.setAttribute("USERINFOR", user);
-            request.setAttribute("LISTQUESTION", listQuestion);
-            request.setAttribute("JOBDETAIL", postJob);
-
-        } catch (SQLException ex) {
-            Logger.getLogger(SearchJobPostController.class.getName()).log(Level.SEVERE, null, ex);
+            ApplyJobDAO jDao = new ApplyJobDAO();
+            List<ApplyJobDTO> listUserWait = jDao.getListUserWaiting(jobId);
+            UserDAO uDao = new UserDAO();
+            List<UserDTO> listUser = new ArrayList<>();
+            ArrayList<JobPostAnswerDTO> listAnswer = new ArrayList<>();
+            JobPostAnswerDAO aDao = new JobPostAnswerDAO();
+            for (ApplyJobDTO a : listUserWait) {
+                listUser.add(uDao.getUserWaitingForJob(a.getUserId()));
+                listAnswer.addAll(aDao.getAnswerJobWaiting(a.getJobId(), a.getUserId()));
+            }
+            
+            if (listUser.isEmpty()) {
+                request.setAttribute("JOBDETAIL", postJob);
+                request.setAttribute("ERROR", "(Chưa có ứng viên)");
+                url = MY_JOB_POST_PROCESS_DETAIL_PAGE;
+            }else {
+                request.setAttribute("JOBDETAIL", postJob);
+                request.setAttribute("USER_WAITING", listUser);
+                request.setAttribute("USER_ANSWER_WAITING", listAnswer);
+                url = MY_JOB_POST_PROCESS_DETAIL_PAGE;
+            }
+        } catch (Exception e) {
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }
     }
 
-// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *

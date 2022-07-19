@@ -33,10 +33,10 @@ public class LoginController extends HttpServlet {
      */
     private static final String ERROR = "login.jsp";
     private static final String AD = "AD";
-    private static final String ADMIN_PAGE = "admin.jsp";
+    private static final String ADMIN_PAGE = "adminLostAndFound";
     private static final String US = "US";
     private static final String LOSTANDFOUNDHOME_PAGE = "lostAndfoundhome";
-    private static final String EMPLOYERHOME_PAGE = "EmployerHome.jsp";
+    private static final String EMPLOYERHOME_PAGE = "employerhome";
     private static final String FREELANCERHOME_PAGE = "freelancerhome";
     private static final String EM = "EM";
     private static final String EMPLOYER_PAGE = "employer.jsp";
@@ -63,7 +63,7 @@ public class LoginController extends HttpServlet {
                 } else if ("isFreelance".equals(isFreelance)) {
                     switch (roleID) {
                         case AD:
-                            url = FREELANCERHOME_PAGE;
+                            url = ADMIN_PAGE;
                             break;
                         case EM:
                             url = EMPLOYERHOME_PAGE;
@@ -78,7 +78,7 @@ public class LoginController extends HttpServlet {
                 } else {
                     switch (roleID) {
                         case AD:
-                            url = LOSTANDFOUNDHOME_PAGE;
+                            url = ADMIN_PAGE;
                             break;
                         case US:
                             url = LOSTANDFOUNDHOME_PAGE;

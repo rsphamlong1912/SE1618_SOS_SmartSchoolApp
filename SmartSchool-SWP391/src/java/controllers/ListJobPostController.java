@@ -42,7 +42,7 @@ public class ListJobPostController extends HttpServlet {
             JobCategoryDAO cdao = new JobCategoryDAO();
             List<JobPostDTO> listAll = dao.getAll();
             List<JobCategoryDTO> listAllCategory = cdao.getAllCategory();
-
+            
             request.setAttribute("LISTJOBPOST", listAll);
             request.setAttribute("LISTJOBCATEGORY", listAllCategory);
         } catch (Exception e) {

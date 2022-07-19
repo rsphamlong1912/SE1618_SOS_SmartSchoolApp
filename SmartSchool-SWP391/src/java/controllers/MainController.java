@@ -19,15 +19,6 @@ import javax.servlet.http.HttpServletResponse;
 @MultipartConfig(maxFileSize = 16177215)
 public class MainController extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     private static final String ERROR = "error.jsp";
     private static final String LOGIN = "Login";
     private static final String LOGIN_CONTROLLER = "login";
@@ -57,8 +48,6 @@ public class MainController extends HttpServlet {
     private static final String MY_JOB_POST_APPROVE_CONTROLLER = "myJobPostApprove";
     private static final String LIST_ALL = "ListAll";
     private static final String LIST_ALL_CONTROLLER = "listAll";
-    private static final String LIST_POST_BY_CATEGORYID = "SearchPostByCategoryId";
-    private static final String LIST_POST_BY_CATEGORYID_CONTROLLER = "searchPostByCategotyId";
     private static final String UPLOAD_POST = "UploadPost";
     private static final String UPLOAD_POST_CONTROLLER = "uploadPost";
     private static final String LIST_ALL_JOBPOST = "ListJobPost";
@@ -73,11 +62,11 @@ public class MainController extends HttpServlet {
     private static final String ADMIN_LOSTANDFOUND_CONTROLLER = "adminLostAndFound";
     private static final String CATEGORY = "Category";
     private static final String CATEGORY_LOSTANDFOUND_CONTROLLER = "category";
-    private static final String ADD_CATEGORY = "AddCategory";
+    private static final String ADD_CATEGORY = "AddCategogy";
     private static final String ADD_CATEGORY_LOSTANDFOUND_CONTROLLER = "addCategory";
-    private static final String EDIT_CATEGORY = "EditCategory";
+    private static final String EDIT_CATEGORY = "EditCategogy";
     private static final String EDIT_CATEGORY_LOSTANDFOUND_CONTROLLER = "editCategory";
-    private static final String DELETE_CATEGORY = "DeleteCategory";
+    private static final String DELETE_CATEGORY = "DeleteCategogy";
     private static final String DELETE_CATEGORY_LOSTANDFOUND_CONTROLLER = "deleteCategory";
 
     private static final String JOB_CATEGORY = "JobCategory";
@@ -88,16 +77,33 @@ public class MainController extends HttpServlet {
     private static final String DELETE_JOB_CATEGORY_CONTROLLER = "deleteJobCategory";
     private static final String EDIT_JOB_CATEGORY = "EditJobCategory";
     private static final String EDIT_JOB_CATEGORY_CONTROLLER = "editJobCategory";
-
+    
     private static final String APPROVE_JOB_POST = "ApproveJobPost";
     private static final String APPROVE_JOB_POST_CONTROLLER = "approveJobPost";
     private static final String APPROVE_JOB = "ApproveJob";
     private static final String APPROVE_JOB_CONTROLLER = "approveJob";
     private static final String NO_APPROVE_JOB = "NoApproveJob";
     private static final String NO_APPROVE_JOB_CONTROLLER = "noApproveJob";
-    private static final String LIST_POST_FOR_ADMIN = "AdminLostAndFoundPost";
-    private static final String LIST_POST_FOR_ADMIN_CONTROLLER = "adminLostAndFoundPost";
-
+    private static final String SUBMIT_FORMJOB = "SubmitFormJob";
+    private static final String SUBMIT_FORMJOB_CONTROLLER = "submitFormJob";
+    
+    private static final String MY_JOB_WAITING = "MyJobWaiting";
+    private static final String MY_JOB_WAITING_CONTROLLER = "myJobWaiting";
+    private static final String MY_JOB_DOING = "MyJobDoing";
+    private static final String MY_JOB_DOING_CONTROLLER = "myJobDoing";
+    
+    private static final String MY_JOB_POST_PROCESS_DETAIL = "MyJobPostProcessDetail";
+    private static final String MY_JOB_POST_PROCESS_DETAIL_CONTROLLER = "myJobPostProcessDetail";
+    
+    private static final String EMPLOYER_UPLOAD_JOBPOST = "EmployerUploadJobPost";
+    private static final String EMPLOYER_UPLOAD_JOBPOST_CONTROLLER = "employerUploadJobPost";
+    
+    private static final String UPLOAD_LOSTANDFOUND_POST = "UploadLostAndFoundPost";
+    private static final String UPLOAD_LOSTANDFOUND_POST_CONTROLLER = "uploadLostAndFoundPost";
+    
+    private static final String SET_JOB_APPROVE_DONE = "SetJobApproveDone";
+    private static final String SET_JOB_APPROVE_DONE_CONTROLLER = "setJobApproveDone";
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -146,9 +152,6 @@ public class MainController extends HttpServlet {
             }
             if (LIST_ALL.equals(action)) {
                 url = LIST_ALL_CONTROLLER;
-            }
-            if (LIST_POST_BY_CATEGORYID.equals(action)) {
-                url = LIST_POST_BY_CATEGORYID_CONTROLLER;
             }
             if (UPLOAD_POST.equals(action)) {
                 url = UPLOAD_POST_CONTROLLER;
@@ -204,8 +207,27 @@ public class MainController extends HttpServlet {
             if (NO_APPROVE_JOB.equals(action)) {
                 url = NO_APPROVE_JOB_CONTROLLER;
             }
-            if (LIST_POST_FOR_ADMIN.equals(action)) {
-                url = LIST_POST_FOR_ADMIN_CONTROLLER;
+            if (SUBMIT_FORMJOB.equals(action)) {
+                url = SUBMIT_FORMJOB_CONTROLLER;
+            }
+            
+            if (MY_JOB_WAITING.equals(action)) {
+                url = MY_JOB_WAITING_CONTROLLER;
+            }
+            if (MY_JOB_DOING.equals(action)) {
+                url = MY_JOB_DOING_CONTROLLER;
+            }          
+            if (MY_JOB_POST_PROCESS_DETAIL.equals(action)) {
+                url = MY_JOB_POST_PROCESS_DETAIL_CONTROLLER;
+            }
+            if (EMPLOYER_UPLOAD_JOBPOST.equals(action)) {
+                url = EMPLOYER_UPLOAD_JOBPOST_CONTROLLER;
+            }
+            if (UPLOAD_LOSTANDFOUND_POST.equals(action)) {
+                url = UPLOAD_LOSTANDFOUND_POST_CONTROLLER;
+            }
+            if (SET_JOB_APPROVE_DONE.equals(action)) {
+                url = SET_JOB_APPROVE_DONE_CONTROLLER;
             }
         } catch (Exception e) {
             log("Error at MainController: " + e.toString());

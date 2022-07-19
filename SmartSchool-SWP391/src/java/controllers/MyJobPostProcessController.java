@@ -50,7 +50,7 @@ public class MyJobPostProcessController extends HttpServlet {
                 request.setAttribute("MY_JOB_POST_PROCESS", list);
                 url = MY_JOB_POST_PROCESS_PAGE;
             } else {
-                request.setAttribute("ERROR", "Bạn chưa có bài đăng nào");
+                request.setAttribute("ERROR", "Bạn chưa có công việc nào");
                 url = ERROR;
             }
         } catch (Exception e) {

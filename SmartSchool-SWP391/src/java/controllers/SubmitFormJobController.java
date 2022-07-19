@@ -5,59 +5,52 @@
  */
 package controllers;
 
+import applyJob.ApplyJobDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.SQLException;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import jobCategory.JobCategoryDAO;
-import jobCategory.JobCategoryDTO;
-import jobPost.JobPostDAO;
-import jobPost.JobPostDTO;
+import javax.servlet.http.HttpSession;
+import jobPostAnswer.JobPostAnswerDAO;
+import user.UserDTO;
 
 /**
  *
- * @author SE150888 Pham Ngoc Long
+ * @author TrinhNgocBao
  */
-@WebServlet(name = "SearchJobByCategoryIdController", urlPatterns = {"/searchJobByCategoryId"})
-public class SearchJobByCategoryIdController extends HttpServlet {
-
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    private static final String LIST_POST_PAGE = "FreelanceList.jsp";
-
+@WebServlet(name = "SubmitFormJobController", urlPatterns = {"/submitFormJob"})
+public class SubmitFormJobController extends HttpServlet {
+    
+    private static final String ERROR = "FreelanceDetail.jsp";
+    private static final String SUCCESS = "main?action=MyJobWaiting";
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        String url = ERROR;
         try {
-            response.setContentType("text/html;charset=UTF-8");
-            String url = LIST_POST_PAGE;
-            String Search = request.getParameter("jobCategoryId");
-            JobPostDAO dao = new JobPostDAO();
-            List<JobPostDTO> listPost = dao.searchPostByJobCategoryId(Search);
-
-            JobCategoryDAO cdao = new JobCategoryDAO();
-            List<JobCategoryDTO> listAllCategory = cdao.getAllCategory();
-
-            request.setAttribute("LISTJOBCATEGORY", listAllCategory);
-            request.setAttribute("LISTJOBPOST", listPost);
-            request.setAttribute("TAGCATE", Search);
-            request.getRequestDispatcher(url).forward(request, response);
-        } catch (SQLException ex) {
-            Logger.getLogger(SearchJobPostController.class.getName()).log(Level.SEVERE, null, ex);
+            HttpSession session = request.getSession();
+            UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
+            String userId = loginUser.getUserId();
+            int jobId = Integer.parseInt(request.getParameter("idJob"));
+            String[] idQuestion = request.getParameterValues("idQuestion");
+            JobPostAnswerDAO aDao = new JobPostAnswerDAO();
+            ApplyJobDAO jDao = new ApplyJobDAO();
+            boolean success = false;
+            for (String q : idQuestion) {
+               String answer = request.getParameter("answer"+q);
+               int questionID = Integer.parseInt(q);
+               success = aDao.submitAnswer(questionID, userId, jobId, answer);
+            }
+            jDao.insertApplyJob(userId, jobId);    
+            if(success = true) {
+                url = SUCCESS;
+            }
+        } catch (Exception e) {
+        } finally {
+           response.sendRedirect(SUCCESS);           
         }
     }
 

@@ -101,7 +101,7 @@
                             class="navbar-toggler-icon"> </span></button>
                     <div class="collapse navbar-collapse border-top border-lg-0 mt-4 mt-lg-0" id="navbarSupportedContent">
                         <ul class="navbar-nav ms-auto pt-2 pt-lg-0 font-base align-items-lg-center align-items-start">
-                            <li class="nav-item px-3"><a class="nav-link fw-bold" aria-current="page" href="EmployerHome.jsp">TRANG CHỦ</a>
+                            <li class="nav-item px-3"><a class="nav-link fw-bold" aria-current="page" href="employerhome">TRANG CHỦ</a>
                             </li>
                             <li class="nav-item px-3"><a class="nav-link fw-bold" aria-current="page" href="#phanloai">DASHBOARD</a>
                             </li>
@@ -116,8 +116,13 @@
 
                                     </div>
                                 </a>
-                                <ul class="dropdown-menu dropdown-menu-end">
-
+                                      <ul class="dropdown-menu dropdown-menu-end">              
+                                    <li>
+                                        <a class="dropdown-item" href="main?action=MyJobPostApprove">
+                                            <i class="bx bx-user me-2"></i>
+                                            <span class="align-middle"> VIỆC CHỜ PHÊ DUYỆT</span>
+                                        </a>
+                                    </li>
                                     <li>
                                         <a class="dropdown-item" href="main?action=MyJobPostProcess">
                                             <i class="bx bx-user me-2"></i>
@@ -127,14 +132,14 @@
                                     <li>
                                         <a class="dropdown-item" href="main?action=MyJobPostDone">
                                             <i class="bx bx-user me-2"></i>
-                                            <span class="align-middle"> VIỆC ĐÃ TUYỂN</span>
+                                            <span class="align-middle"> VIỆC ĐÃ TUYỂN XONG</span>
                                         </a>
                                     </li>
                                     <li>
                                         <div class="dropdown-divider"></div>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="#">
+                                        <a class="dropdown-item" href="main?action=EmployerUploadJobPost">
                                             <i class="bx bx-user me-2"></i>
                                             <span class="align-middle"> ĐĂNG TUYỂN</span>
                                         </a>
@@ -242,9 +247,9 @@
                                     <label for="category" class="form-control-label fw-bold mb-2">Chọn lĩnh vực</label>
                                     <select name="jobCategoryId" id="categoryJob" class="form-select form-select-lg mb-3 required" required="true" data-rule-required="true" aria-label=".form-select-lg example">
                                         <option selected disabled value="">Chọn...</option>
-                                        <option value="1">Lập trình</option>
-                                        <option value="2">Thiết Kế - Mỹ Thuật</option>
-                                        <option value="3">Giáo dục - Đào Tạo</option>
+                                        <c:forEach items="${requestScope.LISTALLCATEGORY}" var="listAllCate">
+                                        <option value="${listAllCate.jobCategoryId}">${listAllCate.jobCategoryName}</option>   
+                                        </c:forEach>
                                     </select>
                                     <div class="invalid-feedback fw-bold">
                                         Vui lòng chọn!
@@ -293,7 +298,7 @@
                                     <div class="row">
                                         <div class="col-lg-4 mb-3">
                                             <span class="w-100">
-                                                <input type="radio" class="form-check-input required" required="true" data-rule-required="true" name="timeJob" value="1" id="timeJob_1" data-validate-hide-message="1">
+                                                <input type="radio" class="form-check-input required" required="true" data-rule-required="true" name="timeJob" value="1" id="timeJob_1" data-validate-hide-message="1" checked>
                                                 <label for="timeJobs_1">
                                                     <span class="inside pt-2 pb-2">
                                                         <span class="d-block fw-500"> Ít hơn 1 tháng</span>
@@ -328,7 +333,7 @@
                                         việc (ít nhất 1 câu hỏi)</label>
                                     <div class="row mb-3">
                                         <div class="input-group">
-                                            <input type="text" name="question" class="form-control m-input question" required>
+                                            <input type="text" name="question" class="form-control m-input question" id="question" required>
                                             <div class="input-group-prepend">
                                                 <button class="btn btn-danger" id="DeleteRowDisable" type="button">
                                                     <i class="fa fa-trash"></i>
@@ -480,9 +485,9 @@
             $("#rowAdder").click(function () {
                 newRowAdd =
                         '<div class="row mb-3"> <div class="input-group">' +
-                        '<input type="text" name="question" class="form-control m-inputque question" required>' +
+                        '<input type="text" name="question" class="form-control m-inputque questionm" required />' +
                         '<div class="input-group-prepend">' +
-                        '<button class="btn btn-danger" id="DeleteRow" type="button"> <i class="fa fa-trash"></i></button> </div>' +
+                        '<button class="btn btn-danger" id="DeleteRow" type="button"> <i class="fa fa-trash"></i></button><small></small> </div>' +
                         '</div> </div> </div>';
                 $('#newinput').append(newRowAdd);
             });

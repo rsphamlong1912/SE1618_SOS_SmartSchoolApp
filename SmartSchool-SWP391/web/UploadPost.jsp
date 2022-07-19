@@ -80,237 +80,144 @@
                 padding-left: 10px;
                 font-weight: 700 !important;
             }
+
+            @media screen and (max-width: 576px) {
+                .file-upload {
+                    width: 324px !important;
+                }
+            }
         </style>
-        <!--        <style>
-                    .images {
-                        display: flex;
-                        flex-wrap:  wrap;
-                        margin-top: 20px;
-                    }
-                    .images .img,
-                    .images .pic {
-                        flex-basis: 31%;
-                        margin-bottom: 10px;
-                        border-radius: 4px;
-        
-                    }
-                    .images .img {
-                        width: 112px;
-                        height: 200px;
-                        background-size: cover;
-                        margin-right: 10px;
-                        background-position: center;
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-                        cursor: pointer;
-                        position: relative;
-                        overflow: hidden;
-                    }
-                    .images .pic:hover{
-                        display: block;
-                        background-color: #000;
-                        opacity: .5;
-                    }
-                    .images .img:nth-child(3n) {
-                        margin-right: 0;
-                    }
-                    .images .img span {
-                        display: none;
-                        text-transform: capitalize;
-                        z-index: 2;
-                    }
-                    .images .img::after {
-                        content: '';
-                        width: 100%;
-                        height: 100%;
-                        transition: opacity .1s ease-in;
-                        border-radius: 4px;
-                        opacity: 0;
-                        position: absolute;
-                    }
-                    .images .img:hover::after {
-                        display: block;
-                        background-color: #000;
-                        opacity: .5;
-                    }
-                    .images .img:hover span {
-                        display: block;
-                        color: #fff;
-                    }
-                    .images .pic {
-                        background-color: #F5F7FA;
-                        align-self: center;
-                        text-align: center;
-                        padding: 91px 0;
-                        text-transform: uppercase;
-                        color: #848EA1;
-                        font-size: 12px;
-                        cursor: pointer;
-                        width: 112px;
-                        height: 200px;
-                    }
-        
-                    @media screen and (max-width: 400px) {
-                        .wrapper {
-                            margin-top: 0;
-                        }
-                        header {
-                            flex-direction: column;
-                        }
-                        header span {
-                            text-align: left;
-                            margin-top: 10px;
-                        }
-                        .ways li,
-                        section input, 
-                        section textarea,
-                        .select-option .head, 
-                        .select-option .option div {
-                            font-size: 8px;
-                        }
-                        .images .img,
-                        .images .pic {
-                            flex-basis: 100%;
-                            margin-right: 0;
-                        }
-                    }
-                    @keyframes fadeIn {
-                        0% { opacity: 0; }
-                        100% { opacity: 1; }
-                    }
-                </style>-->
         <style>
-        body {
-            font-family: sans-serif;
-            background-color: #eeeeee;
-        }
+            body {
+                font-family: sans-serif;
+                background-color: #eeeeee;
+            }
 
-        .file-upload {
-            background-color: #ffffff;
-            width: 600px;
-            margin: 0 auto;
-            padding: 20px;
-        }
+            .file-upload {
+                background-color: #ffffff;
+                width: 600px;
+                margin: 0 auto;
+                padding: 20px;
+            }
 
-        .file-upload-btn {
-            width: 100%;
-            margin: 0;
-            color: #fff;
-            background: linear-gradient(to right, #d89f03, #f37335);
-            border: none;
-            padding: 10px;
-            border-radius: 6px;
-            border-bottom: 4px ;
-            transition: all .2s ease;
-            outline: none;
-            text-transform: uppercase;
-            font-weight: 700;
-        }
+            .file-upload-btn {
+                width: 100%;
+                margin: 0;
+                color: #fff;
+                background: linear-gradient(to right, #d89f03, #f37335);
+                border: none;
+                padding: 10px;
+                border-radius: 6px;
+                border-bottom: 4px ;
+                transition: all .2s ease;
+                outline: none;
+                text-transform: uppercase;
+                font-weight: 700;
+            }
 
-        .file-upload-btn:hover {
-            /*background: #FFD700;*/
-            color: #212832;
-            transition: all .2s ease;
-            cursor: pointer;
-        }
+            .file-upload-btn:hover {
+                /*background: #FFD700;*/
+                color: #212832;
+                transition: all .2s ease;
+                cursor: pointer;
+            }
 
-        .file-upload-btn:active {
-            border: 0;
-            transition: all .2s ease;
-        }
+            .file-upload-btn:active {
+                border: 0;
+                transition: all .2s ease;
+            }
 
-        .file-upload-content {
-            display: none;
-            text-align: center;
-        }
+            .file-upload-content {
+                display: none;
+                text-align: center;
+            }
 
-        .file-upload-input {
-            position: absolute;
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            height: 100%;
-            outline: none;
-            opacity: 0;
-            cursor: pointer;
-        }
+            .file-upload-input {
+                position: absolute;
+                margin: 0;
+                padding: 0;
+                width: 100%;
+                height: 100%;
+                outline: none;
+                opacity: 0;
+                cursor: pointer;
+            }
 
-        .image-upload-wrap {
-            margin-top: 20px;
-            border: 3px dashed #cceffc;
-/*            border-width:2px;*/
-            position: relative;
-            border-radius: 6px;
-            
-            
-        }
-
-        .image-dropping:hover {
-            background: linear-gradient(to right, #dceef4, #cceffc);
-            border: 3px dashed #6acef2;
-            border-radius: 6px;
-        }
-        .image-upload-wrap:hover {
-            background: linear-gradient(to right, #dceef4, #cceffc);
-            border: 3px dashed #6acef2;
-            border-radius: 6px;
-        }
-
-        .image-title-wrap {
-            padding: 0 15px 15px 15px;
-            color: #222;
-        }
-
-        .drag-text {
-            text-align: center;
-        }
-
-        .drag-text {
-            font-weight: 100;
-            color: #212832;
-            padding: 60px 0;
-            font-size: 10px;
-        }
+            .image-upload-wrap {
+                margin-top: 20px;
+                border: 3px dashed #cceffc;
+                /*            border-width:2px;*/
+                position: relative;
+                border-radius: 6px;
 
 
-        .file-upload-image {
-            max-height: 300px;
-            max-width: 300px;
-            margin: auto;
-            padding: 20px;
-        }
+            }
 
-        .remove-image {
-            width: 200px;
-            margin: 0;
-            color: #fff;
-            background: linear-gradient(to right, #d89f03, #f37335);
-            border: none;
-            padding: 10px;
-            border-radius: 6px;
-            border-bottom: 4px ;
-            transition: all .2s ease;
-            outline: none;
-            text-transform: uppercase;
-            font-weight: 700;
-        }
+            .image-dropping:hover {
+                background: linear-gradient(to right, #dceef4, #cceffc);
+                border: 3px dashed #6acef2;
+                border-radius: 6px;
+            }
+            .image-upload-wrap:hover {
+                background: linear-gradient(to right, #dceef4, #cceffc);
+                border: 3px dashed #6acef2;
+                border-radius: 6px;
+            }
 
-        .remove-image:hover {
-/*            background: #c13b2a;
-            color: #ffffff;
-            transition: all .2s ease;
-            cursor: pointer;*/
-                        color: #212832;
-            transition: all .2s ease;
-            cursor: pointer;
-        }
+            .image-title-wrap {
+                padding: 0 15px 15px 15px;
+                color: #222;
+            }
 
-        .remove-image:active {
-            border: 0;
-            transition: all .2s ease;
-        }
-    </style>
+            .drag-text {
+                text-align: center;
+            }
+
+            .drag-text {
+                font-weight: 100;
+                color: #212832;
+                padding: 60px 0;
+                font-size: 10px;
+            }
+
+
+            .file-upload-image {
+                max-height: 300px;
+                max-width: 300px;
+                margin: auto;
+                padding: 20px;
+            }
+
+            .remove-image {
+                width: 200px;
+                margin: 0;
+                color: #fff;
+                background: linear-gradient(to right, #d89f03, #f37335);
+                border: none;
+                padding: 10px;
+                border-radius: 6px;
+                border-bottom: 4px ;
+                transition: all .2s ease;
+                outline: none;
+                text-transform: uppercase;
+                font-weight: 700;
+            }
+
+            .remove-image:hover {
+                /*            background: #c13b2a;
+                            color: #ffffff;
+                            transition: all .2s ease;
+                            cursor: pointer;*/
+                color: #212832;
+                transition: all .2s ease;
+                cursor: pointer;
+            }
+
+            .remove-image:active {
+                border: 0;
+                transition: all .2s ease;
+            }
+        </style>
     </head>
 
 
@@ -324,7 +231,7 @@
             <!-- here  data-navbar-on-scroll="data-navbar-on-scroll"-->
             <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3 d-block gradient-custom-2"
                  style="background-color: #F26F21 ;">
-                <div class="container"><a class="navbar-brand" href="lostAndfoundhome"><img
+                <div class="container"><a class="navbar-brand" href="WelcomePage.jsp"><img
                             src="https://hcmuni.fpt.edu.vn/landing-page/images/logo-top.png" height="46" alt="logo" /></a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
                             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span
@@ -343,7 +250,7 @@
                                         Đăng ký</a></li>
                                     </c:if>
                                     <c:if test="${!empty sessionScope.LOGIN_USER}">
-                                        <li class="nav-item px-3"><a class="nav-link fw-bold" aria-current="page" href="#">ĐĂNG BÀI</a></li>
+                                
                                 <!-- User -->
                                 <li class="nav-item px-3 navbar-dropdown dropdown-user dropdown">
                                     <a class="btn btn-outline-light order-1 order-lg-0 fw-bold nav-link hide-arrow" id="nameLogin" href="" data-bs-toggle="dropdown">
@@ -412,7 +319,9 @@
                                         </li>
                                     </ul>
                                 </li>
-                                <!--/ User -->    
+                                <!--/ User -->  
+                                <li class="nav-item px-3"><a class="btn btn-outline-light order-1 order-lg-0 fw-bold" href="main?action=UploadLostAndFoundPost">ĐĂNG BÀI</a></li>
+
                             </c:if>    
                         </ul>
                     </div>
@@ -466,16 +375,11 @@
                                     <label for="categoryId" class="form-control-label fw-bold mb-2">Loại đồ vật</label>
                                     <select name="categoryId" id="category" class="form-select form-select-lg mb-3 required" required="true" data-rule-required="true" aria-label=".form-select-lg example">
                                         <option selected disabled value="">Chọn...</option>
-                                        <option value="1">Điện thoại</option>
-                                        <option value="2">Laptop</option>
-                                        <option value="3">Bóp ví</option>
-                                        <option value="4">Thẻ xe</option>
-                                        <option value="5">Thẻ sinh viên</option>
-                                        <option value="6">Balo</option>
-                                        <option value="7">Chìa khóa</option>
-                                        <option value="8">Khác</option>
+                                        <c:forEach items="${requestScope.LISTALLCATEGORY}" var="listCate">
+                                        <option value="${listCate.categoryId}">${listCate.categoryName}</option>
+                                        </c:forEach>
                                     </select>
-                                    
+
                                 </div>
                                 <div class="form-group mb-4">
                                     <label for="description" class="form-control-label fw-bold mb-2">Mô tả chi tiết</label>
@@ -607,10 +511,10 @@
         <script src="assets/js/extention/choices.js"></script>
         <script class="jsbin" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
         <script>
-                        const choices = new Choices('[data-trigger]',
-                                {
-                                    searchEnabled: false
-                                });
+                                                    const choices = new Choices('[data-trigger]',
+                                                            {
+                                                                searchEnabled: false
+                                                            });
 
         </script>
         <script>
