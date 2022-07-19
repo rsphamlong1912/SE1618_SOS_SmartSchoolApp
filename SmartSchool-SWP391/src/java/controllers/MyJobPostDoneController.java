@@ -50,7 +50,7 @@ public class MyJobPostDoneController extends HttpServlet {
                 request.setAttribute("MY_JOB_POST_DONE", list);
                 url = MY_JOB_POST_DONE_PAGE;
             } else {
-                request.setAttribute("ERROR", "Bạn chưa có bài đăng nào");
+                request.setAttribute("ERROR", "Bạn chưa có công việc nào");
                 url = ERROR;
             }
         } catch (Exception e) {

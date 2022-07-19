@@ -42,7 +42,7 @@ public class MyJobPostApproveController extends HttpServlet {
                 request.setAttribute("MY_JOB_POST_APPROVE", list);
                 url = MY_JOB_POST_APPROVE_PAGE;
             } else {
-                request.setAttribute("ERROR", "Bạn chưa có bài đăng nào");
+                request.setAttribute("ERROR", "Bạn chưa có bài đăng công việc nào");
                 url = ERROR;
             }
         } catch (Exception e) {

@@ -5,6 +5,8 @@
  */
 package controllers;
 
+import category.CategoryDAO;
+import category.CategoryDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -16,49 +18,21 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import jobCategory.JobCategoryDAO;
-import jobCategory.JobCategoryDTO;
-import jobPost.JobPostDAO;
-import jobPost.JobPostDTO;
 
 /**
  *
- * @author SE150888 Pham Ngoc Long
+ * @author TrinhNgocBao
  */
-@WebServlet(name = "SearchJobByCategoryIdController", urlPatterns = {"/searchJobByCategoryId"})
-public class SearchJobByCategoryIdController extends HttpServlet {
-
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    private static final String LIST_POST_PAGE = "FreelanceList.jsp";
+@WebServlet(name = "UploadLostAndFoundPostController", urlPatterns = {"/uploadLostAndFoundPost"})
+public class UploadLostAndFoundPostController extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
-        try {
-            response.setContentType("text/html;charset=UTF-8");
-            String url = LIST_POST_PAGE;
-            String Search = request.getParameter("jobCategoryId");
-            JobPostDAO dao = new JobPostDAO();
-            List<JobPostDTO> listPost = dao.searchPostByJobCategoryId(Search);
-
-            JobCategoryDAO cdao = new JobCategoryDAO();
-            List<JobCategoryDTO> listAllCategory = cdao.getAllCategory();
-
-            request.setAttribute("LISTJOBCATEGORY", listAllCategory);
-            request.setAttribute("LISTJOBPOST", listPost);
-            request.setAttribute("TAGCATE", Search);
-            request.getRequestDispatcher(url).forward(request, response);
-        } catch (SQLException ex) {
-            Logger.getLogger(SearchJobPostController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        CategoryDAO cdao = new CategoryDAO();
+        List<CategoryDTO> listAllCategory = cdao.getAllCategory();
+        request.setAttribute("LISTALLCATEGORY", listAllCategory);
+        request.getRequestDispatcher("UploadPost.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -73,7 +47,11 @@ public class SearchJobByCategoryIdController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(UploadLostAndFoundPostController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -87,7 +65,11 @@ public class SearchJobByCategoryIdController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(UploadLostAndFoundPostController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

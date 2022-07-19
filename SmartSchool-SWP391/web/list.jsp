@@ -77,7 +77,6 @@
                                         ĐĂNG KÝ</a></li>
                                     </c:if>
                                     <c:if test="${!empty sessionScope.LOGIN_USER}">
-                                        <li class="nav-item px-3"><a class="nav-link fw-bold" aria-current="page" href="main?action=UploadPost">ĐĂNG BÀI</a></li>
                                 <!-- User -->
                                 <li class="nav-item px-3 navbar-dropdown dropdown-user dropdown">
                                     <a class="btn btn-outline-light order-1 order-lg-0 fw-bold nav-link hide-arrow" id="nameLogin" href="" data-bs-toggle="dropdown">
@@ -146,6 +145,7 @@
                                         </li>
                                     </ul>
                                 </li>
+                                <li class="nav-item px-3"><a class="btn btn-outline-light order-1 order-lg-0 fw-bold" href="main?action=UploadLostAndFoundPost">ĐĂNG BÀI</a></li>
                                 <!--/ User -->    
                             </c:if>                           
                         </ul>
@@ -321,7 +321,7 @@
                                     url: "/searchPost",
                                     type: "get",
                                     data: {
-                                        search: txtSearch
+                                        search: txtSearch                                       
                                     },
                                     success: function (data) {
                                         var row = document.getElementById("content");

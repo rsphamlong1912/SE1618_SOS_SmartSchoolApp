@@ -52,7 +52,6 @@ public class UploadJobPostController extends HttpServlet {
         }catch (Exception e) {
             log("Error at UploadJobPostController: " + e.toString());
         } finally {
-//            request.getRequestDispatcher(SUCCESS).forward(request, response);
             response.sendRedirect(SUCCESS);
         }
     }

@@ -87,7 +87,7 @@
                             class="navbar-toggler-icon"> </span></button>
                     <div class="collapse navbar-collapse border-top border-lg-0 mt-4 mt-lg-0" id="navbarSupportedContent">
                         <ul class="navbar-nav ms-auto pt-2 pt-lg-0 font-base align-items-lg-center align-items-start">
-                            <li class="nav-item px-3"><a class="nav-link fw-bold" aria-current="page" href="index.html">TRANG CHỦ</a>
+                            <li class="nav-item px-3"><a class="nav-link fw-bold" aria-current="page" href="EmployerHome.jsp">TRANG CHỦ</a>
                             </li>
                             <li class="nav-item px-3"><a class="nav-link fw-bold" aria-current="page" href="#phanloai">DASHBOARD</a>
                             </li>
@@ -206,7 +206,8 @@
                                     </ul>
                                 </li>
                                 <!--/ User -->    
-                            </c:if>   
+                            </c:if> 
+                                 <li class="nav-item px-3"><a class="btn btn-outline-light order-1 order-lg-0 fw-bold" href="main?action=EmployerUploadJobPost">Đăng tuyển</a></li>
                         </ul>
                     </div>
                 </div>
@@ -266,7 +267,7 @@
                                     </div>
 
                                     <div class="row justify-content-end">
-                                        <a href="/main?jobId=${myJobPostProcess.jobId}&userId=${myJobPostProcess.userId}&action=DetailJob" class="col-md-2 btn btn-primary gradient-custom-2">Xem chi tiết</a>
+                                        <a href="main?action=MyJobPostProcessDetail&jobId=${myJobPostProcess.jobId}" class="col-md-2 btn btn-primary gradient-custom-2">Xem chi tiết</a>
                                     </div>
                                 </div>
                             </div>

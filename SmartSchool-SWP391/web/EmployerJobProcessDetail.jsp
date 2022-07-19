@@ -95,12 +95,17 @@
                 border-radius: 0.5rem;
                 border: 0;
             }
-
+            .btn-sm {
+                border-radius: 0.2rem;
+            }
 
             .modal-header {
                 border-top-right-radius:0.5rem;
                 border-top-left-radius:0.5rem;             
-            } 
+            }
+            .hoverLink:hover {
+                color: #F1A501 !important;
+            }
         </style>
     </head>
 
@@ -121,18 +126,14 @@
                             aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon">
                         </span></button>
                     <div class="collapse navbar-collapse border-top border-lg-0 mt-4 mt-lg-0" id="navbarSupportedContent">
-                          <ul class="navbar-nav ms-auto pt-2 pt-lg-0 font-base align-items-lg-center align-items-start">
-                            <li class="nav-item px-3"><a class="nav-link fw-bold" aria-current="page"
-                                                         href="freelancerhome">TRANG CHỦ</a>
+                        <ul class="navbar-nav ms-auto pt-2 pt-lg-0 font-base align-items-lg-center align-items-start">
+                            <li class="nav-item px-3"><a class="nav-link fw-bold" aria-current="page" href="EmployerHome.jsp">TRANG CHỦ</a>
                             </li>
-                            <li class="nav-item px-3"><a class="nav-link fw-bold" aria-current="page"
-                                                         href="freelancerhome#linhvuc">LĨNH VỰC</a>
+                            <li class="nav-item px-3"><a class="nav-link fw-bold" aria-current="page" href="#phanloai">DASHBOARD</a>
                             </li>
-                            <li class="nav-item px-3"><a class="nav-link fw-bold" aria-current="page" href="main?action=ListJobPost">TÌM VIỆC</a>
-                            </li>
-                            <c:if test="${!empty sessionScope.LOGIN_USER}">
-                             <li class="nav-item px-3 navbar-dropdown dropdown-user dropdown">
-                                <a class="btn btn-outline-light order-1 order-lg-0 fw-bold nav-link hide-arrow" id="nameLogin" href="" data-bs-toggle="dropdown">
+                            <li class="nav-item px-3 navbar-dropdown dropdown-user dropdown">
+                                <a class="btn btn-outline-light order-1 order-lg-0 fw-bold nav-link hide-arrow" id="nameLogin" href=""
+                                   data-bs-toggle="dropdown">
                                     <div class="avatar avatar-online">
 
 
@@ -140,27 +141,40 @@
 
 
                                     </div>
-                                </a>          
-                                <ul class="dropdown-menu dropdown-menu-end">              
-
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end">
                                     <li>
-                                        <a class="dropdown-item" href="main?action=MyJobWaiting">
+                                        <a class="dropdown-item" href="main?action=MyJobPostApprove">
                                             <i class="bx bx-user me-2"></i>
-                                            <span class="align-middle"> VIỆC CHỜ ỨNG TUYỂN</span>
+                                            <span class="align-middle"> VIỆC CHỜ PHÊ DUYỆT</span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="main?action=MyJobDoing">
+                                        <a class="dropdown-item" href="main?action=MyJobPostProcess">
                                             <i class="bx bx-user me-2"></i>
-                                            <span class="align-middle"> VIỆC ĐANG THỰC HIỆN</span>
+                                            <span class="align-middle"> VIỆC ĐANG TUYỂN</span>
                                         </a>
-                                    </li>                                   
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="main?action=MyJobPostDone">
+                                            <i class="bx bx-user me-2"></i>
+                                            <span class="align-middle"> VIỆC ĐÃ TUYỂN XONG</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <div class="dropdown-divider"></div>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="main?action=UploadJobPost">
+                                            <i class="bx bx-user me-2"></i>
+                                            <span class="align-middle"> ĐĂNG TUYỂN</span>
+                                        </a>
+                                    </li>
                                 </ul>
                             </li>
-                            </c:if>
                             <c:if test="${empty sessionScope.LOGIN_USER}">
                                 <li class="nav-item px-3"><a class="btn btn-outline-light order-1 order-lg-0 fw-bold"
-                                                             href="FreelancerLogin.jsp">ĐĂNG NHẬP /
+                                                             href="login.jsp">ĐĂNG NHẬP /
                                         ĐĂNG KÝ</a></li>
                                     </c:if>
                                     <c:if test="${!empty sessionScope.LOGIN_USER}">
@@ -259,35 +273,14 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-12">
-                            <div class="breadcrumb__links">
-                                <a href="freelancerhome"><i class="fa fa-home"></i> Home</a>
-                                <a href="main?action=ListJobPost">Danh sách</a>
-                                <span>${JOBDETAIL.jobCategoryName}</span>
-                            </div>
+
+                            <a class="text-decoration-none" href="main?action=MyJobPostProcess"><i class="fa fa-chevron-left"></i> Việc đang tuyển</a>
+
                         </div>
                     </div>
                 </div>
             </div>
             <!-- Breadcrumb End -->
-
-            <!-- Seach Form-->
-            <!-- <div class="container">
-    
-                <div class="row height d-flex justify-content-center align-items-center">
-    
-                    <div class="offset-md-3 col-md-9">
-    
-                        <div class="search">
-                            <i class="fa fa-search"></i>
-                            <input oninput="searchPost(this)" type="text" name="search" value=""
-                                class="form-control inputSearch" placeholder="Bạn đang tìm kiếm công việc gì ?">
-                            <button class="btn btn-primary">Search</button>
-                        </div>
-                    </div>
-                </div>
-
-            </div> -->
-            <!-- Seach End-->
 
             <section class="shop" style="min-height: 72vh;">
                 <div class="container">
@@ -347,120 +340,94 @@
                                                                            style="margin-right: 5px;" width="15" alt="navigation" /> Đã đăng ${JOBDETAIL.date}</span>
                                         </div>
                                     </div>
-                                    <div class="card-footer pt-4 pb-2">
-                                        <div class="row justify-content-md-end">
-                                            <div class="col-lg-4 col-md-5 mb-3">
-                                                <c:if test="${!empty requestScope.EXISTJOB}">
-                                                <button type="button" class="btn btn-secondary btn-lg btn-block"> 
-                                                    Đã đăng ký
-                                                </button>
-                                                </c:if>
-                                                <c:if test="${empty requestScope.EXISTJOB}">
-                                                <button type="button" class="btn btn-primary btn-lg btn-block gradient-custom-2" data-bs-toggle="modal" data-bs-target="#exampleModal"> 
-                                                    Đăng ký công việc
-                                                </button>
-                                                </c:if>
-                                            </div>
-                                        </div>
-                                    </div>
                                 </div>
-                                <!-- Modal -->
-                                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-
-                                    <div class="modal-dialog modal-dialog-centered">
-
-                                        <div class="modal-content">
-                                            <form action="main" method="POST">
-                                                <div class="modal-header gradient-custom-2" >
-                                                    <h5 class="modal-title" id="exampleModalLabel" style="color: #ffffff;">Câu hỏi đăng ký công việc</h5>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                </div>
-                                                <div class="modal-body" style="padding: 1.5rem;">
-                                                    <input type="hidden" class="form-control" id="formGroupExampleInput" name="idJob" value="${JOBDETAIL.jobId}">
-                                                    <c:forEach items="${requestScope.LISTQUESTION}" var="listQuestion" >
-                                                        <div class="mb-4">
-                                                            <label for="formGroupExampleInput" class="form-label fw-bold">${listQuestion.question}</label>
-                                                            <input type="hidden" class="form-control" id="formGroupExampleInput" name="idQuestion" value="${listQuestion.questionId}">
-
-                                                            <input type="text" class="form-control" id="formGroupExampleInput" name="answer${listQuestion.questionId}" placeholder="Câu trả lời">
-                                                        </div>
-                                                    </c:forEach>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Hủy</button>
-                                                    <button type="submit" name="action" value="SubmitFormJob" class="btn btn-primary gradient-custom-2">Gửi</button>
-                                                </div>
-                                            </form>
-                                        </div>
-
-                                    </div>
-
-                                </div>
-
                             </div>
                             <div class="row">
                                 <div class="card overflow-hidden shadow ">
-                                    <div class="card-header bg-white pt-4 pl-10 pr-10 border-bottom d-md-flex">
-                                        <h5 class="">CÔNG VIỆC LIÊN QUAN</h5>
+                                    <div class="card-header bg-white pt-4 pl-10 pr-10 border-bottom d-md-flex" style="padding-bottom: 1.4rem;">
+                                        <h5 class="">ỨNG VIÊN CHỜ PHÊ DUYỆT ${ERROR}</h5>
                                     </div>
-                                    <div class="card-body">
-                                        <div class="row">
-                                            <div class="col-lg-12 col-md-12 mb-5">
-                                                <div class="card overflow-hidden shadow shadow-hover" id="hoverCard">
-                                                    <div class="card-body ">
-                                                        <div class="row mb-3">
-                                                            <div class="col-md-1"><img
-                                                                    src="https://toigingiuvedep.vn/wp-content/uploads/2021/06/hinh-anh-hoat-hinh-de-thuong-cute-lam-avatar.jpg"
-                                                                    alt class="" style="width: 50px; height: 50px;"/>
-                                                            </div>
-                                                            <div class="col-md-11" style="padding-left: 0px;">
-                                                                <div
-                                                                    class="d-flex flex-column flex-lg-row justify-content-between">
-                                                                    <h5 class="text-secondary fw-medium text-truncate">Trịnh Ngọc Bảo</h5>
-                                                                    <span class="fs-1 fw-medium d-flex"></span>
+                                    <c:forEach items="${requestScope.USER_WAITING}" var="userWaiting" varStatus="count">
+                                        <div id="${userWaiting.userId}">
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <div class="col-lg-12 col-md-12">
+                                                        <div class="card overflow-hidden shadow">
+                                                            <div class="card-body container">
+                                                                <div class="row mb-3">
+                                                                    <div class="col-md-1"><img
+                                                                            src="${pageContext.servletContext.contextPath}/avatar?userId=${userWaiting.userId}"
+                                                                            alt class="" style="width: 50px; height: 50px; border-radius: 50%;"/>
+                                                                    </div>
+                                                                    <div class="col-md-8" style="padding-left: 0px;">
+                                                                        <div class="d-flex flex-column flex-lg-row justify-content-between">
+                                                                            <h5 class="fw-medium text-truncate">${userWaiting.fullname}</h5>
+                                                                            <span class="fs-1 fw-medium d-flex"></span>
+                                                                        </div>
+                                                                        <div class="d-flex align-items-center"><span class="fw-medium" style="font-size: 15px;">Ứng viên</span>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-3 text-end">
+                                                                        <a type="button" class="text-secondary text-decoration-none hoverLink" data-bs-toggle="modal" data-bs-target="#ModalAnswer${count.index + 1}"> 
+                                                                            <img src="assets/img/dest/form.svg" width="18" alt="navigation" /> Form đăng ký
+                                                                        </a>
+                                                                    </div>
                                                                 </div>
-                                                                <div class="d-flex align-items-center"><span class="fw-medium"
-                                                                                                             style="font-size: 15px;">Tên công ty</span>
+                                                                <!-- Modal -->
+                                                                <div class="modal fade" id="ModalAnswer${count.index + 1}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+                                                                    <div class="modal-dialog modal-dialog-centered">
+
+                                                                        <div class="modal-content">
+
+                                                                            <div class="modal-header gradient-custom-2" >
+                                                                                <h5 class="modal-title" id="exampleModalLabel" style="color: #ffffff;">Câu trả lời của Ứng viên</h5>
+
+                                                                            </div>
+                                                                            <div class="modal-body" style="padding: 1.5rem;">
+                                                                                <c:forEach items="${requestScope.USER_ANSWER_WAITING}" var="answerWaiting">
+                                                                                    <c:if test="${userWaiting.userId == answerWaiting.userId}">
+                                                                                        <div class="mb-4">
+                                                                                            <label for="formGroupExampleInput" class="form-label fw-bold">${answerWaiting.question}</label>                                                                                    
+                                                                                            <input type="text" class="form-control" id="formGroupExampleInput" name="answer" value="${answerWaiting.answer}" readonly="">
+                                                                                        </div>
+                                                                                    </c:if>
+                                                                                </c:forEach>
+                                                                            </div>
+                                                                            <div class="modal-footer">
+                                                                                <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Đóng</button>
+                                                                            </div>
+
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
+                                                                <div class="d-flex align-items-center mb-3"> <span class="fw-medium" style="font-size: 14px;"><i class="fa fa-user" aria-hidden="true"></i> Thông tin liên hệ</span>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col-md-6 d-flex align-items-center mb-2"> <h6>Số điện thoại: <span class="fw-medium" style="font-size: 14px;"> ${userWaiting.phone}</span></h6>
+                                                                    </div>
+                                                                    <div class="col-md-6 d-flex align-items-center mb-2"> <h6>Email: <span class="fw-medium" style="font-size: 14px;"> ${userWaiting.email} </span></h6>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="d-flex align-items-center mb-2"> <h6>Facebook: <span class="fw-medium" style="font-size: 14px;"> <a class="text-decoration-none" href="https://www.facebook.com/ngocbao159/">${userWaiting.facebook}</a></span></h6>
+                                                                </div>
+                                                                <div class="d-flex align-items-center justify-content-end mb-2">
+                                                                    <button onclick="ApproveUser(this.getAttribute('data-jobId'), this.getAttribute('data-userId'), this.getAttribute('data-buttonValue'))" 
+                                                                            data-jobId="${JOBDETAIL.jobId}" 
+                                                                            data-userId="${userWaiting.userId}" 
+                                                                            data-buttonValue="denied" type="button" class="col-md-2 btn btn-outline-primary btn-sm mt-2">Từ chối</button>
+                                                                    <button onclick="ApproveUser(this.getAttribute('data-jobId'), this.getAttribute('data-userId'), this.getAttribute('data-buttonValue'))" 
+                                                                            data-jobId="${JOBDETAIL.jobId}" 
+                                                                            data-userId="${userWaiting.userId}" 
+                                                                            data-buttonValue="approved" type="button" class="col-md-2 btn btn-primary gradient-custom-2 btn-sm ms-3 mt-2">Phê duyệt</button>
+                                                                </div>                                            
                                                             </div>
-                                                        </div>
-                                                        <div class="d-flex flex-column flex-lg-row justify-content-between mb-2">
-                                                            <h5 class="text-secondary fw-medium text-truncate"><a
-                                                                    class="link-901 text-decoration-none stretched-link" href="#!">Tuyển dụng Quản trị Web Wordpress, Lập trình Wordpress Theme</a></h5><span class="fs-1 fw-medium"></span>
-                                                        </div>
-                                                        <div class="d-flex align-items-center mb-2"> <span
-                                                                class="fw-medium" style="font-size: 14px;">Lĩnh vực: Lập Trình</span>
-                                                        </div>
-                                                        <div class="d-flex align-items-center mb-2"> <img src="assets/img/dest/dollar.svg"
-                                                                                                          style="margin-right: 5px;" width="20" alt="navigation" /><span
-                                                                                                          class="fw-medium" style="font-size: 14px;">10000 VNĐ/h</span>
-                                                        </div>
-                                                        <div class="d-flex align-items-center mb-2"> <img src="assets/img/dest/user.svg"
-                                                                                                          style="margin-right: 5px;" width="20" alt="navigation" /><span
-                                                                                                          class="fw-medium" style="font-size: 14px;">8 người</span>
-                                                        </div>
-                                                        <div class="d-flex align-items-center mb-5"> <img src="assets/img/dest/calendar.svg"
-                                                                                                          style="margin-right: 5px;" width="20" alt="navigation" /><span
-                                                                                                          class="fw-semibold" style="font-size: 14px;">1 - 3 tháng</span>
-                                                        </div>
-                                                        <div class="d-flex align-items-center"> <img src="assets/img/dest/clock.svg"
-                                                                                                     style="margin-right: 5px;" width="15" alt="navigation" /><span
-                                                                                                     class="fw-medium" style="font-size: 12px;">5 phút trước</span>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-
-
-
-
-
-
-
-
                                         </div>
-
-                                    </div>                           
+                                    </c:forEach>
                                 </div>                                                       
                             </div>
 
@@ -471,79 +438,52 @@
                             <div class="card overflow-hidden shadow ">
                                 <div
                                     class="card-header bg-white pt-4 pl-10 pr-10 border-bottom d-md-flex justify-content-center">
-                                    <h5 class="">NHÀ TUYỂN DỤNG</h5>
+                                    <h5 class="">TRẠNG THÁI</h5>
                                 </div>
                                 <div class="card-body">
                                     <div class="row justify-content-center">
                                         <div class="content-detail mb-3">
-                                            <div class="avatar-upload ">
-                                                <div class="text-center avatar-preview">
-                                                    <c:if test="${!empty USERINFOR.avatar}">
-                                                        <img src="${pageContext.servletContext.contextPath}/avatar?userId=${JOBDETAIL.userId}"
-                                                             width="164" height="164" />
-                                                    </c:if>
-                                                    <c:if test="${empty USERINFOR.avatar}">
-                                                        <img src="https://gtjai.com.vn/wp-content/uploads/2021/07/avt.png"
-                                                             width="164" height="164" />
-                                                    </c:if>
 
-                                                    </br>
-                                                    </br>
-                                                    <h5 class="mb-3">${USERINFOR.fullname}</h5>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="content-detail mb-3">
-                                            <div class="d-flex align-items-center justify-content-center">
-                                                <h6 style="line-height: 2.5;">Thông tin công ty</h6>
+                                            <div class="d-flex align-items-center">
+                                                <h6 style="line-height: 2.5;">Trạng thái công việc: <span class="fw-medium"
+                                                                                                          style="font-size: 14px; "> Đang tuyển</span></h6>
                                             </div>
 
                                             <div class="d-flex align-items-center">
-                                                <h6 style="line-height: 2.5;">Tên công ty: <span class="fw-medium"
-                                                                                                 style="font-size: 14px; "> ${USERINFOR.compName}</span></h6>
+                                                <h6 style="line-height: 2.5;">Số người đã tuyển: <span class="fw-medium"
+                                                                                                       style="font-size: 14px; "> 3</span></h6>
                                             </div>
-
-
-                                            <div class="d-flex align-items-center">
-                                                <h6 style="line-height: 2.5;">Số điện thoại: <span class="fw-medium"
-                                                                                                   style="font-size: 14px; "> ${USERINFOR.phone}</span></h6>
-                                            </div>
-
-                                            <div class="d-flex align-items-center">
-                                                <h6 style="line-height: 2.5;">Email: <span class="fw-medium text-break"
-                                                                                           style="font-size: 14px;"> ${USERINFOR.email}</span></h6>
-                                            </div>
-
-
-                                            <div class="d-flex align-items-center">
-                                                <h6 style="line-height: 2.5;">Địa chỉ: <span class="fw-medium text-break"
-                                                                                             style="font-size: 14px;"> ${USERINFOR.compAddress}</span></h6>
-                                            </div>
-
-
-                                            <div class="d-flex align-items-center">
-                                                <h6 style="line-height: 2.5;">Facebook: <span class="fw-medium text-break"
-                                                                                              style="font-size: 14px;"> ${USERINFOR.facebook}</span></h6>
-                                            </div>
-
 
                                         </div>
 
                                     </div>
-                                    <div class="row">
-                                        <div class="col-md-3 contact">
-                                            <a href="tel:${USERINFOR.phone}" class="btn btn-success btn-sm w-100" style="background: linear-gradient(to right, #99df20, #009245 ); border:none;"> Gọi <i class="fa fa-phone"
-                                                                                                                                                                                                        aria-hidden="true"></i></a>
+                                    <div class="row justify-content-center text-center">
+                                        <h6 style="line-height: 2.5;">Chuyển trạng thái công việc </h6>
+                                        <div class="col-md-6 contact ">
+                                            <a href="" class="btn btn-success btn-sm w-100" 
+                                               data-bs-toggle="modal" data-bs-target="#ModalConfirm"
+                                               style="background: linear-gradient(to right, #99df20, #009245 ); border:none;">
+                                               <i class="fa fa-arrow-right" aria-hidden="true"></i> Đã tuyển xong </a>
                                         </div>
-                                        <div class="col-md-6 contact">
-                                            <a href="${USERINFOR.facebook}" class="btn btn-success btn-sm w-100" style="background: linear-gradient(to right, #12c2e9, #c471ed, #f64f59); border:none;" > Messenger <i class="fa fa-comment"
-                                                                                                                                                                                                        aria-hidden="true"></i></a>
-                                        </div>
-                                        <div class="col-md-3 contact">
-                                            <a href="mailto:${USERINFOR.email}" class="btn btn-success btn-sm w-100" style="background: linear-gradient(to right, #43cea2, #1174d7); border:none;"> Mail <i class="fa fa-envelope"
-                                                                                                                                                                                                        aria-hidden="true"></i></a>
-                                        </div>
+                                    </div>
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="ModalConfirm" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 
+                                        <div class="modal-dialog modal-dialog-centered">
+
+                                            <div class="modal-content">
+
+                                                <div class="modal-header gradient-custom-2 justify-content-center">
+                                                    <h5 class="modal-title" id="exampleModalLabel" style="color: #ffffff;">Bạn có chắc chuyển trạng thái công việc ?</h5>
+                                                </div>
+                                                
+                                                <div class="modal-footer justify-content-center">
+                                                    <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Đóng</button>
+                                                    <a href="main?action=SetJobApproveDone&jobId=${JOBDETAIL.jobId}" type="button" class="btn btn-primary gradient-custom-2">Chuyển</a>
+                                                </div>
+
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -626,7 +566,31 @@
         <!-- ===============================================-->
         <!--    End of Main Content-->
         <!-- ===============================================-->
+        <!--- AJAX -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script>
+                                                                        function ApproveUser(jobId, userId, buttonValue) {
 
+                                                                            $.ajax({
+                                                                                url: "/approveUserWaiting",
+                                                                                type: "get",
+                                                                                data: {
+                                                                                    jobId: jobId,
+                                                                                    userId: userId,
+                                                                                    buttonValue: buttonValue
+
+                                                                                },
+                                                                                success: function (data) {
+                                                                                    var row = document.getElementById(userId);
+                                                                                    row.remove();
+//                                                                                row.innerHTML = data;
+                                                                                },
+                                                                                error: function (xhr) {
+                                                                                    //Do Something to handle error
+                                                                                }
+                                                                            });
+                                                                        }
+        </script>
         <!-- ===============================================-->
         <!--    JavaScripts-->
         <!-- ===============================================-->
@@ -637,14 +601,13 @@
         <script src="vendors/fontawesome/all.min.js"></script>
         <script src="assets/js/theme.js"></script>
         <script src="assets/js/extention/choices.js"></script>
-        <script src="assets/js/extention/validation.js"></script>
 
 
         <script>
-            const choices = new Choices('[data-trigger]',
-                    {
-                        searchEnabled: false
-                    });
+                                                                        const choices = new Choices('[data-trigger]',
+                                                                                {
+                                                                                    searchEnabled: false
+                                                                                });
 
         </script>
         <link
