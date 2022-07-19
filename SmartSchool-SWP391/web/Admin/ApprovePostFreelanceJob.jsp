@@ -560,8 +560,10 @@
                                         <p id="nameDe" name="fullname" class="text-sm"></p>
                                     </div>
                                 </div>
-                                <div class="d-flex align-items-center"> <span class="fw-medium" style="font-size: 14px;" id="dateDe" name="date" > <img
-                                            src="/Admin/assets/images/clock.svg" style="margin-right: 5px;" width="15" alt="navigation" />
+                                <div class="d-flex align-items-center">
+                                    <span class="fw-medium" style="font-size: 14px;" id="dateDe" name="date" > 
+                                        <img src="/Admin/assets/images/clock.svg" style="margin-right: 5px;" width="15" alt="navigation" />
+                                        <img src="/Admin/assets/images/clock.svg"/>
                                     </span>
                                 </div>
                             </div>

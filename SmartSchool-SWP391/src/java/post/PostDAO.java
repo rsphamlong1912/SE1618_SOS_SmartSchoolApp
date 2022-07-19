@@ -38,7 +38,10 @@ public class PostDAO {
             + "  FROM tblPost as p, tblCategory as c \n"
             + "  WHERE p.categoryId=c.categoryId AND type=1 AND postStatus='true' \n"
             + "  ORDER BY postId DESC";
-    private static final String LIST_ALL = "SELECT * FROM tblPost WHERE postStatus='true' ORDER BY postId DESC";
+        private static final String LIST_ALL ="SELECT p.postId, p.userId,p.categoryId, p.postImg, p.description,p.date,p.type,p.title,p.postStatus,c.categoryName\n"
+            + "FROM tblPost as p, tblCategory as c\n"
+            + "WHERE p.categoryId=c.categoryId AND postStatus='true' ORDER BY postId DESC";
+//    private static final String LIST_ALL = "SELECT * FROM tblPost WHERE postStatus='true' ORDER BY postId DESC";
     private static final String CREATE = "INSERT INTO tblPost(userId, categoryId, postImg, description, date, type, title, postStatus) VALUES(?,?,?,?,?,?,?,'approving')";
     private static final String UPDATE = "UPDATE tblPost SET postImg=?, description=?, type=?, title=?, postStatus=? WHERE postId=?";
     private static final String DELETE = "UPDATE tblPost SET postStatus='false' WHERE postId=?";
@@ -202,6 +205,7 @@ public class PostDAO {
                 post.setType(rs.getString("type"));
                 post.setTitle(rs.getString("title"));
                 post.setPostStatus(rs.getString("postStatus"));
+                post.setCategoryName(rs.getString("categoryName"));
                 list.add(post);
             }
 

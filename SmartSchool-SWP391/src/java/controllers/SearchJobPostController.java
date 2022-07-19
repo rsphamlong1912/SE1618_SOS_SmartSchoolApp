@@ -57,7 +57,7 @@ public class SearchJobPostController extends HttpServlet {
         request.setAttribute("LISTJOBPOST", listPost);
 
         request.getRequestDispatcher(url).forward(request, response);
-//        PrintWriter out = response.getWriter();
+        PrintWriter out = response.getWriter();
 //        listPost.forEach((post) -> {
 //            out.println("<div class=\"col-lg-6 col-md-6 mb-5\">\n"
 //                    + "                                        <div class=\"card overflow-hidden shadow shadow-hover\" id=\"hoverCard\">\n"

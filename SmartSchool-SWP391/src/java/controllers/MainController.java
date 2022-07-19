@@ -71,11 +71,11 @@ public class MainController extends HttpServlet {
     private static final String ADMIN_LOSTANDFOUND_CONTROLLER = "adminLostAndFound";
     private static final String CATEGORY = "Category";
     private static final String CATEGORY_LOSTANDFOUND_CONTROLLER = "category";
-    private static final String ADD_CATEGORY = "AddCategogy";
+    private static final String ADD_CATEGORY = "AddCategory";
     private static final String ADD_CATEGORY_LOSTANDFOUND_CONTROLLER = "addCategory";
-    private static final String EDIT_CATEGORY = "EditCategogy";
+    private static final String EDIT_CATEGORY = "EditCategory";
     private static final String EDIT_CATEGORY_LOSTANDFOUND_CONTROLLER = "editCategory";
-    private static final String DELETE_CATEGORY = "DeleteCategogy";
+    private static final String DELETE_CATEGORY = "DeleteCategory";
     private static final String DELETE_CATEGORY_LOSTANDFOUND_CONTROLLER = "deleteCategory";
 
     private static final String JOB_CATEGORY = "JobCategory";
@@ -86,13 +86,16 @@ public class MainController extends HttpServlet {
     private static final String DELETE_JOB_CATEGORY_CONTROLLER = "deleteJobCategory";
     private static final String EDIT_JOB_CATEGORY = "EditJobCategory";
     private static final String EDIT_JOB_CATEGORY_CONTROLLER = "editJobCategory";
-    
+
     private static final String APPROVE_JOB_POST = "ApproveJobPost";
     private static final String APPROVE_JOB_POST_CONTROLLER = "approveJobPost";
     private static final String APPROVE_JOB = "ApproveJob";
     private static final String APPROVE_JOB_CONTROLLER = "approveJob";
     private static final String NO_APPROVE_JOB = "NoApproveJob";
     private static final String NO_APPROVE_JOB_CONTROLLER = "noApproveJob";
+    private static final String LIST_POST_FOR_ADMIN = "AdminLostAndFoundPost";
+    private static final String LIST_POST_FOR_ADMIN_CONTROLLER = "adminLostAndFoundPost";
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -195,6 +198,9 @@ public class MainController extends HttpServlet {
             }
             if (NO_APPROVE_JOB.equals(action)) {
                 url = NO_APPROVE_JOB_CONTROLLER;
+            }
+            if (LIST_POST_FOR_ADMIN.equals(action)) {
+                url = LIST_POST_FOR_ADMIN_CONTROLLER;
             }
         } catch (Exception e) {
             log("Error at MainController: " + e.toString());

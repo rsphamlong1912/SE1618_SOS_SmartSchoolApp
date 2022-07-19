@@ -34,7 +34,7 @@ public class JobPostDAO {
     private static final String GET_MYJOBPOST_APPROVE = "SELECT j.jobId,j.userId,j.jobCategoryId,j.title,j.description,j.salary,j.amount,j.timeJob,j.process,j.date,j.status,c.jobCategoryName\n"
             + "            FROM tblJobPost as j, tblCategoryJob as c\n"
             + "            WHERE j.jobCategoryId=c.jobCategoryId AND status=1 AND process='approving' AND  userId=? ";
-    private static final String LIST_ALL = "SELECT j.jobId,j.userId,j.jobCategoryId,j.title,j.description,j.salary,j.amount,j.timeJob,j.process,j.date,j.status,c.jobCategoryName, u.fullname,u.compName\n"
+    private static final String LIST_ALL = "SELECT j.jobId,j.userId,j.jobCategoryId,j.title,j.description,j.salary,j.amount,j.timeJob,j.process,j.date,j.status,c.jobCategoryName, u.fullname,u.compName,u.avatar\n"
             + "FROM tblJobPost as j, tblCategoryJob as c, tblUser as u\n"
             + "WHERE j.jobCategoryId=c.jobCategoryId AND j.userId=u.userId AND status=1 AND (process='new' OR process='process') \n"
             + "ORDER BY jobId DESC";
