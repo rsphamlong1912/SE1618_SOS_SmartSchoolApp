@@ -5,21 +5,28 @@
  */
 package controllers;
 
+import category.CategoryDAO;
+import category.CategoryDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import jobPost.JobPostDAO;
+import post.PostDAO;
+import post.PostDTO;
 
 /**
  *
- * @author TQK
+ * @author SE150925 Nguyen Van Hai Nam
  */
-@WebServlet(name = "ApproveJobController", urlPatterns = {"/approveJob"})
-public class ApproveJobController extends HttpServlet {
+@WebServlet(name = "SearchByCategoryAndTypeController", urlPatterns = {"/searchPostByCategoryAndType"})
+public class SearchByCategoryAndTypeController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,14 +39,28 @@ public class ApproveJobController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
         try {
-            int jobId = Integer.parseInt(request.getParameter("jobId"));
-            JobPostDAO dao = new JobPostDAO();
-            dao.approvePost(jobId);
-            response.sendRedirect("main?action=ApproveJobPost");
-        } catch (Exception e) {
-            log("Error at ApproveJobController: " + e.toString());
+            response.setContentType("text/html;charset=UTF-8");
+            int categoryId = Integer.parseInt(request.getParameter("categoryId"));
+
+            int type = Integer.parseInt(request.getParameter("type"));
+            PostDAO dao = new PostDAO();
+            CategoryDAO cdao = new CategoryDAO();
+            List<CategoryDTO> listAllCategory = cdao.getAllCategory();
+            List<PostDTO> listPost = dao.searchPostByJobCategoryAndType(categoryId, type);
+            request.setAttribute("LISTPOST", listPost);
+            request.setAttribute("LISTALLCATEGORY", listAllCategory);
+            if (type == 0) {
+                request.setAttribute("TAGCATEFORLOST", categoryId);
+            } else if (type == 1) {
+                request.setAttribute("TAGCATEFORFOUND", categoryId);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(SearchByCategoryAndTypeController.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            request.getRequestDispatcher("list.jsp").forward(request, response);
+
         }
     }
 

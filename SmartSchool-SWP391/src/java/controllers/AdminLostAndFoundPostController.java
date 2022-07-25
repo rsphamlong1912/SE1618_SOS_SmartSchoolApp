@@ -5,21 +5,25 @@
  */
 package controllers;
 
+import category.CategoryDAO;
+import category.CategoryDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import jobPost.JobPostDAO;
+import post.PostDAO;
+import post.PostDTO;
 
 /**
  *
- * @author TQK
+ * @author SE150925 Nguyen Van Hai Nam
  */
-@WebServlet(name = "ApproveJobController", urlPatterns = {"/approveJob"})
-public class ApproveJobController extends HttpServlet {
+@WebServlet(name = "AdminLostAndFoundPostController", urlPatterns = {"/adminLostAndFoundPost"})
+public class AdminLostAndFoundPostController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,12 +38,16 @@ public class ApproveJobController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try {
-            int jobId = Integer.parseInt(request.getParameter("jobId"));
-            JobPostDAO dao = new JobPostDAO();
-            dao.approvePost(jobId);
-            response.sendRedirect("main?action=ApproveJobPost");
+            PostDAO pdao = new PostDAO();
+            CategoryDAO cdao = new CategoryDAO();
+            List<PostDTO> listAll = pdao.getAll();
+            int count = pdao.getTotalPost();
+            request.setAttribute("TOTALPOST", count);
+
+            request.setAttribute("LISTPOST", listAll);
         } catch (Exception e) {
-            log("Error at ApproveJobController: " + e.toString());
+        } finally {
+            request.getRequestDispatcher("/Admin/PostLostAndFound.jsp").forward(request, response);
         }
     }
 

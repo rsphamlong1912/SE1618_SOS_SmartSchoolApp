@@ -41,7 +41,6 @@ public class JobPostDAO {
             + "FROM tblJobPost as j, tblCategoryJob as c, tblUser as u\n"
             + "WHERE j.jobCategoryId=c.jobCategoryId AND j.userId=u.userId AND status=1 AND (process='new' OR process='process') \n"
             + "ORDER BY jobId DESC";
-
     private static final String SEARCH_BY_TITLE = "SELECT j.jobId,j.userId,j.jobCategoryId,j.title,j.description,j.salary,j.amount,j.timeJob,j.process,j.date,j.status,c.jobCategoryName, u.fullname,u.compName \n"
             + "FROM  tblJobPost as j, tblCategoryJob as c, tblUser as u \n"
             + "WHERE j.jobCategoryId=c.jobCategoryId AND j.userId=u.userId AND status=1 AND  (dbo.removeMark(title) LIKE ? OR title LIKE ?) AND (process = 'new' OR process='process')\n"
@@ -53,6 +52,8 @@ public class JobPostDAO {
     private static final String JOB_DETAIL = "SELECT j.jobId,j.userId,j.jobCategoryId,j.title,j.description,j.salary,j.amount,j.timeJob,j.process,j.date,j.status,j.amountFreelancer,c.jobCategoryName, u.fullname,u.compName\n"
             + "FROM  tblJobPost as j, tblCategoryJob as c, tblUser as u\n"
             + "WHERE j.jobCategoryId=c.jobCategoryId AND j.userId=u.userId AND status=1 AND (process = 'new' OR process='process') AND j.jobId=?\n";
+        private static final String GET_TOTAL_APPROVE_POST = "SELECT COUNT(jobId) AS count FROM tblJobPost WHERE process='approving' AND status=1";
+
     private static final String GET_TOTAL_JOB_POST = "  SELECT COUNT(jobId) AS totalJobPost FROM tblJobPost WHERE status = 1";
     private static final String GET_TOP5_NEW_JOB_POST = "SELECT TOP(5) j.jobId,j.userId,j.jobCategoryId,j.title,j.description,j.salary,j.amount,j.timeJob,j.process,j.date,j.status,c.jobCategoryName, u.fullname,u.compName \n"
             + "FROM  tblJobPost as j, tblCategoryJob as c, tblUser as u\n"
@@ -1074,5 +1075,35 @@ public class JobPostDAO {
                 con.close();
             }
         }
+    }
+    
+    public int getTotalApprovePost() throws SQLException {
+        Connection con = null;
+        ResultSet rs = null;
+        PreparedStatement ptm = null;
+        try {
+            //Creating and executing JDBC statements
+            con = DBUtils.getConnection();
+            if (con != null) {
+                ptm = con.prepareStatement(GET_TOTAL_APPROVE_POST);
+                rs = ptm.executeQuery();
+                if (rs.next()) {
+                    return rs.getInt("count");
+                }
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(PostDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return 0;
     }
 }

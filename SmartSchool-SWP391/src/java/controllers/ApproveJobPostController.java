@@ -38,8 +38,9 @@ public class ApproveJobPostController extends HttpServlet {
         try {
             JobPostDAO jdao = new JobPostDAO();
             List<JobPostDTO> listApprove = jdao.getApprovePost();
-
+            int count=jdao.getTotalApprovePost();
             request.setAttribute("LISTAPPROVE", listApprove);
+            request.setAttribute("COUNT", count);
         } catch (Exception e) {
             log("Error at ApproveJobPostController: " + e.toString());
         } finally {

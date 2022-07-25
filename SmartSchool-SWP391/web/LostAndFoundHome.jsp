@@ -72,15 +72,15 @@
                             <li class="nav-item px-3"><a class="nav-link fw-bold" aria-current="page" href="#moinhatduoc">MỚI NHẶT ĐƯỢC</a></li>
                             <li class="nav-item px-3"><a class="nav-link fw-bold" aria-current="page" href="#moithatlac">MỚI THẤT LẠC</a></li>
                             <li class="nav-item px-3"><a class="nav-link fw-bold" aria-current="page" href="main?action=ListAll">TÌM KIẾM</a></li>
-                            
-                            
-                                <c:if test="${empty sessionScope.LOGIN_USER}">
+
+
+                            <c:if test="${empty sessionScope.LOGIN_USER}">
                                 <li class="nav-item px-3"><a class="btn btn-outline-light order-1 order-lg-0 fw-bold" href="login.jsp">ĐĂNG NHẬP /
                                         ĐĂNG KÝ</a></li>
                                     </c:if>
                                     <c:if test="${!empty sessionScope.LOGIN_USER}">
-<!--                                        <li class="nav-item px-3"><a class="nav-link fw-bold" aria-current="page" href="main?action=UploadPost">ĐĂNG BÀI</a></li>-->
-                                        
+                                <!--                                        <li class="nav-item px-3"><a class="nav-link fw-bold" aria-current="page" href="main?action=UploadPost">ĐĂNG BÀI</a></li>-->
+
                                 <!-- User -->
                                 <li class="nav-item px-3 navbar-dropdown dropdown-user dropdown">
                                     <a class="btn btn-outline-light order-1 order-lg-0 fw-bold nav-link hide-arrow" id="nameLogin" href="" data-bs-toggle="dropdown">
@@ -180,23 +180,23 @@
                             SmartSchool </br>Tìm kiếm đồ thất lạc</h1>
                         <div class="s131">
 
-                            <form style="box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px; ">
+                            <form style="box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px; " action="main">
                                 <div class="inner-form">
-                                    <div class="input-field first-wrap">
-                                        <input id="search" type="text" placeholder="Bạn đang tìm kiếm gì?" />
-                                    </div>
-                                    <div class="input-field second-wrap" style="font-family: 'Inter', sans-serif;">
-                                        <div class="input-select">
-                                            <select data-trigger="" name="choices-single-defaul">
-                                                <option placeholder="">Danh sách</option>
-                                                <option>Đồ thất lạc</option>
-                                                <option>Đồ nhặt được</option>
-                                            </select>
+                                        <div class="input-field first-wrap">
+                                            <input id="search" name="searchText" type="text" value="" placeholder="Bạn đang tìm kiếm gì?" />
                                         </div>
-                                    </div>
-                                    <div class="input-field third-wrap">
-                                        <button class="btn-search" type="button">Tìm kiếm</button>
-                                    </div>
+                                        <div class="input-field second-wrap" style="font-family: 'Inter', sans-serif;">
+                                            <div class="input-select">
+                                                <select data-trigger="" name="type">
+                                                    <option value="-1" placeholder="">Danh sách</option>
+                                                    <option value="0">Đồ thất lạc</option>
+                                                    <option value="1">Đồ nhặt được</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="input-field third-wrap">
+                                            <button name="action" value="SearchPostInHome" class="btn-search" type="submit">Tìm kiếm</button>
+                                        </div>
                                 </div>
                             </form>
 
@@ -222,7 +222,7 @@
                             <div class="col-lg-3 col-sm-6 mb-6">
                                 <div class="card service-card shadow-hover rounded-2 text-center align-items-center">
                                     <div class="card-body p-xxl-5 p-4"> <img src="${listAllCategory.categoryImg}" width="75" alt="Service" />
-                                        <h4 class="mb-3">${listAllCategory.categoryName}</h4>
+                                        <h4 class="mb-3" ><a class="text-decoration-none stretched-link" href="main?categoryId=${listAllCategory.categoryId}&action=SearchPostByCategory"></a>${listAllCategory.categoryName}</h4>
 
                                     </div>
                                 </div>

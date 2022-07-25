@@ -5,21 +5,28 @@
  */
 package controllers;
 
+import category.CategoryDAO;
+import category.CategoryDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import jobPost.JobPostDAO;
+import post.PostDAO;
+import post.PostDTO;
 
 /**
  *
- * @author TQK
+ * @author SE150925 Nguyen Van Hai Nam
  */
-@WebServlet(name = "ApproveJobController", urlPatterns = {"/approveJob"})
-public class ApproveJobController extends HttpServlet {
+@WebServlet(name = "SearchPostInHomeController", urlPatterns = {"/searchPostInHome"})
+public class SearchPostInHomeController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,13 +41,32 @@ public class ApproveJobController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try {
-            int jobId = Integer.parseInt(request.getParameter("jobId"));
-            JobPostDAO dao = new JobPostDAO();
-            dao.approvePost(jobId);
-            response.sendRedirect("main?action=ApproveJobPost");
-        } catch (Exception e) {
-            log("Error at ApproveJobController: " + e.toString());
+            String searchText = request.getParameter("searchText");
+            int type = Integer.parseInt(request.getParameter("type"));
+            CategoryDAO cdao = new CategoryDAO();
+            List<CategoryDTO> listAllCategory = cdao.getAllCategory();
+            PostDAO dao = new PostDAO();
+            List<PostDTO> list = null;
+            if ("".equals(searchText) && type == -1) {
+                list = dao.getAll();
+
+            } else if (!"".equals(searchText) && type == -1) {
+                list = dao.searchPostByTitle(searchText);
+
+            } else if ("".equals(searchText) && type != -1) {
+                list = dao.searchPostByType(type);
+            } else {
+                list = dao.searchPostByTypeAndTitle(type, searchText);
+            }
+            request.setAttribute("LISTPOST", list);
+            request.setAttribute("LISTALLCATEGORY", listAllCategory);
+        } catch (SQLException ex) {
+            Logger.getLogger(SearchPostInHomeController.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            request.getRequestDispatcher("list.jsp").forward(request, response);
+
         }
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

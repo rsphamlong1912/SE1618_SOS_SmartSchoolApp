@@ -406,7 +406,7 @@
                                     <div class="right">
                                         <div class="title d-flex align-items-center flex-wrap mb-30">
                                             <button type="button" class="main-btn warning-btn btn-hover btn-sm">
-                                                <i class="lni lni-add-files mr-5" style="font-size: 20px;"></i>Total: 30 posts</button>
+                                                <i class="lni lni-add-files mr-5" style="font-size: 20px;"></i>Total: ${requestScope.COUNT}</button>
                                         </div>
                                     </div>
                                 </div>
@@ -560,8 +560,10 @@
                                         <p id="nameDe" name="fullname" class="text-sm"></p>
                                     </div>
                                 </div>
-                                <div class="d-flex align-items-center"> <span class="fw-medium" style="font-size: 14px;" id="dateDe" name="date" > <img
-                                            src="/Admin/assets/images/clock.svg" style="margin-right: 5px;" width="15" alt="navigation" />
+                                <div class="d-flex align-items-center">
+                                    <span class="fw-medium" style="font-size: 14px;" id="dateDe" name="date" > 
+                                        <img src="/Admin/assets/images/clock.svg" style="margin-right: 5px;" width="15" alt="navigation" />
+                                        <img src="/Admin/assets/images/clock.svg"/>
                                     </span>
                                 </div>
                             </div>
