@@ -204,7 +204,7 @@
                                                     <div class="card-body">
                                                         <ul>
                                                             <c:forEach items="${requestScope.LISTALLCATEGORY}" var="listCategory">
-                                                                <li><a href="/main?action=SearchPostByCategoryId&categoryId=${listCategory.categoryId}&type=0">${listCategory.categoryName}</a></li>
+                                                                <li><a href="/main?action=SearchPostByCategoryAndType&categoryId=${listCategory.categoryId}&type=0">${listCategory.categoryName}</a></li>
                                                                 </c:forEach>
                                                         </ul>
                                                     </div>
@@ -218,7 +218,7 @@
                                                     <div class="card-body">
                                                         <ul>
                                                             <c:forEach items="${requestScope.LISTALLCATEGORY}" var="listCategory">
-                                                                <li><a href="/main?action=SearchPostByCategoryId&categoryId=${listCategory.categoryId}&type=1">${listCategory.categoryName}</a></li>
+                                                                <li><a href="/main?action=SearchPostByCategoryAndType&categoryId=${listCategory.categoryId}&type=1">${listCategory.categoryName}</a></li>
                                                                 </c:forEach>
                                                         </ul>
                                                     </div>

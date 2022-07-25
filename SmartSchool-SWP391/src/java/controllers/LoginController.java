@@ -32,6 +32,7 @@ public class LoginController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     private static final String ERROR = "login.jsp";
+    private static final String ERROR_FREELANCE = "FreelancerLogin.jsp";
     private static final String AD = "AD";
     private static final String ADMIN_PAGE = "adminLostAndFound";
     private static final String US = "US";
@@ -58,7 +59,7 @@ public class LoginController extends HttpServlet {
             if (user != null) {
                 String roleID = user.getRoleId();
                 session.setAttribute("LOGIN_USER", user);
-                if (null == roleID) {
+                if (roleID==null) {
                     request.setAttribute("ERROR", "Your role is not support!");
                 } else if ("isFreelance".equals(isFreelance)) {
                     switch (roleID) {
@@ -90,6 +91,11 @@ public class LoginController extends HttpServlet {
                 }
             } else {
                 request.setAttribute("ERROR", "Tên đăng nhập hoặc mật khẩu không đúng!");
+                if(isFreelance==null){
+                    url=ERROR;
+                }else{
+                    url=ERROR_FREELANCE;
+                }
             }
         } catch (Exception e) {
             log("Error at LoginController:" + e.toString());

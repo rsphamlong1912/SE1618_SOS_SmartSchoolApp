@@ -104,15 +104,19 @@ public class MainController extends HttpServlet {
     private static final String SET_JOB_APPROVE_DONE = "SetJobApproveDone";
     private static final String SET_JOB_APPROVE_DONE_CONTROLLER = "setJobApproveDone";
 
-    private static final String LIST_POST_BY_CATEGORY = "SearchPostByCategoryId";
-    private static final String LIST_POST_BY_CATEGORY_CONTROLLER = "searchPostByCategotyId";
-
+    private static final String LIST_POST_BY_CATEGORY_AND_TYPE = "SearchPostByCategoryAndType";
+    private static final String LIST_POST_BY_CATEGORY_AND_TYPE_CONTROLLER = "searchPostByCategoryAndType";
+    private static final String LIST_POST_BY_CATEGORY = "SearchPostByCategory";
+    private static final String LIST_POST_BY_CATEGORY_CONTROLLER = "searchPostByCategory";
     private static final String LIST_POST_TO_APPROVE = "ListPostToApprove";
     private static final String LIST_POST_TO_APPROVE_CONTROLLER = "listPostToApprove";
     private static final String APPROVE_POST = "ApprovePost";
     private static final String APPROVE_POST_CONTROLLER = "approvePost";
     private static final String NO_APPROVE_POST = "NoApprovePost";
     private static final String NO_APPROVE_POST_CONTROLLER = "noApprovePost";
+
+    private static final String SEARCH_POST_IN_HOME = "SearchPostInHome";
+    private static final String SEARCH_POST_IN_HOME_CONTROLLER = "searchPostInHome";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -239,7 +243,7 @@ public class MainController extends HttpServlet {
             if (SET_JOB_APPROVE_DONE.equals(action)) {
                 url = SET_JOB_APPROVE_DONE_CONTROLLER;
             }
-            if (LIST_POST_BY_CATEGORY.equals(action)) {
+            if (LIST_POST_BY_CATEGORY_AND_TYPE.equals(action)) {
                 url = LIST_POST_BY_CATEGORY_CONTROLLER;
             }
             if (LIST_POST_TO_APPROVE.equals(action)) {
@@ -250,6 +254,12 @@ public class MainController extends HttpServlet {
             }
             if (NO_APPROVE_POST.equals(action)) {
                 url = NO_APPROVE_POST_CONTROLLER;
+            }
+            if (LIST_POST_BY_CATEGORY.equals(action)) {
+                url = LIST_POST_BY_CATEGORY_CONTROLLER;
+            }
+            if (SEARCH_POST_IN_HOME.equals(action)) {
+                url = SEARCH_POST_IN_HOME_CONTROLLER;
             }
         } catch (Exception e) {
             log("Error at MainController: " + e.toString());
