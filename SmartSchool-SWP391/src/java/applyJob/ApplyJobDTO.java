@@ -15,15 +15,23 @@ public class ApplyJobDTO {
     private int jobId;
     private String userId;
     private String status;
+    private String fullname;
+    private String phone;
+    private String email;
+    private String facebook;
 
     public ApplyJobDTO() {
     }
 
-    public ApplyJobDTO(int applyJobId, int jobId, String userId, String status) {
+    public ApplyJobDTO(int applyJobId, int jobId, String userId, String status, String fullname, String phone, String email, String facebook) {
         this.applyJobId = applyJobId;
         this.jobId = jobId;
         this.userId = userId;
         this.status = status;
+        this.fullname = fullname;
+        this.phone = phone;
+        this.email = email;
+        this.facebook = facebook;
     }
 
     public int getApplyJobId() {
@@ -57,4 +65,37 @@ public class ApplyJobDTO {
     public void setStatus(String status) {
         this.status = status;
     }
+
+    public String getFullname() {
+        return fullname;
+    }
+
+    public void setFullname(String fullname) {
+        this.fullname = fullname;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getFacebook() {
+        return facebook;
+    }
+
+    public void setFacebook(String facebook) {
+        this.facebook = facebook;
+    }
+    
 }

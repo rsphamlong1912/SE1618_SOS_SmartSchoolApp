@@ -49,7 +49,7 @@ public class JobPostDAO {
             + "FROM  tblJobPost as j, tblCategoryJob as c, tblUser as u\n"
             + "WHERE j.jobCategoryId=c.jobCategoryId AND j.userId=u.userId AND status=1 AND (process = 'new' OR process='process') AND j.jobCategoryId=?\n"
             + "ORDER BY jobId DESC";
-    private static final String JOB_DETAIL = "SELECT j.jobId,j.userId,j.jobCategoryId,j.title,j.description,j.salary,j.amount,j.timeJob,j.process,j.date,j.status,c.jobCategoryName, u.fullname,u.compName\n"
+    private static final String JOB_DETAIL = "SELECT j.jobId,j.userId,j.jobCategoryId,j.title,j.description,j.salary,j.amount,j.timeJob,j.process,j.date,j.status,j.amountFreelancer,c.jobCategoryName, u.fullname,u.compName\n"
             + "FROM  tblJobPost as j, tblCategoryJob as c, tblUser as u\n"
             + "WHERE j.jobCategoryId=c.jobCategoryId AND j.userId=u.userId AND status=1 AND (process = 'new' OR process='process') AND j.jobId=?\n";
         private static final String GET_TOTAL_APPROVE_POST = "SELECT COUNT(jobId) AS count FROM tblJobPost WHERE process='approving' AND status=1";
@@ -80,6 +80,12 @@ public class JobPostDAO {
 
     private static final String SET_JOB_APPROVE_DONE = "UPDATE tblJobPost SET process = 'done' WHERE jobId = ?";
 
+    private static final String GET_AMOUNT_FREELANCER = "SELECT amount, amountFreelancer FROM tblJobPost WHERE jobId = ?";
+
+    private static final String SET_AMOUNT_FREELANCER_PLUS_ONE = "UPDATE tblJobPost SET amountFreelancer = amountFreelancer + 1 WHERE jobId = ? ";
+
+    private static final String UPDATE_NEW_AMOUNT = "UPDATE tblJobPost SET amount = ? WHERE jobId = ?";
+
     public static int takeMinutes() {
         long millis = System.currentTimeMillis();
         long minutes = TimeUnit.MILLISECONDS.toMinutes(millis);
@@ -102,6 +108,87 @@ public class JobPostDAO {
             return time = Integer.toString(minutesDistance / 43200) + " tháng trước";
         }
         return null;
+    }
+
+    public void UpdateNewAmount(String newAmount, String jobId)
+            throws SQLException {
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(UPDATE_NEW_AMOUNT);
+                ptm.setString(1, newAmount);
+                ptm.setString(2, jobId);
+                ptm.executeUpdate();
+            }
+        } catch (Exception e) {
+
+        } finally {
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+    }
+
+    public JobPostDTO getAmountFreelancer(String jobId)
+            throws SQLException {
+        JobPostDTO post = new JobPostDTO();
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(GET_AMOUNT_FREELANCER);
+                ptm.setString(1, jobId);
+                rs = ptm.executeQuery();
+                while (rs.next()) {
+                    post.setAmount(rs.getInt("amount"));
+                    post.setAmountFreelancer(rs.getInt("amountFreelancer"));
+                }
+                return post;
+            }
+        } catch (Exception ex) {
+
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return null;
+    }
+
+    public void setAmountFreelancerPlusOne(String jobId)
+            throws SQLException {
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(SET_AMOUNT_FREELANCER_PLUS_ONE);
+                ptm.setString(1, jobId);
+                ptm.executeUpdate();
+            }
+        } catch (Exception e) {
+
+        } finally {
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
     }
 
     public List<JobPostDTO> getAll() throws SQLException {
@@ -555,6 +642,7 @@ public class JobPostDAO {
                     post.setJobCategoryName(rs.getString("jobCategoryName"));
                     post.setFullname(rs.getString("fullname"));
                     post.setCompName(rs.getString("compName"));
+                    post.setAmountFreelancer(rs.getInt("amountFreelancer"));
                 }
                 return post;
             }

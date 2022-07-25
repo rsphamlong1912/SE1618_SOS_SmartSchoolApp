@@ -19,6 +19,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import jobPost.JobPostDAO;
+import jobPost.JobPostDTO;
 import jobPostAnswer.JobPostAnswerDAO;
 import jobPostAnswer.JobPostAnswerDTO;
 import user.UserDAO;
@@ -36,18 +38,40 @@ public class ApproveUserWaitingController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         String buttonValue = request.getParameter("buttonValue");
-        String jobId = request.getParameter("jobId");
+        String applyJobId = request.getParameter("applyJobId");
         String userId = request.getParameter("userId");
+        String jobId = request.getParameter("jobId");
         ApplyJobDAO aDao = new ApplyJobDAO();
         UserDAO uDao = new UserDAO();
-        if ("approved".equals(buttonValue)) {
-            aDao.setApplyJobDoing(jobId, userId);
-            uDao.setHaveJobPlusOne(userId);
-        } else if ("denied".equals(buttonValue)) {
-            aDao.setApplyJobDenied(jobId, userId);
+        JobPostAnswerDAO ansDao = new JobPostAnswerDAO();
+        JobPostDAO pDao = new JobPostDAO();
+        int haveJob = uDao.getHaveJob(userId);
+        JobPostDTO checkAmount = pDao.getAmountFreelancer(jobId);
+        if (haveJob < 3) {
+            if (checkAmount.getAmountFreelancer() < checkAmount.getAmount()) {
+                if ("approved".equals(buttonValue)) {
+                    aDao.setApplyJobDoing(applyJobId);
+                    pDao.setAmountFreelancerPlusOne(jobId);
+                    uDao.setHaveJobPlusOne(userId);
+                    JobPostDTO AmountFreelancer = pDao.getAmountFreelancer(jobId);
+                    out.print(AmountFreelancer.getAmountFreelancer());
+                } else if ("denied".equals(buttonValue)) {
+                    aDao.setApplyJobDenied(applyJobId);
+                    ansDao.deleteAnswer(userId, jobId);
+                }
+                
+            } else {
+                out.print("JobFullAmount");
+            }
+        } else {
+            if ("approved".equals(buttonValue)) {
+            out.print("UserFullJob");
+            }else if ("denied".equals(buttonValue)) {
+                aDao.setApplyJobDenied(applyJobId);
+                ansDao.deleteAnswer(userId, jobId);
+            }
         }
-
-
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
