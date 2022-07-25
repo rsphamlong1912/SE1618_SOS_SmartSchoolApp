@@ -42,6 +42,7 @@ public class SearchByCategoryIdController extends HttpServlet {
         try {
             response.setContentType("text/html;charset=UTF-8");
             int categoryId = Integer.parseInt(request.getParameter("categoryId"));
+
             int type = Integer.parseInt(request.getParameter("type"));
             PostDAO dao = new PostDAO();
             CategoryDAO cdao = new CategoryDAO();
@@ -49,6 +50,11 @@ public class SearchByCategoryIdController extends HttpServlet {
             List<PostDTO> listPost = dao.searchPostByJobCategoryId(categoryId, type);
             request.setAttribute("LISTPOST", listPost);
             request.setAttribute("LISTALLCATEGORY", listAllCategory);
+            if (type == 0) {
+                request.setAttribute("TAGCATEFORLOST", categoryId);
+            } else if (type == 1) {
+                request.setAttribute("TAGCATEFORFOUND", categoryId);
+            }
 
         } catch (SQLException ex) {
             Logger.getLogger(SearchByCategoryIdController.class.getName()).log(Level.SEVERE, null, ex);

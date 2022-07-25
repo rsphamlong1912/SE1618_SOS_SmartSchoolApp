@@ -219,7 +219,7 @@
                                                         <ul>
                                                             <c:forEach items="${requestScope.LISTALLCATEGORY}" var="listCategory">
                                                                 <li><a href="/main?action=SearchPostByCategoryId&categoryId=${listCategory.categoryId}&type=1">${listCategory.categoryName}</a></li>
-                                                            </c:forEach>
+                                                                </c:forEach>
                                                         </ul>
                                                     </div>
                                                 </div>
@@ -321,7 +321,7 @@
                                     url: "/searchPost",
                                     type: "get",
                                     data: {
-                                        search: txtSearch                                       
+                                        search: txtSearch
                                     },
                                     success: function (data) {
                                         var row = document.getElementById("content");
