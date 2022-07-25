@@ -12,14 +12,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import jobPost.JobPostDAO;
+import post.PostDAO;
 
 /**
  *
- * @author TQK
+ * @author SE150925 Nguyen Van Hai Nam
  */
-@WebServlet(name = "ApproveJobController", urlPatterns = {"/approveJob"})
-public class ApproveJobController extends HttpServlet {
+@WebServlet(name = "ApprovePostController", urlPatterns = {"/approvePost"})
+public class ApprovePostController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,13 +34,15 @@ public class ApproveJobController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try {
-            int jobId = Integer.parseInt(request.getParameter("jobId"));
-            JobPostDAO dao = new JobPostDAO();
-            dao.approvePost(jobId);
-            response.sendRedirect("main?action=ApproveJobPost");
+            int postId = Integer.parseInt(request.getParameter("postId"));
+            PostDAO dao = new PostDAO();
+            dao.approvePost(postId);
+            response.sendRedirect("main?action=ListPostToApprove");
+
         } catch (Exception e) {
             log("Error at ApproveJobController: " + e.toString());
         }
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

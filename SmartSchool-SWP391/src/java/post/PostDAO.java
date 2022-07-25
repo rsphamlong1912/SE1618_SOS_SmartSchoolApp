@@ -56,6 +56,7 @@ public class PostDAO {
     private static final String GET_TOTALPOST = "SELECT COUNT(postId) AS count FROM tblPost WHERE postStatus='true'";
     private static final String GET_TOTALLOSTPOST = "SELECT COUNT(postId) AS countLostPost FROM tblPost WHERE postStatus='true' AND type=0";
     private static final String GET_TOTALFOUNDPOST = "SELECT COUNT(postId) AS countFoundPost FROM tblPost WHERE postStatus='true' AND type=1";
+    private static final String GET_TOTAL_APPROVE_POST = "SELECT COUNT(postId) AS count FROM tblPost WHERE postStatus='approving'";
 
     private static final String GET_TOTAL_POST_LAST_WEEK = "SELECT COUNT(postId) as totalPost from tblPost WHERE date BETWEEN (DATEDIFF(mi, '1970-01-01 00:00:00', GETUTCDATE())-10080) AND DATEDIFF(mi, '1970-01-01 00:00:00', GETUTCDATE())";
     private static final String GET_TOTAL_POST_1DAY_AGO = "SELECT COUNT(postId) as totalPost from tblPost WHERE date BETWEEN (DATEDIFF(mi, '1970-01-01 00:00:00', GETUTCDATE())-1440) AND DATEDIFF(mi, '1970-01-01 00:00:00', GETUTCDATE())";
@@ -85,7 +86,11 @@ public class PostDAO {
     private static final String GET_TOTAL_FOUND_7DAY_AGO = "SELECT COUNT(postId) as totalPost from tblPost WHERE type = 1 AND date BETWEEN (DATEDIFF(mi, '1970-01-01 00:00:00', GETUTCDATE())-10080) AND (DATEDIFF(mi, '1970-01-01 00:00:00', GETUTCDATE())-8640)";
 
 //    Approve Post
-    private static final String LIST_POST_APPROVE = "SELECT * FROM tblPost WHERE postStatus='true' ORDER BY postId DESC";
+    private static final String LIST_POST_APPROVING = "SELECT p.postId, p.userId,p.categoryId, p.postImg, p.description,p.date,p.type,p.title,p.postStatus,c.categoryName\n"
+            + "FROM tblPost as p, tblCategory as c\n"
+            + "WHERE p.categoryId=c.categoryId AND postStatus='approving' ORDER BY postId DESC";
+    private static final String APPROVE_POST = "UPDATE tblPost SET postStatus='true' WHERE postId=?";
+    private static final String DONT_APPROVE_POST = "UPDATE tblPost SET postStatus='false' WHERE postId=?";
 
     public static int takeMinutes() {
         long millis = System.currentTimeMillis();
@@ -529,6 +534,35 @@ public class PostDAO {
         return 0;
     }
 
+    public int getTotalApprovePost() throws SQLException {
+        Connection con = null;
+        ResultSet rs = null;
+        PreparedStatement ptm = null;
+        try {
+            //Creating and executing JDBC statements
+            con = DBUtils.getConnection();
+            if (con != null) {
+                ptm = con.prepareStatement(GET_TOTAL_APPROVE_POST);
+                rs = ptm.executeQuery();
+                if (rs.next()) {
+                    return rs.getInt("count");
+                }
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(PostDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return 0;
+    }
     public int getTotalLostPost() throws SQLException {
         Connection con = null;
         ResultSet rs = null;
@@ -590,7 +624,7 @@ public class PostDAO {
     }
 
     public byte[] getItemData(String postId) throws SQLException {
-        String getAvatar = "SELECT postImg FROM tblPost WHERE postId = ? and postStatus = 'true'";
+        String getAvatar = "SELECT postImg FROM tblPost WHERE postId = ?";
         Connection conn = null;
         PreparedStatement ptm = null;
         ResultSet rs = null;
@@ -1514,4 +1548,87 @@ public class PostDAO {
         return 0;
     }
 
+    public List<PostDTO> getPostToApprove() throws SQLException {
+        List<PostDTO> list = new ArrayList<>();
+        Connection con = null;
+        Statement stm = null;
+        ResultSet rs = null;
+        try {
+            //Creating and executing JDBC statements
+            con = DBUtils.getConnection();
+            stm = con.createStatement();
+            rs = stm.executeQuery(LIST_POST_APPROVING);
+            //Loading data into the list
+            while (rs.next()) {
+                PostDTO post = new PostDTO();
+                post.setPostId(rs.getInt("postId"));
+                post.setUserId(rs.getString("userId"));
+                post.setCategoryId(rs.getInt("categoryId"));
+                post.setPostImg(rs.getBytes("postImg"));
+                post.setDescription(rs.getString("description"));
+                int date = rs.getInt("date");
+                String newDate = checkTime(date);
+                post.setDate(newDate);
+                post.setType(rs.getString("type"));
+                post.setTitle(rs.getString("title"));
+                post.setPostStatus(rs.getString("postStatus"));
+                post.setCategoryName(rs.getString("categoryName"));
+                list.add(post);
+            }
+
+        } catch (Exception ex) {
+            Logger.getLogger(PostDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return list;
+    }
+
+    public void approvePost(int postId) throws SQLException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        try {
+            con = DBUtils.getConnection();
+            stm = con.prepareStatement(APPROVE_POST);
+            stm.setInt(1, postId);
+            stm.executeUpdate();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+    }
+
+    public void dontApprovePost(int postId) throws SQLException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        try {
+            con = DBUtils.getConnection();
+            stm = con.prepareStatement(DONT_APPROVE_POST);
+            stm.setInt(1, postId);
+            stm.executeUpdate();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+    }
 }
