@@ -21,7 +21,7 @@
         <url-pattern>/adminLostAndFoundPost</url-pattern>
         <url-pattern>/approveJob</url-pattern>
         <url-pattern>/approveJobPost</url-pattern>
-        <url-pattern>/approveUserWaiting</url-pattern>
+        <!--<url-pattern>/approveUserWaiting</url-pattern>-->
         <url-pattern>/category</url-pattern>
         <url-pattern>/deleteCategory</url-pattern>
         <url-pattern>/deleteJobCategory</url-pattern>
