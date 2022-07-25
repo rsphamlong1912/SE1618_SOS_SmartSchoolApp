@@ -1,18 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
-    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="1">
+        <file>
+            <url>Admin/ApprovePostFreelanceJob.jsp</url>
+            <bookmark id="1">
+                <name/>
+                <line>622</line>
+                <key/>
+            </bookmark>
+        </file>
+    </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/nguye/OneDrive/Documents/NetBeansProjects/SE1618_SOS_SmartSchoolApp/SmartSchool-SWP391/src/java/jobPost/JobPostDAO.java</file>
-            <file>file:/C:/Users/nguye/OneDrive/Documents/NetBeansProjects/SE1618_SOS_SmartSchoolApp/SmartSchool-SWP391/src/java/controllers/DisplayItemController.java</file>
-            <file>file:/C:/Users/nguye/OneDrive/Documents/NetBeansProjects/SE1618_SOS_SmartSchoolApp/SmartSchool-SWP391/src/java/controllers/MainController.java</file>
-            <file>file:/C:/Users/nguye/OneDrive/Documents/NetBeansProjects/SE1618_SOS_SmartSchoolApp/SmartSchool-SWP391/src/java/controllers/ApproveJobController.java</file>
-            <file>file:/C:/Users/nguye/OneDrive/Documents/NetBeansProjects/SE1618_SOS_SmartSchoolApp/SmartSchool-SWP391/src/java/controllers/ApproveJobPostController.java</file>
-            <file>file:/C:/Users/nguye/OneDrive/Documents/NetBeansProjects/SE1618_SOS_SmartSchoolApp/SmartSchool-SWP391/src/java/controllers/ListPostAppovingController.java</file>
+            <file>file:/C:/Users/nguye/OneDrive/Documents/NetBeansProjects/SE1618_SOS_SmartSchoolApp/SmartSchool-SWP391/src/java/controllers/NoApprovePostController.java</file>
+            <file>file:/C:/Users/nguye/OneDrive/Documents/NetBeansProjects/SE1618_SOS_SmartSchoolApp/SmartSchool-SWP391/src/java/controllers/ListPostToApproveController.java</file>
+            <file>file:/C:/Users/nguye/OneDrive/Documents/NetBeansProjects/SE1618_SOS_SmartSchoolApp/SmartSchool-SWP391/src/java/controllers/ApprovePostController.java</file>
             <file>file:/C:/Users/nguye/OneDrive/Documents/NetBeansProjects/SE1618_SOS_SmartSchoolApp/SmartSchool-SWP391/src/java/Filters/RouterFilter.java</file>
-            <file>file:/C:/Users/nguye/OneDrive/Documents/NetBeansProjects/SE1618_SOS_SmartSchoolApp/SmartSchool-SWP391/src/java/post/PostDAO.java</file>
-            <file>file:/C:/Users/nguye/OneDrive/Documents/NetBeansProjects/SE1618_SOS_SmartSchoolApp/SmartSchool-SWP391/src/java/controllers/ListPostController.java</file>
-            <file>file:/C:/Users/nguye/OneDrive/Documents/NetBeansProjects/SE1618_SOS_SmartSchoolApp/SmartSchool-SWP391/src/java/Filters/ADFilter.java</file>
         </group>
     </open-files>
 </project-private>

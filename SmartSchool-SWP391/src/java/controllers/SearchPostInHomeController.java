@@ -25,8 +25,8 @@ import post.PostDTO;
  *
  * @author SE150925 Nguyen Van Hai Nam
  */
-@WebServlet(name = "SearchByCategoryIdController", urlPatterns = {"/searchPostByCategotyId"})
-public class SearchByCategoryIdController extends HttpServlet {
+@WebServlet(name = "SearchPostInHomeController", urlPatterns = {"/searchPostInHome"})
+public class SearchPostInHomeController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,29 +39,34 @@ public class SearchByCategoryIdController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
         try {
-            response.setContentType("text/html;charset=UTF-8");
-            int categoryId = Integer.parseInt(request.getParameter("categoryId"));
-
+            String searchText = request.getParameter("searchText");
             int type = Integer.parseInt(request.getParameter("type"));
-            PostDAO dao = new PostDAO();
             CategoryDAO cdao = new CategoryDAO();
             List<CategoryDTO> listAllCategory = cdao.getAllCategory();
-            List<PostDTO> listPost = dao.searchPostByJobCategoryId(categoryId, type);
-            request.setAttribute("LISTPOST", listPost);
-            request.setAttribute("LISTALLCATEGORY", listAllCategory);
-            if (type == 0) {
-                request.setAttribute("TAGCATEFORLOST", categoryId);
-            } else if (type == 1) {
-                request.setAttribute("TAGCATEFORFOUND", categoryId);
-            }
+            PostDAO dao = new PostDAO();
+            List<PostDTO> list = null;
+            if ("".equals(searchText) && type == -1) {
+                list = dao.getAll();
 
+            } else if (!"".equals(searchText) && type == -1) {
+                list = dao.searchPostByTitle(searchText);
+
+            } else if ("".equals(searchText) && type != -1) {
+                list = dao.searchPostByType(type);
+            } else {
+                list = dao.searchPostByTypeAndTitle(type, searchText);
+            }
+            request.setAttribute("LISTPOST", list);
+            request.setAttribute("LISTALLCATEGORY", listAllCategory);
         } catch (SQLException ex) {
-            Logger.getLogger(SearchByCategoryIdController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SearchPostInHomeController.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             request.getRequestDispatcher("list.jsp").forward(request, response);
 
         }
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
