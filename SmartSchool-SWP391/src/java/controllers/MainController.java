@@ -104,6 +104,9 @@ public class MainController extends HttpServlet {
     private static final String SET_JOB_APPROVE_DONE = "SetJobApproveDone";
     private static final String SET_JOB_APPROVE_DONE_CONTROLLER = "setJobApproveDone";
     
+    private static final String UPDATE_NEW_AMOUNT = "UpdateNewAmount";
+    private static final String UPDATE_NEW_AMOUNT_CONTROLLER = "updateNewAmount";
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -228,6 +231,9 @@ public class MainController extends HttpServlet {
             }
             if (SET_JOB_APPROVE_DONE.equals(action)) {
                 url = SET_JOB_APPROVE_DONE_CONTROLLER;
+            }
+            if (UPDATE_NEW_AMOUNT.equals(action)) {
+                url = UPDATE_NEW_AMOUNT_CONTROLLER;
             }
         } catch (Exception e) {
             log("Error at MainController: " + e.toString());

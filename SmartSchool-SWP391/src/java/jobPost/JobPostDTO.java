@@ -21,8 +21,9 @@ public class JobPostDTO {
     private String fullname;
     private String compName;
     private String avatar;
+    private int amountFreelancer;
 
-    public JobPostDTO(int jobId, String userId, int jobCategoryId, String title, String description, float salary, int amount, int timeJob, String process, String date, boolean status, String jobCategoryName, String fullname, String compName, String avatar) {
+    public JobPostDTO(int jobId, String userId, int jobCategoryId, String title, String description, float salary, int amount, int timeJob, String process, String date, boolean status, String jobCategoryName, String fullname, String compName, String avatar, int amountFreelancer) {
         this.jobId = jobId;
         this.userId = userId;
         this.jobCategoryId = jobCategoryId;
@@ -38,6 +39,7 @@ public class JobPostDTO {
         this.fullname = fullname;
         this.compName = compName;
         this.avatar = avatar;
+        this.amountFreelancer = amountFreelancer;
     }
 
     public JobPostDTO() {
@@ -161,6 +163,14 @@ public class JobPostDTO {
 
     public void setAvatar(String avatar) {
         this.avatar = avatar;
+    }
+
+    public int getAmountFreelancer() {
+        return amountFreelancer;
+    }
+
+    public void setAmountFreelancer(int amountFreelancer) {
+        this.amountFreelancer = amountFreelancer;
     }
 
     

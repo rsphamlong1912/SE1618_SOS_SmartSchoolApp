@@ -44,6 +44,8 @@ public class UserDAO {
     private static final String SET_HAVE_JOB_PLUS_ONE = "UPDATE tblUser SET haveJob = haveJob + 1 where userId = ?";
     private static final String SET_HAVE_JOB_MINUS_ONE = "UPDATE tblUser SET haveJob = haveJob - 1 where userId = ?";
 
+    private static final String GET_HAVE_JOB = "SELECT haveJob FROM tblUser WHERE userId = ?";
+
     public List<UserDTO> get5NewUser() throws SQLException {
         List<UserDTO> list = new ArrayList<>();
         Connection conn = null;
@@ -86,6 +88,39 @@ public class UserDAO {
             }
         }
         return list;
+    }
+
+    public int getHaveJob(String userId)
+            throws SQLException {
+
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(GET_HAVE_JOB);
+                ptm.setString(1, userId);
+                rs = ptm.executeQuery();
+                while (rs.next()) {
+                    int haveJob = rs.getInt("haveJob");
+                    return haveJob;
+                }
+            }
+        } catch (Exception ex) {
+
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return 0;
     }
 
     public UserDTO getUserWaitingForJob(String userId) throws SQLException {
