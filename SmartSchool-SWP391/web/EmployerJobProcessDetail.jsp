@@ -18,7 +18,7 @@
         <!-- ===============================================-->
         <!--    Document Title-->
         <!-- ===============================================-->
-        <title>FPTU Lost & Found </title>
+        <title>FPTU Freelance Job </title>
 
 
         <!-- ===============================================-->
@@ -105,6 +105,10 @@
             }
             .hoverLink:hover {
                 color: #F1A501 !important;
+            }
+            
+            .modal-shadow{
+                box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
             }
         </style>
     </head>
@@ -284,6 +288,7 @@
 
             <section class="shop" style="min-height: 72vh;">
                 <div class="container">
+                    <h2 class="text-success text-center mb-5">${requestScope.SUCCESS}</h2>
                     <div class="row">
                         <div class="col-lg-9 col-md-9 mb-5">
                             <div class="row mb-3">
@@ -364,7 +369,7 @@
                                                                             <h5 class="fw-medium text-truncate">${userWaiting.fullname}</h5>
                                                                             <span class="fs-1 fw-medium d-flex"></span>
                                                                         </div>
-                                                                        <div class="d-flex align-items-center"><span class="fw-medium" style="font-size: 15px;">Ứng viên</span>
+                                                                        <div class="d-flex align-items-center"><span class="fw-medium" style="font-size: 14px;"> Ứng viên</span>
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-md-3 text-end">
@@ -374,11 +379,11 @@
                                                                     </div>
                                                                 </div>
                                                                 <!-- Modal -->
-                                                                <div class="modal fade" id="ModalAnswer${count.index + 1}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                <div class="modal fade" id="ModalAnswer${count.index + 1}" tabindex="-1" data-bs-backdrop="false" aria-labelledby="exampleModalLabel" aria-hidden="true">
 
                                                                     <div class="modal-dialog modal-dialog-centered">
 
-                                                                        <div class="modal-content">
+                                                                        <div class="modal-content modal-shadow">
 
                                                                             <div class="modal-header gradient-custom-2" >
                                                                                 <h5 class="modal-title" id="exampleModalLabel" style="color: #ffffff;">Câu trả lời của Ứng viên</h5>
@@ -412,13 +417,15 @@
                                                                 <div class="d-flex align-items-center mb-2"> <h6>Facebook: <span class="fw-medium" style="font-size: 14px;"> <a class="text-decoration-none" href="https://www.facebook.com/ngocbao159/">${userWaiting.facebook}</a></span></h6>
                                                                 </div>
                                                                 <div class="d-flex align-items-center justify-content-end mb-2">
-                                                                    <button onclick="ApproveUser(this.getAttribute('data-jobId'), this.getAttribute('data-userId'), this.getAttribute('data-buttonValue'))" 
-                                                                            data-jobId="${JOBDETAIL.jobId}" 
-                                                                            data-userId="${userWaiting.userId}" 
+                                                                    <button onclick="ApproveUser(this.getAttribute('data-applyJobId'), this.getAttribute('data-userId'), this.getAttribute('data-jobId'), this.getAttribute('data-buttonValue'))" 
+                                                                            data-applyJobId="${userWaiting.applyJobId}"
+                                                                            data-userId="${userWaiting.userId}"
+                                                                            data-jobId="${JOBDETAIL.jobId}"
                                                                             data-buttonValue="denied" type="button" class="col-md-2 btn btn-outline-primary btn-sm mt-2">Từ chối</button>
-                                                                    <button onclick="ApproveUser(this.getAttribute('data-jobId'), this.getAttribute('data-userId'), this.getAttribute('data-buttonValue'))" 
-                                                                            data-jobId="${JOBDETAIL.jobId}" 
-                                                                            data-userId="${userWaiting.userId}" 
+                                                                    <button onclick="ApproveUser(this.getAttribute('data-applyJobId'), this.getAttribute('data-userId'), this.getAttribute('data-jobId'), this.getAttribute('data-buttonValue'))" 
+                                                                            data-applyJobId="${userWaiting.applyJobId}"
+                                                                            data-userId="${userWaiting.userId}"
+                                                                            data-jobId="${JOBDETAIL.jobId}"
                                                                             data-buttonValue="approved" type="button" class="col-md-2 btn btn-primary gradient-custom-2 btn-sm ms-3 mt-2">Phê duyệt</button>
                                                                 </div>                                            
                                                             </div>
@@ -450,8 +457,7 @@
                                             </div>
 
                                             <div class="d-flex align-items-center">
-                                                <h6 style="line-height: 2.5;">Số người đã tuyển: <span class="fw-medium"
-                                                                                                       style="font-size: 14px; "> 3</span></h6>
+                                                <h6 style="line-height: 2.5;">Số người đã tuyển: <span id="amountFreelancer" class="fw-medium" style="font-size: 14px; ">${requestScope.AMOUNT_FREELANCER}</span></h6>
                                             </div>
 
                                         </div>
@@ -459,11 +465,11 @@
                                     </div>
                                     <div class="row justify-content-center text-center">
                                         <h6 style="line-height: 2.5;">Chuyển trạng thái công việc </h6>
-                                        <div class="col-md-6 contact ">
+                                        <div class="col-md-7 contact ">
                                             <a href="" class="btn btn-success btn-sm w-100" 
                                                data-bs-toggle="modal" data-bs-target="#ModalConfirm"
                                                style="background: linear-gradient(to right, #99df20, #009245 ); border:none;">
-                                               <i class="fa fa-arrow-right" aria-hidden="true"></i> Đã tuyển xong </a>
+                                                <i class="fa fa-arrow-right" aria-hidden="true"></i> Bắt đầu công việc </a>
                                         </div>
                                     </div>
                                     <!-- Modal -->
@@ -488,131 +494,189 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-            </section>
+                        </section>
 
-
-
-            <!-- ============================================-->
-            <!-- <section> begin ============================-->
-            <section class="pb-0 pb-lg-4 gradient-custom-2">
-
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-3 col-md-7 col-12 mb-4 mb-md-6 mb-lg-0 order-0"> <img class="mb-4"
-                                                                                                 src="https://hcmuni.fpt.edu.vn/landing-page/images/logo-top.png" width="150" alt="jadoo" />
-                            <p class="fs--1 text-white mb-0 fw-medium">Giúp bạn tìm kiếm những món đồ không may bị thất lạc
-                            </p>
-                        </div>
-                        <div class="col-lg-2 col-md-4 mb-4 mb-lg-0 order-lg-1 order-md-2">
-                            <h4 class="footer-heading-color fw-bold font-sans-serif mb-3 mb-lg-4">Company</h4>
-                            <ul class="list-unstyled mb-0">
-                                <li class="mb-2"><a class="link-900 fs-1 fw-medium text-decoration-none" href="#!">About</a>
-                                </li>
-                                <li class="mb-2"><a class="link-900 fs-1 fw-medium text-decoration-none"
-                                                    href="#!">Careers</a></li>
-                                <li class="mb-2"><a class="link-900 fs-1 fw-medium text-decoration-none"
-                                                    href="#!">Mobile</a></li>
-                            </ul>
-                        </div>
-                        <div class="col-lg-2 col-md-4 mb-4 mb-lg-0 order-lg-2 order-md-3">
-                            <h4 class="footer-heading-color fw-bold font-sans-serif mb-3 mb-lg-4">Contact</h4>
-                            <ul class="list-unstyled mb-0">
-                                <li class="mb-2"><a class="link-900 fs-1 fw-medium text-decoration-none"
-                                                    href="#!">Help/FAQ</a></li>
-                                <li class="mb-2"><a class="link-900 fs-1 fw-medium text-decoration-none" href="#!">Press</a>
-                                </li>
-                                <li class="mb-2"><a class="link-900 fs-1 fw-medium text-decoration-none"
-                                                    href="#!">Affiliate</a></li>
-                            </ul>
-                        </div>
-                        <div class="col-lg-2 col-md-4 mb-4 mb-lg-0 order-lg-3 order-md-4">
-                            <h4 class="footer-heading-color fw-bold font-sans-serif mb-3 mb-lg-4">More</h4>
-                            <ul class="list-unstyled mb-0">
-                                <li class="mb-2"><a class="link-900 fs-1 fw-medium text-decoration-none"
-                                                    href="#!">Airlinefees</a></li>
-                                <li class="mb-2"><a class="link-900 fs-1 fw-medium text-decoration-none"
-                                                    href="#!">Airline</a></li>
-                                <li class="mb-2"><a class="link-900 fs-1 fw-medium text-decoration-none" href="#!">Low fare
-                                        tips</a></li>
-                            </ul>
-                        </div>
-                        <div class="col-lg-3 col-md-5 col-12 mb-4 mb-md-6 mb-lg-0 order-lg-4 order-md-1">
-                            <div class="icon-group mb-4"> <a class="text-decoration-none icon-item shadow-social"
-                                                             id="facebook" href="#!"><i class="fab fa-facebook-f"> </i></a><a
-                                                             class="text-decoration-none icon-item shadow-social" id="instagram" href="#!"><i
-                                        class="fab fa-instagram"> </i></a><a
-                                    class="text-decoration-none icon-item shadow-social" id="twitter" href="#!"><i
-                                        class="fab fa-twitter">
-                                    </i></a></div>
-                            <h4 class="fw-medium font-sans-serif text-white mb-3">Discover our app</h4>
-                            <div class="d-flex align-items-center"> <a href="#!"> <img class="me-2"
-                                                                                       src="assets/img/play-store.png" alt="play store" /></a><a href="#!"> <img
-                                        src="assets/img/apple-store.png" alt="apple store" /></a>
+                        <!-- Modal -->
+                        <div class="modal fade" id="ModalJobFullAmount" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered modal-lg">
+                                <div class="modal-content">
+                                    <div class="modal-header gradient-custom-2 justify-content-center">
+                                        <h5 class="modal-title" id="exampleModalLabel" style="color: #ffffff;">Đã đủ số lượng cần tuyển, Bạn có chắc muốn tuyển thêm ?</h5>
+                                    </div>
+                                    <div class="modal-footer justify-content-center">
+                                        <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Đóng</button>
+                                        <button type="button" type="button" class="btn btn-primary gradient-custom-2" data-bs-target="#ModalSetAmountJob" data-bs-toggle="modal" data-bs-dismiss="modal">Tuyển</button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div><!-- end of .container-->
+                        
+                        <!-- Modal -->
+                        <div class="modal fade" id="ModalSetAmountJob" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <form action="main" method="POST">
+                                    <div class="modal-header gradient-custom-2 justify-content-center">
+                                        <h5 class="modal-title" id="exampleModalLabel" style="color: #ffffff;">Nhập lại số Freelancer cần tuyển</h5>
+                                    </div>
+                                    <div class="modal-body" style="padding: 1.5rem;">
+                                        <input type="hidden" class="form-control" id="formGroupExampleInput" name="jobId" value="${JOBDETAIL.jobId}">
+                                        <input type="text" class="form-control" id="formGroupExampleInput" name="newAmount" value="">
+                                    </div>
+                                    <div class="modal-footer justify-content-center">
+                                        <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Hủy</button>
+                                        <button type="submit" name="action" value="UpdateNewAmount" class="btn btn-primary gradient-custom-2">Xác nhận</button>
+                                    </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
 
-            </section>
-            <!-- <section> close ============================-->
-            <!-- ============================================-->
+                        <!-- Modal -->
+                        <div class="modal fade" id="ModalFullJob" tabindex="-1" aria-labelledby="exampleModalLabel" data-bs-backdrop="false" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content modal-shadow">
+                                    <div class="modal-header gradient-custom-2 justify-content-center">
+                                        <h5 class="modal-title" id="exampleModalLabel" style="color: #ffffff;">Freelancer đã nhận tối đa công việc !</h5>
+                                    </div>
+                                    <div class="modal-footer justify-content-center">
+                                        <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Đóng</button>     
+                                    </div>
+                                </div>
+                            </div>
+                        </div>  
+
+                        <!-- ============================================-->
+                        <!-- <section> begin ============================-->
+                        <section class="pb-0 pb-lg-4 gradient-custom-2">
+
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-7 col-12 mb-4 mb-md-6 mb-lg-0 order-0"> <img class="mb-4"
+                                                                                                             src="https://hcmuni.fpt.edu.vn/landing-page/images/logo-top.png" width="150" alt="jadoo" />
+                                        <p class="fs--1 text-white mb-0 fw-medium">Giúp bạn tìm kiếm những món đồ không may bị thất lạc
+                                        </p>
+                                    </div>
+                                    <div class="col-lg-2 col-md-4 mb-4 mb-lg-0 order-lg-1 order-md-2">
+                                        <h4 class="footer-heading-color fw-bold font-sans-serif mb-3 mb-lg-4">Company</h4>
+                                        <ul class="list-unstyled mb-0">
+                                            <li class="mb-2"><a class="link-900 fs-1 fw-medium text-decoration-none" href="#!">About</a>
+                                            </li>
+                                            <li class="mb-2"><a class="link-900 fs-1 fw-medium text-decoration-none"
+                                                                href="#!">Careers</a></li>
+                                            <li class="mb-2"><a class="link-900 fs-1 fw-medium text-decoration-none"
+                                                                href="#!">Mobile</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-lg-2 col-md-4 mb-4 mb-lg-0 order-lg-2 order-md-3">
+                                        <h4 class="footer-heading-color fw-bold font-sans-serif mb-3 mb-lg-4">Contact</h4>
+                                        <ul class="list-unstyled mb-0">
+                                            <li class="mb-2"><a class="link-900 fs-1 fw-medium text-decoration-none"
+                                                                href="#!">Help/FAQ</a></li>
+                                            <li class="mb-2"><a class="link-900 fs-1 fw-medium text-decoration-none" href="#!">Press</a>
+                                            </li>
+                                            <li class="mb-2"><a class="link-900 fs-1 fw-medium text-decoration-none"
+                                                                href="#!">Affiliate</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-lg-2 col-md-4 mb-4 mb-lg-0 order-lg-3 order-md-4">
+                                        <h4 class="footer-heading-color fw-bold font-sans-serif mb-3 mb-lg-4">More</h4>
+                                        <ul class="list-unstyled mb-0">
+                                            <li class="mb-2"><a class="link-900 fs-1 fw-medium text-decoration-none"
+                                                                href="#!">Airlinefees</a></li>
+                                            <li class="mb-2"><a class="link-900 fs-1 fw-medium text-decoration-none"
+                                                                href="#!">Airline</a></li>
+                                            <li class="mb-2"><a class="link-900 fs-1 fw-medium text-decoration-none" href="#!">Low fare
+                                                    tips</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-lg-3 col-md-5 col-12 mb-4 mb-md-6 mb-lg-0 order-lg-4 order-md-1">
+                                        <div class="icon-group mb-4"> <a class="text-decoration-none icon-item shadow-social"
+                                                                         id="facebook" href="#!"><i class="fab fa-facebook-f"> </i></a><a
+                                                                         class="text-decoration-none icon-item shadow-social" id="instagram" href="#!"><i
+                                                    class="fab fa-instagram"> </i></a><a
+                                                class="text-decoration-none icon-item shadow-social" id="twitter" href="#!"><i
+                                                    class="fab fa-twitter">
+                                                </i></a></div>
+                                        <h4 class="fw-medium font-sans-serif text-white mb-3">Discover our app</h4>
+                                        <div class="d-flex align-items-center"> <a href="#!"> <img class="me-2"
+                                                                                                   src="assets/img/play-store.png" alt="play store" /></a><a href="#!"> <img
+                                                    src="assets/img/apple-store.png" alt="apple store" /></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div><!-- end of .container-->
+
+                        </section>
+                        <!-- <section> close ============================-->
+                        <!-- ============================================-->
 
 
-            <div class="py-5 text-center">
-                <p class="mb-0 text-secondary fs--1 fw-medium">FPT SmartSchool </p>
-            </div>
-        </main>
-        <!-- ===============================================-->
-        <!--    End of Main Content-->
-        <!-- ===============================================-->
-        <!--- AJAX -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-        <script>
-                                                                        function ApproveUser(jobId, userId, buttonValue) {
+                        <div class="py-5 text-center">
+                            <p class="mb-0 text-secondary fs--1 fw-medium">FPT SmartSchool </p>
+                        </div>
+                        </main>
+                        <!-- ===============================================-->
+                        <!--    End of Main Content-->
+                        <!-- ===============================================-->
+                        <!--- AJAX -->
+                        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+                        <script>
+                                                                        function ApproveUser(applyJobId, userId, jobId, buttonValue) {
 
                                                                             $.ajax({
                                                                                 url: "/approveUserWaiting",
                                                                                 type: "get",
                                                                                 data: {
-                                                                                    jobId: jobId,
+                                                                                    applyJobId: applyJobId,
                                                                                     userId: userId,
+                                                                                    jobId: jobId,
                                                                                     buttonValue: buttonValue
 
                                                                                 },
                                                                                 success: function (data) {
-                                                                                    var row = document.getElementById(userId);
-                                                                                    row.remove();
-//                                                                                row.innerHTML = data;
+
+                                                                                    if ('UserFullJob' === data) {
+                                                                                        $("#ModalFullJob").modal("show");                                                        
+                                                                                    } else if ('JobFullAmount' === data) {
+                                                                                        $("#ModalJobFullAmount").modal("show");
+                                                                                    } else {
+                                                                                        var row = document.getElementById(userId);
+                                                                                        row.remove();
+                                                                                        var amountF = document.getElementById("amountFreelancer");
+                                                                                        
+                                                                                        amountF.textContent = data;
+                                                                                    }
+
                                                                                 },
                                                                                 error: function (xhr) {
                                                                                     //Do Something to handle error
                                                                                 }
                                                                             });
                                                                         }
-        </script>
-        <!-- ===============================================-->
-        <!--    JavaScripts-->
-        <!-- ===============================================-->
-        <script src="vendors/@popperjs/popper.min.js"></script>
-        <script src="vendors/bootstrap/bootstrap.min.js"></script>
-        <script src="vendors/is/is.min.js"></script>
-        <script src="https://polyfill.io/v3/polyfill.min.js?features=window.scroll"></script>
-        <script src="vendors/fontawesome/all.min.js"></script>
-        <script src="assets/js/theme.js"></script>
-        <script src="assets/js/extention/choices.js"></script>
+                        </script>
+                        <!-- ===============================================-->
+                        <!--    JavaScripts-->
+                        <!-- ===============================================-->
+                        <script src="vendors/@popperjs/popper.min.js"></script>
+                        <script src="vendors/bootstrap/bootstrap.min.js"></script>
+                        <script src="vendors/is/is.min.js"></script>
+                        <script src="https://polyfill.io/v3/polyfill.min.js?features=window.scroll"></script>
+                        <script src="vendors/fontawesome/all.min.js"></script>
+                        <script src="assets/js/theme.js"></script>
+                        <script src="assets/js/extention/choices.js"></script>
 
 
-        <script>
+                        <script>
                                                                         const choices = new Choices('[data-trigger]',
                                                                                 {
                                                                                     searchEnabled: false
                                                                                 });
 
-        </script>
-        <link
-            href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&amp;family=Volkhov:wght@700&amp;display=swap"
-            rel="stylesheet">
-    </body>
+                        </script>
+                        <link
+                            href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&amp;family=Volkhov:wght@700&amp;display=swap"
+                            rel="stylesheet">
+                        </body>
 
-</html>
+                        </html>
