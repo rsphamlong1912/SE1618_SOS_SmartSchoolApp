@@ -121,6 +121,8 @@ public class MainController extends HttpServlet {
     private static final String SEARCH_POST_IN_HOME = "SearchPostInHome";
     private static final String SEARCH_POST_IN_HOME_CONTROLLER = "searchPostInHome";
 
+    private static final String MY_JOB_POST_DONE_DETAIL = "MyJobPostDoneDetail";
+    private static final String MY_JOB_POST_DONE_DETAIL_CONTROLLER = "myJobPostDoneDetail";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -250,7 +252,7 @@ public class MainController extends HttpServlet {
 
             if (UPDATE_NEW_AMOUNT.equals(action)) {
                 url = UPDATE_NEW_AMOUNT_CONTROLLER;
-
+            }
             if (LIST_POST_BY_CATEGORY_AND_TYPE.equals(action)) {
                 url = LIST_POST_BY_CATEGORY_CONTROLLER;
             }
@@ -268,6 +270,10 @@ public class MainController extends HttpServlet {
             }
             if (SEARCH_POST_IN_HOME.equals(action)) {
                 url = SEARCH_POST_IN_HOME_CONTROLLER;
+
+            }
+            if (MY_JOB_POST_DONE_DETAIL.equals(action)) {
+                url = MY_JOB_POST_DONE_DETAIL_CONTROLLER;
 
             }
         } catch (Exception e) {

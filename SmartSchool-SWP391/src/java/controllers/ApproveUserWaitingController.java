@@ -59,19 +59,19 @@ public class ApproveUserWaitingController extends HttpServlet {
                     aDao.setApplyJobDenied(applyJobId);
                     ansDao.deleteAnswer(userId, jobId);
                 }
-                
+
             } else {
                 out.print("JobFullAmount");
             }
         } else {
             if ("approved".equals(buttonValue)) {
-            out.print("UserFullJob");
-            }else if ("denied".equals(buttonValue)) {
+                out.print("UserFullJob");
+            } else if ("denied".equals(buttonValue)) {
                 aDao.setApplyJobDenied(applyJobId);
                 ansDao.deleteAnswer(userId, jobId);
             }
         }
-        
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
