@@ -515,17 +515,32 @@
                         <div class="modal fade" id="ModalSetAmountJob" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered">
                                 <div class="modal-content">
-                                    <form action="main" method="POST">
+                                    <form action="main" onsubmit="return validateAmount()" method="POST">
                                     <div class="modal-header gradient-custom-2 justify-content-center">
                                         <h5 class="modal-title" id="exampleModalLabel" style="color: #ffffff;">Nhập lại số Freelancer cần tuyển</h5>
                                     </div>
                                     <div class="modal-body" style="padding: 1.5rem;">
                                         <input type="hidden" class="form-control" id="formGroupExampleInput" name="jobId" value="${JOBDETAIL.jobId}">
-                                        <input type="text" class="form-control" id="formGroupExampleInput" name="newAmount" value="">
+                                        <input type="text" class="form-control" id="newAmount" name="newAmount" value="">
                                     </div>
                                     <div class="modal-footer justify-content-center">
                                         <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Hủy</button>
                                         <button type="submit" name="action" value="UpdateNewAmount" class="btn btn-primary gradient-custom-2">Xác nhận</button>
+                                    </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                                        
+                        <div class="modal fade" id="WarningInvalidAmount" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <form action="main" method="POST">
+                                    <div class="modal-header gradient-custom-2 justify-content-center">
+                                        <h5 class="modal-title" id="exampleModalLabel" style="color: #ffffff;">Không thể cập nhật số ứng viên ít hơn ban đầu!</h5>
+                                    </div>
+                                    <div class="modal-footer justify-content-center">
+                                        <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Hủy</button>
                                     </div>
                                     </form>
                                 </div>
@@ -622,6 +637,16 @@
                         <!--- AJAX -->
                         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
                         <script>
+                            var newAmount;
+                            var oldAmount = ${requestScope.JOBDETAIL.amount};
+                            function validateAmount() {
+                                if(document.getElementById("newAmount").value < oldAmount ){
+                                    $("#ModalSetAmountJob").modal("hide");
+                                    $("#WarningInvalidAmount").modal("show");  
+                                    return false;
+                                }
+                                return true;
+                            }
                                                                         function ApproveUser(applyJobId, userId, jobId, buttonValue) {
 
                                                                             $.ajax({
