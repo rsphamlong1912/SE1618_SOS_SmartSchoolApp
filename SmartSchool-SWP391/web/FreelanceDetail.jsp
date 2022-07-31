@@ -51,10 +51,6 @@
                 width: 75%;
             }
 
-            .shadow {
-                box-shadow: rgba(67, 71, 85, 0.27) 0px 0px 0.25em, rgba(90, 125, 188, 0.05) 0px 0.25em 1em !important;
-            }
-
             .card {
                 border-radius: 0.5rem;
             }
@@ -289,8 +285,10 @@
             </div> -->
             <!-- Seach End-->
 
-            <section class="shop" style="min-height: 72vh;">
+            <section class="shop" style="min-height: 82vh;">
                 <div class="container">
+                    <c:choose>
+                        <c:when test="${requestScope.ISDONE == 2 }">
                     <div class="row">
                         <div class="col-lg-9 col-md-9 mb-5">
                             <div class="row mb-3">
@@ -549,6 +547,14 @@
                             </div>
                         </div>
                     </div>
+                        </c:when>
+                        <c:when test="${requestScope.ISDONE == 1 }">
+                            <div class="text-center">
+                            <h1>Công việc đang trong quá trình thực hiện, không còn tuyển nữa!</h1>
+                            </div>
+                        </c:when>
+                    </c:choose>                                                                                                                                                                                   
+                </div> 
             </section>
 
 

@@ -6,6 +6,7 @@
 package controllers;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -44,13 +45,18 @@ public class MyJobPostDoneController extends HttpServlet {
             UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
             String userId = loginUser.getUserId();
             JobPostDAO dao = new JobPostDAO();
-            List<JobPostDTO> list = dao.getMyJobPostDone(userId);
-
+            List<JobPostDTO> list = dao.getMyJobPostDoing(userId);
+            List<JobPostDTO> listDoing = new ArrayList<>();
+            for (JobPostDTO doing : list) {
+                if ("doing".equals(doing.getProcess())) {
+                    listDoing.add(doing);
+                }
+            }
             if (!list.isEmpty()) {
-                request.setAttribute("MY_JOB_POST_DONE", list);
+                request.setAttribute("MY_JOB_POST_DONE", listDoing);
                 url = MY_JOB_POST_DONE_PAGE;
             } else {
-                request.setAttribute("ERROR", "Bạn chưa có công việc nào");
+                request.setAttribute("ERROR", "Chưa có công việc nào");
                 url = ERROR;
             }
         } catch (Exception e) {

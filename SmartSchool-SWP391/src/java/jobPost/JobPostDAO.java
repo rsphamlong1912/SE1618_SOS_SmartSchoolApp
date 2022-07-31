@@ -28,9 +28,12 @@ public class JobPostDAO {
     private static final String GET_MYJOBPOST_PROCESS = "SELECT j.jobId,j.userId,j.jobCategoryId,j.title,j.description,j.salary,j.amount,j.timeJob,j.process,j.date,j.status,c.jobCategoryName\n"
             + "            FROM tblJobPost as j, tblCategoryJob as c\n"
             + "            WHERE j.jobCategoryId=c.jobCategoryId AND status=1 AND (process='new' OR process='process') AND  userId=? ";
-    private static final String GET_MYJOBPOST_DONE = "SELECT j.jobId,j.userId,j.jobCategoryId,j.title,j.description,j.salary,j.amount,j.timeJob,j.process,j.date,j.status,c.jobCategoryName\n"
+    private static final String GET_MYJOBPOST_DOING_DONE = "SELECT j.jobId,j.userId,j.jobCategoryId,j.title,j.description,j.salary,j.amount,j.timeJob,j.process,j.date,j.status,c.jobCategoryName\n"
             + "            FROM tblJobPost as j, tblCategoryJob as c\n"
             + "            WHERE j.jobCategoryId=c.jobCategoryId AND status=1 AND (process='done' OR process='doing') AND  userId=? ";
+    private static final String GET_MYJOBPOST_DOING = "SELECT j.jobId,j.userId,j.jobCategoryId,j.title,j.description,j.salary,j.amount,j.timeJob,j.process,j.date,j.status,c.jobCategoryName\n"
+            + "            FROM tblJobPost as j, tblCategoryJob as c\n"
+            + "            WHERE j.jobCategoryId=c.jobCategoryId AND status=1 AND  process='doing' AND  userId=? ";
     private static final String GET_MYJOBPOST_APPROVE = "SELECT j.jobId,j.userId,j.jobCategoryId,j.title,j.description,j.salary,j.amount,j.timeJob,j.process,j.date,j.status,c.jobCategoryName\n"
             + "            FROM tblJobPost as j, tblCategoryJob as c\n"
             + "            WHERE j.jobCategoryId=c.jobCategoryId AND status=1 AND process='approving' AND  userId=? ";
@@ -51,11 +54,11 @@ public class JobPostDAO {
             + "ORDER BY jobId DESC";
     private static final String JOB_DETAIL = "SELECT j.jobId,j.userId,j.jobCategoryId,j.title,j.description,j.salary,j.amount,j.timeJob,j.process,j.date,j.status,j.amountFreelancer,c.jobCategoryName, u.fullname,u.compName\n"
             + "FROM  tblJobPost as j, tblCategoryJob as c, tblUser as u\n"
-            + "WHERE j.jobCategoryId=c.jobCategoryId AND j.userId=u.userId AND status=1 AND (process = 'new' OR process='process') AND j.jobId=?\n";
+            + "WHERE j.jobCategoryId=c.jobCategoryId AND j.userId=u.userId AND status=1 AND j.jobId=?\n";
     private static final String JOB_DETAIL_DOING = "SELECT j.jobId,j.userId,j.jobCategoryId,j.title,j.description,j.salary,j.amount,j.timeJob,j.process,j.date,j.status,j.amountFreelancer,c.jobCategoryName, u.fullname,u.compName\n"
             + "FROM  tblJobPost as j, tblCategoryJob as c, tblUser as u\n"
-            + "WHERE j.jobCategoryId=c.jobCategoryId AND j.userId=u.userId AND status=1 AND process = 'doing' AND j.jobId=?\n";
-        private static final String GET_TOTAL_APPROVE_POST = "SELECT COUNT(jobId) AS count FROM tblJobPost WHERE process='approving' AND status=1";
+            + "WHERE j.jobCategoryId=c.jobCategoryId AND j.userId=u.userId AND status=1 AND (process = 'doing' OR process ='done') AND j.jobId=?\n";
+    private static final String GET_TOTAL_APPROVE_POST = "SELECT COUNT(jobId) AS count FROM tblJobPost WHERE process='approving' AND status=1";
 
     private static final String GET_TOTAL_JOB_POST = "  SELECT COUNT(jobId) AS totalJobPost FROM tblJobPost WHERE status = 1";
     private static final String GET_TOP5_NEW_JOB_POST = "SELECT TOP(5) j.jobId,j.userId,j.jobCategoryId,j.title,j.description,j.salary,j.amount,j.timeJob,j.process,j.date,j.status,c.jobCategoryName, u.fullname,u.compName \n"
@@ -82,7 +85,7 @@ public class JobPostDAO {
     private static final String DONT_APPROVE_POST = "UPDATE tblJobPost SET status=0 WHERE jobId=? AND process='approving'";
 
     private static final String SET_JOB_APPROVE_DONE = "UPDATE tblJobPost SET process = 'doing' WHERE jobId = ?";
-
+    private static final String SET_JOB_DONE = "UPDATE tblJobPost SET process = 'done' WHERE jobId = ?";
     private static final String GET_AMOUNT_FREELANCER = "SELECT amount, amountFreelancer FROM tblJobPost WHERE jobId = ?";
 
     private static final String SET_AMOUNT_FREELANCER_PLUS_ONE = "UPDATE tblJobPost SET amountFreelancer = amountFreelancer + 1 WHERE jobId = ? ";
@@ -335,6 +338,29 @@ public class JobPostDAO {
         }
     }
 
+    public void SetJobDone(String jobId)
+            throws SQLException {
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(SET_JOB_DONE);
+                ptm.setString(1, jobId);
+                ptm.executeUpdate();
+            }
+        } catch (Exception e) {
+
+        } finally {
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+    }
+
     public List<JobPostDTO> getMyJobPostProcess(String userId) throws SQLException {
         List<JobPostDTO> list = new ArrayList<>();
         Connection conn = null;
@@ -382,7 +408,7 @@ public class JobPostDAO {
         return list;
     }
 
-    public List<JobPostDTO> getMyJobPostDone(String userId) throws SQLException {
+    public List<JobPostDTO> getMyJobPostDoingDone(String userId) throws SQLException {
         List<JobPostDTO> list = new ArrayList<>();
         Connection conn = null;
         PreparedStatement ptm = null;
@@ -390,7 +416,53 @@ public class JobPostDAO {
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                ptm = conn.prepareStatement(GET_MYJOBPOST_DONE);
+                ptm = conn.prepareStatement(GET_MYJOBPOST_DOING_DONE);
+                ptm.setString(1, userId);
+                rs = ptm.executeQuery();
+                while (rs.next()) {
+                    JobPostDTO post = new JobPostDTO();
+                    post.setJobId(rs.getInt("jobId"));
+                    post.setUserId(rs.getString("userId"));
+                    post.setJobCategoryId(rs.getInt("jobCategoryId"));
+                    post.setTitle(rs.getString("title"));
+                    post.setDescription(rs.getString("description"));
+                    post.setSalary(rs.getFloat("salary"));
+                    post.setAmount(rs.getInt("amount"));
+                    post.setTimeJob(rs.getInt("timeJob"));
+                    post.setProcess(rs.getString("process"));
+                    int date = rs.getInt("date");
+                    String newDate = checkTime(date);
+                    post.setDate(newDate);
+                    post.setStatus(rs.getBoolean("status"));
+                    post.setJobCategoryName(rs.getString("jobCategoryName"));
+                    list.add(post);
+                }
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(PostDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return list;
+    }
+    
+    public List<JobPostDTO> getMyJobPostDoing(String userId) throws SQLException {
+        List<JobPostDTO> list = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(GET_MYJOBPOST_DOING);
                 ptm.setString(1, userId);
                 rs = ptm.executeQuery();
                 while (rs.next()) {
@@ -664,7 +736,7 @@ public class JobPostDAO {
         }
         return null;
     }
-    
+
     public JobPostDTO getJobInformationDone(String jobId) throws SQLException {
 
         JobPostDTO post = new JobPostDTO();
@@ -1128,7 +1200,7 @@ public class JobPostDAO {
             }
         }
     }
-    
+
     public int getTotalApprovePost() throws SQLException {
         Connection con = null;
         ResultSet rs = null;

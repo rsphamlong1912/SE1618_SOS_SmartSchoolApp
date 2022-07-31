@@ -23,10 +23,11 @@ public class ApplyJobDAO {
     private static final String LIST_JOB_WAITING = "SELECT * FROM tblApplyJob WHERE userId = ? AND status = 'waiting'";
     private static final String LIST_JOB_DOING = "SELECT * FROM tblApplyJob WHERE userId = ? AND status = 'doing' OR status = 'done' ";
     private static final String LIST_USER_WAITING = "SELECT a.applyJobId, a.jobId, a.userId, a.status, u.fullname, u.phone, u.email, u.facebook FROM tblApplyJob as a, tblUser as u WHERE a.userId = u.userId AND a.jobId = ? AND status = 'waiting'";
-    private static final String LIST_USER_DOING = "SELECT a.applyJobId, a.jobId, a.userId, a.status, u.fullname, u.phone, u.email, u.facebook FROM tblApplyJob as a, tblUser as u WHERE a.userId = u.userId AND a.jobId = ? AND status = 'doing'";
+    private static final String LIST_USER_DOING = "SELECT a.applyJobId, a.jobId, a.userId, a.status, u.fullname, u.phone, u.email, u.facebook FROM tblApplyJob as a, tblUser as u WHERE a.userId = u.userId AND a.jobId = ? AND (status = 'doing' OR status = 'done')";
     private static final String CHECK_APPLYJOB = " SELECT TOP(1) status from tblApplyJob where userId = ? AND jobId = ? ORDER BY applyJobId DESC";
     private static final String SET_APPLYJOB_DOING = " UPDATE tblApplyJob SET status ='doing' WHERE  applyJobId = ? ";
     private static final String SET_APPLYJOB_DENIED = " UPDATE tblApplyJob SET status ='denied' WHERE  applyJobId = ? ";
+    private static final String SET_APPLYJOB_DONE = " UPDATE tblApplyJob SET status ='done' WHERE  applyJobId = ? ";
 
     public void setApplyJobDoing(String applyJobId)
             throws SQLException {
@@ -36,6 +37,29 @@ public class ApplyJobDAO {
             conn = DBUtils.getConnection();
             if (conn != null) {
                 ptm = conn.prepareStatement(SET_APPLYJOB_DOING);
+                ptm.setString(1, applyJobId);
+                ptm.executeUpdate();
+            }
+        } catch (Exception e) {
+
+        } finally {
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+    }
+
+    public void setApplyJobDone(String applyJobId)
+            throws SQLException {
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(SET_APPLYJOB_DONE);
                 ptm.setString(1, applyJobId);
                 ptm.executeUpdate();
             }
@@ -114,7 +138,7 @@ public class ApplyJobDAO {
                     ApplyJobDTO post = new ApplyJobDTO();
                     post.setApplyJobId(rs.getInt("applyJobId"));
                     post.setJobId(rs.getInt("jobId"));
-                    post.setUserId(rs.getString("userId"));               
+                    post.setUserId(rs.getString("userId"));
                     list.add(post);
                 }
             }
@@ -190,7 +214,7 @@ public class ApplyJobDAO {
                     post.setFullname(rs.getString("fullname"));
                     post.setPhone(rs.getString("phone"));
                     post.setEmail(rs.getString("email"));
-                    post.setFacebook(rs.getString("facebook")); 
+                    post.setFacebook(rs.getString("facebook"));
                     list.add(post);
                 }
             }
@@ -209,7 +233,7 @@ public class ApplyJobDAO {
         }
         return list;
     }
-    
+
     public List<ApplyJobDTO> getListUserDoing(String jobId)
             throws SQLException {
         List<ApplyJobDTO> list = new ArrayList<>();
@@ -230,7 +254,8 @@ public class ApplyJobDAO {
                     post.setFullname(rs.getString("fullname"));
                     post.setPhone(rs.getString("phone"));
                     post.setEmail(rs.getString("email"));
-                    post.setFacebook(rs.getString("facebook")); 
+                    post.setFacebook(rs.getString("facebook"));
+                    post.setStatus(rs.getString("status"));
                     list.add(post);
                 }
             }

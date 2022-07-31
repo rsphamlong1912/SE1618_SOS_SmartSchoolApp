@@ -86,7 +86,7 @@
                                 <a href=""> Lost & Found Posts </a>
                             </li>
                             <li>
-                                <a href="" class="active"> Freelance Job Posts </a>
+                                <a href="approveJobPost" class="active"> Freelance Job Posts </a>
                             </li>
                         </ul>
                     </li>

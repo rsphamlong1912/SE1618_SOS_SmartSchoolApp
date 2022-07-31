@@ -249,6 +249,7 @@
 
 .inputSearch {
     line-height: 2.5;
+    border: 0px;
 }
 
 .navbar-light .navbar-nav .nav-link:hover {

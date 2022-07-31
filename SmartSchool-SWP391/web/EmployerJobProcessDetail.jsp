@@ -52,7 +52,7 @@
             }
 
             .shadow {
-                box-shadow: rgba(67, 71, 85, 0.27) 0px 0px 0.25em, rgba(90, 125, 188, 0.05) 0px 0.25em 1em !important;
+/*                box-shadow: rgba(67, 71, 85, 0.27) 0px 0px 0.25em, rgba(90, 125, 188, 0.05) 0px 0.25em 1em !important;*/
             }
 
             .card {
@@ -131,7 +131,7 @@
                         </span></button>
                     <div class="collapse navbar-collapse border-top border-lg-0 mt-4 mt-lg-0" id="navbarSupportedContent">
                         <ul class="navbar-nav ms-auto pt-2 pt-lg-0 font-base align-items-lg-center align-items-start">
-                            <li class="nav-item px-3"><a class="nav-link fw-bold" aria-current="page" href="EmployerHome.jsp">TRANG CHỦ</a>
+                            <li class="nav-item px-3"><a class="nav-link fw-bold" aria-current="page" href="employerhome">TRANG CHỦ</a>
                             </li>
                             <li class="nav-item px-3"><a class="nav-link fw-bold" aria-current="page" href="#phanloai">DASHBOARD</a>
                             </li>
@@ -267,6 +267,7 @@
                                 </li>
                                 <!--/ User -->
                             </c:if>
+                                <li class="nav-item px-3"><a class="btn btn-light order-1 order-lg-0 fw-bold" href="main?action=EmployerUploadJobPost">Đăng tuyển</a></li>
                         </ul>
                     </div>
                 </div>
@@ -452,8 +453,8 @@
                                         <div class="content-detail mb-3">
 
                                             <div class="d-flex align-items-center">
-                                                <h6 style="line-height: 2.5;">Trạng thái công việc: <span class="fw-medium"
-                                                                                                          style="font-size: 14px; "> Đang tuyển</span></h6>
+                                                <h6 style="line-height: 2.5;">Trạng thái công việc: <span class="fw-medium fw-bold"
+                                                                                                          style="font-size: 14px; color:#0d6efd;"> Đang tuyển</span></h6>
                                             </div>
 
                                             <div class="d-flex align-items-center">
