@@ -106,7 +106,7 @@
             .hoverLink:hover {
                 color: #F1A501 !important;
             }
-            
+
             .modal-shadow{
                 box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
             }
@@ -483,7 +483,7 @@
                                                 <div class="modal-header gradient-custom-2 justify-content-center">
                                                     <h5 class="modal-title" id="exampleModalLabel" style="color: #ffffff;">Bạn có chắc chuyển trạng thái công việc ?</h5>
                                                 </div>
-                                                
+
                                                 <div class="modal-footer justify-content-center">
                                                     <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Đóng</button>
                                                     <a href="main?action=SetJobApproveDone&jobId=${JOBDETAIL.jobId}" type="button" class="btn btn-primary gradient-custom-2">Chuyển</a>
@@ -511,23 +511,24 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <!-- Modal -->
                         <div class="modal fade" id="ModalSetAmountJob" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered">
                                 <div class="modal-content">
-                                    <form action="main" method="POST">
-                                    <div class="modal-header gradient-custom-2 justify-content-center">
-                                        <h5 class="modal-title" id="exampleModalLabel" style="color: #ffffff;">Nhập lại số Freelancer cần tuyển</h5>
-                                    </div>
-                                    <div class="modal-body" style="padding: 1.5rem;">
-                                        <input type="hidden" class="form-control" id="formGroupExampleInput" name="jobId" value="${JOBDETAIL.jobId}">
-                                        <input type="text" class="form-control" id="formGroupExampleInput" name="newAmount" value="">
-                                    </div>
-                                    <div class="modal-footer justify-content-center">
-                                        <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Hủy</button>
-                                        <button type="submit" name="action" value="UpdateNewAmount" class="btn btn-primary gradient-custom-2">Xác nhận</button>
-                                    </div>
+                                    <form action="main" onsubmit="return validateAmount()" method="POST">
+                                        <div class="modal-header gradient-custom-2 justify-content-center">
+                                            <h5 class="modal-title" id="exampleModalLabel" style="color: #ffffff;">Nhập lại số Freelancer cần tuyển</h5>
+                                        </div>
+                                        <div class="modal-body" style="padding: 1.5rem;">
+                                            <input type="hidden" class="form-control" id="formGroupExampleInput" name="jobId" value="${JOBDETAIL.jobId}">
+                                            <input type="number" class="form-control" id="newAmount" name="newAmount" value="">
+                                            <small id="warningValidate" style="color: red"></small>
+                                        </div>
+                                        <div class="modal-footer justify-content-center">
+                                            <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Hủy</button>
+                                            <button type="submit" name="action" value="UpdateNewAmount" class="btn btn-primary gradient-custom-2">Xác nhận</button>
+                                        </div>
                                     </form>
                                 </div>
                             </div>
@@ -623,38 +624,50 @@
                         <!--- AJAX -->
                         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
                         <script>
-                                                                        function ApproveUser(applyJobId, userId, jobId, buttonValue) {
+                                        var newAmount;
+                                        var oldAmount = ${requestScope.JOBDETAIL.amount};
+                                        function validateAmount() {
+                                            if (document.getElementById("newAmount").value.length === 0) {
+                                                document.getElementById("warningValidate").textContent = "Vui lòng nhập!"
+                                                return false;
+                                            } else if (document.getElementById("newAmount").value < oldAmount) {
+                                                document.getElementById("warningValidate").textContent = "Không thể cập nhật số ứng viên ít hơn ban đầu!"
+                                                return false;
+                                            sss}
+                                            return true;
+                                        }
+                                        function ApproveUser(applyJobId, userId, jobId, buttonValue) {
 
-                                                                            $.ajax({
-                                                                                url: "/approveUserWaiting",
-                                                                                type: "get",
-                                                                                data: {
-                                                                                    applyJobId: applyJobId,
-                                                                                    userId: userId,
-                                                                                    jobId: jobId,
-                                                                                    buttonValue: buttonValue
+                                            $.ajax({
+                                                url: "/approveUserWaiting",
+                                                type: "get",
+                                                data: {
+                                                    applyJobId: applyJobId,
+                                                    userId: userId,
+                                                    jobId: jobId,
+                                                    buttonValue: buttonValue
 
-                                                                                },
-                                                                                success: function (data) {
+                                                },
+                                                success: function (data) {
 
-                                                                                    if ('UserFullJob' === data) {
-                                                                                        $("#ModalFullJob").modal("show");                                                        
-                                                                                    } else if ('JobFullAmount' === data) {
-                                                                                        $("#ModalJobFullAmount").modal("show");
-                                                                                    } else {
-                                                                                        var row = document.getElementById(userId);
-                                                                                        row.remove();
-                                                                                        var amountF = document.getElementById("amountFreelancer");
-                                                                                        
-                                                                                        amountF.textContent = data;
-                                                                                    }
+                                                    if ('UserFullJob' === data) {
+                                                        $("#ModalFullJob").modal("show");
+                                                    } else if ('JobFullAmount' === data) {
+                                                        $("#ModalJobFullAmount").modal("show");
+                                                    } else {
+                                                        var row = document.getElementById(userId);
+                                                        row.remove();
+                                                        var amountF = document.getElementById("amountFreelancer");
 
-                                                                                },
-                                                                                error: function (xhr) {
-                                                                                    //Do Something to handle error
-                                                                                }
-                                                                            });
-                                                                        }
+                                                        amountF.textContent = data;
+                                                    }
+
+                                                },
+                                                error: function (xhr) {
+                                                    //Do Something to handle error
+                                                }
+                                            });
+                                        }
                         </script>
                         <!-- ===============================================-->
                         <!--    JavaScripts-->
@@ -669,10 +682,10 @@
 
 
                         <script>
-                                                                        const choices = new Choices('[data-trigger]',
-                                                                                {
-                                                                                    searchEnabled: false
-                                                                                });
+                                        const choices = new Choices('[data-trigger]',
+                                                {
+                                                    searchEnabled: false
+                                                });
 
                         </script>
                         <link
