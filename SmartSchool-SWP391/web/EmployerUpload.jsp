@@ -75,10 +75,13 @@
             .pr-10 {
                 padding-right: 1.875rem!important;
             }
+            
+            .invalid-feedback,
             .form-group small {
                 color: #F21F26;
                 padding-left: 10px;
                 font-weight: 700 !important;
+                font-size: 80% !important;
             }
         </style>
     </head>
@@ -220,7 +223,8 @@
                                     </ul>
                                 </li>
                                 <!--/ User -->    
-                            </c:if>   
+                            </c:if>
+                                <li class="nav-item px-3"><a class="btn btn-light order-1 order-lg-0 fw-bold" href="main?action=EmployerUploadJobPost">Đăng tuyển</a></li>
                         </ul>
                     </div>
                 </div>
@@ -298,7 +302,7 @@
                                     <div class="row">
                                         <div class="col-lg-4 mb-3">
                                             <span class="w-100">
-                                                <input type="radio" class="form-check-input required" required="true" data-rule-required="true" name="timeJob" value="1" id="timeJob_1" data-validate-hide-message="1" checked>
+                                                <input type="radio" class="form-check-input required" required="true" data-rule-required="true" name="timeJob" value="1" id="timeJob_1" data-validate-hide-message="1">
                                                 <label for="timeJobs_1">
                                                     <span class="inside pt-2 pb-2">
                                                         <span class="d-block fw-500"> Ít hơn 1 tháng</span>
@@ -339,9 +343,7 @@
                                                     <i class="fa fa-trash"></i>
                                                 </button>
                                             </div> 
-                                            <br>
-                                            <small></small>
-                                            
+                                            <small></small>                                   
                                         </div>
                                         
                                     </div>
