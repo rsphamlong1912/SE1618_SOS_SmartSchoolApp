@@ -100,6 +100,8 @@ public class JobPostDAO {
     private static final String GET_TOTAL_WAITING_POST = " SELECT COUNT(jobId) AS 'count' FROM tblJobPost WHERE status=1 AND process='approving' AND userId = ? ";
     private static final String GET_TOTAL_NEW_POST = " SELECT COUNT(jobId) AS 'count' FROM tblJobPost WHERE status=1 AND process='new' AND userId = ? ";
     private static final String GET_TOTAL_DONE_POST = " SELECT COUNT(jobId) AS 'count' FROM tblJobPost WHERE status=1 AND process='done' AND userId = ? ";
+    
+    private static final String DELETE_JOB_POST = "UPDATE tblJobPost SET status = 0 WHERE jobId = ?";
 
     public static int takeMinutes() {
         long millis = System.currentTimeMillis();
@@ -252,6 +254,30 @@ public class JobPostDAO {
             }
         }
         return list;
+    }
+    
+    public boolean deleteJobPost(int jobId) throws SQLException {
+        boolean check = false;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(DELETE_JOB_POST);
+                ptm.setInt(1, jobId);
+                ptm.executeUpdate();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return check;
     }
 
     public int uploadJobPost(String userId, int jobCategoryId, String title, String description, float salary, int amount, int timeJob)

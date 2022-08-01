@@ -104,7 +104,7 @@
                                 <a href="adminLostAndFoundPost"> Lost & Found </a>
                             </li>
                             <li>
-                                <a href=""> Freelance Job </a>
+                                <a href="adminFreelancePost"> Freelance Job </a>
                             </li>
                         </ul>
                     </li>

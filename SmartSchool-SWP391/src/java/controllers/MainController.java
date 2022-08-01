@@ -119,22 +119,32 @@ public class MainController extends HttpServlet {
     private static final String APPROVE_POST_CONTROLLER = "approvePost";
     private static final String NO_APPROVE_POST = "NoApprovePost";
     private static final String NO_APPROVE_POST_CONTROLLER = "noApprovePost";
-
+    
     private static final String SEARCH_POST_IN_HOME = "SearchPostInHome";
     private static final String SEARCH_POST_IN_HOME_CONTROLLER = "searchPostInHome";
-
-
+    
+    
     private static final String MY_JOB_POST_DONE_DETAIL = "MyJobPostDoneDetail";
     private static final String MY_JOB_POST_DONE_DETAIL_CONTROLLER = "myJobPostDoneDetail";
+        
     
-
     private static final String EMPLOYER_DASHBOARD = "EmployerDashboard";
     private static final String EMPLOYER_DASHBOARD_CONTROLLER = "employerDashboard";
-
+    
     private static final String SET_JOB_DONE = "SetJobDone";
     private static final String SET_JOB_DONE_CONTROLLER = "setJobDone";
-
-
+    
+    private static final String DELETE_POST = "DeletePost";
+    private static final String DELETE_POST_CONTROLLER = "deletePost";
+    private static final String DELETE_JOB_POST = "DeleteJobPost";
+    private static final String DELETE_JOB_POST_CONTROLLER = "deleteJobPost";
+    
+    private static final String ADMIN_FREELANCE_POST = "AdminFreelancePost";
+    private static final String ADMIN_FREELANCE_POST_CONTROLLER = "adminFreelancePost";
+    
+    
+    
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -299,6 +309,12 @@ public class MainController extends HttpServlet {
             if (DETAIL.equals(action)) {
                 url = DETAIL_POST_LOSTANDFOUND_CONTROLLER;
 
+            }
+            if (DELETE_POST.equals(action)) {
+                url = DELETE_POST_CONTROLLER;
+            }
+            if (DELETE_JOB_POST.equals(action)) {
+                url = DELETE_JOB_POST_CONTROLLER;
             }
         } catch (Exception e) {
             log("Error at MainController: " + e.toString());
