@@ -249,27 +249,27 @@ public class MainController extends HttpServlet {
 
             if (UPDATE_NEW_AMOUNT.equals(action)) {
                 url = UPDATE_NEW_AMOUNT_CONTROLLER;
-
-                if (LIST_POST_BY_CATEGORY_AND_TYPE.equals(action)) {
-                    url = LIST_POST_BY_CATEGORY_CONTROLLER;
-                }
-                if (LIST_POST_TO_APPROVE.equals(action)) {
-                    url = LIST_POST_TO_APPROVE_CONTROLLER;
-                }
-                if (APPROVE_POST.equals(action)) {
-                    url = APPROVE_POST_CONTROLLER;
-                }
-                if (NO_APPROVE_POST.equals(action)) {
-                    url = NO_APPROVE_POST_CONTROLLER;
-                }
-                if (LIST_POST_BY_CATEGORY.equals(action)) {
-                    url = LIST_POST_BY_CATEGORY_CONTROLLER;
-                }
-                if (SEARCH_POST_IN_HOME.equals(action)) {
-                    url = SEARCH_POST_IN_HOME_CONTROLLER;
-
-                }
             }
+            if (LIST_POST_BY_CATEGORY_AND_TYPE.equals(action)) {
+                url = LIST_POST_BY_CATEGORY_AND_TYPE_CONTROLLER;
+            }
+            if (LIST_POST_TO_APPROVE.equals(action)) {
+                url = LIST_POST_TO_APPROVE_CONTROLLER;
+            }
+            if (APPROVE_POST.equals(action)) {
+                url = APPROVE_POST_CONTROLLER;
+            }
+            if (NO_APPROVE_POST.equals(action)) {
+                url = NO_APPROVE_POST_CONTROLLER;
+            }
+            if (LIST_POST_BY_CATEGORY.equals(action)) {
+                url = LIST_POST_BY_CATEGORY_CONTROLLER;
+            }
+            if (SEARCH_POST_IN_HOME.equals(action)) {
+                url = SEARCH_POST_IN_HOME_CONTROLLER;
+
+            }
+
         } catch (Exception e) {
             log("Error at MainController: " + e.toString());
         } finally {

@@ -28,7 +28,7 @@
         <url-pattern>/editCategory</url-pattern>
         <url-pattern>/editJobCategory</url-pattern>
         <url-pattern>/jobCategory</url-pattern>
-        <url-pattern>/approvePost</url-pattern>
+        s<url-pattern>/approvePost</url-pattern>
         <url-pattern>/listPostToApprove</url-pattern>
         <url-pattern>/noApprovePost</url-pattern>
 
