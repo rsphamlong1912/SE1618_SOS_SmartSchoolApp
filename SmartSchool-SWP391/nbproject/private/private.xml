@@ -8,9 +8,12 @@
             <file>file:/C:/Users/admin/SE1618_SOS_SmartSchoolApp/SmartSchool-SWP391/src/java/controllers/MainController.java</file>
             <file>file:/C:/Users/admin/SE1618_SOS_SmartSchoolApp/SmartSchool-SWP391/src/java/jobPost/JobPostDAO.java</file>
             <file>file:/C:/Users/admin/SE1618_SOS_SmartSchoolApp/SmartSchool-SWP391/src/java/controllers/MyJobPostProcessController.java</file>
+            <file>file:/C:/Users/admin/SE1618_SOS_SmartSchoolApp/SmartSchool-SWP391/src/java/Filters/ADFilter.java</file>
             <file>file:/C:/Users/admin/SE1618_SOS_SmartSchoolApp/SmartSchool-SWP391/src/java/controllers/AddCategoryController.java</file>
             <file>file:/C:/Users/admin/SE1618_SOS_SmartSchoolApp/SmartSchool-SWP391/src/java/controllers/AddJobCategoryController.java</file>
             <file>file:/C:/Users/admin/SE1618_SOS_SmartSchoolApp/SmartSchool-SWP391/src/java/controllers/MyJobPostProcessDetailController.java</file>
+            <file>file:/C:/Users/admin/SE1618_SOS_SmartSchoolApp/SmartSchool-SWP391/src/java/Filters/RouterFilter.java</file>
+            <file>file:/C:/Users/admin/SE1618_SOS_SmartSchoolApp/SmartSchool-SWP391/src/java/post/PostDAO.java</file>
             <file>file:/C:/Users/admin/SE1618_SOS_SmartSchoolApp/SmartSchool-SWP391/src/java/controllers/EmployerHomeController.java</file>
         </group>
     </open-files>

@@ -331,7 +331,7 @@
                 <div class="container" style="max-width: 771px;">
                     <div class="card card-shadow">
                         <!--                        <form action="main" class="needs-validation" novalidate>-->
-                        <form action="main" method="POST" enctype="multipart/form-data">
+                        <form onsubmit="return validatePost()" action="main" method="POST" enctype="multipart/form-data">
                             <div class="card-header bg-white pt-4 pb-4 pl-10 pr-10 border-bottom d-md-flex">
                                 <h3 class="">ĐĂNG TIN</h3>                               
                             </div>
@@ -366,6 +366,7 @@
                                     <label for="title" class="form-control-label fw-bold mb-2">Tiêu đề</label>
                                     <input type="text" name="title" id="title" data-validate-hide-message="1"
                                            class="form-control required" required="true" data-rule-required="true" data-rule-maxlength="255">
+                                    <small></small>
                                     <!--                                    <div class="invalid-feedback fw-bold">
                                                                             Vui lòng nhập!
                                                                         </div>-->
@@ -385,7 +386,7 @@
                                     <label for="description" class="form-control-label fw-bold mb-2">Mô tả chi tiết</label>
 
                                     <div class="form-floating">
-                                        <textarea class="form-control required" required="true" data-rule-required="true" name="description" placeholder=" " id="floatingTextarea2"
+                                        <textarea class="form-control required" required="true" data-rule-required="true" name="description" placeholder=" " id="descriptionPost"
                                                   style="height: 150px"></textarea>
                                         <small></small>
                                         <label for="floatingTextarea2">Nhập mô tả</label>
@@ -405,6 +406,7 @@
 
                                         <div class="image-upload-wrap">
                                             <input class="file-upload-input" name="postImg" id="postImg" type='file' onchange="readURL(this);" accept=".png, .jpg, .jpeg" />
+                                            <small></small>
                                             <div class="drag-text">
                                                 Kéo và thả hình vào đây, hoặc chọn thêm ảnh
                                             </div>
@@ -510,6 +512,7 @@
         <script src="assets/js/theme.js"></script>
         <script src="assets/js/extention/choices.js"></script>
         <script class="jsbin" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+        <script src="assets/js/extention/validation.js"></script>
         <script>
                                                     const choices = new Choices('[data-trigger]',
                                                             {
