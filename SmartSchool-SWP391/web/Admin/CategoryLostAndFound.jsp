@@ -24,6 +24,13 @@
         <link rel="stylesheet" href="/Admin/assets/css/fullcalendar.css" />
         <link rel="stylesheet" href="/Admin/assets/css/main.css" />
         <link rel="stylesheet" href="/Admin/assets/css/styles.css" />
+        <style>
+            #ModalAddCategory small, #ModalEditCategory small {
+                color: #F21F26;
+                padding-left: 10px;
+                font-weight: 700 !important;
+            }
+        </style>
     </head>
 
     <body>
@@ -408,19 +415,21 @@
                                                     <h4 class="modal-title" id="exampleModalLabel">Add New Category</h4>
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
-                                                <form action="main" method="POST">
+                                                <form onsubmit="return validateAddCategoryLF()" action="main" method="POST">
                                                     <div class="modal-body">
                                                         <div class="row justify-content-center">
                                                             <div class="col-11">
                                                                 <div class="input-style-1">
                                                                     <label>Category Name</label>
                                                                     <input id="cateName" type="text" placeholder="Type here" name="categoryName" />
+                                                                    <small></small>
                                                                 </div>
                                                             </div>
                                                             <div class="col-11">
                                                                 <div class="input-style-1">
                                                                     <label>Category Image (Please copy URL Image)</label>
                                                                     <textarea id="cateImage" placeholder="Type here" rows="6" name="categoryImg"></textarea>
+                                                                    <small></small>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -505,7 +514,7 @@
                     <!-- End Row -->
                 </div>
                 <!-- Modal Edit -->
-                <form action="main" method="POST">
+                <form onsubmit="return validateEditCategoryLF()" action="main" method="POST">
                     <div class="modal fade" id="ModalEditCategory" tabindex="-1" aria-labelledby="exampleModalLabel"
                          aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered">
@@ -523,12 +532,14 @@
                                                 <div class="input-style-1">
                                                     <label>Category Name</label>
                                                     <input id="CateN" type="text" placeholder="Type here" name="categoryName"/>
+                                                    <small></small>
                                                 </div>
                                             </div>
                                             <div class="col-11">
                                                 <div class="input-style-1">
                                                     <label>Category Image (Please copy URL Image)</label>
                                                     <textarea id="CateImg" name="categoryImg" placeholder="Type here" rows="6"></textarea>
+                                                    <small></small>
                                                 </div>
                                             </div>
                                         </div>
@@ -605,6 +616,7 @@
         <script src="/Admin/assets/js/world-merc.js"></script>
         <script src="/Admin/assets/js/polyfill.js"></script>
         <script src="/Admin/assets/js/main.js"></script>
+        <script src="/Admin/assets/js/validation.js"></script>
 
         <script>
                                                                         function truyenDataEdit(cateID, cateName, cateImage) {
