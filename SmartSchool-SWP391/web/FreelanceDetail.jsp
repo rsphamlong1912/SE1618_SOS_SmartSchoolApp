@@ -51,10 +51,6 @@
                 width: 75%;
             }
 
-            .shadow {
-                box-shadow: rgba(67, 71, 85, 0.27) 0px 0px 0.25em, rgba(90, 125, 188, 0.05) 0px 0.25em 1em !important;
-            }
-
             .card {
                 border-radius: 0.5rem;
             }
@@ -121,7 +117,7 @@
                             aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon">
                         </span></button>
                     <div class="collapse navbar-collapse border-top border-lg-0 mt-4 mt-lg-0" id="navbarSupportedContent">
-                          <ul class="navbar-nav ms-auto pt-2 pt-lg-0 font-base align-items-lg-center align-items-start">
+                        <ul class="navbar-nav ms-auto pt-2 pt-lg-0 font-base align-items-lg-center align-items-start">
                             <li class="nav-item px-3"><a class="nav-link fw-bold" aria-current="page"
                                                          href="freelancerhome">TRANG CHỦ</a>
                             </li>
@@ -131,32 +127,32 @@
                             <li class="nav-item px-3"><a class="nav-link fw-bold" aria-current="page" href="main?action=ListJobPost">TÌM VIỆC</a>
                             </li>
                             <c:if test="${!empty sessionScope.LOGIN_USER}">
-                             <li class="nav-item px-3 navbar-dropdown dropdown-user dropdown">
-                                <a class="btn btn-outline-light order-1 order-lg-0 fw-bold nav-link hide-arrow" id="nameLogin" href="" data-bs-toggle="dropdown">
-                                    <div class="avatar avatar-online">
+                                <li class="nav-item px-3 navbar-dropdown dropdown-user dropdown">
+                                    <a class="btn btn-outline-light order-1 order-lg-0 fw-bold nav-link hide-arrow" id="nameLogin" href="" data-bs-toggle="dropdown">
+                                        <div class="avatar avatar-online">
 
 
-                                        QUẢN LÝ CÔNG VIỆC
+                                            QUẢN LÝ CÔNG VIỆC
 
 
-                                    </div>
-                                </a>          
-                                <ul class="dropdown-menu dropdown-menu-end">              
+                                        </div>
+                                    </a>          
+                                    <ul class="dropdown-menu dropdown-menu-end">              
 
-                                    <li>
-                                        <a class="dropdown-item" href="main?action=MyJobWaiting">
-                                            <i class="bx bx-user me-2"></i>
-                                            <span class="align-middle"> VIỆC CHỜ ỨNG TUYỂN</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" href="main?action=MyJobDoing">
-                                            <i class="bx bx-user me-2"></i>
-                                            <span class="align-middle"> VIỆC ĐANG THỰC HIỆN</span>
-                                        </a>
-                                    </li>                                   
-                                </ul>
-                            </li>
+                                        <li>
+                                            <a class="dropdown-item" href="main?action=MyJobWaiting">
+                                                <i class="bx bx-user me-2"></i>
+                                                <span class="align-middle"> VIỆC CHỜ ỨNG TUYỂN</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" href="main?action=MyJobDoing">
+                                                <i class="bx bx-user me-2"></i>
+                                                <span class="align-middle"> VIỆC ĐANG THỰC HIỆN</span>
+                                            </a>
+                                        </li>                                   
+                                    </ul>
+                                </li>
                             </c:if>
                             <c:if test="${empty sessionScope.LOGIN_USER}">
                                 <li class="nav-item px-3"><a class="btn btn-outline-light order-1 order-lg-0 fw-bold"
@@ -289,266 +285,289 @@
             </div> -->
             <!-- Seach End-->
 
-            <section class="shop" style="min-height: 72vh;">
+            <section class="shop" style="min-height: 82vh;">
                 <div class="container">
-                    <div class="row">
-                        <div class="col-lg-9 col-md-9 mb-5">
-                            <div class="row mb-3">
-                                <div class="card overflow-hidden shadow ">
-                                    <div class="card-header bg-white pt-4 pl-10 pr-10 border-bottom d-md-flex">
-                                        <h5 class="">THÔNG TIN CÔNG VIỆC</h5>
-                                    </div>
-                                    <div class="card-body">
-                                        <div class="content-detail mb-3">
-                                            <div class="d-flex flex-column flex-lg-row justify-content-between mb-2">
-                                                <h5 class="text-secondary fw-medium text-truncated"><a
-                                                        class="link-901 text-decoration-none " href="#!">${JOBDETAIL.title}</a></h5><span
-                                                    class="fs-1 fw-medium"></span>
-                                            </div>
-                                            <div class="d-flex align-items-center mb-2">
-                                                <h6>Lĩnh vực: ${JOBDETAIL.jobCategoryName}</h6>
-                                            </div>
-                                        </div>
-                                        <div class="content-detail mb-3">
-                                            <div class="align-items-center mb-2">
-                                                <h6>Mô tả công việc:</h6>
-
-                                                <span class="fw-medium" style="font-size: 0.88889rem; line-height: 2.5;">
-                                                    ${JOBDETAIL.description}
-                                                </span>
-
-                                            </div>
-                                        </div>
-                                        <div class="d-flex align-items-center mb-2">
-                                            <h6>Mức lương: <span class="fw-medium" style="font-size: 14px;">                                                
-                                                    <fmt:formatNumber value="${JOBDETAIL.salary}" pattern="#,### VNĐ/giờ"/>
-                                                </span></h6>
-                                        </div>
-                                        <div class="d-flex align-items-center mb-2">
-                                            <h6>Số người cần tuyển: <span class="fw-medium" style="font-size: 14px;">${JOBDETAIL.amount}
-                                                    người</span></h6>
-                                        </div>
-                                        <div class="d-flex align-items-center mb-5">
-                                            <h6>Thời gian công việc: <span class="fw-medium" style="font-size: 14px;">
-                                                    <c:choose> 
-                                                        <c:when test="${JOBDETAIL.timeJob==1}">
-                                                            Ít hơn 1 tháng
-                                                        </c:when> 
-                                                        <c:when test="${JOBDETAIL.timeJob==2}">
-                                                            1 - 3 tháng
-                                                        </c:when>
-                                                        <c:when test="${JOBDETAIL.timeJob==3}">
-                                                            Hơn 3 tháng
-                                                        </c:when> 
-                                                    </c:choose></span></h6>
-                                        </div>
-                                        <div class="d-flex align-items-center"> <span class="fw-medium"
-                                                                                      style="font-size: 14px;"> <img src="assets/img/dest/clock.svg"
-                                                                           style="margin-right: 5px;" width="15" alt="navigation" /> Đã đăng ${JOBDETAIL.date}</span>
-                                        </div>
-                                    </div>
-                                    <div class="card-footer pt-4 pb-2">
-                                        <div class="row justify-content-md-end">
-                                            <div class="col-lg-4 col-md-5 mb-3">
-                                                <c:if test="${!empty requestScope.EXISTJOB}">
-                                                <button type="button" class="btn btn-secondary btn-lg btn-block"> 
-                                                    Đã đăng ký
-                                                </button>
-                                                </c:if>
-                                                <c:if test="${empty requestScope.EXISTJOB}">
-                                                <button type="button" class="btn btn-primary btn-lg btn-block gradient-custom-2" data-bs-toggle="modal" data-bs-target="#exampleModal"> 
-                                                    Đăng ký công việc
-                                                </button>
-                                                </c:if>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Modal -->
-                                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-
-                                    <div class="modal-dialog modal-dialog-centered">
-
-                                        <div class="modal-content">
-                                            <form action="main" method="POST">
-                                                <div class="modal-header gradient-custom-2" >
-                                                    <h5 class="modal-title" id="exampleModalLabel" style="color: #ffffff;">Câu hỏi đăng ký công việc</h5>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                </div>
-                                                <div class="modal-body" style="padding: 1.5rem;">
-                                                    <input type="hidden" class="form-control" id="formGroupExampleInput" name="idJob" value="${JOBDETAIL.jobId}">
-                                                    <c:forEach items="${requestScope.LISTQUESTION}" var="listQuestion" >
-                                                        <div class="mb-4">
-                                                            <label for="formGroupExampleInput" class="form-label fw-bold">${listQuestion.question}</label>
-                                                            <input type="hidden" class="form-control" id="formGroupExampleInput" name="idQuestion" value="${listQuestion.questionId}">
-
-                                                            <input type="text" class="form-control" id="formGroupExampleInput" name="answer${listQuestion.questionId}" placeholder="Câu trả lời">
-                                                        </div>
-                                                    </c:forEach>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Hủy</button>
-                                                    <button type="submit" name="action" value="SubmitFormJob" class="btn btn-primary gradient-custom-2">Gửi</button>
-                                                </div>
-                                            </form>
-                                        </div>
-
-                                    </div>
-
-                                </div>
-
-                            </div>
+                    <c:choose>
+                        <c:when test="${requestScope.ISDONE == 2 }">
                             <div class="row">
-                                <div class="card overflow-hidden shadow ">
-                                    <div class="card-header bg-white pt-4 pl-10 pr-10 border-bottom d-md-flex">
-                                        <h5 class="">CÔNG VIỆC LIÊN QUAN</h5>
-                                    </div>
-                                    <div class="card-body">
-                                        <div class="row">
-                                            <div class="col-lg-12 col-md-12 mb-5">
-                                                <div class="card overflow-hidden shadow shadow-hover" id="hoverCard">
-                                                    <div class="card-body ">
-                                                        <div class="row mb-3">
-                                                            <div class="col-md-1"><img
-                                                                    src="https://toigingiuvedep.vn/wp-content/uploads/2021/06/hinh-anh-hoat-hinh-de-thuong-cute-lam-avatar.jpg"
-                                                                    alt class="" style="width: 50px; height: 50px;"/>
-                                                            </div>
-                                                            <div class="col-md-11" style="padding-left: 0px;">
-                                                                <div
-                                                                    class="d-flex flex-column flex-lg-row justify-content-between">
-                                                                    <h5 class="text-secondary fw-medium text-truncate">Trịnh Ngọc Bảo</h5>
-                                                                    <span class="fs-1 fw-medium d-flex"></span>
-                                                                </div>
-                                                                <div class="d-flex align-items-center"><span class="fw-medium"
-                                                                                                             style="font-size: 15px;">Tên công ty</span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="d-flex flex-column flex-lg-row justify-content-between mb-2">
-                                                            <h5 class="text-secondary fw-medium text-truncate"><a
-                                                                    class="link-901 text-decoration-none stretched-link" href="#!">Tuyển dụng Quản trị Web Wordpress, Lập trình Wordpress Theme</a></h5><span class="fs-1 fw-medium"></span>
-                                                        </div>
-                                                        <div class="d-flex align-items-center mb-2"> <span
-                                                                class="fw-medium" style="font-size: 14px;">Lĩnh vực: Lập Trình</span>
-                                                        </div>
-                                                        <div class="d-flex align-items-center mb-2"> <img src="assets/img/dest/dollar.svg"
-                                                                                                          style="margin-right: 5px;" width="20" alt="navigation" /><span
-                                                                                                          class="fw-medium" style="font-size: 14px;">10000 VNĐ/h</span>
-                                                        </div>
-                                                        <div class="d-flex align-items-center mb-2"> <img src="assets/img/dest/user.svg"
-                                                                                                          style="margin-right: 5px;" width="20" alt="navigation" /><span
-                                                                                                          class="fw-medium" style="font-size: 14px;">8 người</span>
-                                                        </div>
-                                                        <div class="d-flex align-items-center mb-5"> <img src="assets/img/dest/calendar.svg"
-                                                                                                          style="margin-right: 5px;" width="20" alt="navigation" /><span
-                                                                                                          class="fw-semibold" style="font-size: 14px;">1 - 3 tháng</span>
-                                                        </div>
-                                                        <div class="d-flex align-items-center"> <img src="assets/img/dest/clock.svg"
-                                                                                                     style="margin-right: 5px;" width="15" alt="navigation" /><span
-                                                                                                     class="fw-medium" style="font-size: 12px;">5 phút trước</span>
-                                                        </div>
+                                <div class="col-lg-9 col-md-9 mb-5">
+                                    <div class="row mb-3">
+                                        <div class="card overflow-hidden shadow ">
+                                            <div class="card-header bg-white pt-4 pl-10 pr-10 border-bottom d-md-flex">
+                                                <h5 class="">THÔNG TIN CÔNG VIỆC</h5>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="content-detail mb-3">
+                                                    <div class="d-flex flex-column flex-lg-row justify-content-between mb-2">
+                                                        <h5 class="text-secondary fw-medium text-truncated"><a
+                                                                class="link-901 text-decoration-none " href="#!">${JOBDETAIL.title}</a></h5><span
+                                                            class="fs-1 fw-medium"></span>
+                                                    </div>
+                                                    <div class="d-flex align-items-center mb-2">
+                                                        <h6>Lĩnh vực: ${JOBDETAIL.jobCategoryName}</h6>
+                                                    </div>
+                                                </div>
+                                                <div class="content-detail mb-3">
+                                                    <div class="align-items-center mb-2">
+                                                        <h6>Mô tả công việc:</h6>
+
+                                                        <span class="fw-medium" style="font-size: 0.88889rem; line-height: 2.5;">
+                                                            ${JOBDETAIL.description}
+                                                        </span>
+
+                                                    </div>
+                                                </div>
+                                                <div class="d-flex align-items-center mb-2">
+                                                    <h6>Mức lương: <span class="fw-medium" style="font-size: 14px;">                                                
+                                                            <fmt:formatNumber value="${JOBDETAIL.salary}" pattern="#,### VNĐ/giờ"/>
+                                                        </span></h6>
+                                                </div>
+                                                <div class="d-flex align-items-center mb-2">
+                                                    <h6>Số người cần tuyển: <span class="fw-medium" style="font-size: 14px;">${JOBDETAIL.amount}
+                                                            người</span></h6>
+                                                </div>
+                                                <div class="d-flex align-items-center mb-5">
+                                                    <h6>Thời gian công việc: <span class="fw-medium" style="font-size: 14px;">
+                                                            <c:choose> 
+                                                                <c:when test="${JOBDETAIL.timeJob==1}">
+                                                                    Ít hơn 1 tháng
+                                                                </c:when> 
+                                                                <c:when test="${JOBDETAIL.timeJob==2}">
+                                                                    1 - 3 tháng
+                                                                </c:when>
+                                                                <c:when test="${JOBDETAIL.timeJob==3}">
+                                                                    Hơn 3 tháng
+                                                                </c:when> 
+                                                            </c:choose></span></h6>
+                                                </div>
+                                                <div class="d-flex align-items-center"> <span class="fw-medium"
+                                                                                              style="font-size: 14px;"> <img src="assets/img/dest/clock.svg"
+                                                                                   style="margin-right: 5px;" width="15" alt="navigation" /> Đã đăng ${JOBDETAIL.date}</span>
+                                                </div>
+                                            </div>
+                                            <div class="card-footer pt-4 pb-2">
+                                                <div class="row justify-content-md-end">
+                                                    <div class="col-lg-4 col-md-5 mb-3">
+                                                        <c:if test="${!empty requestScope.EXISTJOB}">
+                                                            <button type="button" class="btn btn-secondary btn-lg btn-block"> 
+                                                                Đã đăng ký
+                                                            </button>
+                                                        </c:if>
+                                                        <c:if test="${empty requestScope.EXISTJOB}">
+                                                            <button type="button" class="btn btn-primary btn-lg btn-block gradient-custom-2" data-bs-toggle="modal" data-bs-target="#exampleModal"> 
+                                                                Đăng ký công việc
+                                                            </button>
+                                                        </c:if>
                                                     </div>
                                                 </div>
                                             </div>
-
-
-
-
-
-
-
-
                                         </div>
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 
-                                    </div>                           
-                                </div>                                                       
-                            </div>
+                                            <div class="modal-dialog modal-dialog-centered">
 
-                        </div>
+                                                <div class="modal-content">
+                                                    <form action="main" method="POST">
+                                                        <div class="modal-header gradient-custom-2" >
+                                                            <h5 class="modal-title" id="exampleModalLabel" style="color: #ffffff;">Câu hỏi đăng ký công việc</h5>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body" style="padding: 1.5rem;">
+                                                            <input type="hidden" class="form-control" id="formGroupExampleInput" name="idJob" value="${JOBDETAIL.jobId}">
+                                                            <c:forEach items="${requestScope.LISTQUESTION}" var="listQuestion" >
+                                                                <div class="mb-4">
+                                                                    <label for="formGroupExampleInput" class="form-label fw-bold">${listQuestion.question}</label>
+                                                                    <input type="hidden" class="form-control" id="formGroupExampleInput" name="idQuestion" value="${listQuestion.questionId}">
 
-
-                        <div class="col-lg-3 col-md-3">
-                            <div class="card overflow-hidden shadow ">
-                                <div
-                                    class="card-header bg-white pt-4 pl-10 pr-10 border-bottom d-md-flex justify-content-center">
-                                    <h5 class="">NHÀ TUYỂN DỤNG</h5>
-                                </div>
-                                <div class="card-body">
-                                    <div class="row justify-content-center">
-                                        <div class="content-detail mb-3">
-                                            <div class="avatar-upload ">
-                                                <div class="text-center avatar-preview">
-                                                    <c:if test="${!empty USERINFOR.avatar}">
-                                                        <img src="${pageContext.servletContext.contextPath}/avatar?userId=${JOBDETAIL.userId}"
-                                                             width="164" height="164" />
-                                                    </c:if>
-                                                    <c:if test="${empty USERINFOR.avatar}">
-                                                        <img src="https://gtjai.com.vn/wp-content/uploads/2021/07/avt.png"
-                                                             width="164" height="164" />
-                                                    </c:if>
-
-                                                    </br>
-                                                    </br>
-                                                    <h5 class="mb-3">${USERINFOR.fullname}</h5>
+                                                                    <input type="text" class="form-control" id="formGroupExampleInput" name="answer${listQuestion.questionId}" placeholder="Câu trả lời">
+                                                                </div>
+                                                            </c:forEach>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Hủy</button>
+                                                            <button type="submit" name="action" value="SubmitFormJob" class="btn btn-primary gradient-custom-2">Gửi</button>
+                                                        </div>
+                                                    </form>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="content-detail mb-3">
-                                            <div class="d-flex align-items-center justify-content-center">
-                                                <h6 style="line-height: 2.5;">Thông tin công ty</h6>
-                                            </div>
-
-                                            <div class="d-flex align-items-center">
-                                                <h6 style="line-height: 2.5;">Tên công ty: <span class="fw-medium"
-                                                                                                 style="font-size: 14px; "> ${USERINFOR.compName}</span></h6>
-                                            </div>
-
-
-                                            <div class="d-flex align-items-center">
-                                                <h6 style="line-height: 2.5;">Số điện thoại: <span class="fw-medium"
-                                                                                                   style="font-size: 14px; "> ${USERINFOR.phone}</span></h6>
-                                            </div>
-
-                                            <div class="d-flex align-items-center">
-                                                <h6 style="line-height: 2.5;">Email: <span class="fw-medium text-break"
-                                                                                           style="font-size: 14px;"> ${USERINFOR.email}</span></h6>
-                                            </div>
-
-
-                                            <div class="d-flex align-items-center">
-                                                <h6 style="line-height: 2.5;">Địa chỉ: <span class="fw-medium text-break"
-                                                                                             style="font-size: 14px;"> ${USERINFOR.compAddress}</span></h6>
-                                            </div>
-
-
-                                            <div class="d-flex align-items-center">
-                                                <h6 style="line-height: 2.5;">Facebook: <span class="fw-medium text-break"
-                                                                                              style="font-size: 14px;"> ${USERINFOR.facebook}</span></h6>
-                                            </div>
-
-
-                                        </div>
-
                                     </div>
                                     <div class="row">
-                                        <div class="col-md-3 contact">
-                                            <a href="tel:${USERINFOR.phone}" class="btn btn-success btn-sm w-100" style="background: linear-gradient(to right, #99df20, #009245 ); border:none;"> Gọi <i class="fa fa-phone"
-                                                                                                                                                                                                        aria-hidden="true"></i></a>
-                                        </div>
-                                        <div class="col-md-6 contact">
-                                            <a href="${USERINFOR.facebook}" class="btn btn-success btn-sm w-100" style="background: linear-gradient(to right, #12c2e9, #c471ed, #f64f59); border:none;" > Messenger <i class="fa fa-comment"
-                                                                                                                                                                                                        aria-hidden="true"></i></a>
-                                        </div>
-                                        <div class="col-md-3 contact">
-                                            <a href="mailto:${USERINFOR.email}" class="btn btn-success btn-sm w-100" style="background: linear-gradient(to right, #43cea2, #1174d7); border:none;"> Mail <i class="fa fa-envelope"
-                                                                                                                                                                                                        aria-hidden="true"></i></a>
-                                        </div>
+                                        <div class="card overflow-hidden shadow ">
+                                            <div class="card-header bg-white pt-4 pl-10 pr-10 border-bottom d-md-flex">
+                                                <h5 class="">CÔNG VIỆC LIÊN QUAN</h5>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <c:forEach items="${requestScope.LIST3JOB}" var="list3Job">
+                                                        <div class="col-lg-12 col-md-12 mb-5">
 
+                                                            <div class="card overflow-hidden shadow shadow-hover" id="hoverCard">
+                                                                <div class="card-body ">
+
+                                                                    <div class="row mb-3">
+                                                                        <div class="col-md-1"><img
+                                                                                src="https://toigingiuvedep.vn/wp-content/uploads/2021/06/hinh-anh-hoat-hinh-de-thuong-cute-lam-avatar.jpg"
+                                                                                alt class="" style="width: 50px; height: 50px;"/>
+                                                                        </div>
+                                                                        <div class="col-md-11" style="padding-left: 0px;">
+                                                                            <div
+                                                                                class="d-flex flex-column flex-lg-row justify-content-between">
+                                                                                <h5 class="text-secondary fw-medium text-truncate">${list3Job.fullname}</h5>
+                                                                                <span class="fs-1 fw-medium d-flex"></span>
+                                                                            </div>
+                                                                            <div class="d-flex align-items-center"><span class="fw-medium"
+                                                                                                                         style="font-size: 15px;">${list3Job.compName}</span>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="d-flex flex-column flex-lg-row justify-content-between mb-2">
+                                                                        <h5 class="text-secondary fw-medium text-truncate"><a
+                                                                                class="link-901 text-decoration-none stretched-link" href="/main?jobId=${list3Job.jobId}&userId=${list3Job.userId}&action=DetailJob">${list3Job.title}</a></h5><span class="fs-1 fw-medium"></span>
+                                                                    </div>
+                                                                    <div class="d-flex align-items-center mb-2"> <span
+                                                                            class="fw-medium" style="font-size: 14px;">Lĩnh vực: ${list3Job.jobCategoryName}</span>
+                                                                    </div>
+                                                                    <div class="d-flex align-items-center mb-2"> <img src="assets/img/dest/dollar.svg"
+                                                                                                                      style="margin-right: 5px;" width="20" alt="navigation" /><span
+                                                                                                                      class="fw-medium" style="font-size: 14px;">${list3Job.salary} VNĐ/h</span>
+                                                                    </div>
+                                                                    <div class="d-flex align-items-center mb-2"> <img src="assets/img/dest/user.svg"
+                                                                                                                      style="margin-right: 5px;" width="20" alt="navigation" /><span
+                                                                                                                      class="fw-medium" style="font-size: 14px;">${list3Job.amount} người</span>
+                                                                    </div>
+                                                                    <div class="d-flex align-items-center mb-5"> <img src="assets/img/dest/calendar.svg"
+                                                                                                                      style="margin-right: 5px;" width="20" alt="navigation" /><span
+                                                                                                                      class="fw-semibold" style="font-size: 14px;">
+                                                                            <c:choose> 
+                                                                                <c:when test="${list3Job.timeJob==1}">
+                                                                                    Ít hơn 1 tháng
+                                                                                </c:when> 
+                                                                                <c:when test="${list3Job.timeJob==2}">
+                                                                                    1 - 3 tháng
+                                                                                </c:when>
+                                                                                <c:when test="${list3Job.timeJob==3}">
+                                                                                    Hơn 3 tháng
+                                                                                </c:when> 
+                                                                            </c:choose>
+                                                                        </span>
+                                                                    </div>
+                                                                    <div class="d-flex align-items-center"> <img src="assets/img/dest/clock.svg"
+                                                                                                                 style="margin-right: 5px;" width="15" alt="navigation" /><span
+                                                                                                                 class="fw-medium" style="font-size: 12px;">${list3Job.date} </span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </c:forEach>
+
+
+
+
+
+
+
+
+                                                </div>
+
+                                            </div>                           
+                                        </div>                                                       
+                                    </div>
+
+                                </div>
+
+
+                                <div class="col-lg-3 col-md-3">
+                                    <div class="card overflow-hidden shadow ">
+                                        <div
+                                            class="card-header bg-white pt-4 pl-10 pr-10 border-bottom d-md-flex justify-content-center">
+                                            <h5 class="">NHÀ TUYỂN DỤNG</h5>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="row justify-content-center">
+                                                <div class="content-detail mb-3">
+                                                    <div class="avatar-upload ">
+                                                        <div class="text-center avatar-preview">
+                                                            <c:if test="${!empty USERINFOR.avatar}">
+                                                                <img src="${pageContext.servletContext.contextPath}/avatar?userId=${JOBDETAIL.userId}"
+                                                                     width="164" height="164" />
+                                                            </c:if>
+                                                            <c:if test="${empty USERINFOR.avatar}">
+                                                                <img src="https://gtjai.com.vn/wp-content/uploads/2021/07/avt.png"
+                                                                     width="164" height="164" />
+                                                            </c:if>
+
+                                                            </br>
+                                                            </br>
+                                                            <h5 class="mb-3">${USERINFOR.fullname}</h5>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="content-detail mb-3">
+                                                    <div class="d-flex align-items-center justify-content-center">
+                                                        <h6 style="line-height: 2.5;">Thông tin công ty</h6>
+                                                    </div>
+
+                                                    <div class="d-flex align-items-center">
+                                                        <h6 style="line-height: 2.5;">Tên công ty: <span class="fw-medium"
+                                                                                                         style="font-size: 14px; "> ${USERINFOR.compName}</span></h6>
+                                                    </div>
+
+
+                                                    <div class="d-flex align-items-center">
+                                                        <h6 style="line-height: 2.5;">Số điện thoại: <span class="fw-medium"
+                                                                                                           style="font-size: 14px; "> ${USERINFOR.phone}</span></h6>
+                                                    </div>
+
+                                                    <div class="d-flex align-items-center">
+                                                        <h6 style="line-height: 2.5;">Email: <span class="fw-medium text-break"
+                                                                                                   style="font-size: 14px;"> ${USERINFOR.email}</span></h6>
+                                                    </div>
+
+
+                                                    <div class="d-flex align-items-center">
+                                                        <h6 style="line-height: 2.5;">Địa chỉ: <span class="fw-medium text-break"
+                                                                                                     style="font-size: 14px;"> ${USERINFOR.compAddress}</span></h6>
+                                                    </div>
+
+
+                                                    <div class="d-flex align-items-center">
+                                                        <h6 style="line-height: 2.5;">Facebook: <span class="fw-medium text-break"
+                                                                                                      style="font-size: 14px;"> ${USERINFOR.facebook}</span></h6>
+                                                    </div>
+
+
+                                                </div>
+
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-3 contact">
+                                                    <a href="tel:${USERINFOR.phone}" class="btn btn-success btn-sm w-100" style="background: linear-gradient(to right, #99df20, #009245 ); border:none;"> Gọi <i class="fa fa-phone"
+                                                                                                                                                                                                        aria-hidden="true"></i></a>
+                                                </div>
+                                                <div class="col-md-6 contact">
+                                                    <a href="${USERINFOR.facebook}" class="btn btn-success btn-sm w-100" style="background: linear-gradient(to right, #12c2e9, #c471ed, #f64f59); border:none;" > Messenger <i class="fa fa-comment"
+                                                                                                                                                                                                        aria-hidden="true"></i></a>
+                                                </div>
+                                                <div class="col-md-3 contact">
+                                                    <a href="mailto:${USERINFOR.email}" class="btn btn-success btn-sm w-100" style="background: linear-gradient(to right, #43cea2, #1174d7); border:none;"> Mail <i class="fa fa-envelope"
+                                                                                                                                                                                                        aria-hidden="true"></i></a>
+                                                </div>
+
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
+                        </c:when>
+                        <c:when test="${requestScope.ISDONE == 1 }">
+                            <div class="text-center">
+                                <h1>Công việc đang trong quá trình thực hiện, không còn tuyển nữa!</h1>
+                            </div>
+                        </c:when>
+                    </c:choose>                                                                                                                                                                                   
+                </div> 
             </section>
 
 

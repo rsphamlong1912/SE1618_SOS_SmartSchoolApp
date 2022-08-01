@@ -17,7 +17,7 @@
   <!-- ===============================================-->
   <!--    Document Title-->
   <!-- ===============================================-->
-  <title>FPTU Lost & Found</title>
+  <title>FPTU Freelance Job</title>
 
 
   <!-- ===============================================-->
@@ -55,28 +55,8 @@
   <!-- ===============================================-->
 
   <main class="main" id="top">
-    <!-- here  data-navbar-on-scroll="data-navbar-on-scroll"-->
-    <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3 d-block gradient-custom-2" style="background-color: #F26F21 ;">
-      <div class="container"><a class="navbar-brand" href="WelcomePage.jsp"><img
-            src="https://hcmuni.fpt.edu.vn/landing-page/images/logo-top.png" height="46" alt="logo" /></a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span
-            class="navbar-toggler-icon"> </span></button>
-        <div class="collapse navbar-collapse border-top border-lg-0 mt-4 mt-lg-0" id="navbarSupportedContent">
-          <ul class="navbar-nav ms-auto pt-2 pt-lg-0 font-base align-items-lg-center align-items-start">
-            <li class="nav-item px-3"><a class="nav-link fw-bold" aria-current="page" href="freelancerhome">TRANG CHỦ</a>
-                            </li>
-                            <li class="nav-item px-3"><a class="nav-link fw-bold" aria-current="page" href="freelancerhome#linhvuc">LĨNH VỰC</a>
-                            </li>
-                            <li class="nav-item px-3"><a class="nav-link fw-bold" aria-current="page" href="main?action=ListJobPost">TÌM VIỆC</a>
-                            </li>
-            <li class="nav-item px-3"><a class="btn btn-outline-light order-1 order-lg-0 fw-bold" href="#">Đăng nhập /
-                Đăng ký</a></li>
-          </ul>
-        </div>
-      </div>
-    </nav>
-    <section class="" style="padding-top: 2rem; min-height: 61rem;">
+
+    <section class="" style="padding-top: 0rem; min-height: 61rem;">
       <div class="bg-holder"
         style="background-image:url(assets/img/Background-FPT.jpeg);">
       </div>
@@ -93,7 +73,7 @@
                     <div class="text-center">
                       <img src="https://upload.wikimedia.org/wikipedia/vi/1/1d/Logo_%C4%90%E1%BA%A1i_h%E1%BB%8Dc_FPT.png"
                         style="width: 185px;" alt="logo">
-                      <h4 class="mt-1 mb-5 pb-1">Freelance Job</h4>
+                      <h4 class="mt-1 mb-5 pb-1"><a href="freelancerhome">Freelance Job</a></h4>
                     </div>
     
                       <form action="main" method="POST">

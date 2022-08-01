@@ -5,35 +5,41 @@
  */
 package controllers;
 
+import applyJob.ApplyJobDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import jobPost.JobPostDAO;
 
 /**
  *
  * @author TrinhNgocBao
  */
-@WebServlet(name = "SetJobApproveDoneController", urlPatterns = {"/setJobApproveDone"})
-public class SetJobApproveDoneController extends HttpServlet {
+@WebServlet(name = "ChangeUserStatusJobController", urlPatterns = {"/changeUserStatusJob"})
+public class ChangeUserStatusJobController extends HttpServlet {
 
- 
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = "";
-        try {
-           String jobId = request.getParameter("jobId");
-           JobPostDAO dao = new JobPostDAO();
-           dao.SetJobApproveDone(jobId);
-           url = "main?action=MyJobPostDoneDetail&jobId="+jobId;
-        } catch (Exception e) {
-        } finally {
-           response.sendRedirect(url);
+        PrintWriter out = response.getWriter();
+        String selectValue = request.getParameter("selectValue");
+        String applyJobId = request.getParameter("applyJobId");
+        ApplyJobDAO aDao = new ApplyJobDAO();
+        System.out.println("selectValue:  "+selectValue);
+        System.out.println("applyJobId:   "+applyJobId);
+        if("doing".equals(selectValue)){
+            aDao.setApplyJobDoing(applyJobId);
+            out.print("Doing");
+        }else if ("done".equals(selectValue)){
+            aDao.setApplyJobDone(applyJobId);
+            out.print("Done");
         }
     }
 
@@ -49,7 +55,11 @@ public class SetJobApproveDoneController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(ChangeUserStatusJobController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -63,7 +73,11 @@ public class SetJobApproveDoneController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(ChangeUserStatusJobController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

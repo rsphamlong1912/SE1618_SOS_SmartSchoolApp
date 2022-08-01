@@ -66,10 +66,10 @@
                         </a>
                         <ul id="ddmenu_2" class="collapse dropdown-nav">
                             <li>
-                                <a href="CategoryLostAndFound.html" class=""> Category Lost & Found </a>
+                                <a href="category" class=""> Category Lost & Found </a>
                             </li>
                             <li>
-                                <a href="" class=""> Category Freelance Job </a>
+                                <a href="jobCategory" class=""> Category Freelance Job </a>
                             </li>
                         </ul>
                     </li>
@@ -83,10 +83,11 @@
                         </a>
                         <ul id="ddmenu_3" class="collapse dropdown-nav">
                             <li>
-                                <a href=""> Lost & Found Posts </a>
+                                <a href="listPostToApprove"> Lost & Found Posts </a>
                             </li>
                             <li>
-                                <a href="" class="active"> Freelance Job Posts </a>
+
+                                <a href="approveJobPost" class="active"> Freelance Job Posts </a>
                             </li>
                         </ul>
                     </li>
@@ -100,7 +101,7 @@
                         </a>
                         <ul id="ddmenu_4" class="collapse dropdown-nav">
                             <li>
-                                <a href=""> Lost & Found </a>
+                                <a href="adminLostAndFoundPost"> Lost & Found </a>
                             </li>
                             <li>
                                 <a href=""> Freelance Job </a>

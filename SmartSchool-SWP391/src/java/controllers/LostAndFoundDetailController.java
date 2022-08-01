@@ -5,60 +5,49 @@
  */
 package controllers;
 
-import applyJob.ApplyJobDAO;
-import applyJob.ApplyJobDTO;
+import category.CategoryDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import jobPost.JobPostDAO;
-import jobPost.JobPostDTO;
-import jobPostAnswer.JobPostAnswerDAO;
-import jobPostAnswer.JobPostAnswerDTO;
+import post.PostDAO;
+import post.PostDTO;
+import user.UserDAO;
+import user.UserDTO;
 
 /**
  *
- * @author TrinhNgocBao
+ * @author TQK
  */
-@WebServlet(name = "MyJobPostDoneDetailController", urlPatterns = {"/myJobPostDoneDetail"})
-public class MyJobPostDoneDetailController extends HttpServlet {
+@WebServlet(name = "LostAndFoundDetailController", urlPatterns = {"/lostAndFoundDetail"})
+public class LostAndFoundDetailController extends HttpServlet {
 
-    private static final String ERROR = "EmployerJobProcessDetail.jsp";
-    private static final String MY_JOB_POST_DONE_DETAIL_PAGE = "EmployerJobDoneDetail.jsp";
-    
+    private static final String ERROR = "LostAndFoundDetail.jsp";
+    private static final String POST_DETAIL_PAGE = "LostAndFoundDetail.jsp";
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-                String url = ERROR;
+        String url = POST_DETAIL_PAGE;
         try {
-            String jobId = request.getParameter("jobId");
-            JobPostDAO dao = new JobPostDAO();
-            JobPostDTO postJob = dao.getJobInformationDone(jobId);
-            ApplyJobDAO jDao = new ApplyJobDAO();
-            List<ApplyJobDTO> listUserDoing = jDao.getListUserDoing(jobId);
-            ArrayList<JobPostAnswerDTO> listAnswer = new ArrayList<>();
-            JobPostAnswerDAO aDao = new JobPostAnswerDAO();
-            for (ApplyJobDTO a : listUserDoing) {
-                listAnswer.addAll(aDao.getAnswerJobWaiting(a.getJobId(), a.getUserId()));
-            }
+//            HttpSession session = request.getSession();
+//            UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
+            String postId = request.getParameter("postId");
+            PostDAO pdao = new PostDAO();
+            PostDTO post = pdao.readPost(postId);
+            List<PostDTO> list3Cate = pdao.get3Category(post.getCategoryId(),post.getPostId());
             
-            if (listUserDoing.isEmpty()) {
-                request.setAttribute("JOBDETAIL", postJob);
-                request.setAttribute("ERROR", "(Chưa có ứng viên)");
-                url = MY_JOB_POST_DONE_DETAIL_PAGE;
-            }else {
-                request.setAttribute("JOBDETAIL", postJob);
-                request.setAttribute("USER_DOING", listUserDoing);
-                request.setAttribute("USER_ANSWER_WAITING", listAnswer);
-                url = MY_JOB_POST_DONE_DETAIL_PAGE;
-            }
-            request.setAttribute("AMOUNT_FREELANCER", postJob.getAmountFreelancer());
+            String userId = post.getUserId();
+            UserDAO udao = new UserDAO();
+            UserDTO user = udao.checkAccountExist(userId);
+            request.setAttribute("POST", post);
+            request.setAttribute("USER_POST", user);
+            request.setAttribute("LIST3CATE", list3Cate);
         } catch (Exception e) {
+            log("Error at LostAndFoundDetailController:" + e.toString());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }

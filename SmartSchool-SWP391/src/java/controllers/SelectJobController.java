@@ -5,8 +5,6 @@
  */
 package controllers;
 
-import applyJob.ApplyJobDAO;
-import applyJob.ApplyJobDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -16,51 +14,60 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import jobPost.JobPostDAO;
 import jobPost.JobPostDTO;
-import jobPostAnswer.JobPostAnswerDAO;
-import jobPostAnswer.JobPostAnswerDTO;
+import user.UserDTO;
 
 /**
  *
  * @author TrinhNgocBao
  */
-@WebServlet(name = "MyJobPostDoneDetailController", urlPatterns = {"/myJobPostDoneDetail"})
-public class MyJobPostDoneDetailController extends HttpServlet {
+@WebServlet(name = "SelectJobController", urlPatterns = {"/selectJob"})
+public class SelectJobController extends HttpServlet {
 
-    private static final String ERROR = "EmployerJobProcessDetail.jsp";
-    private static final String MY_JOB_POST_DONE_DETAIL_PAGE = "EmployerJobDoneDetail.jsp";
-    
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-                String url = ERROR;
         try {
-            String jobId = request.getParameter("jobId");
+            HttpSession session = request.getSession();
+            UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
+            String userId = loginUser.getUserId();
+            String job = request.getParameter("Job");
             JobPostDAO dao = new JobPostDAO();
-            JobPostDTO postJob = dao.getJobInformationDone(jobId);
-            ApplyJobDAO jDao = new ApplyJobDAO();
-            List<ApplyJobDTO> listUserDoing = jDao.getListUserDoing(jobId);
-            ArrayList<JobPostAnswerDTO> listAnswer = new ArrayList<>();
-            JobPostAnswerDAO aDao = new JobPostAnswerDAO();
-            for (ApplyJobDTO a : listUserDoing) {
-                listAnswer.addAll(aDao.getAnswerJobWaiting(a.getJobId(), a.getUserId()));
+            List<JobPostDTO> list = dao.getMyJobPostDoingDone(userId);
+            List<JobPostDTO> listDoing = new ArrayList<>();
+            List<JobPostDTO> listDone = new ArrayList<>();
+            if ("doing".equals(job)){
+                for(JobPostDTO doing: list){
+                    if("doing".equals(doing.getProcess())){
+                        listDoing.add(doing);
+                    }
+                }               
+                request.setAttribute("MY_JOB_POST_DONE", listDoing);
+                request.setAttribute("SELECTED", 1);
+                if(listDoing.isEmpty()){
+                    request.setAttribute("ERROR", "Chưa có công việc nào");
+                }
+                
+            }else if ("done".equals(job)){
+                for(JobPostDTO done: list){
+                    if("done".equals(done.getProcess())){
+                        listDone.add(done);
+                    }
+                }
+                request.setAttribute("MY_JOB_POST_DONE", listDone);
+                request.setAttribute("SELECTED", 2); 
+                if(listDone.isEmpty()){
+                    request.setAttribute("ERROR", "Chưa có công việc nào");
+                }
             }
             
-            if (listUserDoing.isEmpty()) {
-                request.setAttribute("JOBDETAIL", postJob);
-                request.setAttribute("ERROR", "(Chưa có ứng viên)");
-                url = MY_JOB_POST_DONE_DETAIL_PAGE;
-            }else {
-                request.setAttribute("JOBDETAIL", postJob);
-                request.setAttribute("USER_DOING", listUserDoing);
-                request.setAttribute("USER_ANSWER_WAITING", listAnswer);
-                url = MY_JOB_POST_DONE_DETAIL_PAGE;
-            }
-            request.setAttribute("AMOUNT_FREELANCER", postJob.getAmountFreelancer());
+            
         } catch (Exception e) {
         } finally {
-            request.getRequestDispatcher(url).forward(request, response);
+            request.getRequestDispatcher("EmployerJobDone.jsp").forward(request, response);
         }
     }
 

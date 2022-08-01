@@ -207,7 +207,7 @@
                                 </li>
                                 <!--/ User -->    
                             </c:if> 
-                                 <li class="nav-item px-3"><a class="btn btn-outline-light order-1 order-lg-0 fw-bold" href="main?action=EmployerUploadJobPost">Đăng tuyển</a></li>
+                            <li class="nav-item px-3"><a class="btn btn-light order-1 order-lg-0 fw-bold" href="main?action=EmployerUploadJobPost">Đăng tuyển</a></li>
                         </ul>
                     </div>
                 </div>
@@ -235,11 +235,22 @@
             </div>
 
             <section style="padding: 50px 0 ;min-height: 85vh">
-                <div class="container">
-                    <c:if test="${empty requestScope.MY_JOB_POST_DONE}">
-                        <h1 class="text-center">${ERROR}</h1>
-                    </c:if>
 
+                <div class="container">
+                    
+                    <div class="row mb-3 justify-content-end">
+                        <div class="col-md-3 ">
+                            <form action="selectJob">
+                                <select name="Job" class="form-select fw-bold" onchange="this.form.submit()" aria-label="Default select example">
+                                    <option value="doing" ${requestScope.SELECTED == 1 ? 'selected' : ''}>Đang thực hiện</option>
+                                    <option value="done" ${requestScope.SELECTED == 2 ? 'selected' : ''}>Đã hoàn tất</option>
+                                </select>
+                            </form>
+                        </div>
+                    </div>
+                   
+                    <h1 class="text-center">${ERROR}</h1>
+                    
                     <c:if test="${!empty requestScope.MY_JOB_POST_DONE}">
                         <c:forEach items="${requestScope.MY_JOB_POST_DONE}" var="myJobPostDone">
                             <div class="card w-100">
@@ -355,10 +366,10 @@
         <script src="assets/js/theme.js"></script>
         <script src="assets/js/extention/choices.js"></script>
         <script>
-            const choices = new Choices('[data-trigger]',
-                    {
-                        searchEnabled: false
-                    });
+                                const choices = new Choices('[data-trigger]',
+                                        {
+                                            searchEnabled: false
+                                        });
 
         </script>
         <link
