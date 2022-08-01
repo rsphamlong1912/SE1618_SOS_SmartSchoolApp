@@ -348,15 +348,20 @@
                                             <div class="card-footer pt-4 pb-2">
                                                 <div class="row justify-content-md-end">
                                                     <div class="col-lg-4 col-md-5 mb-3">
-                                                        <c:if test="${!empty requestScope.EXISTJOB}">
-                                                            <button type="button" class="btn btn-secondary btn-lg btn-block"> 
-                                                                Đã đăng ký
-                                                            </button>
+                                                        <c:if test="${empty sessionScope.LOGIN_USER}">
+                                                            <a href="main?action=FreelancerLogin" class="btn btn-primary btn-lg btn-block gradient-custom-2">Đăng ký công việc</a>
                                                         </c:if>
-                                                        <c:if test="${empty requestScope.EXISTJOB}">
-                                                            <button type="button" class="btn btn-primary btn-lg btn-block gradient-custom-2" data-bs-toggle="modal" data-bs-target="#exampleModal"> 
-                                                                Đăng ký công việc
-                                                            </button>
+                                                        <c:if test="${!empty sessionScope.LOGIN_USER}">
+                                                            <c:if test="${!empty requestScope.EXISTJOB}">
+                                                                <button type="button" class="btn btn-secondary btn-lg btn-block"> 
+                                                                    Đã đăng ký
+                                                                </button>
+                                                            </c:if>
+                                                            <c:if test="${empty requestScope.EXISTJOB}">
+                                                                <button type="button" class="btn btn-primary btn-lg btn-block gradient-custom-2" data-bs-toggle="modal" data-bs-target="#exampleModal"> 
+                                                                    Đăng ký công việc
+                                                                </button>
+                                                            </c:if>
                                                         </c:if>
                                                     </div>
                                                 </div>

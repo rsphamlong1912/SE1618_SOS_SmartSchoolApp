@@ -62,11 +62,11 @@ public class MainController extends HttpServlet {
     private static final String ADMIN_LOSTANDFOUND_CONTROLLER = "adminLostAndFound";
     private static final String CATEGORY = "Category";
     private static final String CATEGORY_LOSTANDFOUND_CONTROLLER = "category";
-    private static final String ADD_CATEGORY = "AddCategogy";
+    private static final String ADD_CATEGORY = "AddCategory";
     private static final String ADD_CATEGORY_LOSTANDFOUND_CONTROLLER = "addCategory";
-    private static final String EDIT_CATEGORY = "EditCategogy";
+    private static final String EDIT_CATEGORY = "EditCategory";
     private static final String EDIT_CATEGORY_LOSTANDFOUND_CONTROLLER = "editCategory";
-    private static final String DELETE_CATEGORY = "DeleteCategogy";
+    private static final String DELETE_CATEGORY = "DeleteCategory";
     private static final String DELETE_CATEGORY_LOSTANDFOUND_CONTROLLER = "deleteCategory";
     private static final String DETAIL = "Detail";
     private static final String DETAIL_POST_LOSTANDFOUND_CONTROLLER = "lostAndFoundDetail";
@@ -126,17 +126,24 @@ public class MainController extends HttpServlet {
     
     private static final String SEARCH_POST_IN_HOME = "SearchPostInHome";
     private static final String SEARCH_POST_IN_HOME_CONTROLLER = "searchPostInHome";
-    
-    
+
     private static final String MY_JOB_POST_DONE_DETAIL = "MyJobPostDoneDetail";
     private static final String MY_JOB_POST_DONE_DETAIL_CONTROLLER = "myJobPostDoneDetail";
-        
-    
+
+
     private static final String EMPLOYER_DASHBOARD = "EmployerDashboard";
     private static final String EMPLOYER_DASHBOARD_CONTROLLER = "employerDashboard";
     
     private static final String SET_JOB_DONE = "SetJobDone";
     private static final String SET_JOB_DONE_CONTROLLER = "setJobDone";
+
+    private static final String SEND_REPORT = "SendReportPost";
+    private static final String SEND_REPORT_CONTROLLER = "sendReportPost";
+    
+        private static final String EM_SIGNUP = "EmployerSignup";
+    private static final String EM_SIGNUP_CONTROLLER = "employerSignup";
+
+
     
     private static final String DELETE_POST = "DeletePost";
     private static final String DELETE_POST_CONTROLLER = "deletePost";
@@ -303,7 +310,7 @@ public class MainController extends HttpServlet {
 
             }
 
-            if(EMPLOYER_DASHBOARD.equals(action)) {
+            if (EMPLOYER_DASHBOARD.equals(action)) {
                 url = EMPLOYER_DASHBOARD_CONTROLLER;
             }
             if (SET_JOB_DONE.equals(action)) {
@@ -314,6 +321,16 @@ public class MainController extends HttpServlet {
                 url = DETAIL_POST_LOSTANDFOUND_CONTROLLER;
 
             }
+            if (SEND_REPORT.equals(action)) {
+                url = SEND_REPORT_CONTROLLER;
+
+            }
+            if ("FreelancerLogin".equals(action)) {
+                url = "FreelancerLogin.jsp";
+
+            }
+            if (EM_SIGNUP.equals(action)) {
+                url = EM_SIGNUP_CONTROLLER;
             if (DELETE_POST_LOSTANDFOUND.equals(action)) {
 
                 url = DELETE_POST_LOSTANDFOUND_CONTROLLER;

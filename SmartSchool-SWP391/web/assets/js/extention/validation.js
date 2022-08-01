@@ -4,6 +4,8 @@ var password = document.querySelector('#password')
 var repassword = document.querySelector('#re-password')
 var email = document.querySelector('#email')
 var phone = document.querySelector('#phone')
+var compName = document.querySelector('#compName')
+var compAddress = document.querySelector('#compAddress')
 
 //Feedback
 var feedback = document.querySelector('#feedback');
@@ -139,6 +141,18 @@ function validate() {
     let isPasswordLengthError = checkLengthError(password, 4, 30)
     let isMatchError = checkMatchPasswordError(password, repassword)
 
+    if (isEmptyError || isEmailError || isUserNameLengthError || isPasswordLengthError || isMatchError) {
+        return false
+    }
+    return true
+}
+
+function employerValidate() {
+    let isEmptyError = checkEmptyError([fullName, username, password, repassword, email, phone,compName,compAddress])
+    let isEmailError = checkEmailError(email)
+    let isUserNameLengthError = checkLengthError(username, 4, 30)
+    let isPasswordLengthError = checkLengthError(password, 4, 30)
+    let isMatchError = checkMatchPasswordError(password, repassword)
     if (isEmptyError || isEmailError || isUserNameLengthError || isPasswordLengthError || isMatchError) {
         return false
     }

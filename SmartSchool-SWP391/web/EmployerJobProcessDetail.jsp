@@ -133,7 +133,7 @@
                         <ul class="navbar-nav ms-auto pt-2 pt-lg-0 font-base align-items-lg-center align-items-start">
                             <li class="nav-item px-3"><a class="nav-link fw-bold" aria-current="page" href="employerhome">TRANG CHỦ</a>
                             </li>
-                            <li class="nav-item px-3"><a class="nav-link fw-bold" aria-current="page" href="#phanloai">DASHBOARD</a>
+                            <li class="nav-item px-3"><a class="nav-link fw-bold" aria-current="page" href="main?action=EmployerDashboard&userId=${sessionScope.LOGIN_USER.userId}">DASHBOARD</a>
                             </li>
                             <li class="nav-item px-3 navbar-dropdown dropdown-user dropdown">
                                 <a class="btn btn-outline-light order-1 order-lg-0 fw-bold nav-link hide-arrow" id="nameLogin" href=""

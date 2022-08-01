@@ -134,7 +134,7 @@
                         <ul class="navbar-nav ms-auto pt-2 pt-lg-0 font-base align-items-lg-center align-items-start">
                             <li class="nav-item px-3"><a class="nav-link fw-bold" aria-current="page" href="EmployerHome.jsp">TRANG CHỦ</a>
                             </li>
-                            <li class="nav-item px-3"><a class="nav-link fw-bold" aria-current="page" href="/EmployerDashboard.jsp">DASHBOARD</a>
+                            <li class="nav-item px-3"><a class="nav-link fw-bold" aria-current="page" href="#">DASHBOARD</a>
                             </li>
                             <li class="nav-item px-3 navbar-dropdown dropdown-user dropdown">
                                 <a class="btn btn-outline-light order-1 order-lg-0 fw-bold nav-link hide-arrow" id="nameLogin" href=""
@@ -279,7 +279,7 @@
                     <div class="row">
                         <div class="col-lg-12">
 
-                            <a class="text-decoration-none" href="main?action=MyJobPostProcess"><i class="fa fa-chevron-left"></i> Trở về</a>
+                            <a class="text-decoration-none" href="employerhome"><i class="fa fa-chevron-left"></i> Trở về</a>
 
                         </div>
                     </div>

@@ -6,28 +6,25 @@
 package controllers;
 
 import java.io.IOException;
-import java.io.InputStream;
+import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.servlet.http.Part;
-import post.PostDAO;
+import report.ReportDAO;
 import user.UserDTO;
 
 /**
  *
  * @author SE150925 Nguyen Van Hai Nam
  */
-@WebServlet(name = "UploadPostController", urlPatterns = {"/uploadPost"})
-@MultipartConfig(maxFileSize = 16177215)
-public class UploadPostController extends HttpServlet {
+@WebServlet(name = "SendReportPostController", urlPatterns = {"/sendReportPost"})
+public class SendReportPostController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,37 +35,30 @@ public class UploadPostController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    private static final String ERROR = "UploadPost.jsp";
-    private static final String YOUR_POST = "UploadPost.jsp";
-
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String url = YOUR_POST;
-        try {
-            response.setContentType("text/html;charset=UTF-8");
-            HttpSession session = request.getSession();
+        response.setContentType("text/html;charset=UTF-8");
+        String url="";
+        int postId=Integer.parseInt(request.getParameter("postId"));
+        int reportTypeId=Integer.parseInt(request.getParameter("reportTypeId"));
+        HttpSession session = request.getSession();
             UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
-            String userId = loginUser.getUserId();
-            int categoryId = Integer.parseInt(request.getParameter("categoryId"));
-            InputStream inputStream = null;
-            Part filePart = request.getPart("postImg");
-            if (filePart != null) {
-                inputStream = filePart.getInputStream();
+            String userId=request.getParameter("userId");
+            if(loginUser==null){
+                response.sendRedirect("login.jsp");
+            }else{
+            try {
+                ReportDAO dao=new ReportDAO();
+                dao.sendReport(loginUser.getUserId(), postId, reportTypeId);
+                request.setAttribute("MESSAGE", "Báo cáo thành công");
+                url="main?postId="+postId+"&userId="+userId+"&action=Detail";
+            } catch (SQLException ex) {
+                Logger.getLogger(SendReportPostController.class.getName()).log(Level.SEVERE, null, ex);
+            }finally{
+//                request.getRequestDispatcher("lostAndFoundDetail").forward(request, response);
+                response.sendRedirect(url);
             }
-            String title = request.getParameter("title");
-            String description = request.getParameter("description");
-            String type = request.getParameter("type");
-            PostDAO dao = new PostDAO();
-            dao.uploadPost(userId, categoryId, inputStream, description, type, title);
-            request.setAttribute("MESSAGE", "Đăng bài thành công!");
-//            url = PROFILE_DETAIL_PAGE;
-        } catch (Exception e) {
-            Logger.getLogger("Error at UploadPostController: " + e.toString());
-        } finally {
-//            request.getRequestDispatcher(url).forward(request, response);
-                response.sendRedirect("/uploadLostAndFoundPost");
-        }
-
+            }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

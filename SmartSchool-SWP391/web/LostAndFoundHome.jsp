@@ -54,7 +54,6 @@
         <!-- ===============================================-->
         <!--    Main Content-->
         <!-- ===============================================-->
-
         <main class="main" id="top">
             <!-- here  data-navbar-on-scroll="data-navbar-on-scroll"-->
             <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3 d-block gradient-custom-2">
@@ -257,7 +256,7 @@
                                     <div class="card-body py-4 px-3">
                                         <div class="d-flex flex-column flex-lg-row justify-content-between mb-3">
                                             <h4 class="text-secondary fw-medium"><a class="link-901 text-decoration-none stretched-link"
-                                                                                    href="#!">${itemLost.title}</a></h4><span class="fs-1 fw-medium">${itemLost.postId}</span>
+                                                                                    href="/main?postId=${itemLost.postId}&userId=${itemLost.userId}&action=Detail">${itemLost.title}</a></h4><span class="fs-1 fw-medium">${itemLost.postId}</span>
                                         </div>
                                         <div class="d-flex align-items-center"> <img src="assets/img/dest/clock.svg"
                                                                                      style="margin-right: 14px" width="20" alt="navigation" /><span class="fs-0 fw-medium">${itemLost.date}</span></div>
@@ -288,7 +287,7 @@
                                     <div class="card-body py-4 px-3">
                                         <div class="d-flex flex-column flex-lg-row justify-content-between mb-3">
                                             <h4 class="text-secondary fw-medium"><a class="link-901 text-decoration-none stretched-link"
-                                                                                    href="#!">${itemFound.title}</a></h4><span class="fs-1 fw-medium">${itemFound.postId}</span>
+                                                                                    href="/main?postId=${itemFound.postId}&userId=${itemFound.userId}&action=Detail">${itemFound.title}</a></h4><span class="fs-1 fw-medium">${itemFound.postId}</span>
                                         </div>
                                         <div class="d-flex align-items-center"> <img src="assets/img/dest/clock.svg"
                                                                                      style="margin-right: 14px" width="20" alt="navigation" /><span class="fs-0 fw-medium">${itemFound.date}</span></div>

@@ -24,6 +24,8 @@ import utills.DBUtils;
 public class UserDAO {
 
     private static final String REGISTER = "INSERT INTO tblUser(fullname, userId, password, email, phone, roleId) VALUES (?, ?, ?, ?, ?, 'US')";
+    private static final String EM_REGISTER = "INSERT INTO tblUser(fullname, userId, password, email, phone, roleId,compName,compAddress) VALUES (?, ?, ?, ?, ?, 'EM',?,?)";
+
     private static final String LOGIN = "SELECT u.userId, u.roleId, u.password, u.fullname, u.avatar, u.phone, u.email, u.facebook, u.userStatus, u.haveJob, r.roleName\n"
             + "FROM tblUser as u, tblRole as r\n"
             + "WHERE u.roleId = r.roleId AND userId = ? AND password = ?";
@@ -359,6 +361,35 @@ public class UserDAO {
                 ptm.setString(3, password);
                 ptm.setString(4, email);
                 ptm.setString(5, phone);
+                ptm.executeUpdate();
+            }
+        } catch (Exception e) {
+
+        } finally {
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+    }
+
+    public void employerSignup(String fullname, String userId, String password, String email, String phone,String compName,String compAddress)
+            throws SQLException {
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(EM_REGISTER);
+                ptm.setString(1, fullname);
+                ptm.setString(2, userId);
+                ptm.setString(3, password);
+                ptm.setString(4, email);
+                ptm.setString(5, phone);
+                ptm.setString(6, compName);
+                ptm.setString(7, compAddress);
                 ptm.executeUpdate();
             }
         } catch (Exception e) {

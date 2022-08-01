@@ -92,7 +92,7 @@
                     <div class="row d-flex justify-content-center align-items-center h-100">
                         <div class="col-xl-10">
                             <div class="card rounded-1 text-secondary">
-                                <form onsubmit="return validate()" action="main" method="POST" >
+                                <form onsubmit="return employerValidate()" action="main" method="POST" >
                                     <div class="row g-0">
                                         <div class="text-center mt-5">
                                             <img src="https://upload.wikimedia.org/wikipedia/vi/1/1d/Logo_%C4%90%E1%BA%A1i_h%E1%BB%8Dc_FPT.png"
@@ -125,6 +125,11 @@
                                                     <input type="password" id="re-password" class="form-control" name="repassword"/>
                                                     <small class="fw-bold"></small>
                                                 </div>
+                                                <div class="form-outline mb-3">
+                                                    <label class="form-label" for="form2Example22">Tên công ty</label>
+                                                    <input type="text" id="compName" value="${requestScope.COMPNAME}" class="form-control" name="compName"/>
+                                                    <small class="fw-bold"></small>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="col-lg-6">
@@ -139,17 +144,23 @@
                                                     <label class="form-label" for="form2Example11">Số điện thoại</label>
                                                     <input type="tel" id="phone" class="form-control" name="phone"
                                                            value="${requestScope.PHONE}" placeholder="" />
+                                                    <small class="fw-bold"></small>   
+                                                </div>
+                                                <div class="form-outline mb-2">
+                                                    <label class="form-label" for="form2Example11">Địa chỉ công ty</label>
+                                                    <input type="text" id="compAddress" class="form-control" name="compAddress"
+                                                           value="${requestScope.COMPADDRESS}" placeholder="" />
                                                     <small class="fw-bold"></small>                      
                                                 </div>
                                                 <div class="text-center pt-1 mb-5 pb-1">
                                                     <c:if test="${empty requestScope.ERROR}">
                                                         <h6 style="color: green; display: inline-block; padding: 5px 0">${requestScope.SUCCESS}</h6></br>
                                                     </c:if>
-                                                    <button class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="submit" name="action" value="SignUp">Đăng ký</button>                       
+                                                    <button class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="submit" name="action" value="EmployerSignup">Đăng ký</button>                       
                                                 </div>                     
                                                 <div class="d-flex align-items-center justify-content-center pb-4">
                                                     <p class="mb-0 me-2">Đã có tài khoản ?</p>
-                                                    <a class="btn btn-outline-danger" href="login.jsp">Đăng nhập</a>
+                                                    <a class="btn btn-outline-danger" href="FreelancerLogin.jsp">Đăng nhập</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -239,10 +250,10 @@
         <script src="assets/js/extention/choices.js"></script>
         <script src="assets/js/extention/validation.js"></script>
         <script>
-                                                        const choices = new Choices('[data-trigger]',
-                                                                {
-                                                                    searchEnabled: false
-                                                                });
+                                    const choices = new Choices('[data-trigger]',
+                                            {
+                                                searchEnabled: false
+                                            });
 
         </script>
         <link

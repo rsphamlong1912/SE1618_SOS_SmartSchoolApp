@@ -269,6 +269,8 @@
                                     <div class="card-header bg-white pt-4 pl-10 pr-10 border-bottom d-md-flex">
 
                                         <h4 class="" style="line-height: 2.5rem;" >${requestScope.POST.title}
+                                                                    
+
                                             <!--<span class="badge bg-secondary" style="border-radius: 0.25rem !important;">-->
                                             <c:choose> 
                                                 <c:when test="${requestScope.POST.type=='0'}">
@@ -302,7 +304,7 @@
 
                                         <div class="mb-3">
                                             <div class="d-flex align-items-center mb-3">
-                                                <h6>Loại: 
+                                                <h6>Danh mục: 
                                                     <span class="fw-medium" style="font-size: 0.88889rem;">
                                                         ${requestScope.POST.categoryName}    
                                                     </span>
@@ -371,7 +373,7 @@
                                                                         </span>
                                                                     </div>
                                                                     <div class="d-flex align-items-center mb-5"> 
-                                                                        <span class="fw-bold" style="font-size: 14px;">Loại: 
+                                                                        <span class="fw-bold" style="font-size: 14px;">Danh mục: 
                                                                             <span class="fw-medium" style="font-size: 14px;">${listPost.categoryName}</span>                                                                        
                                                                         </span>
                                                                     </div>
@@ -395,58 +397,29 @@
                         <div class="modal fade" id="reportModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered modal-lg">
                                 <div class="modal-content">
-                                    <form action="main" method="POST">
+                                    <form action="main" method="POST" >
                                         <div class="modal-header gradient-custom-2" >
                                             <h5 class="modal-title" id="exampleModalLabel" style="color: #ffffff;">Báo cáo</h5>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body" style="padding: 1.5rem;">                           
                                             <div class="row">
-                                                <div class="col-md-6 mb-2">
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="radio" name="reportType" id="" required>
-                                                        <label class="form-check-label" for="">
-                                                            Thông tin sai sự thật
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6 mb-2">
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="radio" name="reportType" required>
-                                                        <label class="form-check-label" for="reportType">
-                                                            Gian lận hoặc lừa đảo
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6 mb-2">
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="radio" name="reportType" required>
-                                                        <label class="form-check-label" for="flexRadioDefault2">
-                                                            Ngôn từ gây thù ghét
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6 mb-2">
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="radio" name="reportType" id="" required>
-                                                        <label class="form-check-label" for="">
-                                                            Bán hàng trái phép
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6 mb-2">
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="radio" name="reportType" id="">
-                                                        <label class="form-check-label" for="">
-                                                            Chia sẻ hình ảnh riêng tư
-                                                        </label>
-                                                    </div>
-                                                </div>
+                                                <c:forEach items="${requestScope.LISTREPORT}" var="listReport">
+                                                        <div class="col-md-6 mb-2">
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="radio" name="reportTypeId" id="" value="${listReport.reportTypeId}" required>
+                                                                <label class="form-check-label" for="">
+                                                                    ${listReport.reportType}
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                </c:forEach>
                                             </div>
-
                                         </div>
+                                        <input type="hidden" name="userId" value="${requestScope.POST.userId}"/>
+                                        <input type="hidden" name="postId" value="${requestScope.POST.postId}"/>
                                         <div class="modal-footer justify-content-center">
-                                            <button type="submit" name="action" value="" class="btn btn-primary gradient-custom-2">Gửi báo cáo</button>
+                                            <button type="submit" name="action" value="SendReportPost" class="btn btn-primary gradient-custom-2">Gửi báo cáo</button>
                                         </div>
                                     </form>
                                 </div>

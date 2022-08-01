@@ -15,14 +15,19 @@ import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import user.UserDTO;
 
 /**
  *
  * @author SE150925 Nguyen Van Hai Nam
  */
-public class RouterFilter implements Filter {
+@WebFilter(filterName = "EMFilter", urlPatterns = {"/lostAndfoundhome", "/listAll","/uploadLostAndFoundPost"})
+
+public class EMFilter implements Filter {
 
     private static final boolean debug = true;
 
@@ -31,13 +36,13 @@ public class RouterFilter implements Filter {
     // configured. 
     private FilterConfig filterConfig = null;
 
-    public RouterFilter() {
+    public EMFilter() {
     }
 
     private void doBeforeProcessing(ServletRequest request, ServletResponse response)
             throws IOException, ServletException {
         if (debug) {
-            log("RouterFilter:DoBeforeProcessing");
+            log("EMFilter:DoBeforeProcessing");
         }
 
         // Write code here to process the request and/or response before
@@ -65,7 +70,7 @@ public class RouterFilter implements Filter {
     private void doAfterProcessing(ServletRequest request, ServletResponse response)
             throws IOException, ServletException {
         if (debug) {
-            log("RouterFilter:DoAfterProcessing");
+            log("EMFilter:DoAfterProcessing");
         }
 
         // Write code here to process the request and/or response after
@@ -101,62 +106,29 @@ public class RouterFilter implements Filter {
             throws IOException, ServletException {
 
         if (debug) {
-            log("RouterFilter:doFilter()");
+            log("EMFilter:doFilter()");
         }
 
         doBeforeProcessing(request, response);
         HttpServletRequest req = ((HttpServletRequest) request);
         HttpServletResponse res = ((HttpServletResponse) response);
-        String url = req.getServletPath();
-        //Admin Page
-        if (url.endsWith("/Admin/AdminDashboardFreelance.jsp")) {
-            res.sendRedirect(req.getContextPath() + "/adminFreelance");
-        }
-        if (url.endsWith("/Admin/AdminDashboard.jsp")) {
-            res.sendRedirect(req.getContextPath() + "/adminLostAndFound");
-        }
-        if (url.endsWith("/Admin/ApprovePostFreelanceJob.jsp")) {
-            res.sendRedirect(req.getContextPath() + "/approveJobPost");
-        }
-        if (url.endsWith("/Admin/ApprovePostLostAndFound.jsp")) {
-            res.sendRedirect(req.getContextPath() + "/listPostToApprove");
-        }
-        if (url.endsWith("/Admin/CategoryFreelanceJob.jsp")) {
-            res.sendRedirect(req.getContextPath() + "/jobCategory");
-        }
-        if (url.endsWith("/Admin/CategoryLostAndFound.jsp")) {
-            res.sendRedirect(req.getContextPath() + "/category");
-        }
-        if (url.endsWith("/Admin/PostFreelanceJob.jsp")) {
-        }
-        if (url.endsWith("/Admin/PostLostAndFound.jsp")) {
-            res.sendRedirect(req.getContextPath() + "/adminLostAndFoundPost");
-        }
-        if (url.endsWith("/Admin/ReportPostLostAndFound.jsp")) {
+        HttpSession session = req.getSession();
+        UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
+        if(loginUser==null){
+//            res.sendRedirect(req.getContextPath() + "/LostAndFoundHome.jsp");
+                                    req.getRequestDispatcher("/lostAndfoundhome").forward(request, response);
+
+        }else{
+        
+        String userRole = loginUser.getRoleId();
+        if (userRole.equals("EM")) {
+            session.invalidate();
+            res.sendRedirect(req.getContextPath() + "/login.jsp");
+        } else {
 
         }
-        //Normal Page
-        if (url.endsWith("/LostAndFoundHome.jsp")) {
-            res.sendRedirect(req.getContextPath() + "/lostAndfoundhome");
         }
-        if (url.endsWith("/EmployerHome.jsp")) {
-            res.sendRedirect(req.getContextPath() + "/employerhome");
-        }
-        if (url.endsWith("/FreelancerHome.jsp")) {
-            res.sendRedirect(req.getContextPath() + "/freelancerhome");
-        }
-        if (url.endsWith("/EmployerDashboard.jsp")) {
-            res.sendRedirect(req.getContextPath() + "/employerDashboard");
-        }
-        if (url.endsWith("/FreelanceList.jsp")) {
-            res.sendRedirect(req.getContextPath() + "/listJobPost");
-        }
-        if (url.endsWith("/list.jsp")) {
-            res.sendRedirect(req.getContextPath() + "/listAll");
-        }
-        if (url.endsWith("/EmployerUpload.jsp")) {
-            res.sendRedirect(req.getContextPath() + "/uploadJobPost");
-        }
+
         Throwable problem = null;
         try {
             chain.doFilter(request, response);
@@ -212,7 +184,7 @@ public class RouterFilter implements Filter {
         this.filterConfig = filterConfig;
         if (filterConfig != null) {
             if (debug) {
-                log("RouterFilter:Initializing filter");
+                log("EMFilter:Initializing filter");
             }
         }
     }
@@ -223,9 +195,9 @@ public class RouterFilter implements Filter {
     @Override
     public String toString() {
         if (filterConfig == null) {
-            return ("RouterFilter()");
+            return ("EMFilter()");
         }
-        StringBuffer sb = new StringBuffer("RouterFilter(");
+        StringBuffer sb = new StringBuffer("EMFilter(");
         sb.append(filterConfig);
         sb.append(")");
         return (sb.toString());
