@@ -70,8 +70,8 @@ public class MainController extends HttpServlet {
     private static final String DELETE_CATEGORY_LOSTANDFOUND_CONTROLLER = "deleteCategory";
     private static final String DETAIL = "Detail";
     private static final String DETAIL_POST_LOSTANDFOUND_CONTROLLER = "lostAndFoundDetail";
-    private static final String DELETE_POST_LOSTANDFOUND = "Delete";
-    private static final String DELETE_POST_LOSTANDFOUND_CONTROLLER = "deletePost";
+    private static final String DELETE_POST_LOSTANDFOUND = "DeletePostLostAndFound";
+    private static final String DELETE_POST_LOSTANDFOUND_CONTROLLER = "deletePostLostAndFound";
     private static final String UPDATE_POST = "Update";
     private static final String UPDATE_POST_LOSTANDFOUND_CONTROLLER = "updatePost";
 
@@ -317,8 +317,8 @@ public class MainController extends HttpServlet {
             if (DELETE_POST_LOSTANDFOUND.equals(action)) {
 
                 url = DELETE_POST_LOSTANDFOUND_CONTROLLER;
-
-
+            }
+            if (DELETE_POST.equals(action)){
                 url = DELETE_POST_CONTROLLER;
             }
             if (DELETE_JOB_POST.equals(action)) {
