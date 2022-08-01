@@ -11,6 +11,9 @@ var editCateName = document.querySelector('#EditCateName')
 var editCateDesc = document.querySelector('#EditCateDesc')
 var editCateImg = document.querySelector('#EditCateImage')
 
+var cateNameLF = document.querySelector('#CateN')
+var cateImgLF = document.querySelector('#CateImg')
+
 
 function showError(input, message) {
     let parent = input.parentElement;
@@ -98,6 +101,15 @@ function validateAddCategory() {
     return true;
 }
 
+function validateAddCategoryLF() {
+    let isEmptyError = checkEmptyError([cateName, cateImg]);
+    let isCorrectImgUrl = checkImageUrl(cateImg);
+    if (isEmptyError || isCorrectImgUrl) {
+        return false;
+    }
+    return true;
+}
+
 
 function validateEditCategory() {
     let isEmptyError = checkEmptyError([editCateName, editCateDesc, editCateImg])
@@ -110,6 +122,20 @@ function validateEditCategory() {
     }
     return true
 }
+
+function validateEditCategoryLF() {
+    let isEmptyError = checkEmptyError([cateNameLF, cateImgLF])
+    if (isEmptyError) {
+        return false
+    }
+    let isCorrectImgUrl = checkImageUrl(cateImgLF)
+    if (isCorrectImgUrl) {
+        return false
+    }
+    return true
+}
+
+
 
 
 
