@@ -26,6 +26,11 @@ var titlePost = document.querySelector("#title");
 var descriptionPost = document.querySelector("#descriptionPost");
 var postImg = document.querySelector("#postImg");
 
+//Profile User
+var nameUser = document.querySelector('#nameUser')
+var phoneUser = document.querySelector('#phoneUser')
+var emailUser = document.querySelector('#emailUser')
+
 
 function showError(input, message) {
     let parent = input.parentElement;
@@ -212,6 +217,14 @@ function validateEmployerUpload() {
 
 function validatePost() {
     let isEmpty = checkEmptyError([titlePost, descriptionPost, postImg])
+    if (isEmpty ) {
+        return false
+    }
+    return true
+}
+
+function validateProfile() {
+    let isEmpty = checkEmptyError([nameUser, phoneUser, emailUser])
     if (isEmpty ) {
         return false
     }

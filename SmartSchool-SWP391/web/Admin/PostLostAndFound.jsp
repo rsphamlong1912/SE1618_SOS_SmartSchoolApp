@@ -488,7 +488,7 @@
                                                     <td>
                                                         <div class="action justify-content-center">
                                                             <button class="text-gray" style="font-size:23px;">
-                                                                <a href="main?action=" class="text-danger"><i class="lni lni-trash-can fw-bold"></i></a>
+                                                                <a href="main?action=DeletePost&postId=${listPost.postId}" class="text-danger"><i class="lni lni-trash-can fw-bold"></i></a>
                                                             </button>
                                                         </div>
                                                     </td>
