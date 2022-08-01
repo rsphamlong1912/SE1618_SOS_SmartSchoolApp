@@ -70,7 +70,7 @@ public class MainController extends HttpServlet {
     private static final String DELETE_CATEGORY_LOSTANDFOUND_CONTROLLER = "deleteCategory";
     private static final String DETAIL = "Detail";
     private static final String DETAIL_POST_LOSTANDFOUND_CONTROLLER = "lostAndFoundDetail";
-    private static final String DELETE_POST = "Delete";
+    private static final String DELETE_POST_LOSTANDFOUND = "Delete";
     private static final String DELETE_POST_LOSTANDFOUND_CONTROLLER = "deletePost";
     private static final String UPDATE_POST = "Update";
     private static final String UPDATE_POST_LOSTANDFOUND_CONTROLLER = "updatePost";
@@ -109,7 +109,7 @@ public class MainController extends HttpServlet {
 
     private static final String SET_JOB_APPROVE_DONE = "SetJobApproveDone";
     private static final String SET_JOB_APPROVE_DONE_CONTROLLER = "setJobApproveDone";
-    
+
     private static final String UPDATE_NEW_AMOUNT = "UpdateNewAmount";
     private static final String UPDATE_NEW_AMOUNT_CONTROLLER = "updateNewAmount";
 
@@ -123,16 +123,32 @@ public class MainController extends HttpServlet {
     private static final String APPROVE_POST_CONTROLLER = "approvePost";
     private static final String NO_APPROVE_POST = "NoApprovePost";
     private static final String NO_APPROVE_POST_CONTROLLER = "noApprovePost";
-
+    
     private static final String SEARCH_POST_IN_HOME = "SearchPostInHome";
     private static final String SEARCH_POST_IN_HOME_CONTROLLER = "searchPostInHome";
-
+    
+    
     private static final String MY_JOB_POST_DONE_DETAIL = "MyJobPostDoneDetail";
     private static final String MY_JOB_POST_DONE_DETAIL_CONTROLLER = "myJobPostDoneDetail";
+        
+    
+    private static final String EMPLOYER_DASHBOARD = "EmployerDashboard";
+    private static final String EMPLOYER_DASHBOARD_CONTROLLER = "employerDashboard";
     
     private static final String SET_JOB_DONE = "SetJobDone";
     private static final String SET_JOB_DONE_CONTROLLER = "setJobDone";
-
+    
+    private static final String DELETE_POST = "DeletePost";
+    private static final String DELETE_POST_CONTROLLER = "deletePost";
+    private static final String DELETE_JOB_POST = "DeleteJobPost";
+    private static final String DELETE_JOB_POST_CONTROLLER = "deleteJobPost";
+    
+    private static final String ADMIN_FREELANCE_POST = "AdminFreelancePost";
+    private static final String ADMIN_FREELANCE_POST_CONTROLLER = "adminFreelancePost";
+    
+    
+    
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -263,7 +279,7 @@ public class MainController extends HttpServlet {
                 url = UPDATE_NEW_AMOUNT_CONTROLLER;
             }
             if (LIST_POST_BY_CATEGORY_AND_TYPE.equals(action)) {
-                url = LIST_POST_BY_CATEGORY_CONTROLLER;
+                url = LIST_POST_BY_CATEGORY_AND_TYPE_CONTROLLER;
             }
             if (LIST_POST_TO_APPROVE.equals(action)) {
                 url = LIST_POST_TO_APPROVE_CONTROLLER;
@@ -281,9 +297,14 @@ public class MainController extends HttpServlet {
                 url = SEARCH_POST_IN_HOME_CONTROLLER;
 
             }
+
             if (MY_JOB_POST_DONE_DETAIL.equals(action)) {
                 url = MY_JOB_POST_DONE_DETAIL_CONTROLLER;
 
+            }
+
+            if(EMPLOYER_DASHBOARD.equals(action)) {
+                url = EMPLOYER_DASHBOARD_CONTROLLER;
             }
             if (SET_JOB_DONE.equals(action)) {
                 url = SET_JOB_DONE_CONTROLLER;
@@ -293,8 +314,15 @@ public class MainController extends HttpServlet {
                 url = DETAIL_POST_LOSTANDFOUND_CONTROLLER;
 
             }
-            if (DELETE_POST.equals(action)) {
+            if (DELETE_POST_LOSTANDFOUND.equals(action)) {
+
                 url = DELETE_POST_LOSTANDFOUND_CONTROLLER;
+
+
+                url = DELETE_POST_CONTROLLER;
+            }
+            if (DELETE_JOB_POST.equals(action)) {
+                url = DELETE_JOB_POST_CONTROLLER;
 
             }
         } catch (Exception e) {

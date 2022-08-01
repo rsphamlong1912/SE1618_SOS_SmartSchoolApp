@@ -16,13 +16,13 @@
   <title>Admin</title>
 
   <!-- ========== All CSS files linkup ========= -->
-  <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
-  <link rel="stylesheet" href="assets/css/lineicons.css" />
-  <link rel="stylesheet" href="assets/css/materialdesignicons.min.css" />
-  <link rel="stylesheet" href="assets/css/fullcalendar.css" />
-  <link rel="stylesheet" href="assets/css/fullcalendar.css" />
-  <link rel="stylesheet" href="assets/css/main.css" />
-  <link rel="stylesheet" href="assets/css/styles.css" />
+  <link rel="stylesheet" href="Admin/assets/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="Admin/assets/css/lineicons.css" />
+  <link rel="stylesheet" href="Admin/assets/css/materialdesignicons.min.css" />
+  <link rel="stylesheet" href="Admin/assets/css/fullcalendar.css" />
+  <link rel="stylesheet" href="Admin/assets/css/fullcalendar.css" />
+  <link rel="stylesheet" href="Admin/assets/css/main.css" />
+  <link rel="stylesheet" href="Admin/assets/css/styles.css" />
   <style>
     .content-detail {
       border-bottom: 1px solid #EEEEEE !important;
@@ -54,10 +54,10 @@
           </a>
           <ul id="ddmenu_1" class="collapse dropdown-nav">
             <li>
-              <a href="index.html" class="active"> Lost And Found </a>
+              <a href="adminLostAndFound" class=""> Lost And Found </a>
             </li>
             <li>
-              <a href="index.html" class=""> Freelance Job </a>
+              <a href="adminFreelance" class=""> Freelance Job </a>
             </li>
           </ul>
         </li>
@@ -74,10 +74,10 @@
           </a>
           <ul id="ddmenu_2" class="collapse dropdown-nav">
             <li>
-              <a href="CategoryLostAndFound.html" class=""> Category Lost & Found </a>
+              <a href="category" class=""> Category Lost & Found </a>
             </li>
             <li>
-              <a href="" class=""> Category Freelance Job </a>
+              <a href="jobCategory" class=""> Category Freelance Job </a>
             </li>
           </ul>
         </li>
@@ -91,10 +91,10 @@
           </a>
           <ul id="ddmenu_3" class="collapse dropdown-nav">
             <li>
-              <a href=""> Lost & Found Posts </a>
+              <a href="listPostToApprove"> Lost & Found Posts </a>
             </li>
             <li>
-              <a href=""> Freelance Job Posts </a>
+              <a href="approveJobPost"> Freelance Job Posts </a>
             </li>
           </ul>
         </li>
@@ -108,7 +108,7 @@
           </a>
           <ul id="ddmenu_4" class="collapse show dropdown-nav">
             <li>
-              <a href=""> Lost & Found </a>
+              <a href="adminLostAndFoundPost"> Lost & Found </a>
             </li>
             <li>
               <a href=""  class="active"> Freelance Job </a>
@@ -432,24 +432,25 @@
                     </tr>
                   </thead>
                   <tbody>
+                    <c:forEach items="${requestScope.LISTPOST}" var="listPost">
                     <tr>
                       <td>
                         <div class="product">
                           <div class="image user-image">
-                            <img src="https://tophinhanh.com/wp-content/uploads/2021/12/anh-avatar-dep-cho-con-gai.jpg"
+                            <img src="${pageContext.servletContext.contextPath}/avatar?userId=${listPost.userId}"
                               alt="" />
                           </div>
-                          <p class="text-sm">Phạm Ngọc Long</p>
+                          <p class="text-sm">${listPost.fullname}</p>
                         </div>
                       </td>
                       <td>
-                        <p class="text-sm">Cần tuyển nhân sự thiết kế Web</p>
+                        <p class="text-sm">${listPost.title}</p>
                       </td>
                       <td>
-                        <p class="text-sm">Thiết kế - Mỹ Thuật</p>
+                        <p class="text-sm">${listPost.jobCategoryName}</p>
                       </td>
                       <td>
-                        <p class="text-sm">1 giờ trước</p>
+                        <p class="text-sm">${listPost.date}</p>
                       </td>
                       <td>
                         <div class="action justify-content-center">
@@ -461,11 +462,12 @@
                       <td>
                         <div class="action justify-content-center">
                           <button class="text-gray" style="font-size:23px;">
-                            <a href="main?action=" class="text-danger"><i class="lni lni-trash-can fw-bold"></i></a>
+                            <a href="main?action=DeleteJobPost&jobId=${listPost.jobId}" class="text-danger"><i class="lni lni-trash-can fw-bold"></i></a>
                           </button>
                         </div>
                       </td>
                     </tr>
+                    </c:forEach>
                   </tbody>
                 </table>
                 <!-- End Table -->
@@ -577,15 +579,15 @@
   <!-- ======== main-wrapper end =========== -->
 
   <!-- ========= All Javascript files linkup ======== -->
-  <script src="assets/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/js/Chart.min.js"></script>
-  <script src="assets/js/dynamic-pie-chart.js"></script>
-  <script src="assets/js/moment.min.js"></script>
-  <script src="assets/js/fullcalendar.js"></script>
-  <script src="assets/js/jvectormap.min.js"></script>
-  <script src="assets/js/world-merc.js"></script>
-  <script src="assets/js/polyfill.js"></script>
-  <script src="assets/js/main.js"></script>
+  <script src="Admin/assets/js/bootstrap.bundle.min.js"></script>
+  <script src="Admin/assets/js/Chart.min.js"></script>
+  <script src="Admin/assets/js/dynamic-pie-chart.js"></script>
+  <script src="Admin/assets/js/moment.min.js"></script>
+  <script src="Admin/assets/js/fullcalendar.js"></script>
+  <script src="Admin/assets/js/jvectormap.min.js"></script>
+  <script src="Admin/assets/js/world-merc.js"></script>
+  <script src="Admin/assets/js/polyfill.js"></script>
+  <script src="Admin/assets/js/main.js"></script>
 
   <script>
     // ======== jvectormap activation

@@ -12,32 +12,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import post.PostDAO;
+import jobPost.JobPostDAO;
 
 /**
  *
-
- * @author TQK
- */
-@WebServlet(name = "DeletePostController", urlPatterns = {"/deletePost"})
-public class DeletePostController extends HttpServlet {
-    
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try {
-            int postId = Integer.parseInt(request.getParameter("postId"));
-            PostDAO pdao = new PostDAO();
-            pdao.deletePost(postId);
-        } catch (Exception e) {
-            log("Error at DeletePostController: " + e.toString());
-        } finally {
-            response.sendRedirect("main?action=MyPost");
-
  * @author SE150888 Pham Ngoc Long
  */
-@WebServlet(name = "DeletePostController", urlPatterns = {"/deletePost"})
-public class DeletePostController extends HttpServlet {
+@WebServlet(name = "DeleteJobPostController", urlPatterns = {"/deleteJobPost"})
+public class DeleteJobPostController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -48,21 +30,21 @@ public class DeletePostController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    String POST_LOST_AND_FOUND_PAGE = "adminLostAndFoundPost";
+    String JOB_POST_PAGE = "adminFreelancePost";
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = POST_LOST_AND_FOUND_PAGE;
+        String url = JOB_POST_PAGE;
         try {
-            int postId = Integer.parseInt(request.getParameter("postId"));
-            System.out.println(postId);
-            PostDAO dao = new PostDAO();
-            dao.deletePost(postId);
+            int jobId = Integer.parseInt(request.getParameter("jobId"));
+            JobPostDAO dao = new JobPostDAO();
+            System.out.println("hhhhhhh" + jobId);
+            dao.deleteJobPost(jobId);
+            
         } catch (Exception e) {
             log("Error at LogoutController:" + e.toString());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
-
         }
     }
 

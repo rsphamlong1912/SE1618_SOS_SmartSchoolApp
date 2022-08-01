@@ -242,23 +242,23 @@
                     </div>
                     <div class="right col-12 col-md-6">
                         <h5 style="margin-bottom: 30px;">Cập nhật thông tin</h5>
-                        <form action="main" method="GET">
+                        <form onsubmit="return validateProfile()" action="main" method="GET">
                             <div class="row">
                                 <div class="form-group col-12 col-md-6">
                                     <label for="name">Họ và tên</label>
-                                    <input type="text" name="fullname" class="form-control" id="name" placeholder="" value="${sessionScope.LOGIN_USER.fullname}">
+                                    <input type="text" name="fullname" class="form-control" id="nameUser" placeholder="" value="${sessionScope.LOGIN_USER.fullname}">
                                     <small></small>
                                 </div>
                                 <div class="form-group col-12 col-md-6">
                                     <label for="phone">Số điện thoại</label>
-                                    <input type="text" name="phone" class="form-control" id="phone" placeholder="" value="${sessionScope.LOGIN_USER.phone}">
+                                    <input type="text" name="phone" class="form-control" id="phoneUser" placeholder="" value="${sessionScope.LOGIN_USER.phone}">
                                     <small></small>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="form-group col-12 col-md-6">
                                     <label for="email">Email liên lạc</label>
-                                    <input type="email" name="email" class="form-control" id="email" placeholder="" value="${sessionScope.LOGIN_USER.email}">
+                                    <input type="email" name="email" class="form-control" id="emailUser" placeholder="" value="${sessionScope.LOGIN_USER.email}">
                                     <small></small>
                                 </div>
                             </div>
@@ -361,6 +361,7 @@
         <script src="vendors/fontawesome/all.min.js"></script>
         <script src="assets/js/theme.js"></script>
         <script src="assets/js/extention/choices.js"></script>
+        <script src="assets/js/extention/validation.js"></script>
         <script>
                                                     const choices = new Choices('[data-trigger]',
                                                             {

@@ -7,37 +7,21 @@ package controllers;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import post.PostDAO;
+import jobPost.JobPostDAO;
+import jobPost.JobPostDTO;
 
 /**
  *
-
- * @author TQK
- */
-@WebServlet(name = "DeletePostController", urlPatterns = {"/deletePost"})
-public class DeletePostController extends HttpServlet {
-    
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try {
-            int postId = Integer.parseInt(request.getParameter("postId"));
-            PostDAO pdao = new PostDAO();
-            pdao.deletePost(postId);
-        } catch (Exception e) {
-            log("Error at DeletePostController: " + e.toString());
-        } finally {
-            response.sendRedirect("main?action=MyPost");
-
  * @author SE150888 Pham Ngoc Long
  */
-@WebServlet(name = "DeletePostController", urlPatterns = {"/deletePost"})
-public class DeletePostController extends HttpServlet {
+@WebServlet(name = "AdminFreelancePostController", urlPatterns = {"/adminFreelancePost"})
+public class AdminFreelancePostController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -48,21 +32,20 @@ public class DeletePostController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    String POST_LOST_AND_FOUND_PAGE = "adminLostAndFoundPost";
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = POST_LOST_AND_FOUND_PAGE;
         try {
-            int postId = Integer.parseInt(request.getParameter("postId"));
-            System.out.println(postId);
-            PostDAO dao = new PostDAO();
-            dao.deletePost(postId);
-        } catch (Exception e) {
-            log("Error at LogoutController:" + e.toString());
-        } finally {
-            request.getRequestDispatcher(url).forward(request, response);
+            JobPostDAO dao = new JobPostDAO();
+//            CategoryDAO cdao = new CategoryDAO();
+            List<JobPostDTO> listAll = dao.getAll();
+//            int count = pdao.getTotalPost();
+//            request.setAttribute("TOTALPOST", count);
 
+            request.setAttribute("LISTPOST", listAll);
+        } catch (Exception e) {
+        } finally {
+            request.getRequestDispatcher("/Admin/PostFreelanceJob.jsp").forward(request, response);
         }
     }
 

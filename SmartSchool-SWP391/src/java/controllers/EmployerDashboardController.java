@@ -12,32 +12,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import post.PostDAO;
+import jobPost.JobPostDAO;
 
 /**
  *
-
- * @author TQK
- */
-@WebServlet(name = "DeletePostController", urlPatterns = {"/deletePost"})
-public class DeletePostController extends HttpServlet {
-    
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try {
-            int postId = Integer.parseInt(request.getParameter("postId"));
-            PostDAO pdao = new PostDAO();
-            pdao.deletePost(postId);
-        } catch (Exception e) {
-            log("Error at DeletePostController: " + e.toString());
-        } finally {
-            response.sendRedirect("main?action=MyPost");
-
  * @author SE150888 Pham Ngoc Long
  */
-@WebServlet(name = "DeletePostController", urlPatterns = {"/deletePost"})
-public class DeletePostController extends HttpServlet {
+@WebServlet(name = "EmployerDashboardController", urlPatterns = {"/employerDashboard"})
+public class EmployerDashboardController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -48,21 +30,29 @@ public class DeletePostController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    String POST_LOST_AND_FOUND_PAGE = "adminLostAndFoundPost";
+    
+    private static final String EMPLOYER_DASHBOARD_PAGE = "EmployerDashboard.jsp";
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = POST_LOST_AND_FOUND_PAGE;
+        String url = EMPLOYER_DASHBOARD_PAGE;
         try {
-            int postId = Integer.parseInt(request.getParameter("postId"));
-            System.out.println(postId);
-            PostDAO dao = new PostDAO();
-            dao.deletePost(postId);
+            String userId = request.getParameter("userId");
+            JobPostDAO dao = new JobPostDAO();
+            int totalPost = dao.getTotalPostOfAEmployer(userId);
+            int totalWaitingPost = dao.getTotalWaitingPost(userId);
+            int totalNewPost = dao.getTotalNewPost(userId);
+            int totalDonePost = dao.getTotalDonePost(userId);
+            
+            request.setAttribute("TOTAL_POST", totalPost);
+            request.setAttribute("TOTAL_WAITING_POST", totalWaitingPost);
+            request.setAttribute("TOTAL_NEW_POST", totalNewPost);
+            request.setAttribute("TOTAL_DONE_POST", totalDonePost);
         } catch (Exception e) {
             log("Error at LogoutController:" + e.toString());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
-
         }
     }
 

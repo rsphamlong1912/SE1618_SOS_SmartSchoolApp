@@ -95,6 +95,13 @@ public class JobPostDAO {
     private static final String SET_AMOUNT_FREELANCER_PLUS_ONE = "UPDATE tblJobPost SET amountFreelancer = amountFreelancer + 1 WHERE jobId = ? ";
 
     private static final String UPDATE_NEW_AMOUNT = "UPDATE tblJobPost SET amount = ? WHERE jobId = ?";
+    
+    private static final String GET_TOTAL_POST_OF_A_EMPLOYER = " SELECT COUNT(jobId) AS 'count' FROM tblJobPost WHERE status=1 AND userId = ? ";
+    private static final String GET_TOTAL_WAITING_POST = " SELECT COUNT(jobId) AS 'count' FROM tblJobPost WHERE status=1 AND process='approving' AND userId = ? ";
+    private static final String GET_TOTAL_NEW_POST = " SELECT COUNT(jobId) AS 'count' FROM tblJobPost WHERE status=1 AND process='new' AND userId = ? ";
+    private static final String GET_TOTAL_DONE_POST = " SELECT COUNT(jobId) AS 'count' FROM tblJobPost WHERE status=1 AND process='done' AND userId = ? ";
+    
+    private static final String DELETE_JOB_POST = "UPDATE tblJobPost SET status = 0 WHERE jobId = ?";
 
     public static int takeMinutes() {
         long millis = System.currentTimeMillis();
@@ -247,6 +254,30 @@ public class JobPostDAO {
             }
         }
         return list;
+    }
+    
+    public boolean deleteJobPost(int jobId) throws SQLException {
+        boolean check = false;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(DELETE_JOB_POST);
+                ptm.setInt(1, jobId);
+                ptm.executeUpdate();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return check;
     }
 
     public int uploadJobPost(String userId, int jobCategoryId, String title, String description, float salary, int amount, int timeJob)
@@ -1263,6 +1294,130 @@ public class JobPostDAO {
             con = DBUtils.getConnection();
             if (con != null) {
                 ptm = con.prepareStatement(GET_TOTAL_APPROVE_POST);
+                rs = ptm.executeQuery();
+                if (rs.next()) {
+                    return rs.getInt("count");
+                }
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(PostDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return 0;
+    }
+    
+    public int getTotalPostOfAEmployer(String userId) throws SQLException {
+        Connection con = null;
+        ResultSet rs = null;
+        PreparedStatement ptm = null;
+        try {
+            //Creating and executing JDBC statements
+            con = DBUtils.getConnection();
+            if (con != null) {
+                ptm = con.prepareStatement(GET_TOTAL_POST_OF_A_EMPLOYER);
+                ptm.setString(1, userId);
+                rs = ptm.executeQuery();
+                if (rs.next()) {
+                    return rs.getInt("count");
+                }
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(PostDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return 0;
+    }
+    
+    public int getTotalWaitingPost(String userId) throws SQLException {
+        Connection con = null;
+        ResultSet rs = null;
+        PreparedStatement ptm = null;
+        try {
+            //Creating and executing JDBC statements
+            con = DBUtils.getConnection();
+            if (con != null) {
+                ptm = con.prepareStatement(GET_TOTAL_WAITING_POST);
+                ptm.setString(1, userId);
+                rs = ptm.executeQuery();
+                if (rs.next()) {
+                    return rs.getInt("count");
+                }
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(PostDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return 0;
+    }
+    
+    public int getTotalNewPost(String userId) throws SQLException {
+        Connection con = null;
+        ResultSet rs = null;
+        PreparedStatement ptm = null;
+        try {
+            //Creating and executing JDBC statements
+            con = DBUtils.getConnection();
+            if (con != null) {
+                ptm = con.prepareStatement(GET_TOTAL_NEW_POST);
+                ptm.setString(1, userId);
+                rs = ptm.executeQuery();
+                if (rs.next()) {
+                    return rs.getInt("count");
+                }
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(PostDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return 0;
+    }
+    
+    public int getTotalDonePost(String userId) throws SQLException {
+        Connection con = null;
+        ResultSet rs = null;
+        PreparedStatement ptm = null;
+        try {
+            //Creating and executing JDBC statements
+            con = DBUtils.getConnection();
+            if (con != null) {
+                ptm = con.prepareStatement(GET_TOTAL_DONE_POST);
+                ptm.setString(1, userId);
                 rs = ptm.executeQuery();
                 if (rs.next()) {
                     return rs.getInt("count");
