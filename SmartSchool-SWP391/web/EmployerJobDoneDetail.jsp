@@ -288,8 +288,8 @@
             <!-- Breadcrumb End -->
 
             <section class="shop" style="min-height: 72vh;">
-                <div class="container">
-                    <h2 class="text-success text-center mb-5">${requestScope.SUCCESS}</h2>
+                <div class="container">                   
+                    <h2 class="text-warning text-center mb-5">${requestScope.ISNOTDONE}</h2>
                     <div class="row">
                         <div class="col-lg-9 col-md-9 mb-5">
                             <div class="row mb-3">
@@ -350,11 +350,30 @@
                             </div>
                             <div class="row">
                                 <div class="card overflow-hidden shadow ">
-                                    <div class="card-header bg-white pt-4 pl-10 pr-10 border-bottom d-md-flex" style="padding-bottom: 1.4rem;">
-                                        <h5 class="">QUẢN LÝ FREELANCER ${ERROR}</h5>
+                                    <div class="card-header bg-white pt-4 pl-10 pr-10 border-bottom d-md-flex" style="padding-bottom: 1.4rem;">                                      
+                                        <h5 class="">QUẢN LÝ FREELANCER ${ERROR}</h5>                                       
                                     </div>
-                                    <c:forEach items="${requestScope.USER_DOING}" var="userDoing" varStatus="count">
-                                        <div id="${userDoing.userId}">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-lg-12 col-md-12">
+                                                <div class="row text-center justify-content-end" style="--bs-gutter-x: 0rem;">
+                                                    <div class="col-lg-6">                                                      
+                                                        <div class="input-group">
+                                                            <input type="text" oninput="searchUser(this, this.getAttribute('data-jobId'))" 
+                                                                   data-jobId="${JOBDETAIL.jobId}"
+                                                                   name="search" value="" class="form-control"  placeholder="Tìm Freelancer..." style="text-indent: 1rem; border-radius: 0.2rem 0 0 0.2rem;">
+                                                            <button class="btn btn-primary gradient-custom-2" style="width:7rem;" name="action" value="Search ">
+                                                                Tìm kiếm
+                                                            </button>
+                                                        </div>                                                    
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="content">
+                                        <c:forEach items="${requestScope.USER_DOING}" var="userDoing" varStatus="count">
+                                            
                                             <div class="card-body">
                                                 <div class="row">
                                                     <div class="col-lg-12 col-md-12">
@@ -420,31 +439,34 @@
                                                                     <h6>Trạng thái:
                                                                         <c:choose>
                                                                             <c:when test="${userDoing.status == 'doing'}">
-                                                                                <span id="UserJobStatus" class="fw-medium fw-bold text-success" style="font-size: 14px; ">Đang làm</span>
+                                                                                <span id="${userDoing.userId}" class="fw-medium fw-bold text-success" style="font-size: 14px; ">Đang làm</span>
                                                                             </c:when>
                                                                             <c:when test="${userDoing.status == 'done'}">
-                                                                                <span id="UserJobStatus" class="fw-medium fw-bold text-danger" style="font-size: 14px; ">Đã hoàn thành</span>
+                                                                                <span id="${userDoing.userId}" class="fw-medium fw-bold text-danger" style="font-size: 14px; ">Đã hoàn thành</span>
                                                                             </c:when>
                                                                         </c:choose>
-                                                                        <!--                                                                        <span id="UserJobStatus" class="fw-medium" style="font-size: 14px;">Đang làm</span>-->
                                                                     </h6>
                                                                 </div>
-                                                                <div class="row mb-3 justify-content-end">
-                                                                    <div class="col-md-3">                                                                       
-                                                                        <select class="form-select fw-bold" onchange="changeStatus(this.getAttribute('data-applyJobId'), this)" 
-                                                                                data-applyJobId="${userDoing.applyJobId}">
-                                                                            <option value="doing" ${userDoing.status == 'doing' ? 'selected' : ''}>Đang làm</option>
-                                                                            <option value="done" ${userDoing.status == 'done' ? 'selected' : ''}>Đã hoàn thành</option>
-                                                                        </select>
+
+                                                                <c:if test="${JOBDETAIL.process == 'doing'}">
+                                                                    <div class="row mb-3 justify-content-end">
+                                                                        <div class="col-md-3">                                                                       
+                                                                            <select class="form-select fw-bold" onchange="changeStatus(this.getAttribute('data-applyJobId'), this.getAttribute('data-userId'), this)" 
+                                                                                    data-applyJobId="${userDoing.applyJobId}"
+                                                                                    data-userId="${userDoing.userId}">
+                                                                                <option value="doing" ${userDoing.status == 'doing' ? 'selected' : ''}>Đang làm</option>
+                                                                                <option value="done" ${userDoing.status == 'done' ? 'selected' : ''}>Đã hoàn thành</option>
+                                                                            </select>
+                                                                        </div>
                                                                     </div>
-                                                                </div>
+                                                                </c:if>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </c:forEach>
+                                        </c:forEach>
+                                    </div>
                                 </div>                                                       
                             </div>
 
@@ -592,36 +614,61 @@
                         <!--- AJAX -->
                         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
                         <script>
-                                                                            function changeStatus(applyJobId, selectValue) {
+                                                                                function changeStatus(applyJobId, userId, selectValue) {
 
-                                                                                $.ajax({
-                                                                                    url: "/changeUserStatusJob",
-                                                                                    type: "get",
-                                                                                    data: {
-                                                                                        applyJobId: applyJobId,
-                                                                                        selectValue: selectValue.value
+                                                                                    $.ajax({
+                                                                                        url: "/changeUserStatusJob",
+                                                                                        type: "get",
+                                                                                        data: {
+                                                                                            applyJobId: applyJobId,
+                                                                                            userId: userId,
+                                                                                            selectValue: selectValue.value
 
-                                                                                    },
-                                                                                    success: function (data) {
+                                                                                        },
+                                                                                        success: function (data) {
 
-                                                                                        if ('Done' === data) {
-                                                                                            var row = document.getElementById("UserJobStatus");
-                                                                                            row.classList.remove("text-success");
-                                                                                            row.classList.add("text-danger");
-                                                                                            row.textContent = "Đã hoàn thành";
-                                                                                        } else if ('Doing' === data) {
-                                                                                            var row = document.getElementById("UserJobStatus");
-                                                                                            row.classList.remove("text-danger");
-                                                                                            row.classList.add("text-success");
-                                                                                            row.textContent = "Đang làm";
+                                                                                            if ('Done' === data) {
+                                                                                                var row = document.getElementById(userId);
+                                                                                                row.classList.remove("text-success");
+                                                                                                row.classList.add("text-danger");
+                                                                                                row.textContent = "Đã hoàn thành";
+                                                                                            } else if ('Doing' === data) {
+                                                                                                var row = document.getElementById(userId);
+                                                                                                row.classList.remove("text-danger");
+                                                                                                row.classList.add("text-success");
+                                                                                                row.textContent = "Đang làm";
+                                                                                            }
+
+                                                                                        },
+                                                                                        error: function (xhr) {
+                                                                                            //Do Something to handle error
                                                                                         }
+                                                                                    });
+                                                                                }
 
-                                                                                    },
-                                                                                    error: function (xhr) {
-                                                                                        //Do Something to handle error
-                                                                                    }
-                                                                                });
-                                                                            }
+
+
+                                                                                function searchUser(param, jobId) {
+                                                                                    var txtSearch = param.value;
+                                                                                    $.ajax({
+                                                                                        url: "/searchUserDoingDone",
+                                                                                        type: "get",
+                                                                                        data: {
+                                                                                            search: txtSearch,
+                                                                                            jobId: jobId
+                                                                                        },
+                                                                                        success: function (data) {
+                                                                                           
+                                                                                                var row = document.getElementById("content");
+                                                                                                row.innerHTML = data;
+                                                                                            
+                                                                                        },
+                                                                                        error: function (xhr) {
+                                                                                            //Do Something to handle error
+                                                                                        }
+                                                                                    });
+                                                                                }
+
                         </script>
                         <!-- ===============================================-->
                         <!--    JavaScripts-->
@@ -636,10 +683,10 @@
 
 
                         <script>
-                                                                            const choices = new Choices('[data-trigger]',
-                                                                                    {
-                                                                                        searchEnabled: false
-                                                                                    });
+                                                                                const choices = new Choices('[data-trigger]',
+                                                                                        {
+                                                                                            searchEnabled: false
+                                                                                        });
 
                         </script>
                         <link

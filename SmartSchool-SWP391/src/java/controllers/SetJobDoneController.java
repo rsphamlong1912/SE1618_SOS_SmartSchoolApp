@@ -5,8 +5,11 @@
  */
 package controllers;
 
+import applyJob.ApplyJobDAO;
+import applyJob.ApplyJobDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -21,19 +24,27 @@ import jobPost.JobPostDAO;
 @WebServlet(name = "SetJobDoneController", urlPatterns = {"/setJobDone"})
 public class SetJobDoneController extends HttpServlet {
 
-
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = "";
         try {
-           String jobId = request.getParameter("jobId");
-           JobPostDAO dao = new JobPostDAO();
-           dao.SetJobDone(jobId);
-           url = "main?action=MyJobPostDoneDetail&jobId="+jobId;
+            String jobId = request.getParameter("jobId");
+            JobPostDAO dao = new JobPostDAO();
+            ApplyJobDAO aDao = new ApplyJobDAO();
+            List<ApplyJobDTO> listFreelancerDoing = aDao.checkFreelancerDoing(jobId);
+            if (listFreelancerDoing.isEmpty()) {
+                dao.SetJobDone(jobId);
+                url = "main?action=MyJobPostDoneDetail&jobId=" + jobId;
+            }else {
+                request.setAttribute("ISNOTDONE", "Mọi Freelancer phải hoàn thành công việc.");
+                url = "main?action=MyJobPostDoneDetail&jobId=" + jobId;
+            }
+           
+           
         } catch (Exception e) {
-        } finally {
-           response.sendRedirect(url);
+        } finally {          
+            request.getRequestDispatcher(url).forward(request, response);
         }
     }
 

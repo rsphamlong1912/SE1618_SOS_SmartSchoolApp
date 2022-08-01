@@ -28,6 +28,8 @@ public class ApplyJobDAO {
     private static final String SET_APPLYJOB_DOING = " UPDATE tblApplyJob SET status ='doing' WHERE  applyJobId = ? ";
     private static final String SET_APPLYJOB_DENIED = " UPDATE tblApplyJob SET status ='denied' WHERE  applyJobId = ? ";
     private static final String SET_APPLYJOB_DONE = " UPDATE tblApplyJob SET status ='done' WHERE  applyJobId = ? ";
+    private static final String CHECK_FREELANCER_DOING = "SELECT * FROM tblApplyJob WHERE jobId = ? AND status = 'doing'";
+    private static final String SEARCH_USER_DOING = "SELECT a.applyJobId, a.jobId, a.userId, a.status, u.fullname, u.phone, u.email, u.facebook FROM tblApplyJob as a, tblUser as u WHERE a.userId = u.userId AND a.jobId = ? AND u.fullname LIKE ? AND (status = 'doing' OR status = 'done')";
 
     public void setApplyJobDoing(String applyJobId)
             throws SQLException {
@@ -158,6 +160,42 @@ public class ApplyJobDAO {
         return list;
     }
 
+    public List<ApplyJobDTO> checkFreelancerDoing(String jobId)
+            throws SQLException {
+        List<ApplyJobDTO> list = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(CHECK_FREELANCER_DOING);
+                ptm.setString(1, jobId);
+                rs = ptm.executeQuery();
+                while (rs.next()) {
+                    ApplyJobDTO post = new ApplyJobDTO();
+                    post.setApplyJobId(rs.getInt("applyJobId"));
+                    post.setJobId(rs.getInt("jobId"));
+                    post.setUserId(rs.getString("userId"));
+                    list.add(post);
+                }
+            }
+        } catch (Exception e) {
+
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return list;
+    }
+
     public List<ApplyJobDTO> getListApplyJobDoing(String userId)
             throws SQLException {
         List<ApplyJobDTO> list = new ArrayList<>();
@@ -245,6 +283,48 @@ public class ApplyJobDAO {
             if (conn != null) {
                 ptm = conn.prepareStatement(LIST_USER_DOING);
                 ptm.setString(1, jobId);
+                rs = ptm.executeQuery();
+                while (rs.next()) {
+                    ApplyJobDTO post = new ApplyJobDTO();
+                    post.setApplyJobId(rs.getInt("applyJobId"));
+                    post.setJobId(rs.getInt("jobId"));
+                    post.setUserId(rs.getString("userId"));
+                    post.setFullname(rs.getString("fullname"));
+                    post.setPhone(rs.getString("phone"));
+                    post.setEmail(rs.getString("email"));
+                    post.setFacebook(rs.getString("facebook"));
+                    post.setStatus(rs.getString("status"));
+                    list.add(post);
+                }
+            }
+        } catch (Exception ex) {
+
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return list;
+    }
+
+    public List<ApplyJobDTO> searchListUserDoingDone(String jobId, String userId)
+            throws SQLException {
+        List<ApplyJobDTO> list = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(SEARCH_USER_DOING);
+                ptm.setString(1, jobId);
+                ptm.setString(2, "%" + userId + "%");
                 rs = ptm.executeQuery();
                 while (rs.next()) {
                     ApplyJobDTO post = new ApplyJobDTO();

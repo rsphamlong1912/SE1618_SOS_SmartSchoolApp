@@ -16,6 +16,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import user.UserDAO;
 
 /**
  *
@@ -31,14 +32,18 @@ public class ChangeUserStatusJobController extends HttpServlet {
         PrintWriter out = response.getWriter();
         String selectValue = request.getParameter("selectValue");
         String applyJobId = request.getParameter("applyJobId");
+        String userId = request.getParameter("userId");
         ApplyJobDAO aDao = new ApplyJobDAO();
+        UserDAO uDao = new UserDAO();
         System.out.println("selectValue:  "+selectValue);
         System.out.println("applyJobId:   "+applyJobId);
         if("doing".equals(selectValue)){
             aDao.setApplyJobDoing(applyJobId);
+            uDao.setHaveJobPlusOne(userId);
             out.print("Doing");
         }else if ("done".equals(selectValue)){
             aDao.setApplyJobDone(applyJobId);
+            uDao.setHaveJobMinusOne(userId);
             out.print("Done");
         }
     }
