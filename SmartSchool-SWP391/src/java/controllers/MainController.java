@@ -291,7 +291,7 @@ public class MainController extends HttpServlet {
 
             if(EMPLOYER_DASHBOARD.equals(action)) {
                 url = EMPLOYER_DASHBOARD_CONTROLLER;
-
+            }
             if (SET_JOB_DONE.equals(action)) {
                 url = SET_JOB_DONE_CONTROLLER;
 
