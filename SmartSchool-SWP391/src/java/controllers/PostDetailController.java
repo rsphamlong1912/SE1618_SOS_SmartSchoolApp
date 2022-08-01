@@ -5,8 +5,11 @@
  */
 package controllers;
 
+import category.CategoryDAO;
+import category.CategoryDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -35,6 +38,7 @@ public class PostDetailController extends HttpServlet {
      */
     private static final String ERROR = "postDetail.jsp";
     private static final String POST_DETAIL_PAGE = "postDetail.jsp";
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -50,7 +54,9 @@ public class PostDetailController extends HttpServlet {
             UserDTO user = udao.checkAccountExist(userId);
             request.setAttribute("POST", post);
             request.setAttribute("USER_POST", user);
-            
+            CategoryDAO cdao = new CategoryDAO();
+            List<CategoryDTO> listAllCategory = cdao.getAllCategory();
+            request.setAttribute("LISTALLCATEGORY", listAllCategory);
         } catch (Exception e) {
             log("Error at LoginController:" + e.toString());
         } finally {
