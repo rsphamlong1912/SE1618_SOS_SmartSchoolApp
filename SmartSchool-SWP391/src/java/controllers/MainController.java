@@ -68,6 +68,8 @@ public class MainController extends HttpServlet {
     private static final String EDIT_CATEGORY_LOSTANDFOUND_CONTROLLER = "editCategory";
     private static final String DELETE_CATEGORY = "DeleteCategogy";
     private static final String DELETE_CATEGORY_LOSTANDFOUND_CONTROLLER = "deleteCategory";
+    private static final String DETAIL = "Detail";
+    private static final String DETAIL_POST_LOSTANDFOUND_CONTROLLER = "lostAndFoundDetail";
 
     private static final String JOB_CATEGORY = "JobCategory";
     private static final String JOB_CATEGORY_CONTROLLER = "jobCategory";
@@ -281,6 +283,10 @@ public class MainController extends HttpServlet {
             }
             if (SET_JOB_DONE.equals(action)) {
                 url = SET_JOB_DONE_CONTROLLER;
+
+            }
+            if (DETAIL.equals(action)) {
+                url = DETAIL_POST_LOSTANDFOUND_CONTROLLER;
 
             }
         } catch (Exception e) {
