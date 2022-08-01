@@ -15,6 +15,7 @@ import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -24,6 +25,11 @@ import user.UserDTO;
  *
  * @author SE150925 Nguyen Van Hai Nam
  */
+@WebFilter(filterName = "ADFilter", urlPatterns = {"/adminFreelance", "/adminLostAndFound","/addCategory","/addJobCategory",
+    "/adminLostAndFoundPost","/approveJob","/approveJobPost",
+    "/category","/deleteCategory","/deleteJobCategory","/editCategory",
+    "/editJobCategory","/jobCategory","/approvePost","/listPostToApprove","/noApprovePost"})
+
 public class ADFilter implements Filter {
 
     private static final boolean debug = true;
@@ -112,7 +118,7 @@ public class ADFilter implements Filter {
         HttpSession session = req.getSession();
         UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
         if(loginUser==null){
-            res.sendRedirect(req.getContextPath() + "/login.jsp");
+            res.sendRedirect(req.getContextPath() + "/WelcomePage.jsp");
         }
         String userRole = loginUser.getRoleId();
 //        String url=req.getRequestURI();
@@ -127,7 +133,7 @@ public class ADFilter implements Filter {
                 res.sendRedirect(req.getContextPath() + "/WelcomePage.jsp");
 //                        req.getRequestDispatcher(url).forward(request, response);
             } else if (userRole.equals("EM")) {
-                res.sendRedirect(req.getContextPath() + "/EmployerHome.jsp");
+                res.sendRedirect(req.getContextPath() + "/employerhome");
 //                                res.sendRedirect(req.getContextPath() + "/EmployerHome.jsp");
 
             }

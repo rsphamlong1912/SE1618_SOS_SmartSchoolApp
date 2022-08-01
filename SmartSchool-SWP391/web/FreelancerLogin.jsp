@@ -100,7 +100,7 @@
                       </div>
                       <div class="row d-flex align-items-center justify-content-center pb-4">                       
                         <a class="col-12 col-md-5 text-center mb-2" href="register.jsp">Đăng ký ứng viên</a>         
-                        <a class="col-12 col-md-7 text-center mb-2" href="register.jsp">Đăng ký nhà tuyển dụng</a>         
+                        <a class="col-12 col-md-7 text-center mb-2" href="EmployerSignup.jsp">Đăng ký nhà tuyển dụng</a>         
                       </div>
     
                     </form>

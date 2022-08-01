@@ -16,6 +16,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import post.PostDAO;
 import post.PostDTO;
+import reportType.ReportTypeDAO;
+import reportType.ReportTypeDTO;
 import user.UserDAO;
 import user.UserDTO;
 
@@ -28,6 +30,7 @@ public class LostAndFoundDetailController extends HttpServlet {
 
     private static final String ERROR = "LostAndFoundDetail.jsp";
     private static final String POST_DETAIL_PAGE = "LostAndFoundDetail.jsp";
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -38,18 +41,21 @@ public class LostAndFoundDetailController extends HttpServlet {
             String postId = request.getParameter("postId");
             PostDAO pdao = new PostDAO();
             PostDTO post = pdao.readPost(postId);
-            List<PostDTO> list3Cate = pdao.get3Category(post.getCategoryId(),post.getPostId());
-            
+            List<PostDTO> list3Cate = pdao.get3Category(post.getCategoryId(), post.getPostId());
+            ReportTypeDAO dao = new ReportTypeDAO();
+            List<ReportTypeDTO> list = dao.getAll();
             String userId = post.getUserId();
             UserDAO udao = new UserDAO();
             UserDTO user = udao.checkAccountExist(userId);
             request.setAttribute("POST", post);
             request.setAttribute("USER_POST", user);
             request.setAttribute("LIST3CATE", list3Cate);
+            request.setAttribute("LISTREPORT", list);
         } catch (Exception e) {
             log("Error at LostAndFoundDetailController:" + e.toString());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
+//            response.sendRedirect(url);
         }
     }
 

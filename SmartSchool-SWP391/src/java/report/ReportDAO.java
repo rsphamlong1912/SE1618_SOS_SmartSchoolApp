@@ -27,19 +27,19 @@ import utills.DBUtils;
  */
 public class ReportDAO {
 
-    private static final String CREATE = "INSERT INTO tblReport(userId,postId,reportTypeId,reportDetail) VALUES(?,?,?,?)";
+    private static final String CREATE = "INSERT INTO tblReport(userId,postId,reportTypeId) VALUES(?,?,?)";
     private static final String LIST_ALL = "SELECT * FROM tblReport";
 
-    public void sendReport(ReportDTO report) throws SQLException {
+    public void sendReport(String userId, int postId, int reportTypeId) throws SQLException {
         Connection con = null;
         PreparedStatement ptm = null;
         try {
             con = DBUtils.getConnection();
             ptm = con.prepareStatement(CREATE);
-            ptm.setString(1, report.getUserId());
-            ptm.setInt(2, report.getPostId());
-            ptm.setInt(3, report.getReportTypeId());
-            ptm.setString(4, report.getReportDetail());
+            ptm.setString(1, userId);
+            ptm.setInt(2, postId);
+            ptm.setInt(3, reportTypeId);
+//            ptm.setString(4, reportDetail);
             ptm.executeUpdate();
         } catch (Exception ex) {
             Logger.getLogger(PostDAO.class.getName()).log(Level.SEVERE, null, ex);

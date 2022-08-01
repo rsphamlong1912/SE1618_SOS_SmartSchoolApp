@@ -528,14 +528,14 @@
                                             <div class="col-11">
                                                 <div class="input-style-1">
                                                     <label>Category Image (Please copy URL Image)</label>
-                                                    <textarea id="CateImg" placeholder="Type here" rows="6"></textarea>
+                                                    <textarea id="CateImg" name="categoryImg" placeholder="Type here" rows="6"></textarea>
                                                 </div>
                                             </div>
                                         </div>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="main-btn light-btn btn-hover btn-sm" data-bs-dismiss="modal">Close</button>
-                                    <button type="submit" name="action" value="EditCategogy" class="main-btn warning-btn btn-hover btn-sm">Save changes</button>
+                                    <button type="submit" name="action" value="EditCategory" class="main-btn warning-btn btn-hover btn-sm">Save changes</button>
                                 </div>
                             </div>
                         </div>
