@@ -21,14 +21,13 @@
         <url-pattern>/adminLostAndFoundPost</url-pattern>
         <url-pattern>/approveJob</url-pattern>
         <url-pattern>/approveJobPost</url-pattern>
-<!--        <url-pattern>/approveUserWaiting</url-pattern>-->
         <url-pattern>/category</url-pattern>
         <url-pattern>/deleteCategory</url-pattern>
         <url-pattern>/deleteJobCategory</url-pattern>
         <url-pattern>/editCategory</url-pattern>
         <url-pattern>/editJobCategory</url-pattern>
         <url-pattern>/jobCategory</url-pattern>
-        <url-pattern>/approvePost</url-pattern>
+        s<url-pattern>/approvePost</url-pattern>
         <url-pattern>/listPostToApprove</url-pattern>
         <url-pattern>/noApprovePost</url-pattern>
 

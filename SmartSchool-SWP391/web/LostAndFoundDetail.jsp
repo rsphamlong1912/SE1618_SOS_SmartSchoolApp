@@ -243,8 +243,17 @@
                             <div class="breadcrumb__links">
                                 <a href="lostAndfoundhome"><i class="fa fa-home"></i> Home</a>
                                 <a href="main?action=ListAll">Danh sách</a>
-                                <a href="main?searchText=&type=0&action=SearchPostInHome">Đồ thất lạc (if cho nó ra)</a>
-                                <span>Mất điện thoại mọi người ơi!</span>
+                                <a href="main?searchText=&type=0&action=SearchPostInHome">
+                                    <c:choose> 
+                                        <c:when test="${requestScope.POST.type=='0'}">
+                                            Đồ thất lạc
+                                        </c:when>  
+                                        <c:otherwise>
+                                            Đồ nhặt được
+                                        </c:otherwise>
+                                    </c:choose>
+                                </a>
+                                <span>${requestScope.POST.title}</span>
                             </div>
                         </div>
                     </div>
@@ -253,16 +262,24 @@
 
             <section class="shop" style="min-height: 82vh;">
                 <div class="container">
-
                     <div class="row">
                         <div class="col-lg-9 col-md-9 mb-5">
                             <div class="row mb-3">
                                 <div class="card overflow-hidden shadow ">
                                     <div class="card-header bg-white pt-4 pl-10 pr-10 border-bottom d-md-flex">
 
-                                        <h4 class="" style="line-height: 2.5rem;" >Mất điện thoại mọi người ơi!. Mất điện thoại mọi người ơi!.
-                                            <span class="badge bg-secondary" style="border-radius: 0.25rem !important;">LOST</span> or
-                                            <span class="badge" style="border-radius: 0.25rem !important; background-color: #0d6efd!important;">FOUND</span> (if ra)
+                                        <h4 class="" style="line-height: 2.5rem;" >${requestScope.POST.title}
+                                            <!--<span class="badge bg-secondary" style="border-radius: 0.25rem !important;">-->
+                                            <c:choose> 
+                                                <c:when test="${requestScope.POST.type=='0'}">
+                                                    <span class="badge bg-secondary" style="border-radius: 0.25rem !important;">LOST</span>
+                                                </c:when>  
+                                                <c:otherwise>
+                                                    <span class="badge" style="border-radius: 0.25rem !important; background-color: #0d6efd!important;">FOUND</span>
+                                                </c:otherwise>
+                                            </c:choose>
+                                            <!--                                            </span> or
+                                                                                        <span class="badge" style="border-radius: 0.25rem !important; background-color: #0d6efd!important;">FOUND</span> (if ra)-->
                                         </h4>
 
                                     </div>
@@ -279,7 +296,7 @@
                                         </div>
                                         <div class="pt-3 mb-4 ">
                                             <div class="detail-image">
-                                                <a href="" data-bs-toggle="modal" data-bs-target="#imageModal"><img src="https://haycafe.vn/wp-content/uploads/2021/12/hinh-anh-avatar-dep-cho-con-gai-dai-dien-Facebook-Zalo-Tiktok.jpg" width="100%" height="100%"  alt=""/></a>
+                                                <a href="" data-bs-toggle="modal" data-bs-target="#imageModal"><img src="${pageContext.servletContext.contextPath}/item?postId=${requestScope.POST.postId}" width="100%" height="100%"  alt=""/></a>
                                             </div>
                                         </div>
 
@@ -287,7 +304,7 @@
                                             <div class="d-flex align-items-center mb-3">
                                                 <h6>Loại: 
                                                     <span class="fw-medium" style="font-size: 0.88889rem;">
-                                                        Điện thoại    
+                                                        ${requestScope.POST.categoryName}    
                                                     </span>
                                                 </h6>
                                             </div>
@@ -295,7 +312,7 @@
                                                 <h6>Mô tả:</h6>
 
                                                 <span class="fw-medium" style="font-size: 0.88889rem; line-height: 2.5;">
-                                                    Mình bị mất cái điện thoại ZFOLD3, mình nghi admin Hải Nam lấy ZFOLD3, mình nghi admin Hải Nam lấy Mình bị mất cái điện thoại ZFOLD3, mình nghi admin Hải Nam lấy mình nghi admin Hải Nam lấy
+                                                    ${requestScope.POST.description}
                                                 </span>
 
                                             </div>
@@ -310,7 +327,7 @@
                                                 <div class="d-flex align-items-center justify-content-center">
                                                     <img src="assets/img/dest/clock.svg" style="margin-right: 5px;" width="17" alt="navigation" />
                                                     <span class="fw-medium" style="font-size: 14px;"> 
-                                                        Đã đăng 3 phút trước
+                                                        Đã đăng ${requestScope.POST.date}
                                                     </span>
                                                 </div>
                                             </div>
@@ -325,74 +342,85 @@
                                         <h5 class="">TIN LIÊN QUAN</h5>
                                     </div>
                                     <div class="card-body">
-                                        <div class="row">                                       
-                                            <div class="col-lg-12 col-md-12 mb-5">
-                                                <div class="card overflow-hidden shadow shadow-hover" id="hoverCard" style="max-height: 200px;">
-                                                    <div class="row g-0">
-                                                        <div class="col-md-4 relative-image">
-                                                            <img src="https://scr.vn/wp-content/uploads/2020/07/Avt-%C4%91%E1%BA%B9p-cho-n%E1%BB%AF-1.jpg" alt=""/>
-                                                        </div>
+                                        <div class="row">
+                                            <c:forEach items="${requestScope.LIST3CATE}" var="listPost"> 
+                                                <div class="col-lg-12 col-md-12 mb-5">
 
-                                                        <div class="col-md-8">
-                                                            <div class="card-body">
-                                                                <div class="d-flex flex-column flex-lg-row justify-content-between mb-2">
-                                                                    <h5 class="text-secondary fw-medium text-truncate"><a
-                                                                            class="link-901 text-decoration-none stretched-link" href="#">Mất cái điện thoại ròi, có ai nhặt được không</a></h5><span class="fs-1 fw-medium"></span>
-                                                                </div>
-                                                                <div class="d-flex align-items-center mb-2"> <span
-                                                                        class="fw-bold" style="font-size: 15px;">Đồ thất lạc</span>
-                                                                </div>
-                                                                <div class="d-flex align-items-center mb-5"> 
-                                                                    <span class="fw-bold" style="font-size: 14px;">Loại: 
-                                                                        <span class="fw-medium" style="font-size: 14px;">Điện thoại</span>                                                                        
-                                                                    </span>
-                                                                </div>
-                                                                <div class="d-flex align-items-center"> 
-                                                                    <img src="assets/img/dest/clock.svg" style="margin-right: 5px;" width="15" alt="navigation" />
-                                                                    <span class="fw-medium" style="font-size: 14px;">5 phút trước
-                                                                    </span>
+                                                    <div class="card overflow-hidden shadow shadow-hover" id="hoverCard" style="max-height: 200px;">
+                                                        <div class="row g-0">
+                                                            <div class="col-md-4 relative-image">
+                                                                <img src="${pageContext.servletContext.contextPath}/item?postId=${listPost.postId}" alt=""/>
+                                                            </div>
+
+                                                            <div class="col-md-8">
+                                                                <div class="card-body">
+                                                                    <div class="d-flex flex-column flex-lg-row justify-content-between mb-2">
+                                                                        <h5 class="text-secondary fw-medium text-truncate"><a
+                                                                                class="link-901 text-decoration-none stretched-link" href="/main?postId=${listPost.postId}&userId=${listPost.userId}&action=Detail">${listPost.title}</a></h5><span class="fs-1 fw-medium"></span>
+                                                                    </div>
+                                                                    <div class="d-flex align-items-center mb-2"> <span
+                                                                            class="fw-bold" style="font-size: 15px;">
+                                                                            <c:choose> 
+                                                                                <c:when test="${listPost.type=='0'}">
+                                                                                    Đồ thất lạc
+                                                                                </c:when>  
+                                                                                <c:otherwise>
+                                                                                    Đồ nhặt được
+                                                                                </c:otherwise>
+                                                                            </c:choose>
+                                                                        </span>
+                                                                    </div>
+                                                                    <div class="d-flex align-items-center mb-5"> 
+                                                                        <span class="fw-bold" style="font-size: 14px;">Loại: 
+                                                                            <span class="fw-medium" style="font-size: 14px;">${listPost.categoryName}</span>                                                                        
+                                                                        </span>
+                                                                    </div>
+                                                                    <div class="d-flex align-items-center"> 
+                                                                        <img src="assets/img/dest/clock.svg" style="margin-right: 5px;" width="15" alt="navigation" />
+                                                                        <span class="fw-medium" style="font-size: 14px;">${listPost.date}
+                                                                        </span>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-lg-12 col-md-12 mb-5">
-                                                <div class="card overflow-hidden shadow shadow-hover" id="hoverCard" style="max-height: 200px;">
-                                                    <div class="row g-0">
-                                                        <div class="col-md-4 relative-image">
-                                                            <img src="https://anhdephd.vn/wp-content/uploads/2022/03/anh-dai-dien-nu-deo-kinh-chat-600x600.jpg" class="img-fluid" alt=""/>
-                                                        </div>
-
-                                                        <div class="col-md-8">
-                                                            <div class="card-body">
-                                                                <div class="d-flex flex-column flex-lg-row justify-content-between mb-2">
-                                                                    <h5 class="text-secondary fw-medium text-truncate"><a
-                                                                            class="link-901 text-decoration-none stretched-link" href="#">Mất cái ZFOLD3 ròi</a></h5><span class="fs-1 fw-medium"></span>
-                                                                </div>
-                                                                <div class="d-flex align-items-center mb-2"> <span
-                                                                        class="fw-bold" style="font-size: 15px;">Đồ thất lạc</span>
-                                                                </div>
-                                                                <div class="d-flex align-items-center mb-5"> 
-                                                                    <span class="fw-bold" style="font-size: 14px;">Loại: 
-                                                                        <span class="fw-medium" style="font-size: 14px;">Điện thoại</span>                                                                        
-                                                                    </span>
-                                                                </div>
-                                                                <div class="d-flex align-items-center"> 
-                                                                    <img src="assets/img/dest/clock.svg" style="margin-right: 5px;" width="15" alt="navigation" />
-                                                                    <span class="fw-medium" style="font-size: 14px;">1 giờ trước
-                                                                    </span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            </c:forEach>
+                                            <!--                                            <div class="col-lg-12 col-md-12 mb-5">
+                                                                                            <div class="card overflow-hidden shadow shadow-hover" id="hoverCard" style="max-height: 200px;">
+                                                                                                <div class="row g-0">
+                                                                                                    <div class="col-md-4 relative-image">
+                                                                                                        <img src="https://anhdephd.vn/wp-content/uploads/2022/03/anh-dai-dien-nu-deo-kinh-chat-600x600.jpg" class="img-fluid" alt=""/>
+                                                                                                    </div>
+                                            
+                                                                                                    <div class="col-md-8">
+                                                                                                        <div class="card-body">
+                                                                                                            <div class="d-flex flex-column flex-lg-row justify-content-between mb-2">
+                                                                                                                <h5 class="text-secondary fw-medium text-truncate"><a
+                                                                                                                        class="link-901 text-decoration-none stretched-link" href="#">Mất cái ZFOLD3 ròi</a></h5><span class="fs-1 fw-medium"></span>
+                                                                                                            </div>
+                                                                                                            <div class="d-flex align-items-center mb-2"> <span
+                                                                                                                    class="fw-bold" style="font-size: 15px;">Đồ thất lạc</span>
+                                                                                                            </div>
+                                                                                                            <div class="d-flex align-items-center mb-5"> 
+                                                                                                                <span class="fw-bold" style="font-size: 14px;">Loại: 
+                                                                                                                    <span class="fw-medium" style="font-size: 14px;">Điện thoại</span>                                                                        
+                                                                                                                </span>
+                                                                                                            </div>
+                                                                                                            <div class="d-flex align-items-center"> 
+                                                                                                                <img src="assets/img/dest/clock.svg" style="margin-right: 5px;" width="15" alt="navigation" />
+                                                                                                                <span class="fw-medium" style="font-size: 14px;">1 giờ trước
+                                                                                                                </span>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>-->
                                         </div>
                                     </div>                           
                                 </div>                                                       
                             </div>
-
                         </div>
                         <!-- Modal  Report-->
                         <div class="modal fade" id="reportModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -482,13 +510,13 @@
                                                              width="164" height="164" />
                                                     </c:if>
                                                     <c:if test="${empty USERINFOR.avatar}">
-                                                        <img src="https://khoinguonsangtao.vn/wp-content/uploads/2022/05/anh-avatar-dep-ngau-hinh-dai-dien.jpg"
+                                                        <img src="${pageContext.servletContext.contextPath}/avatar?userId=${requestScope.POST.userId}"
                                                              width="164" height="164" />
                                                     </c:if>
 
                                                     </br>
                                                     </br>
-                                                    <h5 class="mb-3">${USERINFOR.fullname} Phạm Ngọc Long</h5>
+                                                    <h5 class="mb-3">${USERINFOR.fullname} ${requestScope.USER_POST.fullname}</h5>
                                                 </div>
                                             </div>
                                         </div>
@@ -500,17 +528,17 @@
 
                                             <div class="d-flex align-items-center">
                                                 <h6 style="line-height: 2.5;">Số điện thoại: <span class="fw-medium"
-                                                                                                   style="font-size: 14px; "> ${USERINFOR.phone}</span></h6>
+                                                                                                   style="font-size: 14px; "> ${requestScope.USER_POST.phone}</span></h6>
                                             </div>
 
                                             <div class="d-flex align-items-center">
                                                 <h6 style="line-height: 2.5;">Email: <span class="fw-medium text-break"
-                                                                                           style="font-size: 14px;"> ${USERINFOR.email}</span></h6>
+                                                                                           style="font-size: 14px;"> ${requestScope.USER_POST.email}</span></h6>
                                             </div>
 
                                             <div class="d-flex align-items-center">
                                                 <h6 style="line-height: 2.5;">Facebook: <span class="fw-medium text-break"
-                                                                                              style="font-size: 14px;"> ${USERINFOR.facebook}</span></h6>
+                                                                                              style="font-size: 14px;">  ${requestScope.USER_POST.facebook}</span></h6>
                                             </div>
 
 

@@ -59,10 +59,10 @@
                         </a>
                         <ul id="ddmenu_1" class="collapse dropdown-nav">
                             <li>
-                                <a href="index.html" class="active"> Lost And Found </a>
+                                <a href="adminLostAndFound" class=""> Lost And Found </a>
                             </li>
                             <li>
-                                <a href="index.html" class=""> Freelance Job </a>
+                                <a href="adminFreelance" class=""> Freelance Job </a>
                             </li>
                         </ul>
                     </li>
@@ -79,10 +79,10 @@
                         </a>
                         <ul id="ddmenu_2" class="collapse dropdown-nav">
                             <li>
-                                <a href="CategoryLostAndFound.html" class=""> Category Lost & Found </a>
+                                <a href="category" class=""> Category Lost & Found </a>
                             </li>
                             <li>
-                                <a href="" class=""> Category Freelance Job </a>
+                                <a href="jobCategory" class=""> Category Freelance Job </a>
                             </li>
                         </ul>
                     </li>
@@ -99,7 +99,7 @@
                                 <a href="" class="active"> Lost & Found Posts </a>
                             </li>
                             <li>
-                                <a href=""> Freelance Job Posts </a>
+                                <a href="approveJobPost"> Freelance Job Posts </a>
                             </li>
                         </ul>
                     </li>
@@ -113,7 +113,7 @@
                         </a>
                         <ul id="ddmenu_4" class="collapse dropdown-nav">
                             <li>
-                                <a href=""> Lost & Found </a>
+                                <a href="adminLostAndFoundPost"> Lost & Found </a>
                             </li>
                             <li>
                                 <a href=""> Freelance Job </a>

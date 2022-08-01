@@ -237,7 +237,7 @@
                                             <div class="card-body py-4 px-3">
                                                 <div class="d-flex flex-column flex-lg-row justify-content-between mb-3">
                                                     <h5 class="text-secondary fw-medium text-truncate"><a class="link-901 text-decoration-none stretched-link"
-                                                                                                          href="#!">${listPost.title}</a></h5><span class="fs-1 fw-medium"></span>
+                                                                                                          href="/main?postId=${listPost.postId}&userId=${listPost.userId}&action=Detail">${listPost.title}</a></h5><span class="fs-1 fw-medium"></span>
                                                 </div>
                                                 <div class="d-flex align-items-center"> <img src="assets/img/dest/clock.svg"
                                                                                              style="margin-right: 5px;" width="15" alt="navigation" /><span class="fw-medium" style="font-size: 12px;">${listPost.date}</span></div>
