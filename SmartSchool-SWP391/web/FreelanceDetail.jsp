@@ -413,7 +413,7 @@
 
                                                                     <div class="row mb-3">
                                                                         <div class="col-md-1"><img
-                                                                                src="https://toigingiuvedep.vn/wp-content/uploads/2021/06/hinh-anh-hoat-hinh-de-thuong-cute-lam-avatar.jpg"
+                                                                                src="${pageContext.servletContext.contextPath}/avatar?userId=${list3Job.userId}"
                                                                                 alt class="" style="width: 50px; height: 50px;"/>
                                                                         </div>
                                                                         <div class="col-md-11" style="padding-left: 0px;">

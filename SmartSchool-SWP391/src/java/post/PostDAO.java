@@ -59,7 +59,7 @@ public class PostDAO {
 "            WHERE p.categoryId=c.categoryId AND postStatus='true' AND p.type=? AND (dbo.removeMark(title) LIKE ? OR title LIKE ?) ORDER BY postId DESC";
 //    private static final String LIST_ALL = "SELECT * FROM tblPost WHERE postStatus='true' ORDER BY postId DESC";
     private static final String CREATE = "INSERT INTO tblPost(userId, categoryId, postImg, description, date, type, title, postStatus) VALUES(?,?,?,?,?,?,?,'approving')";
-    private static final String UPDATE = "UPDATE tblPost SET postImg=?, description=?, type=?, title=?, postStatus=? WHERE postId=?";
+    private static final String UPDATE = "UPDATE tblPost SET postImg=?, description=?, type=?, title=?, postStatus='approving' WHERE postId=?";
     private static final String DELETE = "UPDATE tblPost SET postStatus='false' WHERE postId=?";
     private static final String LIST_MYPOST = "SELECT p.postId, p.userId,p.categoryId, p.postImg, p.description,p.date,p.type,p.title,p.postStatus,c.categoryName\n"
             + "FROM tblPost as p, tblCategory as c\n"
@@ -835,18 +835,17 @@ public class PostDAO {
         return list;
     }
 
-    public void updatePost(PostDTO post) throws SQLException {
+    public void updatePost(int postId, InputStream inputStream, String description, String type, String title) throws SQLException {
         Connection con = null;
         PreparedStatement stm = null;
         try {
             con = DBUtils.getConnection();
             stm = con.prepareStatement(UPDATE);
-            stm.setBytes(1, post.getPostImg());
-            stm.setString(2, post.getDescription());
-            stm.setString(3, post.getType());
-            stm.setString(4, post.getTitle());
-            stm.setString(5, post.getPostStatus());
-            stm.setInt(6, post.getPostId());
+            stm.setBlob(1, inputStream);
+            stm.setString(2, description);
+            stm.setString(3, type);
+            stm.setString(4, title);
+            stm.setInt(5, postId);
             stm.executeUpdate();
         } catch (Exception ex) {
             Logger.getLogger(PostDAO.class.getName()).log(Level.SEVERE, null, ex);

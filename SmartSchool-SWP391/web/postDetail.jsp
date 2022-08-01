@@ -81,9 +81,9 @@
             .title-desc {
                 font-weight: 500;
             }
-            
+
             .content-desc {
-               font-size: 18px; 
+                font-size: 18px; 
             }
 
         </style>
@@ -115,7 +115,7 @@
                             <li class="nav-item px-3"><a class="nav-link fw-bold" aria-current="page" href="lostAndfoundhome#moinhatduoc">MỚI NHẶT ĐƯỢC</a></li>
                             <li class="nav-item px-3"><a class="nav-link fw-bold" aria-current="page" href="lostAndfoundhome#moithatlac">MỚI THẤT LẠC</a></li>
                             <li class="nav-item px-3"><a class="nav-link fw-bold" aria-current="page" href="main?action=ListAll">TÌM KIẾM</a></li>
-                            <c:if test="${empty sessionScope.LOGIN_USER}">
+                                <c:if test="${empty sessionScope.LOGIN_USER}">
                                 <li class="nav-item px-3"><a class="btn btn-outline-light order-1 order-lg-0 fw-bold" href="#!">Đăng nhập /
                                         Đăng ký</a></li>
                                     </c:if>
@@ -190,7 +190,7 @@
                                 </li>
                                 <!--/ User -->   
                                 <li class="nav-item px-3"><a class="btn btn-outline-light order-1 order-lg-0 fw-bold" href="uploadPost">ĐĂNG BÀI</a></li>
-                            </c:if>    
+                                </c:if>    
                         </ul>
                     </div>
                 </div>
@@ -227,23 +227,130 @@
                         <div class="info-desc"><span class="title-desc">Ngày đăng: </span>
                             <p class="content-desc">${requestScope.POST.date}</p>
                         </div>                      
-                        <a href="#" class="btn btn-success btn-sm"><i class="fa-solid fa-pencil"></i> Sửa</a>
-                        <a href="#" class="btn btn-danger btn-sm"><i class="fa-solid fa-trash"></i> Xóa</a>
+                        
+<!--                        <button class="btn btn-success btn-sm" style="font-size:20px;" data-bs-toggle="modal"
+                                data-bs-target="#ModalEdit" onclick="truyenDataEdit(this.getAttribute('data-editImg'), this.getAttribute('date-editTitle'), this.getAttribute('data-editType'), this.getAttribute('data-editCateName'), this.getAttribute('data-editDescription'))"
+                                data-editImg="${pageContext.servletContext.contextPath}/item?postId=${requestScope.POST.postId}"
+                                date-editTitle="${requestScope.POST.title}"
+                                data-editType="<c:choose> <c:when test="${requestScope.POST.type=='0'}">Đồ thất lạc</c:when><c:otherwise>Đồ nhặt được</c:otherwise></c:choose>"
+                                data-editCateName="${requestScope.POST.categoryName}"
+                                data-editDescription="${requestScope.POST.description}">
+                            <i class="fa-solid fa-pencil"></i>Sửa
+                        </button>-->
+
+                        <!--<a href="main?action=Delete&&postId=${requestScope.POST.postId}" class="btn btn-danger btn-sm"><i class="fa-solid fa-trash"></i> Xóa</a>-->
+                        <button class="btn btn-danger btn-sm" style="font-size:20px;" data-bs-toggle="modal"
+                                data-bs-target="#exampleModal" onclick="truyenIdDelete(this.getAttribute('data-postId'))"data-postId="${requestScope.POST.postId}">
+                            <i class="fa-solid fa-trash"></i>Xóa
+                        </button>
+
+                        <!-- Modal Delete -->
+                        <form action="main">
+                            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <input type="hidden" name="postId" id="PostId1" />
+                                        <div class="modal-header">
+                                            <h5 class="modal-title text-center text-danger fw-bold mb-2" id="exampleModalLabel">Thông Báo!!!</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p class="fw-bold mb-2">Bạn Có Muốn Xóa Bài Viết Này?? </p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                                            <!--<button type="button" class="main-btn light-btn btn-hover btn-sm" data-bs-dismiss="modal">Đóng</button>-->
+                                            <button type="submit" name="action" value="DeletePostLostAndFound" class="btn btn-primary">Xóa</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+
+                        <!-- Modal Edit -->
+                        <form action="main">
+                            <div class="modal fade" id="ModalEdit" tabindex="-1" aria-labelledby="exampleModalLabel"
+                                 aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h4 class="modal-title" id="exampleModalLabel">Chỉnh sửa bài đăng</h4>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="row justify-content-center">
+                                                <div class="col-11">
+                                                    <div class="input-style-1">
+                                                        <label class="form-control-label fw-bold mb-2">Tiêu đề</label>
+                                                        <textarea id="Title1" class="form-control required" required="true" data-rule-required="true" name="title" placeholder=" "
+                                                                  style="height: 80px"></textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="col-11">
+                                                    <div class="input-style-1">
+                                                        <label class="form-control-label fw-bold mb-2">Loại</label>
+                                                        <textarea id="Type1" class="form-control required" required="true" data-rule-required="true" name="type" placeholder=" "
+                                                                  style="height: 30px">
+                                                        </textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="col-11">
+                                                    <div class="input-style-1">
+                                                        <label class="form-control-label fw-bold mb-2">Danh mục</label>
+                                                        <select name="categoryId" id="category" class="form-select form-select-lg mb-3 required" required="true" data-rule-required="true" aria-label=".form-select-lg example">
+                                                            <!--<option selected disabled value="">Chọn...</option>-->
+                                                            <c:forEach items="${requestScope.LISTALLCATEGORY}" var="listCate">
+                                                                <option value="${listCate.categoryId}">${listCate.categoryName}</option>
+                                                            </c:forEach>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-11">
+                                                    <label for="description" class="form-control-label fw-bold mb-2">Mô tả chi tiết</label>
+
+                                                    <div class="form-floating">
+                                                        <textarea id="description" class="form-control required" required="true" data-rule-required="true" name="description" placeholder=" " id="floatingTextarea2"
+                                                                  style="height: 150px"></textarea>
+                                                        <small></small>
+                                                        <label for="floatingTextarea2">Nhập mô tả</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-11">
+                                                    <div class="input-style-1">
+                                                        <label class="form-control-label fw-bold mb-2">Hình Ảnh (Sao chép URl hình ảnh)</label>
+                                                        <textarea id="Img1" class="form-control required" required="true" data-rule-required="true" name="image" placeholder=" "
+                                                                  style="height: 80px"></textarea>
+                                                        <div class="image">
+                                                            <img id="Img1" name="image"
+                                                                 alt="" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="main-btn light-btn btn-hover btn-sm" data-bs-dismiss="modal">Đóng</button>
+                                            <button type="submit" name="action" value="Update" class="main-btn warning-btn btn-hover btn-sm">Lưu thay đổi</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
 
                     </div>
                     <div class="col-12 col-md-3 profileUserPost">
-                        
+
                         <div class="card align-items-center" style="width: 18rem;">
                             <h4 class="mb-3">Người đăng</h4>
                             <div class="avatar-preview">
-                            <c:choose>
-                                <c:when test="${sessionScope.LOGIN_USER.avatar==null}">
-                                    <img src="https://unloc.online/wp-content/uploads/2020/04/283-2833820_user-icon-orange-png.png?fbclid=IwAR133UMM9dPj2fhzsRFAVrcTvgHaJBLsIbkkwQbqx1dv_3FTf8OQfqcIRcM" alt >
-                                </c:when>    
-                                <c:otherwise>
-                                    <img src="${pageContext.servletContext.contextPath}/avatar?userId=${requestScope.POST.userId}" alt="User Post">
-                                </c:otherwise>
-                            </c:choose>
+                                <c:choose>
+                                    <c:when test="${sessionScope.LOGIN_USER.avatar==null}">
+                                        <img src="https://unloc.online/wp-content/uploads/2020/04/283-2833820_user-icon-orange-png.png?fbclid=IwAR133UMM9dPj2fhzsRFAVrcTvgHaJBLsIbkkwQbqx1dv_3FTf8OQfqcIRcM" alt >
+                                    </c:when>    
+                                    <c:otherwise>
+                                        <img src="${pageContext.servletContext.contextPath}/avatar?userId=${requestScope.POST.userId}" alt="User Post">
+                                    </c:otherwise>
+                                </c:choose>
                             </div>
                             <div class="card-body">
                                 <h5 class="card-title text-center">${requestScope.USER_POST.fullname}</h5>
@@ -253,11 +360,11 @@
                                 <li class="list-group-item"><i class="fa-solid fa-envelope"></i> ${requestScope.USER_POST.email} </li>
                                 <li class="list-group-item"><i class="fa-brands fa-facebook"></i> ${requestScope.USER_POST.facebook} </li>
                             </ul>
-<!--                            <div class="card-body text-center">
-                                <a href="#" class="btn btn-success btn-sm"><i class="fa-solid fa-phone-volume"></i> Gọi</a>
-                                <a href="#" class="btn btn-success btn-sm"><i class="fa-brands fa-facebook-messenger"></i> Messenger</a>
-                                <a href="#" class="btn btn-success btn-sm"><i class="fa-solid fa-envelope"></i> Mail</a>
-                            </div>-->
+                            <!--                            <div class="card-body text-center">
+                                                            <a href="#" class="btn btn-success btn-sm"><i class="fa-solid fa-phone-volume"></i> Gọi</a>
+                                                            <a href="#" class="btn btn-success btn-sm"><i class="fa-brands fa-facebook-messenger"></i> Messenger</a>
+                                                            <a href="#" class="btn btn-success btn-sm"><i class="fa-solid fa-envelope"></i> Mail</a>
+                                                        </div>-->
                         </div>
 
                     </div>
@@ -356,11 +463,25 @@
         <script src="assets/js/theme.js"></script>
         <script src="assets/js/extention/choices.js"></script>
         <script>
-            const choices = new Choices('[data-trigger]',
-                    {
-                        searchEnabled: false
-                    });
+                                    const choices = new Choices('[data-trigger]',
+                                            {
+                                                searchEnabled: false
+                                            });
 
+        </script>
+
+        <script>
+            function truyenIdDelete(postId) {
+                document.getElementById("PostId1").value = postId;
+            }
+
+            function truyenDataEdit(Img, title, type, cateName, description) {
+                document.getElementById("Img1").setAttribute("src", "/image?postId="+Img);
+                document.getElementById("Title1").innerHTML = title;
+                document.getElementById("Type1").innerHTML = type;
+                document.getElementById("category").value = cateName;
+                document.getElementById("description").innerHTML = description;
+            }
         </script>
         <link
             href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&amp;family=Volkhov:wght@700&amp;display=swap"
