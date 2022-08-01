@@ -260,7 +260,7 @@
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
                                             <!--<button type="button" class="main-btn light-btn btn-hover btn-sm" data-bs-dismiss="modal">Đóng</button>-->
-                                            <button type="submit" name="action" value="Delete" class="btn btn-primary">Xóa</button>
+                                            <button type="submit" name="action" value="DeletePostLostAndFound" class="btn btn-primary">Xóa</button>
                                         </div>
                                     </div>
                                 </div>

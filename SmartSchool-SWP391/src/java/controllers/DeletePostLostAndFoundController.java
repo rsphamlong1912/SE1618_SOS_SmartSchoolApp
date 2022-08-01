@@ -16,34 +16,22 @@ import post.PostDAO;
 
 /**
  *
- * @author SE150888 Pham Ngoc Long
+ * @author TQK
  */
-@WebServlet(name = "DeletePostController", urlPatterns = {"/deletePost"})
-public class DeletePostController extends HttpServlet {
+@WebServlet(name = "DeletePostLostAndFoundController", urlPatterns = {"/deletePostLostAndFound"})
+public class DeletePostLostAndFoundController extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    String POST_LOST_AND_FOUND_PAGE = "adminLostAndFoundPost";
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = POST_LOST_AND_FOUND_PAGE;
         try {
             int postId = Integer.parseInt(request.getParameter("postId"));
-            System.out.println(postId);
-            PostDAO dao = new PostDAO();
-            dao.deletePost(postId);
+            PostDAO pdao = new PostDAO();
+            pdao.deletePost(postId);
         } catch (Exception e) {
-            log("Error at LogoutController:" + e.toString());
+            log("Error at DeletePostController: " + e.toString());
         } finally {
-            request.getRequestDispatcher(url).forward(request, response);
+            response.sendRedirect("main?action=MyPost");
         }
     }
 
