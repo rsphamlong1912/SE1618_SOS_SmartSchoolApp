@@ -80,16 +80,16 @@
         <main class="main" id="top">
             <!-- here  data-navbar-on-scroll="data-navbar-on-scroll"-->
             <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3 d-block gradient-custom-2">
-                <div class="container"><a class="navbar-brand" href="index.html"><img
+                <div class="container"><a class="navbar-brand" href="WelcomePage.jsp"><img
                             src="https://hcmuni.fpt.edu.vn/landing-page/images/logo-top.png" height="46" alt="logo" /></a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
                             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span
                             class="navbar-toggler-icon"> </span></button>
                     <div class="collapse navbar-collapse border-top border-lg-0 mt-4 mt-lg-0" id="navbarSupportedContent">
                         <ul class="navbar-nav ms-auto pt-2 pt-lg-0 font-base align-items-lg-center align-items-start">
-                            <li class="nav-item px-3"><a class="nav-link fw-bold" aria-current="page" href="EmployerHome.jsp">TRANG CHỦ</a>
+                            <li class="nav-item px-3"><a class="nav-link fw-bold" aria-current="page" href="employerhome">TRANG CHỦ</a>
                             </li>
-                            <li class="nav-item px-3"><a class="nav-link fw-bold" aria-current="page" href="#phanloai">DASHBOARD</a>
+                            <li class="nav-item px-3"><a class="nav-link fw-bold" aria-current="page" href="#">DASHBOARD</a>
                             </li>
                             <li class="nav-item px-3 navbar-dropdown dropdown-user dropdown">
                                 <a class="btn btn-outline-light order-1 order-lg-0 fw-bold nav-link hide-arrow" id="nameLogin" href=""
@@ -207,7 +207,7 @@
                                 </li>
                                 <!--/ User -->    
                             </c:if> 
-                                 <li class="nav-item px-3"><a class="btn btn-outline-light order-1 order-lg-0 fw-bold" href="main?action=EmployerUploadJobPost">Đăng tuyển</a></li>
+                            <li class="nav-item px-3"><a class="btn btn-light order-1 order-lg-0 fw-bold" href="main?action=EmployerUploadJobPost">Đăng tuyển</a></li>
                         </ul>
                     </div>
                 </div>
@@ -235,11 +235,22 @@
             </div>
 
             <section style="padding: 50px 0 ;min-height: 85vh">
-                <div class="container">
-                    <c:if test="${empty requestScope.MY_JOB_POST_DONE}">
-                        <h1 class="text-center">${ERROR}</h1>
-                    </c:if>
 
+                <div class="container">
+                    
+                    <div class="row mb-3 justify-content-end">
+                        <div class="col-md-3 ">
+                            <form action="selectJob">
+                                <select name="Job" class="form-select fw-bold" onchange="this.form.submit()" aria-label="Default select example">
+                                    <option value="doing" ${requestScope.SELECTED == 1 ? 'selected' : ''}>Đang thực hiện</option>
+                                    <option value="done" ${requestScope.SELECTED == 2 ? 'selected' : ''}>Đã hoàn tất</option>
+                                </select>
+                            </form>
+                        </div>
+                    </div>
+                   
+                    <h1 class="text-center">${ERROR}</h1>
+                    
                     <c:if test="${!empty requestScope.MY_JOB_POST_DONE}">
                         <c:forEach items="${requestScope.MY_JOB_POST_DONE}" var="myJobPostDone">
                             <div class="card w-100">
@@ -267,7 +278,7 @@
                                     </div>
 
                                     <div class="row justify-content-end">
-                                        <a href="#" class="col-md-2 btn btn-primary gradient-custom-2">Xem chi tiết</a>
+                                        <a href="main?action=MyJobPostDoneDetail&jobId=${myJobPostDone.jobId}" class="col-md-2 btn btn-primary gradient-custom-2">Xem chi tiết</a>
                                     </div>
                                 </div>
                             </div>
@@ -355,10 +366,10 @@
         <script src="assets/js/theme.js"></script>
         <script src="assets/js/extention/choices.js"></script>
         <script>
-            const choices = new Choices('[data-trigger]',
-                    {
-                        searchEnabled: false
-                    });
+                                const choices = new Choices('[data-trigger]',
+                                        {
+                                            searchEnabled: false
+                                        });
 
         </script>
         <link

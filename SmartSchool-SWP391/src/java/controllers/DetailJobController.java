@@ -55,15 +55,21 @@ public class DetailJobController extends HttpServlet {
             String jobId = request.getParameter("jobId");
             JobPostDAO dao = new JobPostDAO();
             JobPostDTO postJob = dao.getJobInformation(jobId);
+            if("doing".equals(postJob.getProcess()) || "done".equals(postJob.getProcess())){
+                request.setAttribute("ISDONE", 1);
+            }else {
             JobPostQuestionDAO questionDao = new JobPostQuestionDAO();
             List<JobPostQuestionDTO> listQuestion = questionDao.getQuestionJobPost(jobId);
             String userId = request.getParameter("userId");
             UserDAO udao = new UserDAO();
             UserDTO user = udao.GetEmployerInfor(userId);
+            List<JobPostDTO> list3Job = dao.getTop3JobPostByCategory(postJob.getJobCategoryId(), postJob.getJobId());
             request.setAttribute("USERINFOR", user);
             request.setAttribute("LISTQUESTION", listQuestion);
             request.setAttribute("JOBDETAIL", postJob);
-
+            request.setAttribute("ISDONE", 2);
+            request.setAttribute("LIST3JOB", list3Job);
+            }
         } catch (SQLException ex) {
             Logger.getLogger(SearchJobPostController.class.getName()).log(Level.SEVERE, null, ex);
         } finally {

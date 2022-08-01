@@ -83,10 +83,11 @@
                         </a>
                         <ul id="ddmenu_3" class="collapse dropdown-nav">
                             <li>
-                                <a href="listPostToApprove"> Lost & Found Posts </a>
+
+                                <a href="main?action=ApprovePost"> Lost & Found Posts </a>
                             </li>
                             <li>
-                                <a href="approveJobPost" class="active"> Freelance Job Posts </a>
+                                <a href="main?action=ApproveJobPost" class="active"> Freelance Job Posts </a>
                             </li>
                         </ul>
                     </li>

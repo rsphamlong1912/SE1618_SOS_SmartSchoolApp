@@ -5,35 +5,62 @@
  */
 package controllers;
 
+import applyJob.ApplyJobDAO;
+import applyJob.ApplyJobDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import jobPost.JobPostDAO;
+import jobPost.JobPostDTO;
+import jobPostAnswer.JobPostAnswerDAO;
+import jobPostAnswer.JobPostAnswerDTO;
 
 /**
  *
  * @author TrinhNgocBao
  */
-@WebServlet(name = "SetJobApproveDoneController", urlPatterns = {"/setJobApproveDone"})
-public class SetJobApproveDoneController extends HttpServlet {
+@WebServlet(name = "MyJobPostDoneDetailController", urlPatterns = {"/myJobPostDoneDetail"})
+public class MyJobPostDoneDetailController extends HttpServlet {
 
- 
+    private static final String ERROR = "EmployerJobProcessDetail.jsp";
+    private static final String MY_JOB_POST_DONE_DETAIL_PAGE = "EmployerJobDoneDetail.jsp";
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = "";
+                String url = ERROR;
         try {
-           String jobId = request.getParameter("jobId");
-           JobPostDAO dao = new JobPostDAO();
-           dao.SetJobApproveDone(jobId);
-           url = "main?action=MyJobPostDoneDetail&jobId="+jobId;
+            String jobId = request.getParameter("jobId");
+            JobPostDAO dao = new JobPostDAO();
+            JobPostDTO postJob = dao.getJobInformationDone(jobId);
+            ApplyJobDAO jDao = new ApplyJobDAO();
+            List<ApplyJobDTO> listUserDoing = jDao.getListUserDoing(jobId);
+            ArrayList<JobPostAnswerDTO> listAnswer = new ArrayList<>();
+            JobPostAnswerDAO aDao = new JobPostAnswerDAO();
+            for (ApplyJobDTO a : listUserDoing) {
+                listAnswer.addAll(aDao.getAnswerJobWaiting(a.getJobId(), a.getUserId()));
+            }
+            
+            if (listUserDoing.isEmpty()) {
+                request.setAttribute("JOBDETAIL", postJob);
+                request.setAttribute("ERROR", "(Chưa có ứng viên)");
+                url = MY_JOB_POST_DONE_DETAIL_PAGE;
+            }else {
+                request.setAttribute("JOBDETAIL", postJob);
+                request.setAttribute("USER_DOING", listUserDoing);
+                request.setAttribute("USER_ANSWER_WAITING", listAnswer);
+                url = MY_JOB_POST_DONE_DETAIL_PAGE;
+            }
+            request.setAttribute("AMOUNT_FREELANCER", postJob.getAmountFreelancer());
         } catch (Exception e) {
         } finally {
-           response.sendRedirect(url);
+            request.getRequestDispatcher(url).forward(request, response);
         }
     }
 

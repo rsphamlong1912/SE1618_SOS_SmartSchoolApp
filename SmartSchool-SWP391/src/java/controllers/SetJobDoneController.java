@@ -18,10 +18,10 @@ import jobPost.JobPostDAO;
  *
  * @author TrinhNgocBao
  */
-@WebServlet(name = "SetJobApproveDoneController", urlPatterns = {"/setJobApproveDone"})
-public class SetJobApproveDoneController extends HttpServlet {
+@WebServlet(name = "SetJobDoneController", urlPatterns = {"/setJobDone"})
+public class SetJobDoneController extends HttpServlet {
 
- 
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -29,7 +29,7 @@ public class SetJobApproveDoneController extends HttpServlet {
         try {
            String jobId = request.getParameter("jobId");
            JobPostDAO dao = new JobPostDAO();
-           dao.SetJobApproveDone(jobId);
+           dao.SetJobDone(jobId);
            url = "main?action=MyJobPostDoneDetail&jobId="+jobId;
         } catch (Exception e) {
         } finally {

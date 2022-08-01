@@ -7,33 +7,67 @@ package controllers;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import jobPost.JobPostDAO;
+import jobPost.JobPostDTO;
+import user.UserDTO;
 
 /**
  *
  * @author TrinhNgocBao
  */
-@WebServlet(name = "SetJobApproveDoneController", urlPatterns = {"/setJobApproveDone"})
-public class SetJobApproveDoneController extends HttpServlet {
+@WebServlet(name = "SelectJobController", urlPatterns = {"/selectJob"})
+public class SelectJobController extends HttpServlet {
 
- 
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = "";
         try {
-           String jobId = request.getParameter("jobId");
-           JobPostDAO dao = new JobPostDAO();
-           dao.SetJobApproveDone(jobId);
-           url = "main?action=MyJobPostDoneDetail&jobId="+jobId;
+            HttpSession session = request.getSession();
+            UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
+            String userId = loginUser.getUserId();
+            String job = request.getParameter("Job");
+            JobPostDAO dao = new JobPostDAO();
+            List<JobPostDTO> list = dao.getMyJobPostDoingDone(userId);
+            List<JobPostDTO> listDoing = new ArrayList<>();
+            List<JobPostDTO> listDone = new ArrayList<>();
+            if ("doing".equals(job)){
+                for(JobPostDTO doing: list){
+                    if("doing".equals(doing.getProcess())){
+                        listDoing.add(doing);
+                    }
+                }               
+                request.setAttribute("MY_JOB_POST_DONE", listDoing);
+                request.setAttribute("SELECTED", 1);
+                if(listDoing.isEmpty()){
+                    request.setAttribute("ERROR", "Chưa có công việc nào");
+                }
+                
+            }else if ("done".equals(job)){
+                for(JobPostDTO done: list){
+                    if("done".equals(done.getProcess())){
+                        listDone.add(done);
+                    }
+                }
+                request.setAttribute("MY_JOB_POST_DONE", listDone);
+                request.setAttribute("SELECTED", 2); 
+                if(listDone.isEmpty()){
+                    request.setAttribute("ERROR", "Chưa có công việc nào");
+                }
+            }
+            
+            
         } catch (Exception e) {
         } finally {
-           response.sendRedirect(url);
+            request.getRequestDispatcher("EmployerJobDone.jsp").forward(request, response);
         }
     }
 

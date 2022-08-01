@@ -52,7 +52,7 @@
             }
 
             .shadow {
-/*                box-shadow: rgba(67, 71, 85, 0.27) 0px 0px 0.25em, rgba(90, 125, 188, 0.05) 0px 0.25em 1em !important;*/
+                /*                box-shadow: rgba(67, 71, 85, 0.27) 0px 0px 0.25em, rgba(90, 125, 188, 0.05) 0px 0.25em 1em !important;*/
             }
 
             .card {
@@ -133,7 +133,7 @@
                         <ul class="navbar-nav ms-auto pt-2 pt-lg-0 font-base align-items-lg-center align-items-start">
                             <li class="nav-item px-3"><a class="nav-link fw-bold" aria-current="page" href="employerhome">TRANG CHỦ</a>
                             </li>
-                            <li class="nav-item px-3"><a class="nav-link fw-bold" aria-current="page" href="#phanloai">DASHBOARD</a>
+                            <li class="nav-item px-3"><a class="nav-link fw-bold" aria-current="page" href="#">DASHBOARD</a>
                             </li>
                             <li class="nav-item px-3 navbar-dropdown dropdown-user dropdown">
                                 <a class="btn btn-outline-light order-1 order-lg-0 fw-bold nav-link hide-arrow" id="nameLogin" href=""
@@ -267,7 +267,7 @@
                                 </li>
                                 <!--/ User -->
                             </c:if>
-                                <li class="nav-item px-3"><a class="btn btn-light order-1 order-lg-0 fw-bold" href="main?action=EmployerUploadJobPost">Đăng tuyển</a></li>
+                            <li class="nav-item px-3"><a class="btn btn-light order-1 order-lg-0 fw-bold" href="main?action=EmployerUploadJobPost">Đăng tuyển</a></li>
                         </ul>
                     </div>
                 </div>
@@ -279,7 +279,7 @@
                     <div class="row">
                         <div class="col-lg-12">
 
-                            <a class="text-decoration-none" href="main?action=MyJobPostProcess"><i class="fa fa-chevron-left"></i> Việc đang tuyển</a>
+                            <a class="text-decoration-none" href="main?action=MyJobPostDone"><i class="fa fa-chevron-left"></i> Việc tuyển xong</a>
 
                         </div>
                     </div>
@@ -328,7 +328,7 @@
                                                     người</span></h6>
                                         </div>
                                         <div class="d-flex align-items-center mb-5">
-                                            <h6>Thời gian công việc dự kiến: <span class="fw-medium" style="font-size: 14px;">
+                                            <h6>Thời gian công việc: <span class="fw-medium" style="font-size: 14px;">
                                                     <c:choose> 
                                                         <c:when test="${JOBDETAIL.timeJob==1}">
                                                             Ít hơn 1 tháng
@@ -351,10 +351,10 @@
                             <div class="row">
                                 <div class="card overflow-hidden shadow ">
                                     <div class="card-header bg-white pt-4 pl-10 pr-10 border-bottom d-md-flex" style="padding-bottom: 1.4rem;">
-                                        <h5 class="">ỨNG VIÊN CHỜ PHÊ DUYỆT ${ERROR}</h5>
+                                        <h5 class="">QUẢN LÝ FREELANCER ${ERROR}</h5>
                                     </div>
-                                    <c:forEach items="${requestScope.USER_WAITING}" var="userWaiting" varStatus="count">
-                                        <div id="${userWaiting.userId}">
+                                    <c:forEach items="${requestScope.USER_DOING}" var="userDoing" varStatus="count">
+                                        <div id="${userDoing.userId}">
                                             <div class="card-body">
                                                 <div class="row">
                                                     <div class="col-lg-12 col-md-12">
@@ -362,15 +362,15 @@
                                                             <div class="card-body container">
                                                                 <div class="row mb-3">
                                                                     <div class="col-md-1"><img
-                                                                            src="${pageContext.servletContext.contextPath}/avatar?userId=${userWaiting.userId}"
+                                                                            src="${pageContext.servletContext.contextPath}/avatar?userId=${userDoing.userId}"
                                                                             alt class="" style="width: 50px; height: 50px; border-radius: 50%;"/>
                                                                     </div>
                                                                     <div class="col-md-8" style="padding-left: 0px;">
                                                                         <div class="d-flex flex-column flex-lg-row justify-content-between">
-                                                                            <h5 class="fw-medium text-truncate">${userWaiting.fullname}</h5>
+                                                                            <h5 class="fw-medium text-truncate">${userDoing.fullname}</h5>
                                                                             <span class="fs-1 fw-medium d-flex"></span>
                                                                         </div>
-                                                                        <div class="d-flex align-items-center"><span class="fw-medium" style="font-size: 14px;"> Ứng viên</span>
+                                                                        <div class="d-flex align-items-center"><span class="fw-medium" style="font-size: 14px;"> Freelancer</span>
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-md-3 text-end">
@@ -392,7 +392,7 @@
                                                                             </div>
                                                                             <div class="modal-body" style="padding: 1.5rem;">
                                                                                 <c:forEach items="${requestScope.USER_ANSWER_WAITING}" var="answerWaiting">
-                                                                                    <c:if test="${userWaiting.userId == answerWaiting.userId}">
+                                                                                    <c:if test="${userDoing.userId == answerWaiting.userId}">
                                                                                         <div class="mb-4">
                                                                                             <label for="formGroupExampleInput" class="form-label fw-bold">${answerWaiting.question}</label>                                                                                    
                                                                                             <input type="text" class="form-control" id="formGroupExampleInput" name="answer" value="${answerWaiting.answer}" readonly="">
@@ -410,25 +410,34 @@
                                                                 <div class="d-flex align-items-center mb-3"> <span class="fw-medium" style="font-size: 14px;"><i class="fa fa-user" aria-hidden="true"></i> Thông tin liên hệ</span>
                                                                 </div>
                                                                 <div class="row">
-                                                                    <div class="col-md-6 d-flex align-items-center mb-2"> <h6>Số điện thoại: <span class="fw-medium" style="font-size: 14px;"> ${userWaiting.phone}</span></h6>
+                                                                    <div class="col-md-6 d-flex align-items-center mb-2"> <h6>Số điện thoại: <span class="fw-medium" style="font-size: 14px;"> ${userDoing.phone}</span></h6>
                                                                     </div>
-                                                                    <div class="col-md-6 d-flex align-items-center mb-2"> <h6>Email: <span class="fw-medium" style="font-size: 14px;"> ${userWaiting.email} </span></h6>
+                                                                    <div class="col-md-6 d-flex align-items-center mb-2"> <h6>Email: <span class="fw-medium" style="font-size: 14px;"> ${userDoing.email} </span></h6>
                                                                     </div>
                                                                 </div>
-                                                                <div class="d-flex align-items-center mb-2"> <h6>Facebook: <span class="fw-medium" style="font-size: 14px;"> <a class="text-decoration-none" href="https://www.facebook.com/ngocbao159/">${userWaiting.facebook}</a></span></h6>
+                                                                <div class="d-flex align-items-center mb-2"> <h6>Facebook: <span class="fw-medium" style="font-size: 14px;"> <a class="text-decoration-none" href="${userDoing.facebook}">${userDoing.facebook}</a></span></h6></div>
+                                                                <div class="d-flex align-items-center mb-2"> 
+                                                                    <h6>Trạng thái:
+                                                                        <c:choose>
+                                                                            <c:when test="${userDoing.status == 'doing'}">
+                                                                                <span id="UserJobStatus" class="fw-medium fw-bold text-success" style="font-size: 14px; ">Đang làm</span>
+                                                                            </c:when>
+                                                                            <c:when test="${userDoing.status == 'done'}">
+                                                                                <span id="UserJobStatus" class="fw-medium fw-bold text-danger" style="font-size: 14px; ">Đã hoàn thành</span>
+                                                                            </c:when>
+                                                                        </c:choose>
+                                                                        <!--                                                                        <span id="UserJobStatus" class="fw-medium" style="font-size: 14px;">Đang làm</span>-->
+                                                                    </h6>
                                                                 </div>
-                                                                <div class="d-flex align-items-center justify-content-end mb-2">
-                                                                    <button onclick="ApproveUser(this.getAttribute('data-applyJobId'), this.getAttribute('data-userId'), this.getAttribute('data-jobId'), this.getAttribute('data-buttonValue'))" 
-                                                                            data-applyJobId="${userWaiting.applyJobId}"
-                                                                            data-userId="${userWaiting.userId}"
-                                                                            data-jobId="${JOBDETAIL.jobId}"
-                                                                            data-buttonValue="denied" type="button" class="col-md-2 btn btn-outline-primary btn-sm mt-2">Từ chối</button>
-                                                                    <button onclick="ApproveUser(this.getAttribute('data-applyJobId'), this.getAttribute('data-userId'), this.getAttribute('data-jobId'), this.getAttribute('data-buttonValue'))" 
-                                                                            data-applyJobId="${userWaiting.applyJobId}"
-                                                                            data-userId="${userWaiting.userId}"
-                                                                            data-jobId="${JOBDETAIL.jobId}"
-                                                                            data-buttonValue="approved" type="button" class="col-md-2 btn btn-primary gradient-custom-2 btn-sm ms-3 mt-2">Phê duyệt</button>
-                                                                </div>                                            
+                                                                <div class="row mb-3 justify-content-end">
+                                                                    <div class="col-md-3">                                                                       
+                                                                        <select class="form-select fw-bold" onchange="changeStatus(this.getAttribute('data-applyJobId'), this)" 
+                                                                                data-applyJobId="${userDoing.applyJobId}">
+                                                                            <option value="doing" ${userDoing.status == 'doing' ? 'selected' : ''}>Đang làm</option>
+                                                                            <option value="done" ${userDoing.status == 'done' ? 'selected' : ''}>Đã hoàn thành</option>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -453,26 +462,36 @@
                                         <div class="content-detail mb-3">
 
                                             <div class="d-flex align-items-center">
-                                                <h6 style="line-height: 2.5;">Trạng thái công việc: <span class="fw-medium fw-bold"
-                                                                                                          style="font-size: 14px; color:#0d6efd;"> Đang tuyển</span></h6>
+                                                <h6 style="line-height: 2.5;">Trạng thái công việc:
+                                                    <c:choose>
+                                                        <c:when test="${JOBDETAIL.process == 'doing'}">
+                                                            <span class="fw-medium text-success fw-bold" style="font-size: 14px; "> Đang thực hiện</span>
+                                                        </c:when>
+                                                        <c:when test="${JOBDETAIL.process == 'done'}">
+                                                            <span class="fw-medium text-danger fw-bold" style="font-size: 14px; "> Đã hoàn tất</span>
+                                                        </c:when>
+                                                    </c:choose>
+                                                </h6>
                                             </div>
 
                                             <div class="d-flex align-items-center">
-                                                <h6 style="line-height: 2.5;">Số người đã tuyển: <span id="amountFreelancer" class="fw-medium" style="font-size: 14px; ">${requestScope.AMOUNT_FREELANCER}</span></h6>
+                                                <h6 style="line-height: 2.5;">Tổng Freelancer: <span id="amountFreelancer" class="fw-medium" style="font-size: 14px; ">${requestScope.AMOUNT_FREELANCER}</span></h6>
                                             </div>
 
                                         </div>
 
                                     </div>
-                                    <div class="row justify-content-center text-center">
-                                        <h6 style="line-height: 2.5;">Chuyển trạng thái công việc </h6>
-                                        <div class="col-md-7 contact ">
-                                            <a href="" class="btn btn-success btn-sm w-100" 
-                                               data-bs-toggle="modal" data-bs-target="#ModalConfirm"
-                                               style="background: linear-gradient(to right,#00B4DB, #0083B0 ); border:none;">
-                                                <i class="fa fa-arrow-right" aria-hidden="true"></i> Bắt đầu công việc </a>
+                                    <c:if test="${JOBDETAIL.process == 'doing'}">
+                                        <div class="row justify-content-center text-center">
+                                            <h6 style="line-height: 2.5;">Chuyển trạng thái công việc </h6>
+                                            <div class="col-md-8 contact ">
+                                                <a href="" class="btn btn-success btn-sm w-100" 
+                                                   data-bs-toggle="modal" data-bs-target="#ModalConfirm"
+                                                   style="background: linear-gradient(to right, #99df20, #009245 ); border:none;">
+                                                    <i class="fa fa-check" aria-hidden="true"></i> Hoàn tất công việc </a>
+                                            </div>
                                         </div>
-                                    </div>
+                                    </c:if>
                                     <!-- Modal -->
                                     <div class="modal fade" id="ModalConfirm" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 
@@ -481,12 +500,12 @@
                                             <div class="modal-content">
 
                                                 <div class="modal-header gradient-custom-2 justify-content-center">
-                                                    <h5 class="modal-title" id="exampleModalLabel" style="color: #ffffff;">Bạn có chắc chuyển trạng thái công việc ?</h5>
+                                                    <h5 class="modal-title" id="exampleModalLabel" style="color: #ffffff;">Bạn có chắc công việc đã hoàn tất?</h5>
                                                 </div>
 
                                                 <div class="modal-footer justify-content-center">
                                                     <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Đóng</button>
-                                                    <a href="main?action=SetJobApproveDone&jobId=${JOBDETAIL.jobId}" type="button" class="btn btn-primary gradient-custom-2">Chuyển</a>
+                                                    <a href="main?action=SetJobDone&jobId=${JOBDETAIL.jobId}" type="button" class="btn btn-primary gradient-custom-2">Xác nhận</a>
                                                 </div>
 
                                             </div>
@@ -496,57 +515,6 @@
                             </div>
                         </div>
                         </section>
-
-                        <!-- Modal -->
-                        <div class="modal fade" id="ModalJobFullAmount" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered modal-lg">
-                                <div class="modal-content">
-                                    <div class="modal-header gradient-custom-2 justify-content-center">
-                                        <h5 class="modal-title" id="exampleModalLabel" style="color: #ffffff;">Đã đủ số lượng cần tuyển, Bạn có chắc muốn tuyển thêm ?</h5>
-                                    </div>
-                                    <div class="modal-footer justify-content-center">
-                                        <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Đóng</button>
-                                        <button type="button" type="button" class="btn btn-primary gradient-custom-2" data-bs-target="#ModalSetAmountJob" data-bs-toggle="modal" data-bs-dismiss="modal">Tuyển</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Modal -->
-                        <div class="modal fade" id="ModalSetAmountJob" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered">
-                                <div class="modal-content">
-                                    <form action="main" onsubmit="return validateAmount()" method="POST">
-                                        <div class="modal-header gradient-custom-2 justify-content-center">
-                                            <h5 class="modal-title" id="exampleModalLabel" style="color: #ffffff;">Nhập lại số Freelancer cần tuyển</h5>
-                                        </div>
-                                        <div class="modal-body" style="padding: 1.5rem;">
-                                            <input type="hidden" class="form-control" id="formGroupExampleInput" name="jobId" value="${JOBDETAIL.jobId}">
-                                            <input type="number" class="form-control" id="newAmount" name="newAmount" value="">
-                                            <small id="warningValidate" style="color: red"></small>
-                                        </div>
-                                        <div class="modal-footer justify-content-center">
-                                            <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Hủy</button>
-                                            <button type="submit" name="action" value="UpdateNewAmount" class="btn btn-primary gradient-custom-2">Xác nhận</button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Modal -->
-                        <div class="modal fade" id="ModalFullJob" tabindex="-1" aria-labelledby="exampleModalLabel" data-bs-backdrop="false" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered">
-                                <div class="modal-content modal-shadow">
-                                    <div class="modal-header gradient-custom-2 justify-content-center">
-                                        <h5 class="modal-title" id="exampleModalLabel" style="color: #ffffff;">Freelancer đã nhận tối đa công việc !</h5>
-                                    </div>
-                                    <div class="modal-footer justify-content-center">
-                                        <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Đóng</button>     
-                                    </div>
-                                </div>
-                            </div>
-                        </div>  
 
                         <!-- ============================================-->
                         <!-- <section> begin ============================-->
@@ -624,50 +592,36 @@
                         <!--- AJAX -->
                         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
                         <script>
-                                        var newAmount;
-                                        var oldAmount = ${requestScope.JOBDETAIL.amount};
-                                        function validateAmount() {
-                                            if (document.getElementById("newAmount").value.length === 0) {
-                                                document.getElementById("warningValidate").textContent = "Vui lòng nhập!"
-                                                return false;
-                                            } else if (document.getElementById("newAmount").value < oldAmount) {
-                                                document.getElementById("warningValidate").textContent = "Không thể cập nhật số ứng viên ít hơn ban đầu!"
-                                                return false;
-                                            sss}
-                                            return true;
-                                        }
-                                        function ApproveUser(applyJobId, userId, jobId, buttonValue) {
+                                                                            function changeStatus(applyJobId, selectValue) {
 
-                                            $.ajax({
-                                                url: "/approveUserWaiting",
-                                                type: "get",
-                                                data: {
-                                                    applyJobId: applyJobId,
-                                                    userId: userId,
-                                                    jobId: jobId,
-                                                    buttonValue: buttonValue
+                                                                                $.ajax({
+                                                                                    url: "/changeUserStatusJob",
+                                                                                    type: "get",
+                                                                                    data: {
+                                                                                        applyJobId: applyJobId,
+                                                                                        selectValue: selectValue.value
 
-                                                },
-                                                success: function (data) {
+                                                                                    },
+                                                                                    success: function (data) {
 
-                                                    if ('UserFullJob' === data) {
-                                                        $("#ModalFullJob").modal("show");
-                                                    } else if ('JobFullAmount' === data) {
-                                                        $("#ModalJobFullAmount").modal("show");
-                                                    } else {
-                                                        var row = document.getElementById(userId);
-                                                        row.remove();
-                                                        var amountF = document.getElementById("amountFreelancer");
+                                                                                        if ('Done' === data) {
+                                                                                            var row = document.getElementById("UserJobStatus");
+                                                                                            row.classList.remove("text-success");
+                                                                                            row.classList.add("text-danger");
+                                                                                            row.textContent = "Đã hoàn thành";
+                                                                                        } else if ('Doing' === data) {
+                                                                                            var row = document.getElementById("UserJobStatus");
+                                                                                            row.classList.remove("text-danger");
+                                                                                            row.classList.add("text-success");
+                                                                                            row.textContent = "Đang làm";
+                                                                                        }
 
-                                                        amountF.textContent = data;
-                                                    }
-
-                                                },
-                                                error: function (xhr) {
-                                                    //Do Something to handle error
-                                                }
-                                            });
-                                        }
+                                                                                    },
+                                                                                    error: function (xhr) {
+                                                                                        //Do Something to handle error
+                                                                                    }
+                                                                                });
+                                                                            }
                         </script>
                         <!-- ===============================================-->
                         <!--    JavaScripts-->
@@ -682,10 +636,10 @@
 
 
                         <script>
-                                        const choices = new Choices('[data-trigger]',
-                                                {
-                                                    searchEnabled: false
-                                                });
+                                                                            const choices = new Choices('[data-trigger]',
+                                                                                    {
+                                                                                        searchEnabled: false
+                                                                                    });
 
                         </script>
                         <link
