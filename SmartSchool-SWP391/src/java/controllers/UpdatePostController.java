@@ -5,60 +5,51 @@
  */
 package controllers;
 
-import category.CategoryDAO;
-import category.CategoryDTO;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 import post.PostDAO;
 import post.PostDTO;
-import user.UserDAO;
-import user.UserDTO;
 
 /**
  *
- * @author SE150888 Pham Ngoc Long
+ * @author TQK
  */
-@WebServlet(name = "PostDetailController", urlPatterns = {"/postDetail"})
-public class PostDetailController extends HttpServlet {
+@WebServlet(name = "UpdatePostController", urlPatterns = {"/updatePost"})
+public class UpdatePostController extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    private static final String ERROR = "postDetail.jsp";
-    private static final String POST_DETAIL_PAGE = "postDetail.jsp";
+    private static final String ERROR = "PostDetailController";
+    private static final String SUCCESS = "PostDetailController";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = POST_DETAIL_PAGE;
+        String url = ERROR;
         try {
 //            HttpSession session = request.getSession();
 //            UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
-            String postId = request.getParameter("postId");
-            PostDAO pdao = new PostDAO();
-            PostDTO post = pdao.readPost(postId);
-            String userId = post.getUserId();
-            UserDAO udao = new UserDAO();
-            UserDTO user = udao.checkAccountExist(userId);
-            request.setAttribute("POST", post);
-            request.setAttribute("USER_POST", user);
-            CategoryDAO cdao = new CategoryDAO();
-            List<CategoryDTO> listAllCategory = cdao.getAllCategory();
-            request.setAttribute("LISTALLCATEGORY", listAllCategory);
+//            String userId = loginUser.getUserId();
+            int postId = Integer.parseInt(request.getParameter("postId"));
+            InputStream inputStream = null;
+            Part filePart = request.getPart("postImg");
+            if (filePart != null) {
+                inputStream = filePart.getInputStream();
+            }
+            String title = request.getParameter("title");
+            String description = request.getParameter("description");
+            String type = request.getParameter("type");
+            PostDAO dao = new PostDAO();
+            dao.updatePost(postId, inputStream, description, type, title);
+            url = SUCCESS;
+
         } catch (Exception e) {
-            log("Error at LoginController:" + e.toString());
+            log("Error at DeletePostController: " + e.toString());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }

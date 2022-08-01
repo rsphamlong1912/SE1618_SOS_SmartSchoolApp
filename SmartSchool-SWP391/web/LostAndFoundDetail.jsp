@@ -386,37 +386,6 @@
                                                     </div>
                                                 </div>
                                             </c:forEach>
-                                            <!--                                            <div class="col-lg-12 col-md-12 mb-5">
-                                                                                            <div class="card overflow-hidden shadow shadow-hover" id="hoverCard" style="max-height: 200px;">
-                                                                                                <div class="row g-0">
-                                                                                                    <div class="col-md-4 relative-image">
-                                                                                                        <img src="https://anhdephd.vn/wp-content/uploads/2022/03/anh-dai-dien-nu-deo-kinh-chat-600x600.jpg" class="img-fluid" alt=""/>
-                                                                                                    </div>
-                                            
-                                                                                                    <div class="col-md-8">
-                                                                                                        <div class="card-body">
-                                                                                                            <div class="d-flex flex-column flex-lg-row justify-content-between mb-2">
-                                                                                                                <h5 class="text-secondary fw-medium text-truncate"><a
-                                                                                                                        class="link-901 text-decoration-none stretched-link" href="#">Mất cái ZFOLD3 ròi</a></h5><span class="fs-1 fw-medium"></span>
-                                                                                                            </div>
-                                                                                                            <div class="d-flex align-items-center mb-2"> <span
-                                                                                                                    class="fw-bold" style="font-size: 15px;">Đồ thất lạc</span>
-                                                                                                            </div>
-                                                                                                            <div class="d-flex align-items-center mb-5"> 
-                                                                                                                <span class="fw-bold" style="font-size: 14px;">Loại: 
-                                                                                                                    <span class="fw-medium" style="font-size: 14px;">Điện thoại</span>                                                                        
-                                                                                                                </span>
-                                                                                                            </div>
-                                                                                                            <div class="d-flex align-items-center"> 
-                                                                                                                <img src="assets/img/dest/clock.svg" style="margin-right: 5px;" width="15" alt="navigation" />
-                                                                                                                <span class="fw-medium" style="font-size: 14px;">1 giờ trước
-                                                                                                                </span>
-                                                                                                            </div>
-                                                                                                        </div>
-                                                                                                    </div>
-                                                                                                </div>
-                                                                                            </div>
-                                                                                        </div>-->
                                         </div>
                                     </div>                           
                                 </div>                                                       
@@ -488,7 +457,7 @@
                             <div class="modal-dialog modal-dialog-centered modal-xl">
                                 <div class="modal-content">
                                     <div class="modal-body" style="padding: 1.5rem;">  
-                                        <img src="https://haycafe.vn/wp-content/uploads/2021/12/hinh-anh-avatar-dep-cho-con-gai-dai-dien-Facebook-Zalo-Tiktok.jpg" width="100%" height="100%"  alt=""/>
+                                        <img src="${pageContext.servletContext.contextPath}/item?postId=${requestScope.POST.postId}" width="100%" height="100%"  alt=""/>
                                     </div>
                                 </div>
                             </div>
