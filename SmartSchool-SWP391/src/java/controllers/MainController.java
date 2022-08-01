@@ -127,8 +127,13 @@ public class MainController extends HttpServlet {
     private static final String MY_JOB_POST_DONE_DETAIL = "MyJobPostDoneDetail";
     private static final String MY_JOB_POST_DONE_DETAIL_CONTROLLER = "myJobPostDoneDetail";
     
+
+    private static final String EMPLOYER_DASHBOARD = "EmployerDashboard";
+    private static final String EMPLOYER_DASHBOARD_CONTROLLER = "employerDashboard";
+
     private static final String SET_JOB_DONE = "SetJobDone";
     private static final String SET_JOB_DONE_CONTROLLER = "setJobDone";
+
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -283,6 +288,10 @@ public class MainController extends HttpServlet {
                 url = MY_JOB_POST_DONE_DETAIL_CONTROLLER;
 
             }
+
+            if(EMPLOYER_DASHBOARD.equals(action)) {
+                url = EMPLOYER_DASHBOARD_CONTROLLER;
+
             if (SET_JOB_DONE.equals(action)) {
                 url = SET_JOB_DONE_CONTROLLER;
 

@@ -21,6 +21,11 @@ var salary = document.querySelector("#salary");
 var question = document.querySelector("#question");
 var form = document.querySelector('form')
 
+//Lost and Found Post
+var titlePost = document.querySelector("#title");
+var descriptionPost = document.querySelector("#descriptionPost");
+var postImg = document.querySelector("#postImg");
+
 
 function showError(input, message) {
     let parent = input.parentElement;
@@ -200,6 +205,14 @@ function validateEmployerUpload() {
 //    questionm.forEach(element => console.log(element));
     if (isEmptyError || isNegative || isNegativeSalary || isEmptyQuestionM || isEmptyQuestionM2 || isEmptyQuestionM3 ||
             isEmptyQuestionM4|| isEmptyQuestionM5|| isEmptyQuestionM6||isEmptyQuestionM7||isEmptyQuestionM8 || isEmptyQuestionM9 || isEmptyQuestionM10) {
+        return false
+    }
+    return true
+}
+
+function validatePost() {
+    let isEmpty = checkEmptyError([titlePost, descriptionPost, postImg])
+    if (isEmpty ) {
         return false
     }
     return true
