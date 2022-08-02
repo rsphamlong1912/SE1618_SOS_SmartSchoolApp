@@ -87,7 +87,7 @@
                             </li>
                             <li>
 
-                                <a href="approveJobPost" class="active"> Freelance Job Posts </a>
+                                <a href="approveJobPost" class=""> Freelance Job Posts </a>
                             </li>
                         </ul>
                     </li>
