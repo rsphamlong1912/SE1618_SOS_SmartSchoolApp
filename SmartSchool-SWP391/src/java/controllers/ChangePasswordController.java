@@ -34,13 +34,20 @@ public class ChangePasswordController extends HttpServlet {
      */
     private static final String ERROR = "login.jsp";
     private static final String CHANGE_PASSWORD_PAGE = "changePassword.jsp";
+    private static final String CHANGE_PASSWORD_FREELANCE_PAGE = "changePasswordFreelance.jsp";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = CHANGE_PASSWORD_PAGE;
         try {
-
+            HttpSession session = request.getSession();
+              String urlBranch =(String) session.getAttribute("urlBranch");
+              if ("LostFound".equals(urlBranch)) {
+                  url = CHANGE_PASSWORD_PAGE;
+              } else {
+                  url = CHANGE_PASSWORD_FREELANCE_PAGE;
+              }
         } catch (Exception e) {
             log("Error at LoginController:" + e.toString());
         } finally {

@@ -37,9 +37,11 @@ public class UpdateAccountController extends HttpServlet {
             String email = request.getParameter("email");
             String facebook = request.getParameter("facebook");
             String phone = request.getParameter("phone");
+            String compName = request.getParameter("compName");
+            String compAddress = request.getParameter("compAddress");
             UserDAO dao = new UserDAO();
             System.out.println("userID là: " + loginUser.getUserId());
-            dao.updateAccount(loginUser.getUserId(),fullname, email, facebook, phone);
+            dao.updateAccount(loginUser.getUserId(),fullname, email, facebook, phone, compName, compAddress);
             url = SUCCESS;
             request.setAttribute("SUCCESS", "Cập nhật thông tin thành công!");
             

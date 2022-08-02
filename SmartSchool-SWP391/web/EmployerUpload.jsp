@@ -302,7 +302,7 @@
                                     <div class="row">
                                         <div class="col-lg-4 mb-3">
                                             <span class="w-100">
-                                                <input type="radio" class="form-check-input required" required="true" data-rule-required="true" name="timeJob" value="1" id="timeJob_1" data-validate-hide-message="1">
+                                                <input type="radio" class="form-check-input required" required="true" data-rule-required="true" name="timeJob" value="1" id="timeJob_1" data-validate-hide-message="1" checked="">
                                                 <label for="timeJobs_1">
                                                     <span class="inside pt-2 pb-2">
                                                         <span class="d-block fw-500"> Ít hơn 1 tháng</span>
