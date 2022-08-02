@@ -38,28 +38,33 @@ public class SendReportPostController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url="";
-        int postId=Integer.parseInt(request.getParameter("postId"));
-        String reportDetail=request.getParameter("reportDetail");
-        int reportTypeId=Integer.parseInt(request.getParameter("reportTypeId"));
+        String url = "";
+        int postId = Integer.parseInt(request.getParameter("postId"));
+        String reportDetail = request.getParameter("reportDetail");
+        int reportTypeId = Integer.parseInt(request.getParameter("reportTypeId"));
         HttpSession session = request.getSession();
-            UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
-            String userId=request.getParameter("userId");
-            if(loginUser==null){
-                response.sendRedirect("login.jsp");
-            }else{
+        UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
+        String userId = request.getParameter("userId");
+        if (loginUser == null) {
+            response.sendRedirect("login.jsp");
+        } else {
             try {
-                ReportDAO dao=new ReportDAO();
-                dao.sendReport(loginUser.getUserId(), postId, reportTypeId,reportDetail);
-                request.setAttribute("MESSAGE", "Báo cáo thành công");
-                url="main?postId="+postId+"&userId="+userId+"&action=Detail";
+                ReportDAO dao = new ReportDAO();
+                int reportedCount = dao.getTotleReported(loginUser.getUserId(), postId);
+                if (reportedCount >= 1) {
+                    request.setAttribute("ERORMESSAGE", "Tối đa 1 lần báo cáo trên 1 bài viết");
+                } else if (reportedCount < 3) {
+                    dao.sendReport(loginUser.getUserId(), postId, reportTypeId, reportDetail);
+                    request.setAttribute("SUCCESSMESSAGE", "Báo cáo thành công");
+                }
+                url = "main?postId=" + postId + "&userId=" + userId + "&action=Detail";
             } catch (SQLException ex) {
                 Logger.getLogger(SendReportPostController.class.getName()).log(Level.SEVERE, null, ex);
-            }finally{
-//                request.getRequestDispatcher("lostAndFoundDetail").forward(request, response);
-                response.sendRedirect(url);
+            } finally {
+                request.getRequestDispatcher(url).forward(request, response);
+//                response.sendRedirect(url);
             }
-            }
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
