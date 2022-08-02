@@ -328,10 +328,33 @@
                                                     <td>
                                                         <p class="text-sm">${listPost.date}</p>
                                                     </td>
-                                                    <td>
+<!--                                                    <td>
                                                         <div class="action justify-content-center">
                                                             <button  style="font-size:23px;">
                                                                 <a href="main?action=" class="text-gray"><i class="lni lni-eye fw-bold"></i></a>
+                                                            </button>
+                                                        </div>
+                                                    </td>-->
+                                                                                                        <td>
+                                                        <div class="action justify-content-center">
+                                                            <button type="button" class="text-gray" style="font-size:23px;" data-bs-toggle="modal"
+                                                                    data-bs-target="#ModalDetailPost" onclick="truyenDataDetail(this.getAttribute('data-jobIdDe'),
+                                                                                    this.getAttribute('data-titleDe'), this.getAttribute('data-descripDe'),
+                                                                                    this.getAttribute('data-cateName'), this.getAttribute('data-salaryDe'),
+                                                                                    this.getAttribute('data-amountDe'), this.getAttribute('data-timeDe'),
+                                                                                    this.getAttribute('data-avatar'), this.getAttribute('data-name'), this.getAttribute('data-date'))"
+                                                                    data-jobIdDe="${listPost.jobId}" 
+                                                                    data-titleDe="${listPost.title}" 
+                                                                    data-descripDe="${listPost.description}" 
+                                                                    data-cateName="${listPost.jobCategoryName}"
+                                                                    data-salaryDe="${listPost.salary}"
+                                                                    data-amountDe="${listPost.amount}" 
+                                                                    data-timeDe="${listPost.timeJob}" 
+                                                                    data-avatar="${listPost.userId}" 
+                                                                    data-name="${listPost.fullname}" 
+                                                                    data-date="${listPost.date}">
+
+                                                                <i class="lni lni-eye fw-bold"></i>
                                                             </button>
                                                         </div>
                                                     </td>
