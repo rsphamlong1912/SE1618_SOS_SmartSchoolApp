@@ -108,6 +108,7 @@
                   <div class="text-white px-3 py-4 p-md-5 mx-md-4">
                     <h4 class="mb-4">FPT Smart School</h4>
                     <p class="mb-0">Smart School, Smart System, Better Life !</p>
+                    <img src="assets/img/lostfound_login.png" alt="LostFound Img" width="100%">
                   </div>
                 </div>
               </div>
