@@ -418,15 +418,23 @@
                                                                 <div class="d-flex align-items-center mb-2"> <h6>Facebook: <span class="fw-medium" style="font-size: 14px;"> <a class="text-decoration-none" href="https://www.facebook.com/ngocbao159/">${userWaiting.facebook}</a></span></h6>
                                                                 </div>
                                                                 <div class="d-flex align-items-center justify-content-end mb-2">
-                                                                    <button onclick="ApproveUser(this.getAttribute('data-applyJobId'), this.getAttribute('data-userId'), this.getAttribute('data-jobId'), this.getAttribute('data-buttonValue'))" 
+                                                                    <button onclick="ApproveUser(this.getAttribute('data-applyJobId'), this.getAttribute('data-userId'), this.getAttribute('data-jobId'), this.getAttribute('data-buttonValue'), this.getAttribute('data-fullname'),this.getAttribute('data-title'),this.getAttribute('data-jobCategoryName'),this.getAttribute('data-userEmail'))" 
                                                                             data-applyJobId="${userWaiting.applyJobId}"
                                                                             data-userId="${userWaiting.userId}"
                                                                             data-jobId="${JOBDETAIL.jobId}"
+                                                                            data-fullname="${userWaiting.fullname}"
+                                                                            data-title="${JOBDETAIL.title}"
+                                                                            data-jobCategoryName="${JOBDETAIL.jobCategoryName}"
+                                                                            data-userEmail="${userWaiting.email}"
                                                                             data-buttonValue="denied" type="button" class="col-md-2 btn btn-outline-primary btn-sm mt-2">Từ chối</button>
-                                                                    <button onclick="ApproveUser(this.getAttribute('data-applyJobId'), this.getAttribute('data-userId'), this.getAttribute('data-jobId'), this.getAttribute('data-buttonValue'))" 
+                                                                    <button onclick="ApproveUser(this.getAttribute('data-applyJobId'), this.getAttribute('data-userId'), this.getAttribute('data-jobId'), this.getAttribute('data-buttonValue'), this.getAttribute('data-fullname'),this.getAttribute('data-title'),this.getAttribute('data-jobCategoryName'),this.getAttribute('data-userEmail'))" 
                                                                             data-applyJobId="${userWaiting.applyJobId}"
                                                                             data-userId="${userWaiting.userId}"
                                                                             data-jobId="${JOBDETAIL.jobId}"
+                                                                            data-fullname="${userWaiting.fullname}"
+                                                                            data-title="${JOBDETAIL.title}"
+                                                                            data-jobCategoryName="${JOBDETAIL.jobCategoryName}"
+                                                                            data-userEmail="${userWaiting.email}"
                                                                             data-buttonValue="approved" type="button" class="col-md-2 btn btn-primary gradient-custom-2 btn-sm ms-3 mt-2">Phê duyệt</button>
                                                                 </div>                                            
                                                             </div>
@@ -636,7 +644,7 @@
                                             sss}
                                             return true;
                                         }
-                                        function ApproveUser(applyJobId, userId, jobId, buttonValue) {
+                                        function ApproveUser(applyJobId, userId, jobId, buttonValue, fullname, title, jobCategoryName, userEmail) {
 
                                             $.ajax({
                                                 url: "/approveUserWaiting",
@@ -645,7 +653,11 @@
                                                     applyJobId: applyJobId,
                                                     userId: userId,
                                                     jobId: jobId,
-                                                    buttonValue: buttonValue
+                                                    buttonValue: buttonValue,
+                                                    fullname: fullname,
+                                                    title: title,
+                                                    jobCategoryName: jobCategoryName,
+                                                    userEmail: userEmail
 
                                                 },
                                                 success: function (data) {

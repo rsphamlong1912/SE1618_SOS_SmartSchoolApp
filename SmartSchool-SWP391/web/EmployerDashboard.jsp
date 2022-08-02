@@ -419,7 +419,7 @@
                 }
                 return true;
             }
-            function ApproveUser(applyJobId, userId, jobId, buttonValue) {
+            function ApproveUser(applyJobId, userId, jobId, buttonValue, fullname, title, jobCategoryName) {
 
                 $.ajax({
                     url: "/approveUserWaiting",

@@ -46,6 +46,16 @@
         <link href="./assets/css/theme.css" rel="stylesheet" />
         <link href="./assets/css/main.css" rel="stylesheet" />
         <link href="./assets/css/style.css" rel="stylesheet" />
+        <style>
+            .card {
+                border-radius: 0.5rem !important;
+            }
+            .card-img-top {
+                border-top-left-radius: calc(0.5rem - 1px) !important;
+                border-top-right-radius: calc(0.5rem - 1px) !important;
+            }
+
+        </style>
     </head>
 
 
@@ -181,21 +191,21 @@
 
                             <form style="box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px; " action="main">
                                 <div class="inner-form">
-                                        <div class="input-field first-wrap">
-                                            <input id="search" name="searchText" type="text" value="" placeholder="Bạn đang tìm kiếm gì?" />
+                                    <div class="input-field first-wrap">
+                                        <input id="search" name="searchText" type="text" value="" placeholder="Bạn đang tìm kiếm gì?" />
+                                    </div>
+                                    <div class="input-field second-wrap" style="font-family: 'Inter', sans-serif;">
+                                        <div class="input-select">
+                                            <select data-trigger="" name="type">
+                                                <option value="-1" placeholder="">Danh sách</option>
+                                                <option value="0">Đồ thất lạc</option>
+                                                <option value="1">Đồ nhặt được</option>
+                                            </select>
                                         </div>
-                                        <div class="input-field second-wrap" style="font-family: 'Inter', sans-serif;">
-                                            <div class="input-select">
-                                                <select data-trigger="" name="type">
-                                                    <option value="-1" placeholder="">Danh sách</option>
-                                                    <option value="0">Đồ thất lạc</option>
-                                                    <option value="1">Đồ nhặt được</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="input-field third-wrap">
-                                            <button name="action" value="SearchPostInHome" class="btn-search" type="submit">Tìm kiếm</button>
-                                        </div>
+                                    </div>
+                                    <div class="input-field third-wrap">
+                                        <button name="action" value="SearchPostInHome" class="btn-search" type="submit">Tìm kiếm</button>
+                                    </div>
                                 </div>
                             </form>
 
@@ -242,24 +252,24 @@
             <section class="pt-5" id="moinhatduoc">
 
                 <div class="container">
-                    <div class="position-absolute start-100 bottom-0 translate-middle-x d-none d-xl-block ms-xl-n4"><img
+                    <div class="position-absolute start-100 bottom-0 translate-middle-x d-none d-xl-block ms-xl-n11"><img
                             src="assets/img/dest/shape.svg" alt="destination" /></div> 
                     <div class="mb-7 text-center">
                         <h5 class="text-secondary">TIN MỚI NHẤT </h5>
                         <h3 class="fs-xl-10 fs-lg-8 fs-7 fw-bold text-capitalize"><a href="list.jsp">Mới thất lạc</a> </h3>
                     </div>
-                    <div class="row">
+                    <div class="row justify-content-center">
                         <c:forEach items="${requestScope.LIST3LOST}" var="itemLost">
-                            <div class="col-md-4 mb-4">
+                            <div class="col-md-3 mb-4">
                                 <div class="card overflow-hidden shadow shadow-hover" id="hoverCard"> <img class="card-img-top" src="${pageContext.servletContext.contextPath}/item?postId=${itemLost.postId}"
-                                                                                                           alt="Lost Item" style="height: 18rem;" />
+                                                                                                           alt="Lost Item" style="height: 13rem;" />
                                     <div class="card-body py-4 px-3">
                                         <div class="d-flex flex-column flex-lg-row justify-content-between mb-3">
-                                            <h4 class="text-secondary fw-medium"><a class="link-901 text-decoration-none stretched-link"
-                                                                                    href="/main?postId=${itemLost.postId}&userId=${itemLost.userId}&action=Detail">${itemLost.title}</a></h4><span class="fs-1 fw-medium">${itemLost.postId}</span>
+                                            <h5 class="text-secondary fw-medium"><a class="link-901 text-decoration-none stretched-link"
+                                                                                    href="/main?postId=${itemLost.postId}&userId=${itemLost.userId}&action=Detail">${itemLost.title}</a></h5><span class="fs-1 fw-medium"></span>
                                         </div>
                                         <div class="d-flex align-items-center"> <img src="assets/img/dest/clock.svg"
-                                                                                     style="margin-right: 14px" width="20" alt="navigation" /><span class="fs-0 fw-medium">${itemLost.date}</span></div>
+                                                                                     style="margin-right: 10px" width="18" alt="navigation" /><span class="fs-0 fw-medium">${itemLost.date}</span></div>
                                     </div>
                                 </div>
                             </div>
@@ -273,24 +283,24 @@
             <section class="pt-5" id="moithatlac">
 
                 <div class="container">
-                    <div class="position-absolute start-100 bottom-0 translate-middle-x d-none d-xl-block ms-xl-n4"><img
+                    <div class="position-absolute start-100 bottom-0 translate-middle-x d-none d-xl-block ms-xl-n11"><img
                             src="assets/img/dest/shape.svg" alt="destination" /></div>
                     <div class="mb-7 text-center">
                         <h5 class="text-secondary">TIN MỚI NHẤT </h5>
                         <h3 class="fs-xl-10 fs-lg-8 fs-7 fw-bold text-capitalize"><a href="list.jsp">Mới nhặt được</a></h3>
                     </div>
-                    <div class="row">
+                    <div class="row justify-content-center">
                         <c:forEach items="${requestScope.LIST3FOUND}" var="itemFound">
-                            <div class="col-md-4 mb-4">
+                            <div class="col-md-3 mb-4">
                                 <div class="card overflow-hidden shadow shadow-hover" id="hoverCard"> <img class="card-img-top" src="${pageContext.servletContext.contextPath}/item?postId=${itemFound.postId}"
-                                                                                                           alt="Found Item" style="height: 18rem;" />
+                                                                                                           alt="Found Item" style="height: 13rem;" />
                                     <div class="card-body py-4 px-3">
                                         <div class="d-flex flex-column flex-lg-row justify-content-between mb-3">
-                                            <h4 class="text-secondary fw-medium"><a class="link-901 text-decoration-none stretched-link"
-                                                                                    href="/main?postId=${itemFound.postId}&userId=${itemFound.userId}&action=Detail">${itemFound.title}</a></h4><span class="fs-1 fw-medium">${itemFound.postId}</span>
+                                            <h5 class="text-secondary fw-medium"><a class="link-901 text-decoration-none stretched-link"
+                                                                                    href="/main?postId=${itemFound.postId}&userId=${itemFound.userId}&action=Detail">${itemFound.title}</a></h5><span class="fs-1 fw-medium"></span>
                                         </div>
                                         <div class="d-flex align-items-center"> <img src="assets/img/dest/clock.svg"
-                                                                                     style="margin-right: 14px" width="20" alt="navigation" /><span class="fs-0 fw-medium">${itemFound.date}</span></div>
+                                                                                     style="margin-right: 10px" width="18" alt="navigation" /><span class="fs-0 fw-medium">${itemFound.date}</span></div>
                                     </div>
                                 </div>
                             </div>

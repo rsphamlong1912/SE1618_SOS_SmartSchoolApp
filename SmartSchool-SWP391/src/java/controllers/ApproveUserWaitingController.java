@@ -19,10 +19,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import jobPost.JobPostDAO;
 import jobPost.JobPostDTO;
 import jobPostAnswer.JobPostAnswerDAO;
 import jobPostAnswer.JobPostAnswerDTO;
+import sendMail.MailSender;
 import user.UserDAO;
 import user.UserDTO;
 
@@ -47,6 +49,35 @@ public class ApproveUserWaitingController extends HttpServlet {
         JobPostDAO pDao = new JobPostDAO();
         int haveJob = uDao.getHaveJob(userId);
         JobPostDTO checkAmount = pDao.getAmountFreelancer(jobId);
+        
+        HttpSession session = request.getSession();
+        UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
+        String fullname = request.getParameter("fullname");
+        String title = request.getParameter("title");
+        String jobCategoryName = request.getParameter("jobCategoryName");
+        String userEmail = request.getParameter("userEmail");
+        String subject = "You have been applied for the Freelance Job !";
+        String message = "<!DOCTYPE html>\n"
+                + "<html lang=\"en\">\n"
+                + "\n"
+                + "<head>\n"
+                + "</head>\n"
+                + "\n"
+                + "<body>\n"
+                + "    <h3 style=\"color: #f26f21;\">Hello, "+fullname+" !</h3>\n"
+                + "    <div>First, we would like to thank you for your interest and application for this position.</div>\n"
+                + "    <div>You will work as a "+title+" in the Field of "+jobCategoryName+"</div>\n"
+                + "    <div>If you have any questions, you can contact us for answers.</div>\n"
+                + "    <div>Hope we will have a good, long-term cooperation in the future.</div>\n"
+                + "    <div>Contact us with,</div>\n"
+                + "    <div>Phone: "+loginUser.getPhone()+"</div>\n"
+                + "    <div>Email: "+loginUser.getEmail()+"</div>\n"
+                + "    <div>Best regards.</div>"
+                + "\n"
+                + "</body>\n"
+                + "\n"
+                + "</html>";
+        
         if (haveJob < 3) {
             if (checkAmount.getAmountFreelancer() < checkAmount.getAmount()) {
                 if ("approved".equals(buttonValue)) {
@@ -54,6 +85,8 @@ public class ApproveUserWaitingController extends HttpServlet {
                     pDao.setAmountFreelancerPlusOne(jobId);
                     uDao.setHaveJobPlusOne(userId);
                     JobPostDTO AmountFreelancer = pDao.getAmountFreelancer(jobId);
+                    MailSender sendMail = new MailSender();
+                    sendMail.send(userEmail, subject, message, "smartschool20222@gmail.com", "frscbuzdjuvziftg");
                     out.print(AmountFreelancer.getAmountFreelancer());
                 } else if ("denied".equals(buttonValue)) {
                     aDao.setApplyJobDenied(applyJobId);

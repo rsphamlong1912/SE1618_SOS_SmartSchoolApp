@@ -44,7 +44,7 @@ public class MyJobPostDoneDetailController extends HttpServlet {
             ArrayList<JobPostAnswerDTO> listAnswer = new ArrayList<>();
             JobPostAnswerDAO aDao = new JobPostAnswerDAO();
             for (ApplyJobDTO a : listUserDoing) {
-                listAnswer.addAll(aDao.getAnswerJobWaiting(a.getJobId(), a.getUserId()));
+                listAnswer.addAll(aDao.getAnswerJobWaiting(a.getJobId(), a.getUserId()));              
             }
             
             if (listUserDoing.isEmpty()) {
