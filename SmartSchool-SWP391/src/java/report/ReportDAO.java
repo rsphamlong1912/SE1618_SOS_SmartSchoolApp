@@ -41,6 +41,9 @@ public class ReportDAO {
     private static final String GET_TOTAL_REPORT = "SELECT COUNT(reportId) AS count\n"
             + "            FROM tblReport as r,tblPost as p, tblUser as u, tblCategory as c,tblReportType as t\n"
             + "            WHERE r.postId=p.postId AND r.userId =u.userId AND p.categoryId=c.categoryId AND r.reportTypeId= t.reportTypeId AND p.postStatus='true'";
+    private static final String COUNT_REPORTED = "  SELECT COUNT(reportId) AS reportedCount\n"
+            + "            FROM tblReport as r,tblPost as p\n"
+            + "            WHERE r.postId=p.postId AND r.userId=? AND p.postId=? AND p.postStatus='true'";
 
     public static int takeMinutes() {
         long millis = System.currentTimeMillis();
@@ -159,6 +162,7 @@ public class ReportDAO {
         }
         return check;
     }
+
     public int getTotalReport() throws SQLException {
         Connection con = null;
         ResultSet rs = null;
@@ -170,6 +174,38 @@ public class ReportDAO {
                 rs = ptm.executeQuery();
                 if (rs.next()) {
                     return rs.getInt("count");
+                }
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(PostDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+
+        }
+
+        return 0;
+    }
+       public int getTotleReported(String userId,int postId) throws SQLException {
+        Connection con = null;
+        ResultSet rs = null;
+        PreparedStatement ptm = null;
+        try {
+            con = DBUtils.getConnection();
+            if (con != null) {
+                ptm = con.prepareStatement(COUNT_REPORTED);
+                ptm.setString(1, userId);
+                ptm.setInt(2, postId);
+                rs = ptm.executeQuery();
+                if (rs.next()) {
+                    return rs.getInt("reportedCount");
                 }
             }
         } catch (Exception ex) {

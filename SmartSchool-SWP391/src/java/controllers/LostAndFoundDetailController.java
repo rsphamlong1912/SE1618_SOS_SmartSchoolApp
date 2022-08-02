@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import post.PostDAO;
 import post.PostDTO;
+import report.ReportDAO;
 import reportType.ReportTypeDAO;
 import reportType.ReportTypeDTO;
 import user.UserDAO;
