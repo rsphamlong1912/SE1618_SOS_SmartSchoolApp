@@ -45,7 +45,15 @@
         <link href="./assets/css/theme.css" rel="stylesheet" />
         <link href="./assets/css/main.css" rel="stylesheet" />
         <link href="./assets/css/style.css" rel="stylesheet" />
-
+        <style>
+            .card {
+                border-radius: 0.5rem !important;
+            }
+            .card-img-top {
+                border-top-left-radius: calc(0.5rem - 1px) !important;
+                border-top-right-radius: calc(0.5rem - 1px) !important;
+            }
+        </style>
     </head>
 
 
@@ -317,6 +325,7 @@
                         <script>
                             function searchPost(param) {
                                 var txtSearch = param.value;
+                                console.log(txtSearch);
                                 $.ajax({
                                     url: "/searchPost",
                                     type: "get",
