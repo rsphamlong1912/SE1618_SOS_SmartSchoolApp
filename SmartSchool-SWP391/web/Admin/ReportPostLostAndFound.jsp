@@ -29,7 +29,7 @@
             }
 
             .top-selling-table .product .image {
-                height: 150px;
+                height: 100%;
                 max-width: 150px;
             }
 
@@ -338,7 +338,7 @@
                                             data-bs-toggle="dropdown" aria-expanded="false">
                                         <div class="profile-info">
                                             <div class="info">
-                                                <h6>John Doe</h6>
+                                                <h6>Admin</h6>
                                                 <div class="image">
                                                     <img src="/Admin/assets/images/profile/profile-image.png" alt="" />
                                                     <span class="status"></span>
@@ -365,7 +365,7 @@
                                             <a href="#0"> <i class="lni lni-cog"></i> Settings </a>
                                         </li>
                                         <li>
-                                            <a href="#0"> <i class="lni lni-exit"></i> Sign Out </a>
+                                            <a href="/logout"> <i class="lni lni-exit"></i> Sign Out </a>
                                         </li>
                                     </ul>
                                 </div>
@@ -578,7 +578,7 @@
                                                 <p>Posted by</p>
                                                 <div class="product" style="padding-left: 0px;">
                                                     <div class="image user-image pl-10" style="max-width: 48px;">
-                                                        <img id="img" name="avatar" src="https://khoinguonsangtao.vn/wp-content/uploads/2022/02/anh-dai-dien-fb-dep.jpg"
+                                                        <img id="ImgPostUser" name="avatar" src=""
                                                              alt="" />
                                                     </div>
                                                     <p id="PostUser" name="" class="text-sm"></p>
@@ -631,7 +631,7 @@
                                             <div class="d-flex align-items-center top-selling-table mb-3">
                                                 <div class="product" style="padding-left: 0px;">
                                                     <div class="image user-image" style="max-width: 48px;">
-                                                        <img id="img" name="avatar" src="https://thuthuatnhanh.com/wp-content/uploads/2018/07/anh-dai-dien-dep.jpg"
+                                                        <img id="ImgReportUser" name="avatar" src=""
                                                              alt="" />
                                                     </div>
                                                     <p id="ReportUser" name="fullname" class="text-sm"></p>
@@ -713,6 +713,8 @@
         <script>
                                                                         function truyenDataDetailReport(postId, title, cateName, postUser, reportDetail, reportUser, reportType, type, postDescription, datePost) {
                                                                             document.getElementById("PostImg").setAttribute("src", "/item?postId=" + postId);
+                                                                            document.getElementById("ImgPostUser").setAttribute("src", "/avatar?userId=" + postUser);
+                                                                            document.getElementById("ImgReportUser").setAttribute("src", "/avatar?userId=" + reportUser);
                                                                             document.getElementById("Title").innerHTML = title;
                                                                             document.getElementById("CateName").innerHTML = cateName;
                                                                             document.getElementById("PostUser").innerHTML = postUser;

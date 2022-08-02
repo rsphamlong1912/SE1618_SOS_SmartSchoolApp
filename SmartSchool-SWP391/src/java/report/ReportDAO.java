@@ -29,10 +29,10 @@ import utills.DBUtils;
  */
 public class ReportDAO {
 
-    private static final String CREATE = "INSERT INTO tblReport(userId,postId,reportTypeId,reportDetail,status) VALUES(?,?,?,?,1)";
+    private static final String CREATE = "INSERT INTO tblReport(userId,postId,reportTypeId,reportDetail) VALUES(?,?,?,?)";
     private static final String LIST_ALL = "SELECT r.reportId, p.postId, p.title,c.categoryName,p.userId as postUser,r.reportDetail,r.userId as reportUser, t.reportType,p.type,p.description as postDescription,p.date as datePost\n"
             + "FROM tblReport as r,tblPost as p, tblUser as u, tblCategory as c,tblReportType as t\n"
-            + "WHERE r.postId=p.postId AND r.userId =u.userId AND p.categoryId=c.categoryId AND r.reportTypeId= t.reportTypeId AND r.status=1 AND p.postStatus='true' ORDER BY reportId DESC";
+            + "WHERE r.postId=p.postId AND r.userId =u.userId AND p.categoryId=c.categoryId AND r.reportTypeId= t.reportTypeId AND p.postStatus='true' ORDER BY reportId DESC";
     private static final String REMOVE_REPORTED_POST = "UPDATE tblPost\n"
             + "SET tblPost.postStatus = 'false'\n"
             + "FROM   tblReport r, \n"
@@ -40,7 +40,7 @@ public class ReportDAO {
             + "WHERE r.postId = p.postId AND r.reportId=?";
     private static final String GET_TOTAL_REPORT = "SELECT COUNT(reportId) AS count\n"
             + "            FROM tblReport as r,tblPost as p, tblUser as u, tblCategory as c,tblReportType as t\n"
-            + "            WHERE r.postId=p.postId AND r.userId =u.userId AND p.categoryId=c.categoryId AND r.reportTypeId= t.reportTypeId AND r.status=1 AND p.postStatus='true'";
+            + "            WHERE r.postId=p.postId AND r.userId =u.userId AND p.categoryId=c.categoryId AND r.reportTypeId= t.reportTypeId AND p.postStatus='true'";
 
     public static int takeMinutes() {
         long millis = System.currentTimeMillis();
