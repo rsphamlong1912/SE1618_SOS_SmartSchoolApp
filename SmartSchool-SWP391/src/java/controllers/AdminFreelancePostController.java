@@ -37,10 +37,9 @@ public class AdminFreelancePostController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try {
             JobPostDAO dao = new JobPostDAO();
-//            CategoryDAO cdao = new CategoryDAO();
             List<JobPostDTO> listAll = dao.getAll();
-//            int count = pdao.getTotalPost();
-//            request.setAttribute("TOTALPOST", count);
+            int count = dao.getTotalJobPostForAdmin();
+            request.setAttribute("TOTALPOST", count);
 
             request.setAttribute("LISTPOST", listAll);
         } catch (Exception e) {
