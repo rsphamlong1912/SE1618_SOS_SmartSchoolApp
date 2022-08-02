@@ -65,7 +65,7 @@ public class JobPostDAO {
             + "FROM  tblJobPost as j, tblCategoryJob as c, tblUser as u\n"
             + "WHERE j.jobCategoryId=c.jobCategoryId AND j.userId=u.userId AND status=1 \n"
             + "ORDER BY jobId DESC";
-    
+
     private static final String GET_TOP3_JOB_POST_BY_CATEGORY = "SELECT TOP(3) j.jobId,j.userId,j.jobCategoryId,j.title,j.description,j.salary,j.amount,j.timeJob,j.process,j.date,j.status,c.jobCategoryName, u.fullname,u.compName "
             + "FROM  tblJobPost as j, tblCategoryJob as c, tblUser as u "
             + "WHERE j.jobCategoryId=c.jobCategoryId AND j.jobCategoryId=? AND j.process='new' AND jobId!=? AND j.userId=u.userId AND status=1 ORDER BY jobId DESC";
@@ -95,13 +95,16 @@ public class JobPostDAO {
     private static final String SET_AMOUNT_FREELANCER_PLUS_ONE = "UPDATE tblJobPost SET amountFreelancer = amountFreelancer + 1 WHERE jobId = ? ";
 
     private static final String UPDATE_NEW_AMOUNT = "UPDATE tblJobPost SET amount = ? WHERE jobId = ?";
-    
+
     private static final String GET_TOTAL_POST_OF_A_EMPLOYER = " SELECT COUNT(jobId) AS 'count' FROM tblJobPost WHERE status=1 AND userId = ? ";
     private static final String GET_TOTAL_WAITING_POST = " SELECT COUNT(jobId) AS 'count' FROM tblJobPost WHERE status=1 AND process='approving' AND userId = ? ";
     private static final String GET_TOTAL_NEW_POST = " SELECT COUNT(jobId) AS 'count' FROM tblJobPost WHERE status=1 AND process='new' AND userId = ? ";
     private static final String GET_TOTAL_DONE_POST = " SELECT COUNT(jobId) AS 'count' FROM tblJobPost WHERE status=1 AND process='done' AND userId = ? ";
-    
+
     private static final String DELETE_JOB_POST = "UPDATE tblJobPost SET status = 0 WHERE jobId = ?";
+    private static final String GET_TOTAL_JOB_POST_FOR_ADMIN = "SELECT COUNT(*) as count\n"
+            + "FROM tblJobPost as j, tblCategoryJob as c, tblUser as u\n"
+            + "WHERE j.jobCategoryId=c.jobCategoryId AND j.userId=u.userId AND status=1 AND (process='new' OR process='process') ";
 
     public static int takeMinutes() {
         long millis = System.currentTimeMillis();
@@ -255,7 +258,7 @@ public class JobPostDAO {
         }
         return list;
     }
-    
+
     public boolean deleteJobPost(int jobId) throws SQLException {
         boolean check = false;
         Connection conn = null;
@@ -488,7 +491,7 @@ public class JobPostDAO {
         }
         return list;
     }
-    
+
     public List<JobPostDTO> getMyJobPostDoing(String userId) throws SQLException {
         List<JobPostDTO> list = new ArrayList<>();
         Connection conn = null;
@@ -898,7 +901,7 @@ public class JobPostDAO {
         }
         return list;
     }
-    
+
     public List<JobPostDTO> getTop3JobPostByCategory(int jobCategoryId, int jobId) throws SQLException {
         List<JobPostDTO> list = new ArrayList<>();
         Connection conn = null;
@@ -1314,7 +1317,7 @@ public class JobPostDAO {
         }
         return 0;
     }
-    
+
     public int getTotalPostOfAEmployer(String userId) throws SQLException {
         Connection con = null;
         ResultSet rs = null;
@@ -1345,7 +1348,7 @@ public class JobPostDAO {
         }
         return 0;
     }
-    
+
     public int getTotalWaitingPost(String userId) throws SQLException {
         Connection con = null;
         ResultSet rs = null;
@@ -1376,7 +1379,7 @@ public class JobPostDAO {
         }
         return 0;
     }
-    
+
     public int getTotalNewPost(String userId) throws SQLException {
         Connection con = null;
         ResultSet rs = null;
@@ -1407,7 +1410,7 @@ public class JobPostDAO {
         }
         return 0;
     }
-    
+
     public int getTotalDonePost(String userId) throws SQLException {
         Connection con = null;
         ResultSet rs = null;
@@ -1418,6 +1421,36 @@ public class JobPostDAO {
             if (con != null) {
                 ptm = con.prepareStatement(GET_TOTAL_DONE_POST);
                 ptm.setString(1, userId);
+                rs = ptm.executeQuery();
+                if (rs.next()) {
+                    return rs.getInt("count");
+                }
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(PostDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return 0;
+    }
+    
+    public int getTotalJobPostForAdmin() throws SQLException {
+        Connection con = null;
+        ResultSet rs = null;
+        PreparedStatement ptm = null;
+        try {
+            //Creating and executing JDBC statements
+            con = DBUtils.getConnection();
+            if (con != null) {
+                ptm = con.prepareStatement(GET_TOTAL_JOB_POST_FOR_ADMIN);
                 rs = ptm.executeQuery();
                 if (rs.next()) {
                     return rs.getInt("count");

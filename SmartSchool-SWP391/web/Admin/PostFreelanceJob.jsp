@@ -278,7 +278,7 @@
                                     <div class="right">
                                         <div class="title d-flex align-items-center flex-wrap mb-30">
                                             <button type="button" class="main-btn warning-btn btn-hover btn-sm">
-                                                <i class="lni lni-empty-file mr-5" style="font-size: 20px;"></i>Total: 30 posts</button>
+                                                <i class="lni lni-empty-file mr-5" style="font-size: 20px;"></i>Total: ${TOTALPOST} posts</button>
                                         </div>
                                     </div>
                                 </div>
