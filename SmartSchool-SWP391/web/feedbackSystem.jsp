@@ -178,7 +178,7 @@
                                     </ul>
                                 </li>
                                 <!--/ User --> 
-                                <li class="nav-item px-3"><a class="btn btn-outline-light order-1 order-lg-0 fw-bold" href="uploadPost">ĐĂNG BÀI</a></li>
+                                <li class="nav-item px-3"><a class="btn btn-outline-light order-1 order-lg-0 fw-bold" href="main?action=UploadLostAndFoundPost">ĐĂNG BÀI</a></li>
                             </c:if>    
                         </ul>
                     </div>

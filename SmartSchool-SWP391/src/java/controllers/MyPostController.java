@@ -47,7 +47,7 @@ public class MyPostController extends HttpServlet {
             UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
             PostDAO dao = new PostDAO();
 //            CategoryDAO dao1 = new CategoryDAO();
-            List<PostDTO> list = dao.getMyPost(loginUser.getUserId());
+            List<PostDTO> list = dao.getMyPostApproving(loginUser.getUserId());
 
             if (!list.isEmpty()) {
                 request.setAttribute("MY_POST", list);

@@ -189,7 +189,7 @@
                                     </ul>
                                 </li>
                                 <!--/ User -->   
-                                <li class="nav-item px-3"><a class="btn btn-outline-light order-1 order-lg-0 fw-bold" href="uploadPost">ĐĂNG BÀI</a></li>
+                                <li class="nav-item px-3"><a class="btn btn-outline-light order-1 order-lg-0 fw-bold" href="main?action=UploadLostAndFoundPost">ĐĂNG BÀI</a></li>
                                 </c:if>    
                         </ul>
                     </div>
@@ -227,22 +227,27 @@
                         <div class="info-desc"><span class="title-desc">Ngày đăng: </span>
                             <p class="content-desc">${requestScope.POST.date}</p>
                         </div>                      
-                        
-<!--                        <button class="btn btn-success btn-sm" style="font-size:20px;" data-bs-toggle="modal"
-                                data-bs-target="#ModalEdit" onclick="truyenDataEdit(this.getAttribute('data-editImg'), this.getAttribute('date-editTitle'), this.getAttribute('data-editType'), this.getAttribute('data-editCateName'), this.getAttribute('data-editDescription'))"
-                                data-editImg="${pageContext.servletContext.contextPath}/item?postId=${requestScope.POST.postId}"
-                                date-editTitle="${requestScope.POST.title}"
-                                data-editType="<c:choose> <c:when test="${requestScope.POST.type=='0'}">Đồ thất lạc</c:when><c:otherwise>Đồ nhặt được</c:otherwise></c:choose>"
-                                data-editCateName="${requestScope.POST.categoryName}"
-                                data-editDescription="${requestScope.POST.description}">
-                            <i class="fa-solid fa-pencil"></i>Sửa
-                        </button>-->
+
+                        <!--                        <button class="btn btn-success btn-sm" style="font-size:20px;" data-bs-toggle="modal"
+                                                        data-bs-target="#ModalEdit" onclick="truyenDataEdit(this.getAttribute('data-editImg'), this.getAttribute('date-editTitle'), this.getAttribute('data-editType'), this.getAttribute('data-editCateName'), this.getAttribute('data-editDescription'))"
+                                                        data-editImg="${pageContext.servletContext.contextPath}/item?postId=${requestScope.POST.postId}"
+                                                        date-editTitle="${requestScope.POST.title}"
+                                                        data-editType="<c:choose> <c:when test="${requestScope.POST.type=='0'}">Đồ thất lạc</c:when><c:otherwise>Đồ nhặt được</c:otherwise></c:choose>"
+                                                        data-editCateName="${requestScope.POST.categoryName}"
+                                                        data-editDescription="${requestScope.POST.description}">
+                                                    <i class="fa-solid fa-pencil"></i>Sửa
+                                                </button>-->
 
                         <!--<a href="main?action=Delete&&postId=${requestScope.POST.postId}" class="btn btn-danger btn-sm"><i class="fa-solid fa-trash"></i> Xóa</a>-->
                         <button class="btn btn-danger btn-sm" style="font-size:20px;" data-bs-toggle="modal"
                                 data-bs-target="#exampleModal" onclick="truyenIdDelete(this.getAttribute('data-postId'))"data-postId="${requestScope.POST.postId}">
-                            <i class="fa-solid fa-trash"></i>Xóa
+                            <i class="fa-solid fa-trash"></i> Xóa
                         </button>
+                        <c:if test="${requestScope.POST.postStatus=='true'}">
+                            <a href="/main?postId=${requestScope.POST.postId}&userId=${requestScope.POST.userId}&action=Detail" class="btn btn-primary btn-sm" style="font-size:20px;">
+                                <i class="fa-solid fa-list-alt"></i> Xem bài đăng
+                            </a>
+                        </c:if>
 
                         <!-- Modal Delete -->
                         <form action="main">
@@ -476,7 +481,7 @@
             }
 
             function truyenDataEdit(Img, title, type, cateName, description) {
-                document.getElementById("Img1").setAttribute("src", "/image?postId="+Img);
+                document.getElementById("Img1").setAttribute("src", "/image?postId=" + Img);
                 document.getElementById("Title1").innerHTML = title;
                 document.getElementById("Type1").innerHTML = type;
                 document.getElementById("category").value = cateName;
