@@ -417,7 +417,7 @@
                                                 </c:forEach>
                                                 <div class="col-md-12">
                                                     <div class="form-floating">
-                                                        <textarea class="form-control required" required="true" data-rule-required="true" name="" placeholder=" " id="floatingTextarea2"
+                                                        <textarea class="form-control required" data-rule-required="true" name="reportDetail" placeholder=" " id="floatingTextarea2"
                                                                   style="height: 120px"></textarea>
                                                         <small></small>
                                                         <label for="floatingTextarea2">Chi tiết (không bắt buộc)</label>

@@ -15,16 +15,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import report.ReportDAO;
-import user.UserDTO;
 
 /**
  *
  * @author SE150925 Nguyen Van Hai Nam
  */
-@WebServlet(name = "SendReportPostController", urlPatterns = {"/sendReportPost"})
-public class SendReportPostController extends HttpServlet {
+@WebServlet(name = "DeleteReportedPostController", urlPatterns = {"/deleteReportedPost"})
+public class DeleteReportedPostController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,29 +35,16 @@ public class SendReportPostController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        String url="";
-        int postId=Integer.parseInt(request.getParameter("postId"));
-        String reportDetail=request.getParameter("reportDetail");
-        int reportTypeId=Integer.parseInt(request.getParameter("reportTypeId"));
-        HttpSession session = request.getSession();
-            UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
-            String userId=request.getParameter("userId");
-            if(loginUser==null){
-                response.sendRedirect("login.jsp");
-            }else{
-            try {
-                ReportDAO dao=new ReportDAO();
-                dao.sendReport(loginUser.getUserId(), postId, reportTypeId,reportDetail);
-                request.setAttribute("MESSAGE", "Báo cáo thành công");
-                url="main?postId="+postId+"&userId="+userId+"&action=Detail";
-            } catch (SQLException ex) {
-                Logger.getLogger(SendReportPostController.class.getName()).log(Level.SEVERE, null, ex);
-            }finally{
-//                request.getRequestDispatcher("lostAndFoundDetail").forward(request, response);
-                response.sendRedirect(url);
-            }
-            }
+        try {
+            response.setContentType("text/html;charset=UTF-8");
+            int reportId=Integer.parseInt(request.getParameter("reportId"));
+            ReportDAO dao=new ReportDAO();
+            dao.deletePost(reportId);
+        } catch (SQLException ex) {
+            Logger.getLogger(DeleteReportedPostController.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+            response.sendRedirect("main?action=ReportManagement");
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

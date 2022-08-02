@@ -124,7 +124,7 @@
                         </a>
                         <ul id="ddmenu_5" class="collapse dropdown-nav">
                             <li>
-                                <a href=""> Lost & Found </a>
+                                <a href="reportManagement"> Lost & Found </a>
                             </li>
                             <li>
                                 <a href=""> Freelance Job </a>

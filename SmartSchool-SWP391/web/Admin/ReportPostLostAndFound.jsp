@@ -16,20 +16,20 @@
         <title>Admin</title>
 
         <!-- ========== All CSS files linkup ========= -->
-        <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
-        <link rel="stylesheet" href="assets/css/lineicons.css" />
-        <link rel="stylesheet" href="assets/css/materialdesignicons.min.css" />
-        <link rel="stylesheet" href="assets/css/fullcalendar.css" />
-        <link rel="stylesheet" href="assets/css/fullcalendar.css" />
-        <link rel="stylesheet" href="assets/css/main.css" />
-        <link rel="stylesheet" href="assets/css/styles.css" />
+        <link rel="stylesheet" href="/Admin/assets/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="/Admin/assets/css/lineicons.css" />
+        <link rel="stylesheet" href="/Admin/assets/css/materialdesignicons.min.css" />
+        <link rel="stylesheet" href="/Admin/assets/css/fullcalendar.css" />
+        <link rel="stylesheet" href="/Admin/assets/css/fullcalendar.css" />
+        <link rel="stylesheet" href="/Admin/assets/css/main.css" />
+        <link rel="stylesheet" href="/Admin/assets/css/styles.css" />
         <style>
             .top-selling-table .product{
                 min-width: 70px;
             }
 
             .top-selling-table .product .image {
-                height: 100%;
+                height: 150px;
                 max-width: 150px;
             }
 
@@ -46,13 +46,13 @@
                 object-fit: cover;
                 -o-object-position: center;
                 object-position: center;
-/*                width: auto;*/
+                /*                width: auto;*/
                 border-radius: 0.5rem;
                 object-fit: contain;
             }
-            .modal-content {
-                background-color: transparent;
-            }
+            /*            .modal-content1 {
+                            background-color: transparent;
+                        }*/
         </style>
     </head>
 
@@ -77,7 +77,7 @@
                         </a>
                         <ul id="ddmenu_1" class="collapse dropdown-nav">
                             <li>
-                                <a href="adminLostAndFound" class="active"> Lost And Found </a>
+                                <a href="adminLostAndFound" class=""> Lost And Found </a>
                             </li>
                             <li>
                                 <a href="adminFreelance" class=""> Freelance Job </a>
@@ -148,7 +148,7 @@
                         </a>
                         <ul id="ddmenu_5" class="collapse show dropdown-nav">
                             <li>
-                                <a href="" class="active"> Lost & Found </a>
+                                <a href="reportManagement" class="active"> Lost & Found </a>
                             </li>
                             <li>
                                 <a href=""> Freelance Job </a>
@@ -238,7 +238,7 @@
                                         <li>
                                             <a href="#0">
                                                 <div class="image">
-                                                    <img src="assets/images/lead/lead-6.png" alt="" />
+                                                    <img src="/Admin/assets/images/lead/lead-6.png" alt="" />
                                                 </div>
                                                 <div class="content">
                                                     <h6>
@@ -258,7 +258,7 @@
                                         <li>
                                             <a href="#0">
                                                 <div class="image">
-                                                    <img src="assets/images/lead/lead-1.png" alt="" />
+                                                    <img src="/Admin/assets/images/lead/lead-1.png" alt="" />
                                                 </div>
                                                 <div class="content">
                                                     <h6>
@@ -289,7 +289,7 @@
                                         <li>
                                             <a href="#0">
                                                 <div class="image">
-                                                    <img src="assets/images/lead/lead-5.png" alt="" />
+                                                    <img src="/Admin/assets/images/lead/lead-5.png" alt="" />
                                                 </div>
                                                 <div class="content">
                                                     <h6>Jacob Jones</h6>
@@ -301,7 +301,7 @@
                                         <li>
                                             <a href="#0">
                                                 <div class="image">
-                                                    <img src="assets/images/lead/lead-3.png" alt="" />
+                                                    <img src="/Admin/assets/images/lead/lead-3.png" alt="" />
                                                 </div>
                                                 <div class="content">
                                                     <h6>John Doe</h6>
@@ -313,7 +313,7 @@
                                         <li>
                                             <a href="#0">
                                                 <div class="image">
-                                                    <img src="assets/images/lead/lead-2.png" alt="" />
+                                                    <img src="/Admin/assets/images/lead/lead-2.png" alt="" />
                                                 </div>
                                                 <div class="content">
                                                     <h6>Anee Lee</h6>
@@ -340,7 +340,7 @@
                                             <div class="info">
                                                 <h6>John Doe</h6>
                                                 <div class="image">
-                                                    <img src="assets/images/profile/profile-image.png" alt="" />
+                                                    <img src="/Admin/assets/images/profile/profile-image.png" alt="" />
                                                     <span class="status"></span>
                                                 </div>
                                             </div>
@@ -425,7 +425,7 @@
                                     <div class="right">
                                         <div class="title d-flex align-items-center flex-wrap mb-30">
                                             <button type="button" class="main-btn warning-btn btn-hover btn-sm">
-                                                <i class="lni lni-remove-file mr-5" style="font-size: 20px;"></i>Total: 30 posts</button>
+                                                <i class="lni lni-remove-file mr-5" style="font-size: 20px;"></i>Total Report: ${requestScope.COUNTREPORT}</button>
                                         </div>
                                     </div>
                                 </div>
@@ -464,92 +464,84 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>
-                                                    <div class="product" style="padding-left: 0px;">
-                                                        <div class="image">
-                                                            <img src="https://upload.wikimedia.org/wikipedia/commons/e/e6/IPhone_XS_1_2018-11-02.jpg" alt="" />
+                                            <c:forEach items="${requestScope.LISTREPORT}" var="list">
+                                                <tr>
+                                                    <td>
+                                                        <div class="product" style="padding-left: 0px;">
+                                                            <div class="image">
+                                                                <img src="${pageContext.servletContext.contextPath}/item?postId=${list.postId}" alt="" />
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <p class="text-sm">Mất laptop</p>
-                                                </td>
-                                                <td>
-                                                    <p class="text-sm">Laptop</p>
-                                                </td>
-                                                <td>
-                                                    <p class="text-sm">ngoclong12</p>
-                                                </td>
-                                                <td>
-                                                    <p class="text-sm fw-bold">Gian lận lừa đảo</p>
-                                                </td>
-                                                <td>
-                                                    <p class="text-sm">nguyennam44</p>
-                                                </td>
-                                                <td>
-                                                    <div class="action justify-content-center">
-                                                        <span class="status-btn success-btn fw-bold">Found</span>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="action justify-content-center">
-                                                        <button  style="font-size:23px;">
-                                                            <a href="" class="text-gray" data-bs-toggle="modal" data-bs-target="#ModalDetailReport"><i class="lni lni-eye fw-bold"></i></a>
-                                                        </button>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="action justify-content-center">
-                                                        <button class="text-gray" style="font-size:23px;">
-                                                            <a href="main?action=" class="text-danger"><i class="lni lni-trash-can fw-bold"></i></a>
-                                                        </button>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <div class="product" style="padding-left: 0px;">
-                                                        <div class="image">
-                                                            <img src="https://upload.wikimedia.org/wikipedia/commons/e/e6/IPhone_XS_1_2018-11-02.jpg" alt="" />
+                                                    </td>
+                                                    <td>
+                                                        <p class="text-sm">${list.title}</p>
+                                                    </td>
+                                                    <td>
+                                                        <p class="text-sm">${list.categoryName}</p>
+                                                    </td>
+                                                    <td>
+                                                        <p class="text-sm">${list.postUser}</p>
+                                                    </td>
+                                                    <td>
+                                                        <p class="text-sm fw-bold">${list.reportType}</p>
+                                                    </td>
+                                                    <td>
+                                                        <p class="text-sm">${list.reportUser}</p>
+                                                    </td>
+                                                    <td>
+                                                        <c:choose> 
+                                                            <c:when test="${list.type=='0'}">
+
+                                                                <div class="action justify-content-center">
+                                                                    <span class="status-btn warning-btn fw-bold">Lost</span>
+                                                                </div>
+
+                                                            </c:when>    
+                                                            <c:otherwise>
+
+                                                                <div class="action justify-content-center">
+                                                                    <span class="status-btn success-btn fw-bold">Found</span>
+                                                                </div>
+
+                                                            </c:otherwise>
+                                                        </c:choose>
+                                                    </td>
+                                                    <td>
+                                                        <div class="action justify-content-center">
+                                                            <button  style="font-size:23px;"  class="text-gray" data-bs-toggle="modal" data-bs-target="#ModalDetailReport"
+                                                                     onclick="truyenDataDetailReport(this.getAttribute('data-postId'), this.getAttribute('data-Title'), this.getAttribute('data-CateName'), this.getAttribute('data-PostUser')
+                                                                                     , this.getAttribute('data-ReportDetail'), this.getAttribute('data-ReportUser'), this.getAttribute('data-ReportType'), this.getAttribute('data-Type'), this.getAttribute('data-Description'), this.getAttribute('data-DatePost'))"
+
+                                                                     data-postId="${list.postId}"
+                                                                     data-Title="${list.title}"
+                                                                     data-CateName="${list.categoryName}"
+                                                                     data-PostUser="${list.postUser}"
+                                                                     data-ReportDetail="${list.reportDetail}"
+                                                                     data-ReportUser="${list.reportUser}"
+                                                                     data-ReportType="${list.reportType}"
+                                                                     data-Type="${list.type}"
+                                                                     data-Description="${list.postDescription}"
+                                                                     data-DatePost="${list.datePost}">
+
+                                                                <i class="lni lni-eye fw-bold">
+
+                                                                </i>
+
+                                                            </button>
                                                         </div>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <p class="text-sm">Tìm thấy Điện thoại </p>
-                                                </td>
-                                                <td>
-                                                    <p class="text-sm">Điện thoại</p>
-                                                </td>
-                                                <td>
-                                                    <p class="text-sm">baovip</p>
-                                                </td>
-                                                <td>
-                                                    <p class="text-sm fw-bold">Thông tin sai sự thật</p>
-                                                </td>
-                                                <td>
-                                                    <p class="text-sm">ngoclongvip</p>
-                                                </td>
-                                                <td>
-                                                    <div class="action justify-content-center">
-                                                        <span class="status-btn warning-btn fw-bold">Lost</span>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="action justify-content-center">
-                                                        <button  style="font-size:23px;">
-                                                            <a href="" class="text-gray" data-bs-toggle="modal" data-bs-target="#ModalDetailReport"><i class="lni lni-eye fw-bold"></i></a>
-                                                        </button>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="action justify-content-center">
-                                                        <button class="text-gray" style="font-size:23px;">
-                                                            <a href="main?action=" class="text-danger"><i class="lni lni-trash-can fw-bold"></i></a>
-                                                        </button>
-                                                    </div>
-                                                </td>
-                                            </tr>
+                                                    </td>
+                                                    <td>
+                                                        <div class="action justify-content-center">
+                                                            <button class="text-gray" style="font-size:23px;" data-bs-toggle="modal" data-bs-target="#ModalDeleteReportedPost"
+                                                                    onclick="truyenDataDelete(this.getAttribute('data-reportId'))"
+                                                                    data-reportId="${list.reportId}">
+                                                                <i class="lni lni-trash-can fw-bold"></i>
+                                                            </button>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </c:forEach>
+
                                         </tbody>
                                     </table>
                                     <!-- End Table -->
@@ -563,29 +555,25 @@
                 <!-- Modal -->
                 <div class="modal " id="ModalDetailReport" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered modal-xl">
-                        <div class="modal-content">
+                        <div class="modal-content" style="background-color: transparent">
 
                             <div class="row mb-3">
                                 <div class="card overflow-hidden shadow ">
                                     <div class="card-header bg-white pl-10 pr-10 border-bottom d-md-flex">
 
-                                        <h4 class="" style="line-height: 2.5rem;" >
-                                            Mất điện thoại ZFOLD3
-
-                                            <span class="badge bg-secondary" style="border-radius: 0.25rem !important;">LOST</span>
-
-                                            <span class="badge" style="border-radius: 0.25rem !important; background-color: #0d6efd!important;">FOUND</span>
-
-
+                                        <h4 id="Title" class="" style="line-height: 2.5rem;" >
                                         </h4>
+                                        <span id="Type1"></span>
+
+
 
                                     </div>
                                     <div class="row">                       
                                         <div class="pt-4 mb-4 col-md-6 ">
                                             <div class="detail-image mb-3">
-                                                <a href=""><img src="https://upload.wikimedia.org/wikipedia/commons/e/e6/IPhone_XS_1_2018-11-02.jpg" width="100%" height="100%"  alt=""/></a>
+                                                <a href=""><img src="" id="PostImg" width="100%" height="100%"  alt=""/></a>
                                             </div>
-                                            
+
                                             <div class="d-flex align-items-center top-selling-table mb-3 pl-10">
                                                 <p>Posted by</p>
                                                 <div class="product" style="padding-left: 0px;">
@@ -593,12 +581,11 @@
                                                         <img id="img" name="avatar" src="https://khoinguonsangtao.vn/wp-content/uploads/2022/02/anh-dai-dien-fb-dep.jpg"
                                                              alt="" />
                                                     </div>
-                                                    <p id="nameDe" name="fullname" class="text-sm">Phạm Ngọc Long</p>
+                                                    <p id="PostUser" name="" class="text-sm"></p>
                                                 </div>
                                             </div>
                                             <div class="d-flex align-items-center pl-10">                                              
-                                                <span class="fw-medium" style="font-size: 14px;"> 
-                                                    Bài viết được đăng 3 giờ trước
+                                                <span id="DatePost" class="fw-medium" style="font-size: 14px;"> 
                                                 </span>
                                             </div>
                                         </div>
@@ -606,15 +593,15 @@
                                         <div class="pt-4 mb-4 col-md-6">
                                             <div class="d-flex align-items-center mb-3">
                                                 <h5>Type: 
-                                                    <span class="fw-medium" style="font-size: 1rem; font-weight: 400;">
-                                                        Đồ thất lạc   
+                                                    <span id="Type" class="fw-medium" style="font-size: 1rem; font-weight: 400;">
+
                                                     </span>
                                                 </h5>
                                             </div>
                                             <div class="d-flex align-items-center mb-3">
                                                 <h5>Category: 
-                                                    <span class="fw-medium" style="font-size: 1rem; font-weight: 400;">
-                                                        Điện thoại   
+                                                    <span id="CateName" class="fw-medium" style="font-size: 1rem; font-weight: 400;">
+
                                                     </span>
                                                 </h5>
                                             </div>
@@ -622,23 +609,22 @@
                                             <div class="align-items-center mb-2">
                                                 <h5>Description:</h5>
 
-                                                <span class="fw-medium" style="font-size: 0.88889rem; line-height: 2.5;">
-                                                    Mình bị mất cái điện thoại ZFOLD3, mình nghi admin Hải Nam lấy
+                                                <span id="Description" class="fw-medium" style="font-size: 0.88889rem; line-height: 2.5;">
+
                                                 </span>
 
                                             </div>
                                             <div class="d-flex align-items-center mb-3">
                                                 <h5>Reason: 
-                                                    <span class="fw-medium text-primary" style="font-size: 1rem;">
-                                                        Gian lận lừa đảo  
+                                                    <span id="ReportType" class="fw-medium text-primary" style="font-size: 1rem;">
+
                                                     </span>
                                                 </h5>
                                             </div>
                                             <div class="align-items-center mb-3">
                                                 <h5 class="mb-3">Detail: </h5>
                                                 <div class="form-floating">
-                                                    <textarea class="form-control text-area" placeholder="..." style="height: 100px; padding-top: 0.625rem; background-color: #fff;" readonly="">Thằng này nó đăng bài lừa đảo nè 
-                                                    </textarea>                                                   
+                                                    <textarea id="ReportDetail" class="form-control text-area" placeholder="..." style="height: 100px; padding-top: 0.625rem; background-color: #fff;" readonly=""></textarea>
                                                 </div>
                                             </div>
                                             <p class="mb-2">Reported by</p>
@@ -648,10 +634,10 @@
                                                         <img id="img" name="avatar" src="https://thuthuatnhanh.com/wp-content/uploads/2018/07/anh-dai-dien-dep.jpg"
                                                              alt="" />
                                                     </div>
-                                                    <p id="nameDe" name="fullname" class="text-sm">Trịnh Ngọc Bảo</p>
+                                                    <p id="ReportUser" name="fullname" class="text-sm"></p>
                                                 </div>
                                             </div>
-                                            
+
                                         </div>
                                     </div>
                                 </div>
@@ -659,6 +645,25 @@
                         </div>
                     </div>
                 </div>
+
+                <!--Modal Delete-->
+                <form action="main">
+                    <div class="modal fade" id="ModalDeleteReportedPost" tabindex="-1" aria-labelledby="exampleModalLabel"
+                         aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered modal-sm">
+                            <div class="modal-content">
+                                <div class="modal-header justify-content-center">
+                                    <h4 class="modal-title" id="exampleModalLabel">Are you sure ?</h4>
+                                </div>
+                                <div class="modal-footer justify-content-center">
+                                    <input id="ReportId" type="hidden" name="reportId" />
+                                    <button type="button" class="main-btn warning-btn-outline btn-hover btn-sm" data-bs-dismiss="modal">No</button>
+                                    <button type="submit" name="action" value="DeleteReportedPost" class="main-btn warning-btn btn-hover btn-sm">Yes</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
                 <!-- end container -->
             </section>
             <!-- ========== section end ========== -->
@@ -695,16 +700,49 @@
         <!-- ======== main-wrapper end =========== -->
 
         <!-- ========= All Javascript files linkup ======== -->
-        <script src="assets/js/bootstrap.bundle.min.js"></script>
-        <script src="assets/js/Chart.min.js"></script>
-        <script src="assets/js/dynamic-pie-chart.js"></script>
-        <script src="assets/js/moment.min.js"></script>
-        <script src="assets/js/fullcalendar.js"></script>
-        <script src="assets/js/jvectormap.min.js"></script>
-        <script src="assets/js/world-merc.js"></script>
-        <script src="assets/js/polyfill.js"></script>
-        <script src="assets/js/main.js"></script>
+        <script src="/Admin/assets/js/bootstrap.bundle.min.js"></script>
+        <script src="/Admin/assets/js/Chart.min.js"></script>
+        <script src="/Admin/assets/js/dynamic-pie-chart.js"></script>
+        <script src="/Admin/assets/js/moment.min.js"></script>
+        <script src="/Admin/assets/js/fullcalendar.js"></script>
+        <script src="/Admin/assets/js/jvectormap.min.js"></script>
+        <script src="/Admin/assets/js/world-merc.js"></script>
+        <script src="/Admin/assets/js/polyfill.js"></script>
+        <script src="/Admin/assets/js/main.js"></script>
 
+        <script>
+                                                                        function truyenDataDetailReport(postId, title, cateName, postUser, reportDetail, reportUser, reportType, type, postDescription, datePost) {
+                                                                            document.getElementById("PostImg").setAttribute("src", "/item?postId=" + postId);
+                                                                            document.getElementById("Title").innerHTML = title;
+                                                                            document.getElementById("CateName").innerHTML = cateName;
+                                                                            document.getElementById("PostUser").innerHTML = postUser;
+                                                                            document.getElementById("ReportDetail").innerHTML = reportDetail;
+                                                                            document.getElementById("ReportUser").innerHTML = reportUser;
+                                                                            document.getElementById("ReportType").textContent = reportType;
+                                                                            if (type == 0) {
+                                                                                document.getElementById("Type").textContent = "Đồ thất lạc";
+                                                                                document.getElementById("Type").setAttribute("style", "font-size: 1rem; font-weight: 400;");
+                                                                                document.getElementById("Type").setAttribute("class", "fw-medium")
+                                                                                document.getElementById("Type1").textContent = "LOST";
+                                                                                document.getElementById("Type1").setAttribute("style", "border-radius: 0.25rem !important;line-height: 1.5rem;height: 30px;border-bottom: 54px;margin-left: 10px; margin-top:5px;");
+                                                                                document.getElementById("Type1").setAttribute("class", "badge bg-warning")
+                                                                            } else {
+                                                                                document.getElementById("Type").textContent = "Đồ nhặt được";
+                                                                                document.getElementById("Type").setAttribute("style", "font-size: 1rem; font-weight: 400;");
+                                                                                document.getElementById("Type").setAttribute("class", "fw-medium")
+                                                                                document.getElementById("Type1").textContent = "FOUND";
+                                                                                document.getElementById("Type1").setAttribute("style", "border-radius: 0.25rem !important;line-height: 1.5rem;height: 30px;border-bottom: 54px;margin-left: 10px; margin-top:5px;");
+                                                                                document.getElementById("Type1").setAttribute("background-color", "#0d6efd!important;");
+                                                                                document.getElementById("Type1").setAttribute("class", "badge bg-success");
+                                                                            }
+
+                                                                            document.getElementById("Description").textContent = postDescription;
+                                                                            document.getElementById("DatePost").textContent = "Bài viết được đăng " + datePost;
+                                                                        }
+                                                                        function truyenDataDelete(reportId) {
+                                                                            document.getElementById("ReportId").value = reportId;
+                                                                        }
+        </script>
         <script>
             // ======== jvectormap activation
             var markers = [

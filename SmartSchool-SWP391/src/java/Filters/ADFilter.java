@@ -28,7 +28,7 @@ import user.UserDTO;
 @WebFilter(filterName = "ADFilter", urlPatterns = {"/adminFreelance", "/adminLostAndFound","/addCategory","/addJobCategory",
     "/adminLostAndFoundPost","/approveJob","/approveJobPost",
     "/category","/deleteCategory","/deleteJobCategory","/editCategory",
-    "/editJobCategory","/jobCategory","/approvePost","/listPostToApprove","/noApprovePost"})
+    "/editJobCategory","/jobCategory","/approvePost","/listPostToApprove","/noApprovePost","/deleteReportedPost","/reportManagement"})
 
 public class ADFilter implements Filter {
 

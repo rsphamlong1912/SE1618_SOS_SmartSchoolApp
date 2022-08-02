@@ -150,6 +150,12 @@ public class MainController extends HttpServlet {
     private static final String ADMIN_FREELANCE_POST = "AdminFreelancePost";
     private static final String ADMIN_FREELANCE_POST_CONTROLLER = "adminFreelancePost";
 
+    private static final String DELETE_REPORTED_POST = "DeleteReportedPost";
+    private static final String DELETE_REPORTED_POST_CONTROLLER = "deleteReportedPost";
+
+    private static final String REPORT_MANAGEMENT = "ReportManagement";
+    private static final String REPORT_MANAGEMENT_CONTROLLER = "reportManagement";
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -334,6 +340,12 @@ public class MainController extends HttpServlet {
             }
             if (DELETE_JOB_POST.equals(action)) {
                 url = DELETE_JOB_POST_CONTROLLER;
+            }
+            if (DELETE_REPORTED_POST.equals(action)) {
+                url = DELETE_REPORTED_POST_CONTROLLER;
+            }
+            if (REPORT_MANAGEMENT.equals(action)) {
+                url = REPORT_MANAGEMENT_CONTROLLER;
             }
 
         } catch (Exception e) {

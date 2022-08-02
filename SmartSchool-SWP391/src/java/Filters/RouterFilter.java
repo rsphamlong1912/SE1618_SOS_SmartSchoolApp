@@ -133,7 +133,7 @@ public class RouterFilter implements Filter {
             res.sendRedirect(req.getContextPath() + "/adminLostAndFoundPost");
         }
         if (url.endsWith("/Admin/ReportPostLostAndFound.jsp")) {
-
+            res.sendRedirect(req.getContextPath() + "/reportManagement");
         }
         //Normal Page
         if (url.endsWith("/LostAndFoundHome.jsp")) {
