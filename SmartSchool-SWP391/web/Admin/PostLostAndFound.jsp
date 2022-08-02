@@ -193,134 +193,23 @@
                         <div class="col-lg-5 col-md-5 col-6">
                             <div class="header-left d-flex align-items-center">
                                 <div class="menu-toggle-btn mr-20">
-                                    <button id="menu-toggle" class="main-btn warning-btn btn-hover">
+                                    <button id="menu-toggle" class="main-btn primary-btn btn-hover">
                                         <i class="lni lni-chevron-left me-2"></i> Menu
                                     </button>
-                                </div>
-                                <div class="header-search d-none d-md-flex">
-                                    <form action="#">
-                                        <input type="text" placeholder="Search..." />
-                                        <button><i class="lni lni-search-alt"></i></button>
-                                    </form>
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-7 col-md-7 col-6">
                             <div class="header-right">
-                                <!-- notification start -->
-                                <div class="notification-box ml-15 d-none d-md-flex">
-                                    <button class="dropdown-toggle" type="button" id="notification" data-bs-toggle="dropdown"
-                                            aria-expanded="false">
-                                        <i class="lni lni-alarm"></i>
-                                        <span>2</span>
-                                    </button>
-                                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="notification">
-                                        <li>
-                                            <a href="#0">
-                                                <div class="image">
-                                                    <img src="assets/images/lead/lead-6.png" alt="" />
-                                                </div>
-                                                <div class="content">
-                                                    <h6>
-                                                        John Doe
-                                                        <span class="text-regular">
-                                                            comment on a product.
-                                                        </span>
-                                                    </h6>
-                                                    <p>
-                                                        Lorem ipsum dolor sit amet, consect etur adipiscing
-                                                        elit Vivamus tortor.
-                                                    </p>
-                                                    <span>10 mins ago</span>
-                                                </div>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#0">
-                                                <div class="image">
-                                                    <img src="Admin/assets/images/lead/lead-1.png" alt="" />
-                                                </div>
-                                                <div class="content">
-                                                    <h6>
-                                                        Jonathon
-                                                        <span class="text-regular">
-                                                            like on a product.
-                                                        </span>
-                                                    </h6>
-                                                    <p>
-                                                        Lorem ipsum dolor sit amet, consect etur adipiscing
-                                                        elit Vivamus tortor.
-                                                    </p>
-                                                    <span>10 mins ago</span>
-                                                </div>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <!-- notification end -->
-                                <!-- message start -->
-                                <div class="header-message-box ml-15 d-none d-md-flex">
-                                    <button class="dropdown-toggle" type="button" id="message" data-bs-toggle="dropdown"
-                                            aria-expanded="false">
-                                        <i class="lni lni-envelope"></i>
-                                        <span>3</span>
-                                    </button>
-                                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="message">
-                                        <li>
-                                            <a href="#0">
-                                                <div class="image">
-                                                    <img src="Admin/assets/images/lead/lead-5.png" alt="" />
-                                                </div>
-                                                <div class="content">
-                                                    <h6>Jacob Jones</h6>
-                                                    <p>Hey!I can across your profile and ...</p>
-                                                    <span>10 mins ago</span>
-                                                </div>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#0">
-                                                <div class="image">
-                                                    <img src="Admin/assets/images/lead/lead-3.png" alt="" />
-                                                </div>
-                                                <div class="content">
-                                                    <h6>John Doe</h6>
-                                                    <p>Would you mind please checking out</p>
-                                                    <span>12 mins ago</span>
-                                                </div>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#0">
-                                                <div class="image">
-                                                    <img src="Admin/assets/images/lead/lead-2.png" alt="" />
-                                                </div>
-                                                <div class="content">
-                                                    <h6>Anee Lee</h6>
-                                                    <p>Hey! are you available for freelance?</p>
-                                                    <span>1h ago</span>
-                                                </div>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <!-- message end -->
-                                <!-- filter start -->
-                                <div class="filter-box ml-15 d-none d-md-flex">
-                                    <button class="" type="button" id="filter">
-                                        <i class="lni lni-funnel"></i>
-                                    </button>
-                                </div>
-                                <!-- filter end -->
                                 <!-- profile start -->
                                 <div class="profile-box ml-15">
                                     <button class="dropdown-toggle bg-transparent border-0" type="button" id="profile"
                                             data-bs-toggle="dropdown" aria-expanded="false">
                                         <div class="profile-info">
                                             <div class="info">
-                                                <h6>John Doe</h6>
+                                                <h6>Admin</h6>
                                                 <div class="image">
-                                                    <img src="Admin/assets/images/profile/profile-image.png" alt="" />
+                                                    <img src="/Admin/assets/images/profile/profile-image.png" alt="" />
                                                     <span class="status"></span>
                                                 </div>
                                             </div>
@@ -329,23 +218,7 @@
                                     </button>
                                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profile">
                                         <li>
-                                            <a href="#0">
-                                                <i class="lni lni-user"></i> View Profile
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#0">
-                                                <i class="lni lni-alarm"></i> Notifications
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#0"> <i class="lni lni-inbox"></i> Messages </a>
-                                        </li>
-                                        <li>
-                                            <a href="#0"> <i class="lni lni-cog"></i> Settings </a>
-                                        </li>
-                                        <li>
-                                            <a href="#0"> <i class="lni lni-exit"></i> Sign Out </a>
+                                            <a href="/logout"> <i class="lni lni-exit"></i> Sign Out </a>
                                         </li>
                                     </ul>
                                 </div>
@@ -432,9 +305,9 @@
                                                 <th class="min-width">
                                                     <h6 class="text-sm text-medium text-center">Type</h6>
                                                 </th>
-                                                <th class="min-width">
-                                                    <h6 class="text-sm text-medium text-center">Detail</h6>
-                                                </th>
+                                                <!--                                                <th class="min-width">
+                                                                                                    <h6 class="text-sm text-medium text-center">Detail</h6>
+                                                                                                </th>-->
                                                 <th class="min-width">
                                                     <h6 class="text-sm text-medium text-center">Action</h6>
                                                 </th>
@@ -478,13 +351,24 @@
                                                             </c:otherwise>
                                                         </c:choose>
                                                     </td>
-                                                    <td>
-                                                        <div class="action justify-content-center">
-                                                            <button  style="font-size:23px;">
-                                                                <a href="main?action=" class="text-gray"><i class="lni lni-eye fw-bold"></i></a>
-                                                            </button>
-                                                        </div>
-                                                    </td>
+                                                    <!--                                                    <td>
+                                                                                                            <div class="action justify-content-center">
+                                                                                                                <button type="button" class="text-gray" style="font-size:23px;" data-bs-toggle="modal"
+                                                                                                                        data-bs-target="#ModalDetailPost" 
+                                                                                                                        onclick="truyenDataDetail(this.getAttribute('data-idP'), this.getAttribute('data-titleP'), this.getAttribute('data-descP'),
+                                                                                                                                        this.getAttribute('data-cateName'), this.getAttribute('data-userId'), this.getAttribute('data-dateP'))"
+                                                                                                                        data-idP="${listPost.postId}"
+                                                                                                                        data-titleP="${listPost.title}"
+                                                                                                                        data-descP="${listPost.description}"
+                                                                                                                        data-cateName="${listPost.categoryName}"
+                                                                                                                        data-userId="${listPost.userId}"
+                                                                                                                        data-dateP="${listPost.date}"
+                                                    
+                                                                                                                        >
+                                                                                                                    <i class="lni lni-eye fw-bold"></i>
+                                                                                                                </button>
+                                                                                                            </div>
+                                                                                                        </td>-->
                                                     <td>
                                                         <div class="action justify-content-center">
                                                             <!--                                                            <button class="text-gray" style="font-size:23px;">
@@ -532,7 +416,67 @@
                 <!-- end container -->
             </section>
             <!-- ========== section end ========== -->
-
+            <!--            <div class="modal fade" id="ModalDetailPost" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered modal-xl">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h4 class="modal-title" id="exampleModalLabel">Item Information</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <input type="hidden" name="jobId" id="IdDe"/>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="content-detail mb-3">
+                                                    <div class="d-flex flex-column flex-lg-row justify-content-between mb-3">
+                                                        <h4 class="text-gray fw-medium text-truncate"><a class="text-decoration-none" id="titleP" name="title"></a></h4><span
+                                                            class="fs-1 fw-medium"></span>
+                                                    </div>
+                                                    <div class="d-flex align-items-center mb-3">
+            
+                                                        <h6 id="CateD" name="jobCategoryName"></h6>
+                                                    </div>
+                                                </div>
+                                                <div class="content-detail mb-3">
+                                                    <div class="align-items-center mb-2">
+                                                        <h6 class="mb-2">Mô tả:</h6>
+                                                        <span id="descP" name="description" class="fw-medium" style="font-size: 0.88889rem; line-height: 2.5;"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="d-flex align-items-center mb-3">
+                                                    <h6>Danh mục: <span id="cateNameP" name="cateNameP" class="fw-medium" style="font-size: 14px;">
+                                                        </span></h6>
+                                                </div>
+            
+                                                <p class="mb-2">Posted by</p>
+                                                <div class="d-flex align-items-center top-selling-table mb-3">
+                                                    <div class="product">
+                                                        <div class="image user-image">
+                                                            <img id="imgUser" name="avatar"
+                                                                 alt="" width="45px" height="45px"/>
+                                                        </div>
+                                                        <p id="userP" name="fullname" class="text-sm"></p>
+                                                    </div>
+                                                </div>
+                                                <div class="d-flex align-items-center">
+                                                    <span class="fw-medium" style="font-size: 14px;" id="dateP" name="date" > 
+                                                        <img src="/Admin/assets/images/clock.svg" style="margin-right: 5px;" width="15" alt="navigation" />
+                                                        <img src="/Admin/assets/images/clock.svg"/>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <img id="img" name="imgPost"
+                                                     alt=""  width="500px" height="400px" style="border-radius: 10px"/>
+                                            </div>
+                                        </div>
+            
+                                    </div>
+                                    <div class="modal-footer justify-content-center">
+                                        <button type="button" class="main-btn light-btn btn-hover btn-sm" data-bs-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div-->
             <!-- ========== footer start =========== -->
             <footer class="footer">
                 <div class="container-fluid">
@@ -574,7 +518,17 @@
         <script src="Admin/assets/js/world-merc.js"></script>
         <script src="Admin/assets/js/polyfill.js"></script>
         <script src="Admin/assets/js/main.js"></script>
-
+                <script>
+                                                                                function truyenDataDetail(idP, titleP, descP, cateNameP, userP, dateP) {
+                                                                                    document.getElementById("titleP").innerHTML = titleP;
+                                                                                    document.getElementById("descP").innerHTML = descP;
+                                                                                    document.getElementById("cateNameP").innerHTML = cateNameP;
+                                                                                    document.getElementById("userP").innerHTML = userP;
+                                                                                    document.getElementById("img").setAttribute("src", "/item?postId=" + idP)
+                                                                                    document.getElementById("imgUser").setAttribute("src", "/avatar?userId=" + userP);
+                                                                                    document.getElementById("dateP").innerHTML = dateP;
+                                                                                }
+                </script>
         <script>
                                                                 function truyenIdDelete(PostId) {
                                                                     document.getElementById("PostId2").value = PostId;

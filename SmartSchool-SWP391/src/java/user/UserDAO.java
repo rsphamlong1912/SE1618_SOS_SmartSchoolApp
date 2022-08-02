@@ -26,14 +26,14 @@ public class UserDAO {
     private static final String REGISTER = "INSERT INTO tblUser(fullname, userId, password, email, phone, roleId) VALUES (?, ?, ?, ?, ?, 'US')";
     private static final String EM_REGISTER = "INSERT INTO tblUser(fullname, userId, password, email, phone, roleId,compName,compAddress) VALUES (?, ?, ?, ?, ?, 'EM',?,?)";
 
-    private static final String LOGIN = "SELECT u.userId, u.roleId, u.password, u.fullname, u.avatar, u.phone, u.email, u.facebook, u.userStatus, u.haveJob, r.roleName\n"
+    private static final String LOGIN = "SELECT u.userId, u.roleId, u.password, u.fullname, u.avatar, u.phone, u.email, u.facebook, u.userStatus, u.haveJob,u.compName, u.compAddress, r.roleName\n"
             + "FROM tblUser as u, tblRole as r\n"
             + "WHERE u.roleId = r.roleId AND userId = ? AND password = ?";
-    private static final String CHECK_ACCOUNT = "SELECT u.userId, u.roleId, u.password, u.fullname, u.avatar, u.phone, u.email, u.facebook, u.userStatus, u.haveJob, r.roleName\n"
+    private static final String CHECK_ACCOUNT = "SELECT u.userId, u.roleId, u.password, u.fullname, u.avatar, u.phone, u.email, u.facebook, u.userStatus, u.haveJob, r.roleName, u.compName, u.compAddress\n"
             + "FROM tblUser as u, tblRole as r\n"
             + "WHERE u.roleId = r.roleId AND userId = ?";
     private static final String CHANGE_PASSWORD = "UPDATE tblUser SET password = ? WHERE userId= ?";
-    private static final String UPDATE_ACCOUNT = "UPDATE tblUser SET fullname = ?, email = ?, facebook = ?, phone = ? WHERE userId= ?";
+    private static final String UPDATE_ACCOUNT = "UPDATE tblUser SET fullname = ?, email = ?, facebook = ?, phone = ?, compName = ?, compAddress = ? WHERE userId= ?";
     private static final String EMPLOYER_INFOR = "SELECT u.userId, u.roleId, u.password, u.fullname, u.avatar, u.phone, u.email, u.facebook,u.compName,u.compDesc,u.compPhone,u.compEmail,u.compAddress, u.userStatus, u.haveJob, r.roleName\n"
             + "            FROM tblUser as u, tblRole as r\n"
             + "            WHERE u.roleId = r.roleId AND userId = ?";
@@ -233,8 +233,8 @@ public class UserDAO {
                 user.setPhone(rs.getString("phone"));
                 user.setEmail(rs.getString("email"));
                 user.setFacebook(rs.getString("facebook"));
-//                user.setCompAddress(rs.getString("compAddress"));
-//                user.setUserId(rs.getString("userId"));
+                user.setCompName(rs.getString("compName"));
+                user.setCompAddress(rs.getString("compAddress"));
                 user.setUserStatus(rs.getBoolean("userStatus"));
                 user.setHaveJob(rs.getBoolean("haveJob"));
                 user.setRoleName(rs.getString("roleName"));
@@ -276,13 +276,12 @@ public class UserDAO {
                     user.setPhone(rs.getString("phone"));
                     user.setEmail(rs.getString("email"));
                     user.setFacebook(rs.getString("facebook"));
-//                    user.setCompAddress(rs.getString("compAddress"));
-//                    user.setUserId(rs.getString("userId"));
+                    user.setCompName(rs.getString("compName"));
+                    user.setCompAddress(rs.getString("compAddress"));
                     user.setUserStatus(rs.getBoolean("userStatus"));
                     user.setHaveJob(rs.getBoolean("haveJob"));
                     user.setRoleName(rs.getString("roleName"));
                 }
-                return user;
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -297,7 +296,7 @@ public class UserDAO {
                 conn.close();
             }
         }
-        return null;
+        return user;
     }
 
     public UserDTO GetEmployerInfor(String userId) throws SQLException {
@@ -375,7 +374,7 @@ public class UserDAO {
         }
     }
 
-    public void employerSignup(String fullname, String userId, String password, String email, String phone,String compName,String compAddress)
+    public void employerSignup(String fullname, String userId, String password, String email, String phone, String compName, String compAddress)
             throws SQLException {
         Connection conn = null;
         PreparedStatement ptm = null;
@@ -464,7 +463,7 @@ public class UserDAO {
     }
 
     //Edit Profile
-    public void updateAccount(String userId, String fullname, String email, String facebook, String phone) throws Exception {
+    public void updateAccount(String userId, String fullname, String email, String facebook, String phone, String compName, String compAddress) throws Exception {
         Connection conn = null;
         PreparedStatement ptm = null;
         try {
@@ -476,7 +475,9 @@ public class UserDAO {
                 ptm.setString(2, email);
                 ptm.setString(3, facebook);
                 ptm.setString(4, phone);
-                ptm.setString(5, userId);
+                ptm.setString(5, compName);
+                ptm.setString(6, compAddress);
+                ptm.setString(7, userId);
                 ptm.executeUpdate();
             } //process when connection is existed
 

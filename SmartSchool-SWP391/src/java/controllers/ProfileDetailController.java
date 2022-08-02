@@ -35,13 +35,20 @@ public class ProfileDetailController extends HttpServlet {
     
     private static final String ERROR = "login.jsp";
     private static final String PROFILE_DETAIL_PAGE = "profileDetail.jsp";
+    private static final String PROFILE_DETAIL_FREELANCE_PAGE = "profileDetailFreelance.jsp";
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = PROFILE_DETAIL_PAGE;
+        String url = PROFILE_DETAIL_FREELANCE_PAGE;
         try {
             HttpSession session = request.getSession();
+              String urlBranch =(String) session.getAttribute("urlBranch");
+              if ("LostFound".equals(urlBranch)) {
+                  url = PROFILE_DETAIL_PAGE;
+              } else {
+                  url = PROFILE_DETAIL_FREELANCE_PAGE;
+              }
             UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
             
             UserDAO dao = new UserDAO(); 

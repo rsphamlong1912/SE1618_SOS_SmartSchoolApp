@@ -14,6 +14,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import user.UserDAO;
 import user.UserDTO;
 
@@ -35,13 +36,20 @@ public class FeedbackSystemController extends HttpServlet {
      */
     private static final String ERROR = "login.jsp";
     private static final String FEEDBACK_SYSTEM_PAGE = "feedbackSystem.jsp";
+    private static final String FEEDBACK_SYSTEM_FREELANCE_PAGE = "feedbackSystemFreelance.jsp";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = FEEDBACK_SYSTEM_PAGE;
         try {
-
+            HttpSession session = request.getSession();
+              String urlBranch =(String) session.getAttribute("urlBranch");
+              if ("LostFound".equals(urlBranch)) {
+                  url = FEEDBACK_SYSTEM_PAGE;
+              } else {
+                  url = FEEDBACK_SYSTEM_FREELANCE_PAGE;
+              }
         } catch (Exception e) {
             log("Error at LoginController:" + e.toString());
         } finally {

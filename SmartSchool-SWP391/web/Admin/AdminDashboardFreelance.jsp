@@ -27,7 +27,7 @@
 
     <body>
         <!-- ======== sidebar-nav start =========== -->
-           <aside class="sidebar-nav-wrapper">
+        <aside class="sidebar-nav-wrapper">
             <div class="navbar-logo">
                 <a href="index.html">
                     <img src="https://upload.wikimedia.org/wikipedia/vi/1/1d/Logo_%C4%90%E1%BA%A1i_h%E1%BB%8Dc_FPT.png"
@@ -187,121 +187,10 @@
                                         <i class="lni lni-chevron-left me-2"></i> Menu
                                     </button>
                                 </div>
-                                <div class="header-search d-none d-md-flex">
-                                    <form action="#">
-                                        <input type="text" placeholder="Search..." />
-                                        <button><i class="lni lni-search-alt"></i></button>
-                                    </form>
-                                </div>
                             </div>
                         </div>
                         <div class="col-lg-7 col-md-7 col-6">
                             <div class="header-right">
-                                <!-- notification start -->
-                                <div class="notification-box ml-15 d-none d-md-flex">
-                                    <button class="dropdown-toggle" type="button" id="notification" data-bs-toggle="dropdown"
-                                            aria-expanded="false">
-                                        <i class="lni lni-alarm"></i>
-                                        <span>2</span>
-                                    </button>
-                                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="notification">
-                                        <li>
-                                            <a href="#0">
-                                                <div class="image">
-                                                    <img src="assets/images/lead/lead-6.png" alt="" />
-                                                </div>
-                                                <div class="content">
-                                                    <h6>
-                                                        Admin
-                                                        <span class="text-regular">
-                                                            comment on a product.
-                                                        </span>
-                                                    </h6>
-                                                    <p>
-                                                        Lorem ipsum dolor sit amet, consect etur adipiscing
-                                                        elit Vivamus tortor.
-                                                    </p>
-                                                    <span>10 mins ago</span>
-                                                </div>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#0">
-                                                <div class="image">
-                                                    <img src="assets/images/lead/lead-1.png" alt="" />
-                                                </div>
-                                                <div class="content">
-                                                    <h6>
-                                                        Jonathon
-                                                        <span class="text-regular">
-                                                            like on a product.
-                                                        </span>
-                                                    </h6>
-                                                    <p>
-                                                        Lorem ipsum dolor sit amet, consect etur adipiscing
-                                                        elit Vivamus tortor.
-                                                    </p>
-                                                    <span>10 mins ago</span>
-                                                </div>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <!-- notification end -->
-                                <!-- message start -->
-                                <div class="header-message-box ml-15 d-none d-md-flex">
-                                    <button class="dropdown-toggle" type="button" id="message" data-bs-toggle="dropdown"
-                                            aria-expanded="false">
-                                        <i class="lni lni-envelope"></i>
-                                        <span>3</span>
-                                    </button>
-                                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="message">
-                                        <li>
-                                            <a href="#0">
-                                                <div class="image">
-                                                    <img src="assets/images/lead/lead-5.png" alt="" />
-                                                </div>
-                                                <div class="content">
-                                                    <h6>Jacob Jones</h6>
-                                                    <p>Hey!I can across your profile and ...</p>
-                                                    <span>10 mins ago</span>
-                                                </div>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#0">
-                                                <div class="image">
-                                                    <img src="assets/images/lead/lead-3.png" alt="" />
-                                                </div>
-                                                <div class="content">
-                                                    <h6>John Doe</h6>
-                                                    <p>Would you mind please checking out</p>
-                                                    <span>12 mins ago</span>
-                                                </div>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#0">
-                                                <div class="image">
-                                                    <img src="assets/images/lead/lead-2.png" alt="" />
-                                                </div>
-                                                <div class="content">
-                                                    <h6>Anee Lee</h6>
-                                                    <p>Hey! are you available for freelance?</p>
-                                                    <span>1h ago</span>
-                                                </div>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <!-- message end -->
-                                <!-- filter start -->
-                                <div class="filter-box ml-15 d-none d-md-flex">
-                                    <button class="" type="button" id="filter">
-                                        <i class="lni lni-funnel"></i>
-                                    </button>
-                                </div>
-                                <!-- filter end -->
                                 <!-- profile start -->
                                 <div class="profile-box ml-15">
                                     <button class="dropdown-toggle bg-transparent border-0" type="button" id="profile"
@@ -310,7 +199,7 @@
                                             <div class="info">
                                                 <h6>Admin</h6>
                                                 <div class="image">
-                                                    <img src="assets/images/profile/profile-image.png" alt="" />
+                                                    <img src="/Admin/assets/images/profile/profile-image.png" alt="" />
                                                     <span class="status"></span>
                                                 </div>
                                             </div>
@@ -319,23 +208,7 @@
                                     </button>
                                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profile">
                                         <li>
-                                            <a href="#0">
-                                                <i class="lni lni-user"></i> View Profile
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#0">
-                                                <i class="lni lni-alarm"></i> Notifications
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#0"> <i class="lni lni-inbox"></i> Messages </a>
-                                        </li>
-                                        <li>
-                                            <a href="#0"> <i class="lni lni-cog"></i> Settings </a>
-                                        </li>
-                                        <li>
-                                            <a href="#0"> <i class="lni lni-exit"></i> Sign Out </a>
+                                            <a href="/logout"> <i class="lni lni-exit"></i> Sign Out </a>
                                         </li>
                                     </ul>
                                 </div>
@@ -496,34 +369,34 @@
                                         </thead>
                                         <tbody>
                                             <c:forEach items="${requestScope.TOP5_NEW_EMPLOYER}" var="employer">
-                                            <tr>
-                                                <td>
-                                                    <div class="product">
-                                                        <div class="image user-image">
-                                                            <img src="${pageContext.servletContext.contextPath}/avatar?userId=${employer.userId}" alt="" />
+                                                <tr>
+                                                    <td>
+                                                        <div class="product">
+                                                            <div class="image user-image">
+                                                                <img src="${pageContext.servletContext.contextPath}/avatar?userId=${employer.userId}" alt="" />
+                                                            </div>
+                                                            <p class="text-sm">${employer.fullname}</p>
                                                         </div>
-                                                        <p class="text-sm">${employer.fullname}</p>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <p class="text-sm">${employer.phone}</p>
-                                                </td>
-                                                <td>
-                                                    <p class="text-sm">${employer.email}</p>
-                                                </td>
-                                                <td>
-                                                    <div class="action justify-content-center">
-                                                        <span class="status-btn success-btn">Active</span>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="action justify-content-center">
-                                                        <button type="submit" name="" value="" class="edit" >
-                                                            <span class="status-btn danger-btn" style="font-weight: 700;"><i class="lni lni-ban" style="font-weight: 700;"></i> Ban</span>                     
-                                                        </button>
-                                                    </div>
-                                                </td>
-                                            </tr>
+                                                    </td>
+                                                    <td>
+                                                        <p class="text-sm">${employer.phone}</p>
+                                                    </td>
+                                                    <td>
+                                                        <p class="text-sm">${employer.email}</p>
+                                                    </td>
+                                                    <td>
+                                                        <div class="action justify-content-center">
+                                                            <span class="status-btn success-btn">Active</span>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="action justify-content-center">
+                                                            <button type="submit" name="" value="" class="edit" >
+                                                                <span class="status-btn danger-btn" style="font-weight: 700;"><i class="lni lni-ban" style="font-weight: 700;"></i> Ban</span>                     
+                                                            </button>
+                                                        </div>
+                                                    </td>
+                                                </tr>
                                             </c:forEach>
                                         </tbody>
                                     </table>
@@ -610,7 +483,7 @@
                                                                     src="${pageContext.servletContext.contextPath}/avatar?userId=${jobPost.userId}"
                                                                     alt="" />
                                                             </div>
-                                                                    <p class="text-sm">${jobPost.fullname}</p>
+                                                            <p class="text-sm">${jobPost.fullname}</p>
                                                         </div>
                                                     </td>
                                                     <td>

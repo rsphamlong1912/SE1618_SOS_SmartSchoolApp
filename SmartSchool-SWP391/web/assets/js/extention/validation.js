@@ -97,6 +97,20 @@ function checkEmailError(input) {
     return isEmailError
 }
 
+function checkPhoneError(input) {
+    const regexPhone =
+            /^[0-9\-\+]{9,15}$/i;
+    input.value = input.value.trim()
+    let isPhoneError = !regexPhone.test(input.value)
+    if (regexPhone.test(input.value)) {
+        showSuccess(input)
+    } else {
+        showError(input, 'Số điện thoại không hợp lệ !')
+    }
+
+    return isPhoneError
+}
+
 function checkLengthError(input, min, max) {
     input.value = input.value.trim()
 
@@ -137,11 +151,12 @@ function checkMatchPasswordError(passwordInput, repasswordInput) {
 function validate() {
     let isEmptyError = checkEmptyError([fullName, username, password, repassword, email, phone])
     let isEmailError = checkEmailError(email)
+    let isPhoneError = checkPhoneError(phone)
     let isUserNameLengthError = checkLengthError(username, 4, 30)
     let isPasswordLengthError = checkLengthError(password, 4, 30)
     let isMatchError = checkMatchPasswordError(password, repassword)
 
-    if (isEmptyError || isEmailError || isUserNameLengthError || isPasswordLengthError || isMatchError) {
+    if (isEmptyError || isEmailError || isUserNameLengthError || isPasswordLengthError || isMatchError || isPhoneError) {
         return false
     }
     return true
@@ -150,10 +165,11 @@ function validate() {
 function employerValidate() {
     let isEmptyError = checkEmptyError([fullName, username, password, repassword, email, phone,compName,compAddress])
     let isEmailError = checkEmailError(email)
+    let isPhoneError = checkPhoneError(phone)
     let isUserNameLengthError = checkLengthError(username, 4, 30)
     let isPasswordLengthError = checkLengthError(password, 4, 30)
     let isMatchError = checkMatchPasswordError(password, repassword)
-    if (isEmptyError || isEmailError || isUserNameLengthError || isPasswordLengthError || isMatchError) {
+    if (isEmptyError || isEmailError || isUserNameLengthError || isPasswordLengthError || isMatchError || isPhoneError) {
         return false
     }
     return true
@@ -239,9 +255,18 @@ function validatePost() {
 
 function validateProfile() {
     let isEmpty = checkEmptyError([nameUser, phoneUser, emailUser])
-    if (isEmpty ) {
+    let isPhoneError = checkPhoneError(phoneUser);
+    if (isEmpty || isPhoneError ) {
         return false
     }
     return true
 }
 
+function validateProfileEm() {
+    let isEmpty = checkEmptyError([nameUser, phoneUser, emailUser, compName, compAddress])
+    let isPhoneError = checkPhoneError(phoneUser);
+    if (isEmpty || isPhoneError ) {
+        return false
+    }
+    return true
+}
