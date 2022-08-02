@@ -207,14 +207,12 @@
                                             data-bs-toggle="dropdown" aria-expanded="false">
                                         <div class="profile-info">
                                             <div class="info">
-                                                <h6>Admin</h6>
+                                                <h6>${sessionScope.LOGIN_USER.fullname}</h6>
                                                 <div class="image">
-                                                    <img src="/Admin/assets/images/profile/profile-image.png" alt="" />
-                                                    <span class="status"></span>
+                                                    <img src="${pageContext.servletContext.contextPath}/avatar?userId=${sessionScope.LOGIN_USER.userId}" style="width: 45px; height: 47px" alt="" />
                                                 </div>
                                             </div>
                                         </div>
-                                        <i class="lni lni-chevron-down"></i>
                                     </button>
                                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profile">
                                         <li>
