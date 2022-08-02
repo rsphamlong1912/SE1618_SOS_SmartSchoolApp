@@ -331,6 +331,7 @@ public class MainController extends HttpServlet {
             }
             if (EM_SIGNUP.equals(action)) {
                 url = EM_SIGNUP_CONTROLLER;
+            }
             if (DELETE_POST_LOSTANDFOUND.equals(action)) {
 
                 url = DELETE_POST_LOSTANDFOUND_CONTROLLER;

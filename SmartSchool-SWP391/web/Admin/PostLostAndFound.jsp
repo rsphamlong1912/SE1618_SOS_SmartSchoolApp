@@ -114,7 +114,7 @@
                                 <a href="" class="active"> Lost & Found </a>
                             </li>
                             <li>
-                                <a href=""> Freelance Job </a>
+                                <a href="adminFreelancePost"> Freelance Job </a>
                             </li>
                         </ul>
                     </li>
@@ -487,18 +487,41 @@
                                                     </td>
                                                     <td>
                                                         <div class="action justify-content-center">
-                                                            <button class="text-gray" style="font-size:23px;">
-                                                                <a href="main?action=DeletePost&postId=${listPost.postId}" class="text-danger"><i class="lni lni-trash-can fw-bold"></i></a>
+                                                            <!--                                                            <button class="text-gray" style="font-size:23px;">
+                                                                                                                            <a href="main?action=DeletePost&postId=${listPost.postId}" class="text-danger"><i class="lni lni-trash-can fw-bold"></i></a>
+                                                                                                                        </button>-->
+                                                            <button class="text-danger" style="font-size:23px;" onclick="truyenIdDelete(this.getAttribute('data-PostId'))" data-bs-toggle="modal"
+                                                                    data-bs-target="#ModalDeletePost" data-PostId="${listPost.postId}">
+                                                                <i class="lni lni-trash-can fw-bold"></i>
                                                             </button>
                                                         </div>
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                 </c:forEach>
-                                            
                                         </tbody>
                                     </table>
                                     <!-- End Table -->
+
+                                    <!--Modal Delete-->
+                                    <form action="main">
+                                        <div class="modal fade" id="ModalDeletePost" tabindex="-1" aria-labelledby="exampleModalLabel"
+                                             aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered modal-sm">
+                                                <div class="modal-content">
+                                                    <div class="modal-header justify-content-center">
+                                                        <h4 class="modal-title text-danger" id="exampleModalLabel">Xóa bài đăng này?</h4>
+                                                    </div>
+                                                    <div class="modal-footer justify-content-center">
+                                                        <button type="button" class="main-btn warning-btn-outline btn-hover btn-sm"
+                                                                data-bs-dismiss="modal">Hủy</button>
+                                                        <input type="hidden" id="PostId2"  name="postId"/>
+                                                        <button type="submit" name="action" value="DeletePost" class="main-btn warning-btn btn-hover btn-sm">Xóa</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -551,6 +574,12 @@
         <script src="Admin/assets/js/world-merc.js"></script>
         <script src="Admin/assets/js/polyfill.js"></script>
         <script src="Admin/assets/js/main.js"></script>
+
+        <script>
+                                                                function truyenIdDelete(PostId) {
+                                                                    document.getElementById("PostId2").value = PostId;
+                                                                }
+        </script>
 
         <script>
             // ======== jvectormap activation
