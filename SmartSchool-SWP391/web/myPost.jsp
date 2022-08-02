@@ -203,7 +203,7 @@
                                     </ul>
                                 </li>
                                 <!--/ User -->  
-                                <li class="nav-item px-3"><a class="btn btn-outline-light order-1 order-lg-0 fw-bold" href="uploadPost">ĐĂNG BÀI</a></li>
+                                <li class="nav-item px-3"><a class="btn btn-outline-light order-1 order-lg-0 fw-bold" href="main?action=UploadLostAndFoundPost">ĐĂNG BÀI</a></li>
                                 </c:if>    
                         </ul>
                     </div>
@@ -211,6 +211,16 @@
             </nav>
             <section class="container" style="padding-top: 1rem;" id="timkiem">
                 <h1 style="margin-top: 100px; text-align: center;">Bài đăng của tôi</h1>
+                <div class="row mb-3 justify-content-end">
+                    <div class="col-md-3">
+                        <form action="selectMyPost">
+                            <select name="postStatus" class="form-select fw-bold" onchange="this.form.submit()" aria-label="Default select example">
+                                <option value="approving" ${requestScope.SELECTED == 1 ? 'selected' : ''}>Bài viết đang chờ duyệt</option>
+                                <option value="true" ${requestScope.SELECTED == 2 ? 'selected' : ''}>Bài viết của tôi</option>
+                            </select>
+                        </form>
+                    </div>
+                </div>
                 <div class="row justify-content-center">
                     <div class="left col-12 col-md-4">
                         <div class="card position-relative shadow" style="max-width: 370px;">
@@ -242,6 +252,7 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="right col-12 col-md-6">
                         <form>
                             <c:if test="${!empty requestScope.MY_POST}">
@@ -362,10 +373,10 @@
         <script src="assets/js/theme.js"></script>
         <script src="assets/js/extention/choices.js"></script>
         <script>
-            const choices = new Choices('[data-trigger]',
-                    {
-                        searchEnabled: false
-                    });
+                                const choices = new Choices('[data-trigger]',
+                                        {
+                                            searchEnabled: false
+                                        });
 
         </script>
         <link

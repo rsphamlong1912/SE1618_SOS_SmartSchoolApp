@@ -48,14 +48,21 @@ public class SendReportPostController extends HttpServlet {
         if (loginUser == null) {
             response.sendRedirect("login.jsp");
         } else {
+
             try {
-                ReportDAO dao = new ReportDAO();
-                int reportedCount = dao.getTotleReported(loginUser.getUserId(), postId);
-                if (reportedCount >= 1) {
-                    request.setAttribute("ERORMESSAGE", "Tối đa 1 lần báo cáo trên 1 bài viết");
-                } else if (reportedCount < 3) {
-                    dao.sendReport(loginUser.getUserId(), postId, reportTypeId, reportDetail);
-                    request.setAttribute("SUCCESSMESSAGE", "Báo cáo thành công");
+                if (loginUser.getUserId().equals(userId)) {
+                    request.setAttribute("ERORMESSAGE", "Không thể báo cáo bài viết của mình!");
+
+                } else {
+
+                    ReportDAO dao = new ReportDAO();
+                    int reportedCount = dao.getTotleReported(loginUser.getUserId(), postId);
+                    if (reportedCount >= 1) {
+                        request.setAttribute("ERORMESSAGE", "Tối đa 1 lần báo cáo trên 1 bài viết");
+                    } else if (reportedCount < 3) {
+                        dao.sendReport(loginUser.getUserId(), postId, reportTypeId, reportDetail);
+                        request.setAttribute("SUCCESSMESSAGE", "Báo cáo thành công");
+                    }
                 }
                 url = "main?postId=" + postId + "&userId=" + userId + "&action=Detail";
             } catch (SQLException ex) {

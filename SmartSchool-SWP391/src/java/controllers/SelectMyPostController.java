@@ -7,67 +7,66 @@ package controllers;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
+import java.sql.SQLException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import jobPost.JobPostDAO;
-import jobPost.JobPostDTO;
+import post.PostDAO;
+import post.PostDTO;
 import user.UserDTO;
 
 /**
  *
- * @author TrinhNgocBao
+ * @author SE150925 Nguyen Van Hai Nam
  */
-@WebServlet(name = "SelectJobController", urlPatterns = {"/selectJob"})
-public class SelectJobController extends HttpServlet {
+@WebServlet(name = "SelectMyPostController", urlPatterns = {"/selectMyPost"})
+public class SelectMyPostController extends HttpServlet {
 
-
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
         try {
+            response.setContentType("text/html;charset=UTF-8");
             HttpSession session = request.getSession();
+            String postStatus = request.getParameter("postStatus");
             UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
-            String userId = loginUser.getUserId();
-            String job = request.getParameter("Job");
-            JobPostDAO dao = new JobPostDAO();
-            List<JobPostDTO> list = dao.getMyJobPostDoingDone(userId);
-            List<JobPostDTO> listDoing = new ArrayList<>();
-            List<JobPostDTO> listDone = new ArrayList<>();
-            if ("doing".equals(job)){
-                for(JobPostDTO doing: list){
-                    if("doing".equals(doing.getProcess())){
-                        listDoing.add(doing);
-                    }
+            PostDAO dao = new PostDAO();
+            if ("approving".equals(postStatus)) {
+                List<PostDTO> listApproving = dao.getMyPostApproving(loginUser.getUserId());
+                if (listApproving.isEmpty()) {
+                    request.setAttribute("ERROR", "Bạn chưa có bài đăng nào");
+                } else {
+                    request.setAttribute("MY_POST", listApproving);
+                    request.setAttribute("SELECTED", 1);
                 }
-                request.setAttribute("MY_JOB_POST_DONE", listDoing);
-                request.setAttribute("SELECTED", 1);
-                if(listDoing.isEmpty()){
-                    request.setAttribute("ERROR", "Chưa có công việc nào");
+            } else if ("true".equals(postStatus)) {
+                List<PostDTO> list = dao.getMyPost(loginUser.getUserId());
+                if (list.isEmpty()) {
+                    request.setAttribute("ERROR", "Bạn chưa có bài đăng nào");
+                } else {
+                    request.setAttribute("MY_POST", list);
+                    request.setAttribute("SELECTED", 2);
                 }
-                
-            }else if ("done".equals(job)){
-                for(JobPostDTO done: list){
-                    if("done".equals(done.getProcess())){
-                        listDone.add(done);
-                    }
-                }
-                request.setAttribute("MY_JOB_POST_DONE", listDone);
-                request.setAttribute("SELECTED", 2); 
-                if(listDone.isEmpty()){
-                    request.setAttribute("ERROR", "Chưa có công việc nào");
-                }
+
             }
-            
-            
-        } catch (Exception e) {
+        } catch (SQLException ex) {
+            Logger.getLogger(SelectMyPostController.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-            request.getRequestDispatcher("EmployerJobDone.jsp").forward(request, response);
+            request.getRequestDispatcher("myPost.jsp").forward(request, response);
         }
     }
 
