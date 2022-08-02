@@ -255,7 +255,7 @@
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
-                                            <p class="fw-bold mb-2">Bạn Có Muốn Xóa Bài Viết Này?? </p>
+                                            <p class="fw-bold mb-2">Bạn Có Muốn Xóa Bài Viết Này? </p>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>

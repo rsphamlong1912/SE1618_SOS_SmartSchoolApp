@@ -57,7 +57,7 @@
                         </a>
                         <ul id="ddmenu_1" class="collapse dropdown-nav">
                             <li>
-                                <a href="adminLostAndFound" class="active"> Lost And Found </a>
+                                <a href="adminLostAndFound" class=""> Lost And Found </a>
                             </li>
                             <li>
                                 <a href="adminFreelance" class=""> Freelance Job </a>
@@ -128,7 +128,7 @@
                         </a>
                         <ul id="ddmenu_5" class="collapse dropdown-nav">
                             <li>
-                                <a href=""> Lost & Found </a>
+                                <a href="reportManagement"> Lost & Found </a>
                             </li>
                             <li>
                                 <a href=""> Freelance Job </a>
