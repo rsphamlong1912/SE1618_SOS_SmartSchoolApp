@@ -157,6 +157,51 @@ public class RouterFilter implements Filter {
         if (url.endsWith("/EmployerUpload.jsp")) {
             res.sendRedirect(req.getContextPath() + "/uploadJobPost");
         }
+        if (url.endsWith("/UploadPost.jsp")) {
+            res.sendRedirect(req.getContextPath() + "/uploadLostAndFoundPost");
+        }
+        if (url.endsWith("/profileDetail.jsp")) {
+            res.sendRedirect(req.getContextPath() + "/updateAvatar");
+        }
+        if (url.endsWith("/EmployerJobDone.jsp")) {
+            res.sendRedirect(req.getContextPath() + "/selectJob");
+        }
+        if (url.endsWith("/postDetail.jsp")) {
+            res.sendRedirect(req.getContextPath() + "/postDetail");
+        }
+        if (url.endsWith("/myPost.jsp")) {
+            res.sendRedirect(req.getContextPath() + "/myPost");
+        }
+        if (url.endsWith("FreelancerJobWaiting.jsp")) {
+            res.sendRedirect(req.getContextPath() + "/myJobWaiting");
+        }
+        if (url.endsWith("EmployerJobProcessDetail.jsp")) {
+            res.sendRedirect(req.getContextPath() + "/myJobPostProcessDetail");
+        }
+        if (url.endsWith("EmployerJobProcess.jsp")) {
+            res.sendRedirect(req.getContextPath() + "/myJobPostProcess");
+        }
+        if (url.endsWith("EmployerJobDoneDetail.jsp")) {
+            res.sendRedirect(req.getContextPath() + "/myJobPostDoneDetail");
+        }
+        if (url.endsWith("EmployerJobDone.jsp")) {
+            res.sendRedirect(req.getContextPath() + "/myJobPostDone");
+        }
+        if (url.endsWith("EmployerJobApprove.jsp")) {
+            res.sendRedirect(req.getContextPath() + "/myJobPostApprove");
+        }
+        if (url.endsWith("FreelancerJobDoing.jsp")) {
+            res.sendRedirect(req.getContextPath() + "/myJobDoing");
+        }
+        if (url.endsWith("LostAndFoundDetail.jsp")) {
+            res.sendRedirect(req.getContextPath() + "/lostAndFoundDetail");
+        }
+        if (url.endsWith("FreelanceList.jsp")) {
+            res.sendRedirect(req.getContextPath() + "/listJobPost");
+        }
+        if (url.endsWith("feedbackSystem.jsp")) {
+            res.sendRedirect(req.getContextPath() + "/feedbackSystem");
+        }
         Throwable problem = null;
         try {
             chain.doFilter(request, response);

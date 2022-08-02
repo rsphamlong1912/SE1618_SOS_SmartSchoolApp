@@ -25,7 +25,8 @@ import user.UserDTO;
  *
  * @author SE150925 Nguyen Van Hai Nam
  */
-@WebFilter(filterName = "EMFilter", urlPatterns = {"/lostAndfoundhome", "/listAll","/uploadLostAndFoundPost"})
+@WebFilter(filterName = "EMFilter", urlPatterns = {"/lostAndfoundhome", "/listAll","/uploadLostAndFoundPost","/lostAndFoundDetail","/listJobPost",
+    ""})
 
 public class EMFilter implements Filter {
 
