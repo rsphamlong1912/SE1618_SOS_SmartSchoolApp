@@ -27,7 +27,8 @@ import user.UserDTO;
  */
 @WebFilter(filterName = "SecurityFilter", urlPatterns = {"/uploadJobPost", "/uploadLostAndFoundPost",
     "/submitFormJob","/myJobWaiting","/myJobPostProcessDetail","/myJobPostProcess","/myJobPostDoneDetail","/myJobPostDone",
-    "/myJobPostApprove","/myJobDoing","/approveUserWaiting"})
+    "/myJobPostApprove","/myJobDoing","/approveUserWaiting","/employerDashboard","/uploadLostAndFoundPost","/myJobPostProcessDetail","/myJobWaiting",
+    "/myPost","/myJobPostProcessDetail","/myJobPostProcess","/myJobPostDoneDetail","/myJobPostDone","/myJobPostApprove","/myJobDoing"})
 public class SecurityFilter implements Filter {
 
     private static final boolean debug = true;
@@ -116,7 +117,7 @@ public class SecurityFilter implements Filter {
         HttpSession session = req.getSession();
         UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
         if (loginUser == null) {
-            res.sendRedirect(req.getContextPath() + "/FreelancerLogin.jsp");
+            res.sendRedirect(req.getContextPath() + "/WelcomePage.jsp");
         }
         Throwable problem = null;
         try {

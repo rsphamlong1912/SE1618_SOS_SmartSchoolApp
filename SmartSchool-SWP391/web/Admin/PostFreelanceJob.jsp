@@ -207,6 +207,7 @@
                                                 <h6>Admin</h6>
                                                 <div class="image">
                                                     <img src="/Admin/assets/images/profile/profile-image.png" alt="" />
+
                                                     <span class="status"></span>
                                                 </div>
                                             </div>
@@ -216,6 +217,7 @@
                                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profile">
                                         <li>
                                             <a href="/logout"> <i class="lni lni-exit"></i> Sign Out </a>
+
                                         </li>
                                     </ul>
                                 </div>
@@ -226,6 +228,7 @@
                 </div>
             </header>
             <!-- ========== header end ========== -->
+
 
             <!-- ========== section start ========== -->
             <section class="section">
@@ -327,30 +330,19 @@
                                                     </td>
                                                     <td>
                                                         <div class="action justify-content-center">
-                                                            <button type="button" class="text-gray" style="font-size:23px;" data-bs-toggle="modal"
-                                                                    data-bs-target="#ModalDetailPost" onclick="truyenDataDetail(this.getAttribute('data-jobIdDe'),
-                                                                                    this.getAttribute('data-titleDe'), this.getAttribute('data-descripDe'),
-                                                                                    this.getAttribute('data-cateName'), this.getAttribute('data-salaryDe'),
-                                                                                    this.getAttribute('data-amountDe'), this.getAttribute('data-timeDe'),
-                                                                                    this.getAttribute('data-avatar'), this.getAttribute('data-name'), this.getAttribute('data-date'))"
-                                                                    data-jobIdDe="${listPost.jobId}" 
-                                                                    data-titleDe="${listPost.title}" 
-                                                                    data-descripDe="${listPost.description}" 
-                                                                    data-cateName="${listPost.jobCategoryName}"
-                                                                    data-salaryDe="${listPost.salary}"
-                                                                    data-amountDe="${listPost.amount}" 
-                                                                    data-timeDe="${listPost.timeJob}" 
-                                                                    data-avatar="${listPost.userId}" 
-                                                                    data-name="${listPost.fullname}" 
-                                                                    data-date="${listPost.date}">
-                                                                <i class="lni lni-eye fw-bold"></i>
+                                                            <button  style="font-size:23px;">
+                                                                <a href="main?action=" class="text-gray"><i class="lni lni-eye fw-bold"></i></a>
                                                             </button>
                                                         </div>
                                                     </td>
                                                     <td>
                                                         <div class="action justify-content-center">
-                                                            <button class="text-gray" style="font-size:23px;">
-                                                                <a href="main?action=DeleteJobPost&jobId=${listPost.jobId}" class="text-danger"><i class="lni lni-trash-can fw-bold"></i></a>
+                                                            <!--                                                            <button class="text-gray" style="font-size:23px;">
+                                                                                                                            <a href="main?action=DeleteJobPost&jobId=${listPost.jobId}" class="text-danger"><i class="lni lni-trash-can fw-bold"></i></a>
+                                                                                                                        </button>-->
+                                                            <button class="text-danger" style="font-size:23px;" onclick="truyenIdDelete(this.getAttribute('data-JobPostId'))" data-bs-toggle="modal"
+                                                                    data-bs-target="#ModalDeleteJobPost" data-JobPostId="${listPost.jobId}">
+                                                                <i class="lni lni-trash-can fw-bold"></i>
                                                             </button>
                                                         </div>
                                                     </td>
@@ -359,6 +351,26 @@
                                         </tbody>
                                     </table>
                                     <!-- End Table -->
+
+                                    <!--Modal No Approve Post-->
+                                    <form action="main">
+                                        <div class="modal fade" id="ModalDeleteJobPost" tabindex="-1" aria-labelledby="exampleModalLabel"
+                                             aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered modal-sm">
+                                                <div class="modal-content">
+                                                    <div class="modal-header justify-content-center">
+                                                        <h4 class="modal-title text-danger" id="exampleModalLabel">Xóa bài viết này?</h4>
+                                                    </div>
+                                                    <div class="modal-footer justify-content-center">
+                                                        <button type="button" class="main-btn warning-btn-outline btn-hover btn-sm"
+                                                                data-bs-dismiss="modal">Hủy</button>
+                                                        <input type="hidden" id="JobPostId1"  name="jobId"/>
+                                                        <button type="submit" name="action" value="DeleteJobPost" class="main-btn warning-btn btn-hover btn-sm">Xóa</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -383,6 +395,7 @@
                                     <div class="d-flex align-items-center mb-3">
 
                                         <h6 id="CateD" name="jobCategoryName"></h6>
+
                                     </div>
                                 </div>
                                 <div class="content-detail mb-3">
@@ -401,6 +414,7 @@
                                 </div>
                                 <div class="d-flex align-items-center mb-3">
                                     <h6>Thời gian công việc: <span id="timeDe1" name="timeJob" class="fw-medium" style="font-size: 14px;"></span></h6>
+
                                 </div>
                                 <p class="mb-2">Posted by</p>
                                 <div class="d-flex align-items-center top-selling-table mb-3">
@@ -417,6 +431,7 @@
                                         <img src="/Admin/assets/images/clock.svg" style="margin-right: 5px;" width="15" alt="navigation" />
                                         <img src="/Admin/assets/images/clock.svg"/>
                                     </span>
+
                                 </div>
                             </div>
                             <div class="modal-footer justify-content-center">
@@ -483,6 +498,11 @@
                                                                             document.getElementById("nameDe").innerHTML = name;
                                                                             document.getElementById("dateDe").innerHTML = date;
                                                                         }
+
+                                                        function truyenIdDelete(JobPostId) {
+                                                            document.getElementById("JobPostId1").value = JobPostId;
+                                                        }
+
         </script>
 
         <script>

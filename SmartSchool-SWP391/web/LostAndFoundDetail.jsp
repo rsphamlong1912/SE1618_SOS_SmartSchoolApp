@@ -243,16 +243,17 @@
                             <div class="breadcrumb__links">
                                 <a href="lostAndfoundhome"><i class="fa fa-home"></i> Home</a>
                                 <a href="main?action=ListAll">Danh sách</a>
-                                <a href="main?searchText=&type=0&action=SearchPostInHome">
-                                    <c:choose> 
-                                        <c:when test="${requestScope.POST.type=='0'}">
-                                            Đồ thất lạc
-                                        </c:when>  
-                                        <c:otherwise>
-                                            Đồ nhặt được
-                                        </c:otherwise>
-                                    </c:choose>
-                                </a>
+                                <c:choose> 
+                                    <c:when test="${requestScope.POST.type=='0'}">
+                                        <a href="main?searchText=&type=0&action=SearchPostInHome">Đồ thất lạc
+                                        </a>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <a href="main?searchText=&type=1&action=SearchPostInHome">Đồ nhặt được
+                                        </a>
+                                    </c:otherwise>                       
+                                </c:choose>
+
                                 <span>${requestScope.POST.title}</span>
                             </div>
                         </div>
@@ -269,7 +270,7 @@
                                     <div class="card-header bg-white pt-4 pl-10 pr-10 border-bottom d-md-flex">
 
                                         <h4 class="" style="line-height: 2.5rem;" >${requestScope.POST.title}
-                                                                    
+
 
                                             <!--<span class="badge bg-secondary" style="border-radius: 0.25rem !important;">-->
                                             <c:choose> 
@@ -405,15 +406,23 @@
                                         <div class="modal-body" style="padding: 1.5rem;">                           
                                             <div class="row">
                                                 <c:forEach items="${requestScope.LISTREPORT}" var="listReport">
-                                                        <div class="col-md-6 mb-2">
-                                                            <div class="form-check">
-                                                                <input class="form-check-input" type="radio" name="reportTypeId" id="" value="${listReport.reportTypeId}" required>
-                                                                <label class="form-check-label" for="">
-                                                                    ${listReport.reportType}
-                                                                </label>
-                                                            </div>
+                                                    <div class="col-md-6 mb-2">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="radio" name="reportTypeId" id="" value="${listReport.reportTypeId}" required>
+                                                            <label class="form-check-label" for="">
+                                                                ${listReport.reportType}
+                                                            </label>
                                                         </div>
+                                                    </div>
                                                 </c:forEach>
+                                                <div class="col-md-12">
+                                                    <div class="form-floating">
+                                                        <textarea class="form-control required" required="true" data-rule-required="true" name="" placeholder=" " id="floatingTextarea2"
+                                                                  style="height: 120px"></textarea>
+                                                        <small></small>
+                                                        <label for="floatingTextarea2">Chi tiết (không bắt buộc)</label>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                         <input type="hidden" name="userId" value="${requestScope.POST.userId}"/>

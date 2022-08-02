@@ -334,8 +334,8 @@ public class MainController extends HttpServlet {
             }
             if (DELETE_JOB_POST.equals(action)) {
                 url = DELETE_JOB_POST_CONTROLLER;
-
             }
+
         } catch (Exception e) {
             log("Error at MainController: " + e.toString());
         } finally {
