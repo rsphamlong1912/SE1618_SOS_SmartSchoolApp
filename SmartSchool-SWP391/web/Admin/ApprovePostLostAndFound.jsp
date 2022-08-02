@@ -116,7 +116,7 @@
                                 <a href="adminLostAndFoundPost"> Lost & Found </a>
                             </li>
                             <li>
-                                <a href=""> Freelance Job </a>
+                                <a href="adminFreelancePost"> Freelance Job </a>
                             </li>
                         </ul>
                     </li>
@@ -482,28 +482,52 @@
                                                             </c:otherwise>
                                                         </c:choose>
                                                     </td>
-                                                    <input type="hidden" name="postId" value="${list.postId}" />
-                                                    <td>
-                                                        <div class="action justify-content-center icon purple">
-                                                            <button type="submit" name="action" value="ApprovePost" class="text-gray" style="font-size:25px;">
-                                                                <i class="lni lni-checkmark fw-bold"></i>
-                                                            </button>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="action justify-content-center icon purple">
-                                                            <button type="submit" name="action" value="NoApprovePost" class="text-gray" style="font-size:20px;">
-                                                                <i class="lni lni-close fw-bold"></i>
-                                                            </button>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    </form>
-                                                </c:forEach>
-                                        </tbody>
+                                                <input type="hidden" name="postId" value="${list.postId}" />
+                                                <td>
+                                                    <div class="action justify-content-center icon purple">
+                                                        <button type="submit" name="action" value="ApprovePost" class="text-gray" style="font-size:25px;">
+                                                            <i class="lni lni-checkmark fw-bold"></i>
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                            </form>
+                                            <td>
+                                                <div class="action justify-content-center icon purple">
+                                                    <!--                                                        <button type="submit" name="action" value="NoApprovePost" class="text-gray" style="font-size:20px;">
+                                                                                                                <i class="lni lni-close fw-bold"></i>
+                                                                                                            </button>-->
+                                                    <button class="text-gray" style="font-size:20px;" onclick="truyenIdDelete(this.getAttribute('data-PostId'))" data-bs-toggle="modal"
+                                                            data-bs-target="#ModalNoApprovePost" data-PostId="${list.postId}">
+                                                        <i class="lni lni-close fw-bold"></i>
+                                                    </button>
+                                                </div>
+                                            </td>
+                                            </tr>
+                                            <tr>
+                                            </c:forEach>
+                                            </tbody>
                                     </table>
                                     <!-- End Table -->
+
+                                    <!--Modal No Approve Post-->
+                                    <form action="main">
+                                        <div class="modal fade" id="ModalNoApprovePost" tabindex="-1" aria-labelledby="exampleModalLabel"
+                                             aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered modal-sm">
+                                                <div class="modal-content">
+                                                    <div class="modal-header justify-content-center">
+                                                        <h4 class="modal-title text-danger" id="exampleModalLabel">Không đăng bài viết này?</h4>
+                                                    </div>
+                                                    <div class="modal-footer justify-content-center">
+                                                        <button type="button" class="main-btn warning-btn-outline btn-hover btn-sm"
+                                                                data-bs-dismiss="modal">Hủy</button>
+                                                        <input type="hidden" id="PostId1"  name="postId"/>
+                                                        <button type="submit" name="action" value="NoApprovePost" class="main-btn warning-btn btn-hover btn-sm">Xóa</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -556,6 +580,12 @@
         <script src="/Admin/assets/js/world-merc.js"></script>
         <script src="/Admin/assets/js/polyfill.js"></script>
         <script src="/Admin/assets/js/main.js"></script>
+
+        <script>
+                                                            function truyenIdDelete(PostId) {
+                                                                document.getElementById("PostId1").value = PostId;
+                                                            }
+        </script>
 
         <script>
             // ======== jvectormap activation

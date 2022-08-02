@@ -112,7 +112,7 @@
                                 <a href="adminLostAndFoundPost"> Lost & Found </a>
                             </li>
                             <li>
-                                <a href=""> Freelance Job </a>
+                                <a href="adminFreelancePost"> Freelance Job </a>
                             </li>
                         </ul>
                     </li>
@@ -494,19 +494,43 @@
                                                             </button>
                                                         </div>
                                                     </td>
-                                                    <td>
-                                                        <div class="action justify-content-center icon purple">
-                                                            <button type="submit" name="action" value="NoApproveJob" class="text-gray" style="font-size:20px;">
-                                                                <i class="lni lni-close fw-bold"></i>
-                                                            </button>
-                                                        </div>
-                                                    </td>
-                                                </tr>
                                             </form>
+                                            <td>
+                                                <div class="action justify-content-center icon purple">
+<!--                                                    <button type="submit" name="action" value="NoApproveJob" class="text-gray" style="font-size:20px;">
+                                                        <i class="lni lni-close fw-bold"></i>
+                                                    </button>-->
+                                                    <button class="text-gray" style="font-size:20px;" onclick="truyenIdDelete(this.getAttribute('data-JobPostId'))" data-bs-toggle="modal"
+                                                            data-bs-target="#ModalNoApproveJobPost" data-JobPostId="${approve.jobId}">
+                                                        <i class="lni lni-close fw-bold"></i>
+                                                    </button>
+                                                </div>
+                                            </td>
+                                            </tr>
                                         </c:forEach>
                                         </tbody>
                                     </table>
                                     <!-- End Table -->
+
+                                    <!--Modal No Approve Post-->
+                                    <form action="main">
+                                        <div class="modal fade" id="ModalNoApproveJobPost" tabindex="-1" aria-labelledby="exampleModalLabel"
+                                             aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered modal-sm">
+                                                <div class="modal-content">
+                                                    <div class="modal-header justify-content-center">
+                                                        <h4 class="modal-title text-danger" id="exampleModalLabel">Không đăng bài viết này?</h4>
+                                                    </div>
+                                                    <div class="modal-footer justify-content-center">
+                                                        <button type="button" class="main-btn warning-btn-outline btn-hover btn-sm"
+                                                                data-bs-dismiss="modal">Hủy</button>
+                                                        <input type="hidden" id="JobPostId1"  name="jobId"/>
+                                                        <button type="submit" name="action" value="NoApproveJob" class="main-btn warning-btn btn-hover btn-sm">Xóa</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -620,18 +644,24 @@
         <script src="/Admin/assets/js/main.js"></script>
 
         <script>
-                                                                        function truyenDataDetail(jobIdDe, titleDe, descripDe, cateName, salary, amountDe, timeJob, avatar, name, date) {
-                                                                            document.getElementById("IdDe").value = jobIdDe;
-                                                                            document.getElementById("titleD").innerHTML = titleDe;
-                                                                            document.getElementById("DesD").innerHTML = descripDe;
-                                                                            document.getElementById("CateD").innerHTML = "Lĩnh vực: " + cateName;
-                                                                            document.getElementById("salaryDe1").innerHTML = salary + " VNĐ/h";
-                                                                            document.getElementById("amountD").innerHTML = amountDe + " người";
-                                                                            document.getElementById("timeDe1").innerHTML = timeJob + " tháng";
-                                                                            document.getElementById("img").setAttribute("src", "/avatar?userId="+avatar);
-                                                                            document.getElementById("nameDe").innerHTML = name;
-                                                                            document.getElementById("dateDe").innerHTML = date;
-                                                                        }
+                                                function truyenIdDelete(JobPostId) {
+                                                    document.getElementById("JobPostId1").value = JobPostId;
+                                                }
+        </script>
+
+        <script>
+            function truyenDataDetail(jobIdDe, titleDe, descripDe, cateName, salary, amountDe, timeJob, avatar, name, date) {
+                document.getElementById("IdDe").value = jobIdDe;
+                document.getElementById("titleD").innerHTML = titleDe;
+                document.getElementById("DesD").innerHTML = descripDe;
+                document.getElementById("CateD").innerHTML = "Lĩnh vực: " + cateName;
+                document.getElementById("salaryDe1").innerHTML = salary + " VNĐ/h";
+                document.getElementById("amountD").innerHTML = amountDe + " người";
+                document.getElementById("timeDe1").innerHTML = timeJob + " tháng";
+                document.getElementById("img").setAttribute("src", "/avatar?userId=" + avatar);
+                document.getElementById("nameDe").innerHTML = name;
+                document.getElementById("dateDe").innerHTML = date;
+            }
         </script>
         <script>
             // ======== jvectormap activation

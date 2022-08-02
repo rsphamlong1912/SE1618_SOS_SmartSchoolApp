@@ -37,10 +37,12 @@ public class ApprovePostController extends HttpServlet {
             int postId = Integer.parseInt(request.getParameter("postId"));
             PostDAO dao = new PostDAO();
             dao.approvePost(postId);
-            response.sendRedirect("main?action=ListPostToApprove");
+//            response.sendRedirect("main?action=ListPostToApprove");
 
         } catch (Exception e) {
             log("Error at ApproveJobController: " + e.toString());
+        } finally {
+            response.sendRedirect("main?action=ListPostToApprove");
         }
 
     }
