@@ -77,15 +77,14 @@ public class ApproveUserWaitingController extends HttpServlet {
                 + "</body>\n"
                 + "\n"
                 + "</html>";
-        
+        MailSender sendMail = new MailSender();
         if (haveJob < 3) {
             if (checkAmount.getAmountFreelancer() < checkAmount.getAmount()) {
                 if ("approved".equals(buttonValue)) {
                     aDao.setApplyJobDoing(applyJobId);
                     pDao.setAmountFreelancerPlusOne(jobId);
                     uDao.setHaveJobPlusOne(userId);
-                    JobPostDTO AmountFreelancer = pDao.getAmountFreelancer(jobId);
-                    MailSender sendMail = new MailSender();
+                    JobPostDTO AmountFreelancer = pDao.getAmountFreelancer(jobId);                  
                     sendMail.send(userEmail, subject, message, "smartschool20222@gmail.com", "frscbuzdjuvziftg");
                     out.print(AmountFreelancer.getAmountFreelancer());
                 } else if ("denied".equals(buttonValue)) {

@@ -30,10 +30,11 @@ public class SetJobApproveDoneController extends HttpServlet {
            String jobId = request.getParameter("jobId");
            JobPostDAO dao = new JobPostDAO();
            dao.SetJobApproveDone(jobId);
+           request.setAttribute("APPROVE_SUCCESS", "Công việc đã được bắt đầu");
            url = "main?action=MyJobPostDoneDetail&jobId="+jobId;
         } catch (Exception e) {
         } finally {
-           response.sendRedirect(url);
+           request.getRequestDispatcher(url).forward(request, response);
         }
     }
 

@@ -35,9 +35,10 @@ public class SetJobDoneController extends HttpServlet {
             List<ApplyJobDTO> listFreelancerDoing = aDao.checkFreelancerDoing(jobId);
             if (listFreelancerDoing.isEmpty()) {
                 dao.SetJobDone(jobId);
+                request.setAttribute("ISDONE", "Hoàn tất công việc.");
                 url = "main?action=MyJobPostDoneDetail&jobId=" + jobId;
             }else {
-                request.setAttribute("ISNOTDONE", "Mọi Freelancer phải hoàn thành công việc.");
+                request.setAttribute("ISNOTDONE", "Mọi Freelancer phải hoàn tất công việc.");
                 url = "main?action=MyJobPostDoneDetail&jobId=" + jobId;
             }
            
