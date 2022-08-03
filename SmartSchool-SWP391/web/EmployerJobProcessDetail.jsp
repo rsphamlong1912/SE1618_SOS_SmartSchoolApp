@@ -52,7 +52,7 @@
             }
 
             .shadow {
-/*                box-shadow: rgba(67, 71, 85, 0.27) 0px 0px 0.25em, rgba(90, 125, 188, 0.05) 0px 0.25em 1em !important;*/
+                /*                box-shadow: rgba(67, 71, 85, 0.27) 0px 0px 0.25em, rgba(90, 125, 188, 0.05) 0px 0.25em 1em !important;*/
             }
 
             .card {
@@ -267,7 +267,7 @@
                                 </li>
                                 <!--/ User -->
                             </c:if>
-                                <li class="nav-item px-3"><a class="btn btn-light order-1 order-lg-0 fw-bold" href="main?action=EmployerUploadJobPost">Đăng tuyển</a></li>
+                            <li class="nav-item px-3"><a class="btn btn-light order-1 order-lg-0 fw-bold" href="main?action=EmployerUploadJobPost">Đăng tuyển</a></li>
                         </ul>
                     </div>
                 </div>
@@ -418,7 +418,7 @@
                                                                 <div class="d-flex align-items-center mb-2"> <h6>Facebook: <span class="fw-medium" style="font-size: 14px;"> <a class="text-decoration-none" href="https://www.facebook.com/ngocbao159/">${userWaiting.facebook}</a></span></h6>
                                                                 </div>
                                                                 <div class="d-flex align-items-center justify-content-end mb-2">
-                                                                    <button onclick="ApproveUser(this.getAttribute('data-applyJobId'), this.getAttribute('data-userId'), this.getAttribute('data-jobId'), this.getAttribute('data-buttonValue'), this.getAttribute('data-fullname'),this.getAttribute('data-title'),this.getAttribute('data-jobCategoryName'),this.getAttribute('data-userEmail'))" 
+                                                                    <button onclick="ApproveUser(this.getAttribute('data-applyJobId'), this.getAttribute('data-userId'), this.getAttribute('data-jobId'), this.getAttribute('data-buttonValue'), this.getAttribute('data-fullname'), this.getAttribute('data-title'), this.getAttribute('data-jobCategoryName'), this.getAttribute('data-userEmail'))" 
                                                                             data-applyJobId="${userWaiting.applyJobId}"
                                                                             data-userId="${userWaiting.userId}"
                                                                             data-jobId="${JOBDETAIL.jobId}"
@@ -427,7 +427,7 @@
                                                                             data-jobCategoryName="${JOBDETAIL.jobCategoryName}"
                                                                             data-userEmail="${userWaiting.email}"
                                                                             data-buttonValue="denied" type="button" class="col-md-2 btn btn-outline-primary btn-sm mt-2">Từ chối</button>
-                                                                    <button onclick="ApproveUser(this.getAttribute('data-applyJobId'), this.getAttribute('data-userId'), this.getAttribute('data-jobId'), this.getAttribute('data-buttonValue'), this.getAttribute('data-fullname'),this.getAttribute('data-title'),this.getAttribute('data-jobCategoryName'),this.getAttribute('data-userEmail'))" 
+                                                                    <button onclick="ApproveUser(this.getAttribute('data-applyJobId'), this.getAttribute('data-userId'), this.getAttribute('data-jobId'), this.getAttribute('data-buttonValue'), this.getAttribute('data-fullname'), this.getAttribute('data-title'), this.getAttribute('data-jobCategoryName'), this.getAttribute('data-userEmail'))" 
                                                                             data-applyJobId="${userWaiting.applyJobId}"
                                                                             data-userId="${userWaiting.userId}"
                                                                             data-jobId="${JOBDETAIL.jobId}"
@@ -640,8 +640,8 @@
                                                 return false;
                                             } else if (document.getElementById("newAmount").value < oldAmount) {
                                                 document.getElementById("warningValidate").textContent = "Không thể cập nhật số ứng viên ít hơn ban đầu!"
-                                                return false;
-                                            sss}
+                                                return false;                                               
+                                            }
                                             return true;
                                         }
                                         function ApproveUser(applyJobId, userId, jobId, buttonValue, fullname, title, jobCategoryName, userEmail) {
@@ -667,11 +667,42 @@
                                                     } else if ('JobFullAmount' === data) {
                                                         $("#ModalJobFullAmount").modal("show");
                                                     } else {
+//                                                        var row = document.getElementById(userId);
+                                                        document.getElementById(userId).innerHTML = '';
                                                         var row = document.getElementById(userId);
-                                                        row.remove();
-                                                        var amountF = document.getElementById("amountFreelancer");
-
+                                                        row.innerHTML = "<div class=\"card-body\">\n"
+                                                                + "    <svg xmlns=\"http://www.w3.org/2000/svg\" style=\"display: none;\">\n"
+                                                                + "            <symbol id=\"check-circle-fill\" fill=\"currentColor\" viewBox=\"0 0 16 16\">\n"
+                                                                + "                <path d=\"M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z\"></path>\n"
+                                                                + "            </symbol>\n"
+                                                                + "                                                </svg><div class=\"row\">\n"
+                                                                + "                                                    \n"
+                                                                + "                                                                <div class=\"row justify-content-center align-items-center\">\n"
+                                                                + "                                                                <div class=\"alert alert-success d-flex align-items-center col-md-5 justify-content-center\" role=\"alert\" style=\"\n"
+                                                                + "    margin-bottom: 0px;\n"
+                                                                + "\">\n"
+                                                                + "  <svg class=\"bi flex-shrink-0 me-2\" width=\"24\" height=\"24\" role=\"img\" aria-label=\"Success:\"><use xlink:href=\"#check-circle-fill\"></use></svg>\n"
+                                                                + "                                <div>\n"
+                                                                + "                                   Phê duyệt thành công, đã gửi mail !\n"
+                                                                + "                                </div>\n"
+                                                                + "                            </div>    \n"
+                                                                + "                                                                    \n"
+                                                                + "                                                                    \n"
+                                                                + "                                                                </div>\n"
+                                                                + "                                                                <!-- Modal -->\n"
+                                                                + "                                                                \n"
+                                                                + "                                                                \n"
+                                                                + "                                                                \n"
+                                                                + "                                                                \n"
+                                                                + "                                                                                                            \n"
+                                                                + "                                                            \n"
+                                                                + "                                                        \n"
+                                                                + "                                                    \n"
+                                                                + "                                                </div>\n"
+                                                                + "                                            </div>";
+                                                        var amountF = document.getElementById("amountFreelancer"); 
                                                         amountF.textContent = data;
+                                                        $("#"+userId).delay(2000).fadeOut();
                                                     }
 
                                                 },

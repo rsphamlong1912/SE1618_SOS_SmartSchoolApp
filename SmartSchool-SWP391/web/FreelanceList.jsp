@@ -48,11 +48,11 @@
         <link href="./assets/css/style.css" rel="stylesheet" />
         <style>
             .list-group-flush>.list-group-item {
-                width: 75%;
+                width: 100%;
             }
 
             .shadow {
-/*                box-shadow: rgba(67, 71, 85, 0.27) 0px 0px 0.25em, rgba(90, 125, 188, 0.05) 0px 0.25em 1em !important;*/
+                /*                box-shadow: rgba(67, 71, 85, 0.27) 0px 0px 0.25em, rgba(90, 125, 188, 0.05) 0px 0.25em 1em !important;*/
             }   
 
             .card {
@@ -68,9 +68,12 @@
                 box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px !important;
 
             }
-            
+
             .forcusCate {
                 color: #F1A501;
+            }
+            .text-black{
+                color:#212832;
             }
         </style>
     </head>
@@ -102,32 +105,32 @@
                             <li class="nav-item px-3"><a class="nav-link fw-bold" aria-current="page" href="#">TÌM VIỆC</a>
                             </li>
                             <c:if test="${!empty sessionScope.LOGIN_USER}">
-                             <li class="nav-item px-3 navbar-dropdown dropdown-user dropdown">
-                                <a class="btn btn-outline-light order-1 order-lg-0 fw-bold nav-link hide-arrow" id="nameLogin" href="" data-bs-toggle="dropdown">
-                                    <div class="avatar avatar-online">
+                                <li class="nav-item px-3 navbar-dropdown dropdown-user dropdown">
+                                    <a class="btn btn-outline-light order-1 order-lg-0 fw-bold nav-link hide-arrow" id="nameLogin" href="" data-bs-toggle="dropdown">
+                                        <div class="avatar avatar-online">
 
 
-                                        QUẢN LÝ CÔNG VIỆC
+                                            QUẢN LÝ CÔNG VIỆC
 
 
-                                    </div>
-                                </a>          
-                                <ul class="dropdown-menu dropdown-menu-end">              
+                                        </div>
+                                    </a>          
+                                    <ul class="dropdown-menu dropdown-menu-end">              
 
-                                    <li>
-                                        <a class="dropdown-item" href="main?action=MyJobWaiting">
-                                            <i class="bx bx-user me-2"></i>
-                                            <span class="align-middle"> VIỆC CHỜ ỨNG TUYỂN</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" href="main?action=MyJobDoing">
-                                            <i class="bx bx-user me-2"></i>
-                                            <span class="align-middle"> VIỆC ĐANG THỰC HIỆN</span>
-                                        </a>
-                                    </li>                                   
-                                </ul>
-                            </li>
+                                        <li>
+                                            <a class="dropdown-item" href="main?action=MyJobWaiting">
+                                                <i class="bx bx-user me-2"></i>
+                                                <span class="align-middle"> VIỆC CHỜ ỨNG TUYỂN</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" href="main?action=MyJobDoing">
+                                                <i class="bx bx-user me-2"></i>
+                                                <span class="align-middle"> VIỆC ĐANG THỰC HIỆN</span>
+                                            </a>
+                                        </li>                                   
+                                    </ul>
+                                </li>
                             </c:if>
                             <c:if test="${empty sessionScope.LOGIN_USER}">
                                 <li class="nav-item px-3"><a class="btn btn-outline-light order-1 order-lg-0 fw-bold"
@@ -263,22 +266,26 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-3 col-md-3">
-                            <div class="shop__sidebar">
-                                <div class="sidebar__categories">
-                                    <div class="section-title">
-                                        <h4>Categories</h4>
+                            <div class="card overflow-hidden shadow shadow-hover" id="hoverCard">
+                                <div class="card-body ">
+                                    <div class="shop__sidebar">
+                                        <div class="sidebar__categories">
+                                            <div class="section-title">
+                                                <h4>Categories</h4>
+                                            </div>
+
+                                            <ul class="list-group list-group-flush">
+                                                <c:forEach items='${requestScope.LISTJOBCATEGORY}' var='listJobCategory'>
+
+                                                    <li class="list-group-item"><a class="text-decoration-none ${TAGCATE == listJobCategory.jobCategoryId ? "forcusCate":""}" href="/main?jobCategoryId=${listJobCategory.jobCategoryId}&action=SearchJobByCategory">${listJobCategory.jobCategoryName}</a>
+                                                    </li>
+
+
+                                                </c:forEach>
+                                            </ul>
+
+                                        </div>
                                     </div>
-
-                                    <ul class="list-group list-group-flush">
-                                        <c:forEach items='${requestScope.LISTJOBCATEGORY}' var='listJobCategory'>
-
-                                            <li class="list-group-item"><a class="text-decoration-none ${TAGCATE == listJobCategory.jobCategoryId ? "forcusCate":""}" href="/main?jobCategoryId=${listJobCategory.jobCategoryId}&action=SearchJobByCategory">${listJobCategory.jobCategoryName}</a>
-                                            </li>
-
-
-                                        </c:forEach>
-                                    </ul>
-
                                 </div>
                             </div>
                         </div>
@@ -296,7 +303,7 @@
                                                     <div class="col-md-9" style="padding-left: 0px;">
                                                         <div
                                                             class="d-flex flex-column flex-lg-row justify-content-between">
-                                                            <h5 class="text-secondary fw-medium text-truncate">${listJob.fullname}</h5>
+                                                            <h5 class="text-black fw-medium text-truncate">${listJob.fullname}</h5>
                                                             <span class="fs-1 fw-medium d-flex"></span>
                                                         </div>
                                                         <div class="d-flex align-items-center"><span class="fw-medium"
@@ -309,19 +316,19 @@
                                                             class="link-901 text-decoration-none stretched-link" href="/main?jobId=${listJob.jobId}&userId=${listJob.userId}&action=DetailJob">${listJob.title}</a></h5><span class="fs-1 fw-medium"></span>
                                                 </div>
                                                 <div class="d-flex align-items-center mb-2"> <span
-                                                        class="fw-medium" style="font-size: 14px;">Lĩnh vực: ${listJob.jobCategoryName}</span>
+                                                        class="fw-medium text-black" style="font-size: 14px;">Lĩnh vực: ${listJob.jobCategoryName}</span>
                                                 </div>
                                                 <div class="d-flex align-items-center mb-2"> <img src="assets/img/dest/dollar.svg"
                                                                                                   style="margin-right: 5px;" width="20" alt="navigation" /><span
-                                                                                                  class="fw-medium" style="font-size: 14px;"><fmt:formatNumber value="${listJob.salary} " pattern="#,##0 VNĐ/h"/></span>
+                                                                                                  class="fw-medium text-black" style="font-size: 14px;"><fmt:formatNumber value="${listJob.salary} " pattern="#,##0 VNĐ/h"/></span>
                                                 </div>
                                                 <div class="d-flex align-items-center mb-2"> <img src="assets/img/dest/user.svg"
                                                                                                   style="margin-right: 5px;" width="20" alt="navigation" /><span
-                                                                                                  class="fw-medium" style="font-size: 14px;">${listJob.amount} người</span>
+                                                                                                  class="fw-medium text-black" style="font-size: 14px;">${listJob.amount} người</span>
                                                 </div>
                                                 <div class="d-flex align-items-center mb-5"> <img src="assets/img/dest/calendar.svg"
                                                                                                   style="margin-right: 5px;" width="20" alt="navigation" /><span
-                                                                                                  class="fw-semibold" style="font-size: 14px;">                                            
+                                                                                                  class="fw-semibold text-black" style="font-size: 14px;">                                            
                                                         <c:choose> 
                                                             <c:when test="${listJob.timeJob==1}">
                                                                 Ít hơn 1 tháng

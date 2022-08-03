@@ -97,6 +97,9 @@
                 border-top-right-radius:0.5rem;
                 border-top-left-radius:0.5rem;             
             } 
+            .text-black{
+                color:#212832;
+            }
         </style>
     </head>
 
@@ -432,19 +435,19 @@
                                                                                 class="link-901 text-decoration-none stretched-link" href="/main?jobId=${list3Job.jobId}&userId=${list3Job.userId}&action=DetailJob">${list3Job.title}</a></h5><span class="fs-1 fw-medium"></span>
                                                                     </div>
                                                                     <div class="d-flex align-items-center mb-2"> <span
-                                                                            class="fw-medium" style="font-size: 14px;">Lĩnh vực: ${list3Job.jobCategoryName}</span>
+                                                                            class="fw-medium text-black" style="font-size: 14px;">Lĩnh vực: ${list3Job.jobCategoryName}</span>
                                                                     </div>
                                                                     <div class="d-flex align-items-center mb-2"> <img src="assets/img/dest/dollar.svg"
                                                                                                                       style="margin-right: 5px;" width="20" alt="navigation" /><span
-                                                                                                                      class="fw-medium" style="font-size: 14px;">${list3Job.salary} VNĐ/h</span>
+                                                                                                                      class="fw-medium text-black" style="font-size: 14px;">${list3Job.salary} VNĐ/h</span>
                                                                     </div>
                                                                     <div class="d-flex align-items-center mb-2"> <img src="assets/img/dest/user.svg"
                                                                                                                       style="margin-right: 5px;" width="20" alt="navigation" /><span
-                                                                                                                      class="fw-medium" style="font-size: 14px;">${list3Job.amount} người</span>
+                                                                                                                      class="fw-medium text-black" style="font-size: 14px;">${list3Job.amount} người</span>
                                                                     </div>
                                                                     <div class="d-flex align-items-center mb-5"> <img src="assets/img/dest/calendar.svg"
                                                                                                                       style="margin-right: 5px;" width="20" alt="navigation" /><span
-                                                                                                                      class="fw-semibold" style="font-size: 14px;">
+                                                                                                                      class="fw-semibold text-black" style="font-size: 14px;">
                                                                             <c:choose> 
                                                                                 <c:when test="${list3Job.timeJob==1}">
                                                                                     Ít hơn 1 tháng
