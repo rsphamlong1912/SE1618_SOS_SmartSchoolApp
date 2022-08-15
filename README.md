@@ -15,4 +15,45 @@ With a leading technology school like Fpt, this promises to be a useful system d
 4. Tăng Quang Khải
 
 ## Project User's interface:
-### Login screen:
+**Welcome Page:**
+
+![](img/WelcomePage.png)
+
+### 1. Lost & Found System:
+![](img/LostAndFoundLogin.png)
+
+![](img/LostAndFoundHome.png)
+
+![](img/LostAndFoundHome1.png)
+
+![](img/LostAndFoundUpload.png)
+
+![](img/LostAndFoundList.png)
+
+![](img/LostAndFoundPost.png)
+
+### 2. Freelance Job System:
+**Freelancer Role:**
+
+![](img/FreelancerLogin.png)
+
+![](img/FreelancerHome.png)
+
+![](img/FreelanceCategory.png)
+
+![](img/FreelancePost.png)
+
+![](img/FreelancerJob.png)
+
+**Employer Role:**
+
+![](img/EmployerUpload.png)
+
+![](img/EmployerJobManagement.png)
+
+![](img/EmployerApproveFreelancer.png)
+
+![](img/EmployerManageFreelancer.png)
+
+![](img/EmployerDashboard.png)
+
