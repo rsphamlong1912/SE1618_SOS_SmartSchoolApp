@@ -118,7 +118,7 @@
                                     <li>
                                         <a class="dropdown-item" href="main?action=MyJobDoing">
                                             <i class="bx bx-user me-2"></i>
-                                            <span class="align-middle"> VIỆC ĐANG THỰC HIỆN</span>
+                                            <span class="align-middle"> VIỆC ĐÃ ỨNG TUYỂN</span>
                                         </a>
                                     </li>                                   
                                 </ul>
@@ -212,7 +212,7 @@
                     </a>
                     <a class="text-decoration-none fw-bold" href="main?action=MyJobDoing">
                         <div class="col">
-                            VIỆC ĐANG THỰC HIỆN
+                            VIỆC ĐÃ ỨNG TUYỂN
                         </div>
                     </a>
                 </div>

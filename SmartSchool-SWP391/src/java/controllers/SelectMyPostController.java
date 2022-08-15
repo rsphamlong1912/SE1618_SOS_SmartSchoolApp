@@ -49,6 +49,7 @@ public class SelectMyPostController extends HttpServlet {
                 List<PostDTO> listApproving = dao.getMyPostApproving(loginUser.getUserId());
                 if (listApproving.isEmpty()) {
                     request.setAttribute("ERROR", "Bạn chưa có bài đăng nào");
+                    request.setAttribute("SELECTED", 1);
                 } else {
                     request.setAttribute("MY_POST", listApproving);
                     request.setAttribute("SELECTED", 1);
@@ -57,6 +58,7 @@ public class SelectMyPostController extends HttpServlet {
                 List<PostDTO> list = dao.getMyPost(loginUser.getUserId());
                 if (list.isEmpty()) {
                     request.setAttribute("ERROR", "Bạn chưa có bài đăng nào");
+                     request.setAttribute("SELECTED", 2);
                 } else {
                     request.setAttribute("MY_POST", list);
                     request.setAttribute("SELECTED", 2);

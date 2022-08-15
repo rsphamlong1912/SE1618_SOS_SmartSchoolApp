@@ -65,8 +65,21 @@
                 font-size: 20px;
                 line-height: 2rem;
             }
-
-
+            .card {
+                border-radius: 0.5rem;
+            }
+            .btn-sm {
+                border-radius: 0.5rem;
+            }
+            .contact {
+                padding: 4px;                
+            }
+            .contact a {
+                border-radius: 0.3rem;                
+            }
+            .modal-sm {
+                max-width: 340px;
+            }
         </style>
     </head>
 
@@ -114,7 +127,7 @@
                                     <li>
                                         <a class="dropdown-item" href="">
                                             <i class="bx bx-user me-2"></i>
-                                            <span class="align-middle"> VIỆC ĐANG THỰC HIỆN</span>
+                                            <span class="align-middle"> VIỆC ĐÃ ỨNG TUYỂN</span>
                                         </a>
                                     </li>                                   
                                 </ul>
@@ -202,12 +215,12 @@
                 <div class="row row-cols-2 row-content text-center ">
                     <a class="text-decoration-none fw-bold " href="main?action=MyJobWaiting">
                         <div class="col">
-                           VIỆC CHỜ ỨNG TUYỂN
+                            VIỆC CHỜ ỨNG TUYỂN
                         </div>
                     </a>
                     <a class="text-decoration-none fw-bold choosen" href="">
                         <div class="col">
-                           VIỆC ĐANG THỰC HIỆN
+                            VIỆC ĐÃ ỨNG TUYỂN
                         </div>
                     </a>
                 </div>
@@ -215,39 +228,158 @@
 
             <section style="padding: 50px 0 ;min-height: 85vh">
                 <div class="container">
-                    <c:if test="${empty requestScope.MY_JOB_DOING}">
-                        <h1 class="text-center">${ERROR}</h1>
-                    </c:if>
+
+                    <div class="row mb-3 justify-content-end">
+                        <div class="col-md-3 ">
+                            <form action="selectUserJob">
+                                <select name="Job" class="form-select fw-bold" onchange="this.form.submit()" aria-label="Default select example">
+                                    <option value="doing" ${requestScope.SELECTED == 1 ? 'selected' : ''}>Đang thực hiện</option>
+                                    <option value="done" ${requestScope.SELECTED == 2 ? 'selected' : ''}>Đã hoàn thành</option>
+                                </select>
+                            </form>
+                        </div>
+                    </div>
+
+                    <h1 class="text-center">${ERROR}</h1>
 
                     <c:if test="${!empty requestScope.MY_JOB_DOING}">
-                        <c:forEach items="${requestScope.MY_JOB_DOING}" var="myJobDoing">
+                        <c:forEach items="${requestScope.MY_JOB_DOING}" var="myJobDoing" varStatus="count">
                             <div class="card w-100">
                                 <div class="card-body">
                                     <h5 class="card-title mb-3">${myJobDoing.title}</h5>
                                     <p class="card-text"><i class="fa fa-clock" aria-hidden="true"></i> ${myJobDoing.date}</p>
-                                    <div class="row mb-3">
-                                        <p class="col-md-4 card-text">Lĩnh vực: ${myJobDoing.jobCategoryName} </p>
-                                        <p class="col-md-4 card-text">Yêu cầu số người:  ${myJobDoing.amount} </p>
+                                    <div class="row mb-2">
+                                        <p class="col-md-4 card-text fw-bold">Lĩnh vực: <span class="card-text fw-medium">${myJobDoing.jobCategoryName}</span> </p>
+                                        <p class="col-md-4 card-text fw-bold">Yêu cầu số người:  <span class="card-text fw-medium">${myJobDoing.amount}</span> </p>
                                         <!--<p class="col-md-4 card-text">Thời gian: 1-3 tháng </p>-->
-                                        <p class="col-md-4 card-text">
-                                            Thời gian: 
-                                            <c:choose> 
-                                                <c:when test="${myJobDoing.timeJob==1}">
-                                                    Ít hơn 1 tháng
-                                                </c:when> 
-                                                <c:when test="${myJobDoing.timeJob==2}">
-                                                    1 - 3 tháng
-                                                </c:when>
-                                                <c:when test="${myJobDoing.timeJob==3}">
-                                                    Hơn 3 tháng
-                                                </c:when> 
-                                            </c:choose>
+                                        <p class="col-md-4 card-text fw-bold">
+                                            Thời gian: <span class="card-text fw-medium">
+                                                <c:choose> 
+                                                    <c:when test="${myJobDoing.timeJob==1}">
+                                                        Ít hơn 1 tháng
+                                                    </c:when> 
+                                                    <c:when test="${myJobDoing.timeJob==2}">
+                                                        1 - 3 tháng
+                                                    </c:when>
+                                                    <c:when test="${myJobDoing.timeJob==3}">
+                                                        Hơn 3 tháng
+                                                    </c:when> 
+                                                </c:choose>
+                                            </span>
                                         </p>
                                     </div>
 
-                                    <div class="row justify-content-end">
-                                        <a href="#" class="col-md-2 btn btn-primary gradient-custom-2">Xem chi tiết</a>
+                                    <div class="row col-md-8 mb-3">
+                                        <p class="card-text fw-bold"> Mô tả công việc:</p>
+                                        <p class="card-text"><i class="fa fa-chevron-right" aria-hidden="true"></i> ${myJobDoing.description}</p>
                                     </div>
+                                    <div class="row col-md-3 ms-1">
+                                        <a href="" class=" btn btn-primary gradient-custom-2" data-bs-toggle="modal" data-bs-target="#ModalContact${count.index + 1}"><i class="fa fa-user" aria-hidden="true"></i>  Liên hệ với nhà tuyển dụng</a>
+                                        <c:forEach items="${requestScope.USER_INFO}" var="infoUser">
+                                            <c:if test="${myJobDoing.userId == infoUser.userId}">
+                                                <!-- Modal -->
+                                                <div class="modal fade" id="ModalContact${count.index + 1}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+                                                    <div class="modal-dialog modal-dialog-centered modal-sm">
+                                                        <div class="modal-content">
+                                                            <div class="row">
+                                                                <div class="col-lg-12 col-md-12">
+                                                                    <div class="card overflow-hidden shadow ">
+                                                                        <div
+                                                                            class="card-header bg-white pt-4 pl-10 pr-10 border-bottom d-md-flex justify-content-center">
+                                                                            <h5 class="">NHÀ TUYỂN DỤNG</h5>
+                                                                        </div>
+                                                                        <div class="card-body">
+                                                                            <div class="row justify-content-center">
+                                                                                <div class="content-detail mb-3">
+                                                                                    <div class="avatar-upload ">
+                                                                                        <div class="text-center avatar-preview">
+                                                                                            <c:if test="${!empty infoUser.avatar}">
+                                                                                                <img src="${pageContext.servletContext.contextPath}/avatar?userId=${infoUser.userId}"
+                                                                                                     width="164" height="164" />
+                                                                                            </c:if>
+                                                                                            <c:if test="${empty infoUser.avatar}">
+                                                                                                <img src="https://gtjai.com.vn/wp-content/uploads/2021/07/avt.png"
+                                                                                                     width="164" height="164" />
+                                                                                            </c:if>
+
+                                                                                            </br>
+                                                                                            </br>
+                                                                                            <h5 class="mb-3">${infoUser.fullname}</h5>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="content-detail mb-3">
+                                                                                    <div class="d-flex align-items-center justify-content-center">
+                                                                                        <h6 style="line-height: 2.5;">Thông tin công ty</h6>
+                                                                                    </div>
+
+                                                                                    <div class="d-flex align-items-center">
+                                                                                        <h6 style="line-height: 2.5;">Tên công ty: <span class="fw-medium"
+                                                                                                                                         style="font-size: 14px; "> ${infoUser.compName}</span></h6>
+                                                                                    </div>
+
+
+                                                                                    <div class="d-flex align-items-center">
+                                                                                        <h6 style="line-height: 2.5;">Số điện thoại: <span class="fw-medium"
+                                                                                                                                           style="font-size: 14px; "> ${infoUser.phone}</span></h6>
+                                                                                    </div>
+
+                                                                                    <div class="d-flex align-items-center">
+                                                                                        <h6 style="line-height: 2.5;">Email: <span class="fw-medium text-break"
+                                                                                                                                   style="font-size: 14px;"> ${infoUser.email}</span></h6>
+                                                                                    </div>
+
+
+                                                                                    <div class="d-flex align-items-center">
+                                                                                        <h6 style="line-height: 2.5;">Địa chỉ: <span class="fw-medium text-break"
+                                                                                                                                     style="font-size: 14px;"> ${infoUser.compAddress}</span></h6>
+                                                                                    </div>
+
+
+                                                                                    <div class="d-flex align-items-center">
+                                                                                        <h6 style="line-height: 2.5;">Facebook: <span class="fw-medium text-break"
+                                                                                                                                      style="font-size: 14px;"> ${infoUser.facebook}</span></h6>
+                                                                                    </div>
+
+
+                                                                                </div>
+
+                                                                            </div>
+                                                                            <div class="row">
+                                                                                <div class="col-md-3 contact">
+                                                                                    <a href="tel:${infoUser.phone}" class="btn btn-success btn-sm w-100" style="background: linear-gradient(to right, #99df20, #009245 ); border:none;"> Gọi <i class="fa fa-phone"
+                                                                                                                                                                                                        aria-hidden="true"></i></a>
+                                                                                </div>
+                                                                                <div class="col-md-6 contact">
+                                                                                    <a href="${infoUser.facebook}" class="btn btn-success btn-sm w-100" style="background: linear-gradient(to right, #12c2e9, #c471ed, #f64f59); border:none;" > Messenger <i class="fa fa-comment"
+                                                                                                                                                                                                        aria-hidden="true"></i></a>
+                                                                                </div>
+                                                                                <div class="col-md-3 contact">
+                                                                                    <a href="mailto:${infoUser.email}" class="btn btn-success btn-sm w-100" style="background: linear-gradient(to right, #43cea2, #1174d7); border:none;"> Mail <i class="fa fa-envelope"
+                                                                                                                                                                                                        aria-hidden="true"></i></a>
+                                                                                </div>
+
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </c:if>
+                                        </c:forEach>
+                                    </div>
+                                    <div class="row text-end">
+                                        <c:if test="${requestScope.SELECTED == 1}">
+                                            <p class="card-text text-primary"><i class="fa fa-spinner" aria-hidden="true"></i> Đang thực hiện</p>
+                                        </c:if>
+                                        <c:if test="${requestScope.SELECTED == 2}">
+                                            <p class="card-text text-success"><i class="fa fa-check" aria-hidden="true"></i> Đã hoàn thành</p>
+                                        </c:if>
+                                    </div>
+
                                 </div>
                             </div>
                         </c:forEach>
@@ -331,10 +463,10 @@
         <script src="assets/js/theme.js"></script>
         <script src="assets/js/extention/choices.js"></script>
         <script>
-            const choices = new Choices('[data-trigger]',
-                    {
-                        searchEnabled: false
-                    });
+                                    const choices = new Choices('[data-trigger]',
+                                            {
+                                                searchEnabled: false
+                                            });
 
         </script>
         <link

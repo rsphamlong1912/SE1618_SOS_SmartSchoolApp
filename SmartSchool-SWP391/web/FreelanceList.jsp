@@ -126,7 +126,7 @@
                                         <li>
                                             <a class="dropdown-item" href="main?action=MyJobDoing">
                                                 <i class="bx bx-user me-2"></i>
-                                                <span class="align-middle"> VIỆC ĐANG THỰC HIỆN</span>
+                                                <span class="align-middle"> VIỆC ĐÃ ỨNG TUYỂN</span>
                                             </a>
                                         </li>                                   
                                     </ul>
@@ -266,7 +266,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-3 col-md-3">
-                            <div class="card overflow-hidden shadow shadow-hover" id="hoverCard">
+                            <div class="card overflow-hidden shadow shadow-hover" id="">
                                 <div class="card-body ">
                                     <div class="shop__sidebar">
                                         <div class="sidebar__categories">

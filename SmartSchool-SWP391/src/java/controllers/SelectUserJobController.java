@@ -19,14 +19,15 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import jobPost.JobPostDAO;
 import jobPost.JobPostDTO;
+import user.UserDAO;
 import user.UserDTO;
 
 /**
  *
  * @author TrinhNgocBao
  */
-@WebServlet(name = "MyJobDoingController", urlPatterns = {"/myJobDoing"})
-public class MyJobDoingController extends HttpServlet {
+@WebServlet(name = "SelectUserJobController", urlPatterns = {"/selectUserJob"})
+public class SelectUserJobController extends HttpServlet {
 
     private static final String ERROR = "FreelancerJobDoing.jsp";
     private static final String MY_JOB_DOING_PAGE = "FreelancerJobDoing.jsp";
@@ -39,23 +40,44 @@ public class MyJobDoingController extends HttpServlet {
             HttpSession session = request.getSession();
             UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
             String userId = loginUser.getUserId();
+            String job = request.getParameter("Job");
             ApplyJobDAO jDao = new ApplyJobDAO();
-            List<ApplyJobDTO> listDoing = jDao.getListApplyJobDoing(userId);
             JobPostDAO pDao = new JobPostDAO();
+            UserDAO udao = new UserDAO();
             List<JobPostDTO> listJob = new ArrayList<>();
-            for (ApplyJobDTO a : listDoing) {
-                listJob.add(pDao.getMyJobWaiting(a.getJobId()));
-            }
-            if (!listJob.isEmpty()) {
+            List<UserDTO> listUserInfo = new ArrayList<>();
+            if ("doing".equals(job)) {
+                List<ApplyJobDTO> listDoing = jDao.getListApplyJobDoing(userId);              
+                for (ApplyJobDTO a : listDoing) {
+                    listJob.add(pDao.getMyJobWaiting(a.getJobId()));
+                }
+                for (JobPostDTO jobInfo: listJob){
+                    listUserInfo.add(udao.GetEmployerInfor(jobInfo.getUserId()));
+                }
                 request.setAttribute("MY_JOB_DOING", listJob);
+                request.setAttribute("USER_INFO", listUserInfo);
                 request.setAttribute("SELECTED", 1);
+                if (listJob.isEmpty()) {
+                    request.setAttribute("ERROR", "Bạn chưa có công việc nào");
+                }
                 url = MY_JOB_DOING_PAGE;
-            } else {
-                request.setAttribute("ERROR", "Bạn chưa có công việc nào");
-                url = ERROR;
+            } else if ("done".equals(job)) {
+                List<ApplyJobDTO> listDone = jDao.getListApplyJobDone(userId);
+                for (ApplyJobDTO a : listDone) {
+                    listJob.add(pDao.getMyJobWaiting(a.getJobId()));
+                }
+                for (JobPostDTO jobInfo: listJob){
+                    listUserInfo.add(udao.GetEmployerInfor(jobInfo.getUserId()));
+                }
+                request.setAttribute("MY_JOB_DOING", listJob);             
+                request.setAttribute("USER_INFO", listUserInfo);
+                request.setAttribute("SELECTED", 2);
+                if (listJob.isEmpty()) {
+                    request.setAttribute("ERROR", "Bạn chưa có công việc nào");
+                }
+                url = MY_JOB_DOING_PAGE;
             }
         } catch (Exception e) {
-            log("Error at MyJobDoingController:" + e.toString());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }
