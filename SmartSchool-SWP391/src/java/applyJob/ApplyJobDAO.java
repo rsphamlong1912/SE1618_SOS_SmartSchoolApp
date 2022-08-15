@@ -21,7 +21,8 @@ public class ApplyJobDAO {
 
     private static final String INSERT_APPLYJOB = "INSERT INTO tblApplyJob(jobId, userId, status) VALUES (?, ?, 'waiting')";
     private static final String LIST_JOB_WAITING = "SELECT * FROM tblApplyJob WHERE userId = ? AND status = 'waiting'";
-    private static final String LIST_JOB_DOING = "SELECT * FROM tblApplyJob WHERE userId = ? AND status = 'doing' OR status = 'done' ";
+    private static final String LIST_JOB_DOING = "SELECT * FROM tblApplyJob WHERE userId = ? AND status = 'doing' ";
+    private static final String LIST_JOB_DONE = "SELECT * FROM tblApplyJob WHERE userId = ? AND status = 'done' ";
     private static final String LIST_USER_WAITING = "SELECT a.applyJobId, a.jobId, a.userId, a.status, u.fullname, u.phone, u.email, u.facebook FROM tblApplyJob as a, tblUser as u WHERE a.userId = u.userId AND a.jobId = ? AND status = 'waiting'";
     private static final String LIST_USER_DOING = "SELECT a.applyJobId, a.jobId, a.userId, a.status, u.fullname, u.phone, u.email, u.facebook FROM tblApplyJob as a, tblUser as u WHERE a.userId = u.userId AND a.jobId = ? AND (status = 'doing' OR status = 'done')";
     private static final String CHECK_APPLYJOB = " SELECT TOP(1) status from tblApplyJob where userId = ? AND jobId = ? ORDER BY applyJobId DESC";
@@ -206,6 +207,41 @@ public class ApplyJobDAO {
             conn = DBUtils.getConnection();
             if (conn != null) {
                 ptm = conn.prepareStatement(LIST_JOB_DOING);
+                ptm.setString(1, userId);
+                rs = ptm.executeQuery();
+                while (rs.next()) {
+                    ApplyJobDTO post = new ApplyJobDTO();
+                    post.setApplyJobId(rs.getInt("applyJobId"));
+                    post.setJobId(rs.getInt("jobId"));
+                    post.setUserId(rs.getString("userId"));
+                    list.add(post);
+                }
+            }
+        } catch (Exception ex) {
+
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return list;
+    }
+    public List<ApplyJobDTO> getListApplyJobDone(String userId)
+            throws SQLException {
+        List<ApplyJobDTO> list = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(LIST_JOB_DONE);
                 ptm.setString(1, userId);
                 rs = ptm.executeQuery();
                 while (rs.next()) {
